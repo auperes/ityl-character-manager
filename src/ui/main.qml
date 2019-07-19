@@ -11,5 +11,6 @@ Window {
 
     CharacterListView {
         anchors.centerIn: parent
+        anchors.fill: parent
     }
 }
