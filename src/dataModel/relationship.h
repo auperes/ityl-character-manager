@@ -15,5 +15,11 @@ enum Relationship
     Grandfather,
     Grandmother,
     Grandchild,
-    HalfSibling
+    HalfSibling,
+    Guardian,
+    Partner,
+    Lover,
+    Twin,
+    Protege,
+    Betrothed
 };

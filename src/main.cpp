@@ -2,6 +2,7 @@
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QMetaType>
+#include <QDir>
 
 #include "model/character_model.h"
 #include "model/qObjectWrapper/characters_wrapper.h"
@@ -17,9 +18,15 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
 
     CharactersWrapper charactersWrapper;
-    charactersWrapper.appendCharacter(CharacterReader::readCharacterFromFile("C:\\Users\\chach\\Dropbox\\Ecriture\\zzz_Les Royaumes d'Ityl\\Personnages - Groupes - Familles\\characters_json\\analad_edethiel.json"));
-    charactersWrapper.appendCharacter(CharacterReader::readCharacterFromFile("C:\\Users\\chach\\Dropbox\\Ecriture\\zzz_Les Royaumes d'Ityl\\Personnages - Groupes - Familles\\characters_json\\leanna_edethiel.json"));
-    charactersWrapper.appendCharacter(CharacterReader::readCharacterFromFile("C:\\Users\\chach\\Dropbox\\Ecriture\\zzz_Les Royaumes d'Ityl\\Personnages - Groupes - Familles\\characters_json\\enewyr_edethiel.json"));
+    QDir directory("C:\\Users\\chach\\Dropbox\\Ecriture\\zzz_Les Royaumes d'Ityl\\Personnages - Groupes - Familles\\characters_json\\");
+    QStringList files = directory.entryList(QStringList() << "*.json", QDir::Files);
+    foreach(QString filename, files) {
+        charactersWrapper.appendCharacter(CharacterReader::readCharacterFromFile(directory.filePath(filename)));
+    }
+
+//    charactersWrapper.appendCharacter(CharacterReader::readCharacterFromFile("C:\\Users\\chach\\Dropbox\\Ecriture\\zzz_Les Royaumes d'Ityl\\Personnages - Groupes - Familles\\characters_json\\analad_edethiel.json"));/*
+//    charactersWrapper.appendCharacter(CharacterReader::readCharacterFromFile("C:\\Users\\chach\\Dropbox\\Ecriture\\zzz_Les Royaumes d'Ityl\\Personnages - Groupes - Familles\\characters_json\\leanna_edethiel.json"));
+//    charactersWrapper.appendCharacter(CharacterReader::readCharacterFromFile("C:\\Users\\chach\\Dropbox\\Ecriture\\zzz_Les Royaumes d'Ityl\\Personnages - Groupes - Familles\\characters_json\\enewyr_edethiel.json"));*/
 
     qRegisterMetaType<std::shared_ptr<SkillsWrapper>>();
     qRegisterMetaType<std::shared_ptr<RelationshipsWrapper>>();

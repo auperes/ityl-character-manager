@@ -49,6 +49,24 @@ QString Converters::convertRelationshipSingularForm(const Relationship& relation
     case HalfSibling:
         value = "Demi-adelphe";
         break;
+    case Guardian:
+        value = "Gardien";
+        break;
+    case Partner:
+        value ="Partenaire";
+        break;
+    case Lover:
+        value = "Amant(e)";
+        break;
+    case Twin:
+        value = "Jumeau";
+        break;
+    case Protege:
+        value = "Protégé";
+        break;
+    case Betrothed:
+        value = "Fiancé(e)";
+        break;
     };
     return value;
 }
@@ -100,6 +118,24 @@ QString Converters::convertRelationshipPluralForm(const Relationship& relationsh
     case HalfSibling:
         value = "Demi-adelphes";
         break;
+    case Guardian:
+        value = "Gardiens";
+        break;
+    case Partner:
+        value = "Partenaires";
+        break;
+    case Lover:
+        value = "Amants";
+        break;
+    case Twin:
+        value = "Jumeaux";
+        break;
+    case Protege:
+        value = "Protégés";
+        break;
+    case Betrothed:
+        value = "Fiancés";
+        break;
     };
     return value;
 }
@@ -126,13 +162,25 @@ Relationship Converters::convertRelationshipToEnum(const QString& relationship)
         return Relationship::Husband;
     if (relationship == "sibling")
         return Relationship::Sibling;
-    if (relationship == "grandchild")
+    if (relationship == "grandChild")
         return Relationship::Grandchild;
-    if (relationship == "grandfather")
+    if (relationship == "grandFather")
         return Relationship::Grandfather;
-    if (relationship == "grandmother")
+    if (relationship == "grandMother")
         return Relationship::Grandmother;
-    if (relationship == "halfsibling")
+    if (relationship == "halfSibling")
         return Relationship::HalfSibling;
+    if (relationship == "guardian")
+        return Relationship::Guardian;
+    if (relationship == "partner")
+        return Relationship::Partner;
+    if (relationship == "lover")
+        return Relationship::Lover;
+    if (relationship == "twin")
+        return Relationship::Twin;
+    if (relationship == "protege")
+        return Relationship::Protege;
+    if (relationship == "betrothed")
+        return Relationship::Betrothed;
     throw std::exception();
 }
