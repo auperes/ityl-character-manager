@@ -1,6 +1,7 @@
 #include "converters.h"
 
 #include <exception>
+#include <iostream>
 
 QString Converters::convertRelationshipSingularForm(const Relationship& relationship)
 {
@@ -66,6 +67,12 @@ QString Converters::convertRelationshipSingularForm(const Relationship& relation
         break;
     case Betrothed:
         value = "Fiancé(e)";
+        break;
+    case FirstHusband:
+        value = "Premier mari";
+        break;
+    case SecondHusband:
+        value = "Second mari";
         break;
     };
     return value;
@@ -136,6 +143,12 @@ QString Converters::convertRelationshipPluralForm(const Relationship& relationsh
     case Betrothed:
         value = "Fiancés";
         break;
+    case FirstHusband:
+        value = "Premier mari";
+        break;
+    case SecondHusband:
+        value = "Second mari";
+        break;
     };
     return value;
 }
@@ -182,5 +195,12 @@ Relationship Converters::convertRelationshipToEnum(const QString& relationship)
         return Relationship::Protege;
     if (relationship == "betrothed")
         return Relationship::Betrothed;
-    throw std::exception();
+    if (relationship == "firstHusband")
+        return Relationship::FirstHusband;
+    if (relationship == "secondHusband")
+        return Relationship::SecondHusband;
+
+    std::string errorMessage("Cannot convert relationship name. Unknown value: " + relationship.toStdString());
+    std::cout << errorMessage << std::endl;
+    throw std::exception(errorMessage.c_str());
 }

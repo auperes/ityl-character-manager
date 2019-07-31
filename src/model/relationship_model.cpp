@@ -22,12 +22,18 @@ QVariant RelationshipModel::data(const QModelIndex &index, int role) const
         return QVariant();
 
     const Relationship relationship = _relationshipsWrapper->relationships().keys().at(index.row());
+    const QList<QPair<QString, QString>> relationshipNames = _relationshipsWrapper->relationships().value(relationship);
+
     switch (role) {
     case RelationshipTypeRole:
-        return QVariant(Converters::convertRelationshipPluralForm(relationship));
+    {
+        if (relationshipNames.size() > 1)
+            return QVariant(Converters::convertRelationshipPluralForm(relationship));
+        return QVariant(Converters::convertRelationshipSingularForm(relationship));
+    }
     case RelationshipNamesRole:
     {
-        const QList<QPair<QString, QString>> relationshipNames = _relationshipsWrapper->relationships().value(relationship);
+
         QString relationshipsDetail("");
         for (auto it  = relationshipNames.begin(); it != relationshipNames.end(); ++it)
         {

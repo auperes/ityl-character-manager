@@ -21,5 +21,7 @@ enum Relationship
     Lover,
     Twin,
     Protege,
-    Betrothed
+    Betrothed,
+    FirstHusband,
+    SecondHusband
 };

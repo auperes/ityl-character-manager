@@ -5,9 +5,10 @@ import QtQuick.Layouts 1.3
 
 Window {
     visible: true
-    width: 1300
-    height: 920
-    title: qsTr("Hello World")
+    visibility: Window.Maximized
+    minimumWidth: 1300
+    minimumHeight: 920
+    title: qsTr("Ityl characters viewer")
 
     CharacterListView {
         anchors.centerIn: parent
