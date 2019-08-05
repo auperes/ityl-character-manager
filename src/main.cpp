@@ -4,7 +4,7 @@
 #include <QMetaType>
 #include <QDir>
 
-#include "characters_manager.h"
+#include "characters_provider.h"
 #include "model/character_model.h"
 #include "model/qObjectWrapper/characters_wrapper.h"
 #include "model/qObjectWrapper/skills_wrapper.h"
@@ -13,6 +13,7 @@
 #include "model/relationship_model.h"
 #include "qml_types_factory.h"
 #include "reader/character_reader.h"
+#include "uiModel/characters_ui_collection.h"
 
 int main(int argc, char *argv[])
 {
@@ -22,15 +23,18 @@ int main(int argc, char *argv[])
     QmlTypesFactory::registerTypes();
 
     QString charactersFolderPath("C:\\Users\\chach\\Dropbox\\Ecriture\\zzz_Les Royaumes d'Ityl\\Personnages - Groupes - Familles\\characters_json\\");
-    CharactersManager charactersManager(charactersFolderPath);
+    CharactersProvider charactersProvider(charactersFolderPath);
 
-    CharactersWrapper charactersWrapper;
-    foreach(const Character& character, charactersManager.characters()) {
-        charactersWrapper.appendCharacter(character);
-    }
+//    CharactersWrapper charactersWrapper(charactersManager);
+    CharactersUiCollection charactersUiCollection(charactersProvider);
 
     QQmlApplicationEngine engine;
-    engine.rootContext()->setContextProperty(QStringLiteral("charactersList"), &charactersWrapper);
+
+//    engine.rootContext()->setContextProperty(QStringLiteral("charactersList"), &charactersWrapper);
+    engine.rootContext()->setContextProperty(QStringLiteral("groupsList"), charactersProvider._groups);
+    engine.rootContext()->setContextProperty(QStringLiteral("ethniesList"), charactersProvider._ethnies);
+    engine.rootContext()->setContextProperty(QStringLiteral("charactersList"), &charactersUiCollection);
+
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
     if (engine.rootObjects().isEmpty())
         return -1;

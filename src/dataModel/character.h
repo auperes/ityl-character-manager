@@ -26,14 +26,14 @@ public:
         QVector<QString>&& ethnies,
         QVector<QString>&& groups);
 
-    QString getFirstName()const  { return _firstName; }
-    QString getLastName() const { return _lastName; }
-    QString getNickName() const { return _nickName; }
-    QString getTitle() const { return _title; }
-    QString getQuote() const { return _quote; }
-    QString getAvatar() const { return _avatar; }
-    QString getBirthPlace() const { return _birthPlace; }
-    QString getLivelyPlace() const { return _livelyPlace; }
+    const QString& getFirstName()const  { return _firstName; }
+    const QString& getLastName() const { return _lastName; }
+    const QString& getNickName() const { return _nickName; }
+    const QString& getTitle() const { return _title; }
+    const QString& getQuote() const { return _quote; }
+    const QString& getAvatar() const { return _avatar; }
+    const QString& getBirthPlace() const { return _birthPlace; }
+    const QString& getLivelyPlace() const { return _livelyPlace; }
 
     QVector<QString> getRoles() const { return _roles; }
     QMap<QString, QList<Skill>> getSkills() const { return _skills; }
@@ -41,7 +41,7 @@ public:
     QVector<QString> getEthnies() const { return _ethnies; }
     QVector<QString> getGroups() const { return _groups; }
 
-    QString getDescription() const { return _description; }
+    const QString& getDescription() const { return _description; }
 
     void setFirstName(const QString& firstName) { _firstName = firstName; }
     void setLastName(const QString& lastName) { _lastName = lastName; }

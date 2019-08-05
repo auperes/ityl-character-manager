@@ -10,6 +10,8 @@
 #include "model/skill_model.h"
 #include "model/relationship_model.h"
 #include "reader/character_reader.h"
+#include "uiModel/character_ui_model.h"
+#include "uiModel/characters_ui_collection.h"
 
 void QmlTypesFactory::registerTypes()
 {
@@ -25,4 +27,9 @@ void QmlTypesFactory::registerTypes()
         QStringLiteral("SkillsWrapper should not be created in QML"));
     qmlRegisterUncreatableType<RelationshipsWrapper>("Character", 1, 0, "RelationshipsWrapper",
         QStringLiteral("RelationshipsWrapper should not be created in QML"));
+
+
+    qmlRegisterType<CharactersUiCollection>("Character", 1, 0, "CharactersUiCollection");
+    qmlRegisterUncreatableType<CharacterUiModel>("Character", 1, 0, "CharacterUiModel",
+        QStringLiteral("CharacterUiModel should not be created in QML"));
 }

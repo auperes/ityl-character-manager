@@ -11,7 +11,7 @@ Component {
                 anchors.fill: parent
                 Image {
                     anchors.margins: 0
-                    source: model.avatar
+                    source: model.display.avatar
                 }
             }
         }
@@ -24,89 +24,89 @@ Component {
                 anchors.fill: parent
 
                 Text {
-                    text: model.fullName
+                    text: model.display.fullName
                 }
                 Text {
-                    text: model.title
+                    text: model.display.title
                 }
                 Text {
                     Layout.preferredWidth: parent.width
-                    text: model.quote
+                    text: model.display.quote
                     wrapMode: Label.WordWrap
                 }
 
-                ListView {
-                    Layout.fillHeight: true
-                    model: characterRoles
-                    delegate: RowLayout {
-                        Text {
-                            text: modelData
-                        }
-                    }
-                }
+//                ListView {
+//                    Layout.fillHeight: true
+//                    model: characterRoles
+//                    delegate: RowLayout {
+//                        Text {
+//                            text: modelData
+//                        }
+//                    }
+//                }
 
-                ListView {
-                    Layout.fillHeight: true
-                    model: SkillModel {
-                        skills: model.skills
-                    }
-                    delegate: RowLayout {
-                        Text {
-                            text: model.skillName
-                        }
-                        Text {
-                            text: model.skillValues
-                        }
-                    }
+//                ListView {
+//                    Layout.fillHeight: true
+//                    model: SkillModel {
+//                        skills: model.skills
+//                    }
+//                    delegate: RowLayout {
+//                        Text {
+//                            text: model.skillName
+//                        }
+//                        Text {
+//                            text: model.skillValues
+//                        }
+//                    }
+//                }
+
+                Text {
+                    text: model.display.birthPlace
                 }
 
                 Text {
-                    text: model.birthPlace
+                    text: model.display.livelyPlace
                 }
 
-                Text {
-                    text: model.livelyPlace
-                }
+//                ListView {
+//                    implicitHeight: 100
+//                    model: RelationshipModel {
+//                        relationships: model.relationships
+//                    }
+//                    delegate: RowLayout {
+//                        Layout.fillHeight: true
+//                        Text {
+//                            text: model.type
+//                            height: parent.height
+//                        }
+//                        Text {
+//                            Layout.preferredWidth: 350
+//                            text: model.names
+//                            wrapMode: Text.WordWrap
+//                            height: parent.height
+//                        }
+//                    }
+//                }
 
-                ListView {
-                    implicitHeight: 100
-                    model: RelationshipModel {
-                        relationships: model.relationships
-                    }
-                    delegate: RowLayout {
-                        Layout.fillHeight: true
-                        Text {
-                            text: model.type
-                            height: parent.height
-                        }
-                        Text {
-                            Layout.preferredWidth: 350
-                            text: model.names
-                            wrapMode: Text.WordWrap
-                            height: parent.height
-                        }
-                    }
-                }
+//                ListView {
+//                    Layout.fillHeight: true
+//                    model: ethnies
+//                    delegate: RowLayout {
+//                        Text {
+//                            text: modelData
+//                        }
+//                    }
+//                }
 
-                ListView {
-                    Layout.fillHeight: true
-                    model: ethnies
-                    delegate: RowLayout {
-                        Text {
-                            text: modelData
-                        }
-                    }
-                }
-
-                ListView {
-                    Layout.fillHeight: true
-                    model: groups
-                    delegate: RowLayout {
-                        Text {
-                            text: modelData
-                        }
-                    }
-                }
+//                ListView {
+//                    Layout.fillHeight: true
+//                    model: groups
+//                    delegate: RowLayout {
+//                        Text {
+//                            text: modelData
+//                        }
+//                    }
+//                }
             }
         }
 
@@ -115,7 +115,7 @@ Component {
             implicitWidth: 600
             Text {
                 anchors.fill: parent
-                text: model.description
+                text: model.display.description
                 wrapMode: Text.WordWrap
                 horizontalAlignment: Text.AlignJustify
             }

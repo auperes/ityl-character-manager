@@ -1,11 +1,8 @@
 #include "characters_wrapper.h"
 
-CharactersWrapper::CharactersWrapper(QObject *parent) : QObject(parent)
+CharactersWrapper::CharactersWrapper(const CharactersProvider& charactersProvider, QObject *parent)
+    : QObject(parent)
+    , _charactersProvider(charactersProvider)
 {
-
-}
-
-void CharactersWrapper::appendCharacter(const Character &character)
-{
-    _characters.append(character);
+//    _characters = _charactersProvider.characters().toVector();
 }

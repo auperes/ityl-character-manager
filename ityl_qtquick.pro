@@ -1,4 +1,4 @@
-QT += quick
+QT += quick widgets
 CONFIG += c++11
 
 # The following define makes your compiler emit warnings if you use
@@ -13,7 +13,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        src/characters_manager.cpp \
+        src/characters_provider.cpp \
         src/converters/converters.cpp \
         src/dataModel/character.cpp \
         src/dataModel/skill/skill.cpp \
@@ -25,7 +25,9 @@ SOURCES += \
         src/model/relationship_model.cpp \
         src/model/skill_model.cpp \
         src/qml_types_factory.cpp \
-        src/reader/character_reader.cpp
+        src/reader/character_reader.cpp \
+        src/uiModel/character_ui_model.cpp \
+        src/uiModel/characters_ui_collection.cpp
 
 RESOURCES += src/ui/qml.qrc
 
@@ -44,7 +46,7 @@ DISTFILES += \
     qtquickcontrols2.conf
 
 HEADERS += \
-    src/characters_manager.h \
+    src/characters_provider.h \
     src/converters/converters.h \
     src/dataModel/character.h \
     src/dataModel/relationship.h \
@@ -56,4 +58,6 @@ HEADERS += \
     src/model/relationship_model.h \
     src/model/skill_model.h \
     src/qml_types_factory.h \
-    src/reader/character_reader.h
+    src/reader/character_reader.h \
+    src/uiModel/character_ui_model.h \
+    src/uiModel/characters_ui_collection.h

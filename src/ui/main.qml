@@ -10,8 +10,15 @@ Window {
     minimumHeight: 920
     title: qsTr("Ityl characters viewer")
 
-    CharacterListView {
-        anchors.centerIn: parent
+    ColumnLayout {
         anchors.fill: parent
+
+        QuickNavigation {
+            Layout.leftMargin: 20
+            Layout.fillWidth: true
+        }
+
+        CharacterListView {
+        }
     }
 }
