@@ -17,7 +17,7 @@ class CharacterUiModel : public QObject
     Q_PROPERTY(QString description READ description CONSTANT)
     Q_PROPERTY(QStringList roles READ roles CONSTANT)
     Q_PROPERTY(QAbstractItemModel* skills READ skills CONSTANT)
-    Q_PROPERTY(QAbstractItemModel* relathionships READ relationships CONSTANT)
+    Q_PROPERTY(QAbstractItemModel* relationships READ relationships CONSTANT)
     Q_PROPERTY(QStringList ethnies READ ethnies CONSTANT)
     Q_PROPERTY(QStringList groups READ groups CONSTANT)
 
@@ -50,6 +50,6 @@ private:
     std::unique_ptr<QAbstractItemModel> _relationships;
 
     void addSkill(const QString& skillName, const QList<Skill>& skillValues);
-    void addRelationship(const QString& relationType, QList<QPair<QString, QString>> characterNames);
+    void addRelationship(const Relationship& relationType, const QList<QPair<QString, QString>> &characterNames);
 };
 

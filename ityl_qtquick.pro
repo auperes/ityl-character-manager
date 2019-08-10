@@ -28,6 +28,7 @@ SOURCES += \
         src/reader/character_reader.cpp \
         src/uiModel/character_ui_model.cpp \
         src/uiModel/characters_ui_collection.cpp \
+        src/uiModel/relationship_ui_model.cpp \
         src/uiModel/skill_ui_model.cpp
 
 RESOURCES += src/ui/qml.qrc
@@ -62,4 +63,5 @@ HEADERS += \
     src/reader/character_reader.h \
     src/uiModel/character_ui_model.h \
     src/uiModel/characters_ui_collection.h \
+    src/uiModel/relationship_ui_model.h \
     src/uiModel/skill_ui_model.h

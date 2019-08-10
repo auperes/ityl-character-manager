@@ -4,6 +4,7 @@
 #include <QStandardItemModel>
 #include <QMap>
 
+#include "relationship_ui_model.h"
 #include "skill_ui_model.h"
 
 CharacterUiModel::CharacterUiModel()
@@ -20,10 +21,17 @@ CharacterUiModel::CharacterUiModel(const std::shared_ptr<Character> &character)
     , _relationships(new QStandardItemModel(this))
 {
     _skills->insertColumn(0);
-    auto skills = _character->getSkills();
 
+    auto skills = _character->getSkills();
     for (auto skillName : skills.keys()) {
         addSkill(skillName, skills.value(skillName));
+    }
+
+    _relationships->insertColumn(0);
+
+    auto relationships = _character->getRelationships();
+    for (auto relationship : relationships.keys()) {
+        addRelationship(relationship, relationships.value(relationship));
     }
 }
 
@@ -57,7 +65,11 @@ void CharacterUiModel::addSkill(const QString &skillName, const QList<Skill> &sk
     _skills->setData(_skills->index(newRow, 0), QVariant::fromValue(skillUi), Qt::DisplayRole);
 }
 
-void CharacterUiModel::addRelationship(const QString &relationType, QList<QPair<QString, QString> > characterNames)
+void CharacterUiModel::addRelationship(const Relationship &relationType, const QList<QPair<QString, QString>> &characterNames)
 {
-
+    const int newRow = _relationships->rowCount();
+    RelationshipUiModel* relationshipUi = new RelationshipUiModel(relationType, characterNames);
+    QQmlEngine::setObjectOwnership(relationshipUi, QQmlEngine::JavaScriptOwnership);
+    _relationships->insertRow(newRow);
+    _relationships->setData(_relationships->index(newRow, 0), QVariant::fromValue(relationshipUi), Qt::DisplayRole);
 }

@@ -66,25 +66,26 @@ Component {
                     text: model.display.livelyPlace
                 }
 
-//                ListView {
-//                    implicitHeight: 100
-//                    model: RelationshipModel {
-//                        relationships: model.relationships
-//                    }
-//                    delegate: RowLayout {
-//                        Layout.fillHeight: true
-//                        Text {
-//                            text: model.type
-//                            height: parent.height
-//                        }
-//                        Text {
-//                            Layout.preferredWidth: 350
-//                            text: model.names
-//                            wrapMode: Text.WordWrap
-//                            height: parent.height
-//                        }
-//                    }
-//                }
+                ListView {
+                    implicitHeight: 125
+                    model: display.relationships
+                    delegate: GridLayout {
+                        columns: 2
+                        Layout.fillHeight: true
+                        Text {
+                            Layout.preferredWidth: 75
+                            text: model.display.type
+                            height: parent.height
+                            font.bold: true
+                        }
+                        Text {
+                            Layout.preferredWidth: 285
+                            text: model.display.names
+                            wrapMode: Text.WordWrap
+                            height: parent.height
+                        }
+                    }
+                }
 
                 ListView {
                     Layout.fillHeight: true
