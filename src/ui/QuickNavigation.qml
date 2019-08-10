@@ -25,7 +25,7 @@ Item {
             implicitWidth: 300
             model: groupsList
 
-            onAccepted: charactersList.filterCharacters("group", currentText)
+            onActivated: charactersList.filterCharacters("group", currentText)
         }
     }
 }

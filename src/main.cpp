@@ -1,3 +1,5 @@
+#include <iostream>
+
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -17,27 +19,31 @@
 
 int main(int argc, char *argv[])
 {
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    QGuiApplication app(argc, argv);
+    try {
+        QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+        QGuiApplication app(argc, argv);
 
-    QmlTypesFactory::registerTypes();
+        QmlTypesFactory::registerTypes();
 
-    QString charactersFolderPath("C:\\Users\\chach\\Dropbox\\Ecriture\\zzz_Les Royaumes d'Ityl\\Personnages - Groupes - Familles\\characters_json\\");
-    CharactersProvider charactersProvider(charactersFolderPath);
+        QString charactersFolderPath("C:\\Users\\chach\\Dropbox\\Ecriture\\zzz_Les Royaumes d'Ityl\\Personnages - Groupes - Familles\\characters_json\\");
+        CharactersProvider charactersProvider(charactersFolderPath);
 
-//    CharactersWrapper charactersWrapper(charactersManager);
-    CharactersUiCollection charactersUiCollection(charactersProvider);
+        //    CharactersWrapper charactersWrapper(charactersManager);
+        CharactersUiCollection charactersUiCollection(charactersProvider);
 
-    QQmlApplicationEngine engine;
+        QQmlApplicationEngine engine;
 
-//    engine.rootContext()->setContextProperty(QStringLiteral("charactersList"), &charactersWrapper);
-    engine.rootContext()->setContextProperty(QStringLiteral("groupsList"), charactersProvider._groups);
-    engine.rootContext()->setContextProperty(QStringLiteral("ethniesList"), charactersProvider._ethnies);
-    engine.rootContext()->setContextProperty(QStringLiteral("charactersList"), &charactersUiCollection);
+        //    engine.rootContext()->setContextProperty(QStringLiteral("charactersList"), &charactersWrapper);
+        engine.rootContext()->setContextProperty(QStringLiteral("groupsList"), charactersProvider._groups);
+        engine.rootContext()->setContextProperty(QStringLiteral("ethniesList"), charactersProvider._ethnies);
+        engine.rootContext()->setContextProperty(QStringLiteral("charactersList"), &charactersUiCollection);
 
-    engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
-    if (engine.rootObjects().isEmpty())
-        return -1;
+        engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+        if (engine.rootObjects().isEmpty())
+            return -1;
 
-    return app.exec();
+        return app.exec();
+    } catch (const std::exception& e) {
+        std::cout << e.what() << std::endl;
+    }
 }

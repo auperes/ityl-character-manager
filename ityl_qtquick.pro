@@ -27,7 +27,8 @@ SOURCES += \
         src/qml_types_factory.cpp \
         src/reader/character_reader.cpp \
         src/uiModel/character_ui_model.cpp \
-        src/uiModel/characters_ui_collection.cpp
+        src/uiModel/characters_ui_collection.cpp \
+        src/uiModel/skill_ui_model.cpp
 
 RESOURCES += src/ui/qml.qrc
 
@@ -60,4 +61,5 @@ HEADERS += \
     src/qml_types_factory.h \
     src/reader/character_reader.h \
     src/uiModel/character_ui_model.h \
-    src/uiModel/characters_ui_collection.h
+    src/uiModel/characters_ui_collection.h \
+    src/uiModel/skill_ui_model.h

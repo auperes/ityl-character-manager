@@ -28,8 +28,9 @@ CharactersProvider::CharactersProvider(const QString &folderPath)
     _ethnies = ethnies.toList();
     _ethnies.sort();
     _ethnies.prepend(QString());
-    _groups.sort();
+
     _groups = groups.toList();
+    _groups.sort();
     _groups.prepend(QString());
 }
 

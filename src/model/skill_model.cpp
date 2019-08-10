@@ -68,29 +68,29 @@ QString SkillModel::convertIntSkillNameToString(int value) const
 
 QString SkillModel::createSkillValuesStringFromSkills(const QList<Skill> &skills) const
 {
-        QString skillDetail;
-        for (auto it  = skills.begin(); it != skills.end(); ++it)
+    QString skillDetail;
+    for (auto it  = skills.begin(); it != skills.end(); ++it)
+    {
+        skillDetail += it->getType();
+        if (!it->getSpecialties().empty())
         {
-            skillDetail += it->getType();
-            if (!it->getSpecialties().empty())
+            skillDetail += " (";
+            auto specialties = it->getSpecialties();
+            for (auto specialtyIt = specialties.begin(); specialtyIt != specialties.end(); ++specialtyIt)
             {
-                skillDetail += " (";
-                auto specialties = it->getSpecialties();
-                for (auto specialtyIt = specialties.begin(); specialtyIt != specialties.end(); ++specialtyIt)
+                skillDetail += *specialtyIt;
+                if (specialtyIt+1 != specialties.end())
                 {
-                    skillDetail += *specialtyIt;
-                    if (specialtyIt+1 != specialties.end())
-                    {
-                        skillDetail += ", ";
-                    }
+                    skillDetail += ", ";
                 }
-                skillDetail += ")";
             }
-            if (it+1 != skills.end())
-            {
-                skillDetail += ", ";
-            }
+            skillDetail += ")";
         }
+        if (it+1 != skills.end())
+        {
+            skillDetail += ", ";
+        }
+    }
 
     return skillDetail;
 }

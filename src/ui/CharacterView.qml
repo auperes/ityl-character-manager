@@ -35,30 +35,28 @@ Component {
                     wrapMode: Label.WordWrap
                 }
 
-//                ListView {
-//                    Layout.fillHeight: true
-//                    model: characterRoles
-//                    delegate: RowLayout {
-//                        Text {
-//                            text: modelData
-//                        }
-//                    }
-//                }
+                ListView {
+                    Layout.fillHeight: true
+                    model: display.roles
+                    delegate: RowLayout {
+                        Text {
+                            text: modelData
+                        }
+                    }
+                }
 
-//                ListView {
-//                    Layout.fillHeight: true
-//                    model: SkillModel {
-//                        skills: model.skills
-//                    }
-//                    delegate: RowLayout {
-//                        Text {
-//                            text: model.skillName
-//                        }
-//                        Text {
-//                            text: model.skillValues
-//                        }
-//                    }
-//                }
+                ListView {
+                    Layout.fillHeight: true
+                    model: display.skills
+                    delegate: RowLayout {
+                        Text {
+                            text: model.display.skillName
+                        }
+                        Text {
+                            text: model.display.skillValues
+                        }
+                    }
+                }
 
                 Text {
                     text: model.display.birthPlace
@@ -88,25 +86,25 @@ Component {
 //                    }
 //                }
 
-//                ListView {
-//                    Layout.fillHeight: true
-//                    model: ethnies
-//                    delegate: RowLayout {
-//                        Text {
-//                            text: modelData
-//                        }
-//                    }
-//                }
+                ListView {
+                    Layout.fillHeight: true
+                    model: display.ethnies
+                    delegate: RowLayout {
+                        Text {
+                            text: modelData
+                        }
+                    }
+                }
 
-//                ListView {
-//                    Layout.fillHeight: true
-//                    model: groups
-//                    delegate: RowLayout {
-//                        Text {
-//                            text: modelData
-//                        }
-//                    }
-//                }
+                ListView {
+                    Layout.fillHeight: true
+                    model: display.groups
+                    delegate: RowLayout {
+                        Text {
+                            text: modelData
+                        }
+                    }
+                }
             }
         }
 

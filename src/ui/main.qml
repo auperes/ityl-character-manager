@@ -19,6 +19,7 @@ Window {
         }
 
         CharacterListView {
+            Layout.alignment: Qt.AlignHCenter
         }
     }
 }

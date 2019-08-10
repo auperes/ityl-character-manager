@@ -6,8 +6,6 @@
 #include "../characters_provider.h"
 #include "character_ui_model.h"
 
-Q_DECLARE_METATYPE(CharacterUiModel)
-
 class CharactersUiCollection : public QObject
 {
     Q_OBJECT
@@ -18,7 +16,7 @@ public:
     CharactersUiCollection();
     explicit CharactersUiCollection(const CharactersProvider &charactersProvider, QObject *parent = nullptr);
 
-    QAbstractItemModel* model() const;
+    QAbstractItemModel* model() const { return _model.get(); }
 
 signals:
 

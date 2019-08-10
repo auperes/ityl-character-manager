@@ -1,5 +1,6 @@
 #include "characters_ui_collection.h"
 
+#include <QQmlEngine>
 #include <QStandardItemModel>
 
 CharactersUiCollection::CharactersUiCollection()
@@ -21,17 +22,13 @@ CharactersUiCollection::CharactersUiCollection(const CharactersProvider &charact
     }
 }
 
-QAbstractItemModel* CharactersUiCollection::model() const
-{
-    return _model.get();
-}
-
 void CharactersUiCollection::addCharacter(const std::shared_ptr<Character> &character)
 {
     if (!character) return;
 
     const int newRow = _model->rowCount();
-    const CharacterUiModel characterUi(character);
+    CharacterUiModel* characterUi = new CharacterUiModel(character);
+    QQmlEngine::setObjectOwnership(characterUi, QQmlEngine::JavaScriptOwnership);
     _model->insertRow(newRow);
     _model->setData(_model->index(newRow, 0), QVariant::fromValue(characterUi), Qt::DisplayRole);
 }
@@ -50,8 +47,9 @@ void CharactersUiCollection::filterCharacters(const QString &type, const QString
     else if (type == QString("group")) {
         characters = _charactersProvider.findCharacters([name](const std::shared_ptr<Character> &character)
         {
-        //TODO make this work
-            return std::find(character->getGroups().begin(), character->getGroups().end(), name);
+            auto groups = character->getGroups();
+            auto it = std::find_if(groups.begin(), groups.end(),[name](auto group) { return QString::compare(name, group) == 0; });
+            return it != groups.end();
         }).toVector();
     }
 
