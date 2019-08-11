@@ -5,9 +5,12 @@ import QtQuick.Layouts 1.12
 import Character 1.0
 
 ListView {
-    implicitWidth: 1500
+    implicitWidth: 1600
     implicitHeight: 880
     clip: true
+    ScrollBar.vertical: ScrollBar {
+        policy: "AlwaysOn"
+    }
 
     model: charactersList.model
 

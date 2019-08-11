@@ -19,90 +19,126 @@ Component {
         Frame {
             id: identityFrame
             implicitHeight: parent.height
-            implicitWidth: 400
-            ColumnLayout {
-                anchors.fill: parent
+            implicitWidth: 500
 
-                Text {
-                    text: model.display.fullName
-                }
-                Text {
-                    text: model.display.title
-                }
-                Text {
-                    Layout.preferredWidth: parent.width
-                    text: model.display.quote
-                    wrapMode: Label.WordWrap
-                }
+            ScrollView {
+                implicitHeight: parent.height
+                implicitWidth: 475
+                clip: true
 
-                ListView {
-                    Layout.fillHeight: true
-                    model: display.roles
-                    delegate: RowLayout {
-                        Text {
-                            text: modelData
+                ColumnLayout {
+                    anchors.fill: parent
+
+                    Rectangle {
+                        Layout.preferredWidth: parent.width
+                        Layout.preferredHeight: characterHeader.height + 6
+                        color: "#b1cae7"
+
+                        ColumnLayout {
+                            width: parent.width
+                            id: characterHeader
+
+                            Item { Layout.fillHeight: true }
+
+                            Text {
+                                text: model.display.fullName
+                                Layout.alignment: Qt.AlignCenter
+                                font.pointSize: 12
+                            }
+
+                            Text {
+                                text: model.display.title
+                                Layout.alignment: Qt.AlignCenter
+                                font.pointSize: 9
+                            }
+
+                            Item { Layout.fillHeight: true }
                         }
                     }
-                }
 
-                ListView {
-                    Layout.fillHeight: true
-                    model: display.skills
-                    delegate: RowLayout {
-                        Text {
-                            text: model.display.skillName
-                        }
-                        Text {
-                            text: model.display.skillValues
+                    Text {
+                        Layout.preferredWidth: parent.width
+                        text: model.display.quote
+                        wrapMode: Label.WordWrap
+                        font.italic: true
+                    }
+
+                    ListView {
+                        id: rolesListView
+                        Layout.preferredHeight: rolesListView.count * 14
+                        model: display.roles
+                        delegate: RowLayout {
+                            Text {
+                                text: modelData
+                            }
                         }
                     }
-                }
 
-                Text {
-                    text: model.display.birthPlace
-                }
-
-                Text {
-                    text: model.display.livelyPlace
-                }
-
-                ListView {
-                    implicitHeight: 125
-                    model: display.relationships
-                    delegate: GridLayout {
-                        columns: 2
-                        Layout.fillHeight: true
-                        Text {
-                            Layout.preferredWidth: 75
-                            text: model.display.type
-                            height: parent.height
-                            font.bold: true
-                        }
-                        Text {
-                            Layout.preferredWidth: 285
-                            text: model.display.names
-                            wrapMode: Text.WordWrap
-                            height: parent.height
+                    ListView {
+                        id: skillsListView
+                        Layout.preferredHeight: skillsListView.count * 14
+                        model: display.skills
+                        delegate: RowLayout {
+                            Text {
+                                Layout.preferredWidth: 60
+                                text: model.display.skillName
+                                font.bold: true
+                            }
+                            Text {
+                                text: model.display.skillValues
+                            }
                         }
                     }
-                }
 
-                ListView {
-                    Layout.fillHeight: true
-                    model: display.ethnies
-                    delegate: RowLayout {
-                        Text {
-                            text: modelData
+                    Text {
+                        text: model.display.birthPlace
+                    }
+
+                    Text {
+                        text: model.display.livelyPlace
+                    }
+
+                    ListView {
+                        id: relationshipsListView
+                        Layout.preferredHeight: relationshipsListView.count * 20
+                        model: display.relationships
+                        delegate: GridLayout {
+                            columns: 2
+                            Layout.fillHeight: true
+                            Text {
+                                Layout.preferredWidth: 75
+                                text: model.display.type
+                                height: parent.height
+                                font.bold: true
+                            }
+                            Text {
+                                Layout.preferredWidth: 390
+                                text: model.display.names
+                                wrapMode: Text.WordWrap
+                                height: parent.height
+                            }
                         }
                     }
-                }
 
-                ListView {
-                    Layout.fillHeight: true
-                    model: display.groups
-                    delegate: RowLayout {
-                        Text {
-                            text: modelData
+                    ListView {
+                        id: ethniesListView
+                        Layout.preferredHeight: ethniesListView.count * 14
+                        model: display.ethnies
+                        delegate: RowLayout {
+                            Text {
+                                text: modelData
+                            }
+                        }
+                    }
+
+                    ListView {
+                        id: groupsListView
+                        Layout.preferredHeight: groupsListView.count * 14
+                        model: display.groups
+                        delegate: RowLayout {
+                            Text {
+                                text: modelData
+                            }
                         }
                     }
                 }
@@ -111,12 +147,20 @@ Component {
 
         Frame {
             Layout.fillHeight: true
-            implicitWidth: 600
-            Text {
-                anchors.fill: parent
-                text: model.display.description
-                wrapMode: Text.WordWrap
-                horizontalAlignment: Text.AlignJustify
+            implicitWidth: 800
+
+            ScrollView {
+                implicitHeight: parent.height
+                implicitWidth: 775
+                clip: true
+
+                Text {
+                    Layout.alignment: Qt.AlignCenter
+                    width: 770
+                    text: model.display.description
+                    wrapMode: Text.WordWrap
+                    horizontalAlignment: Text.AlignJustify
+                }
             }
         }
     }

@@ -6,7 +6,7 @@ import QtQuick.Layouts 1.3
 Window {
     visible: true
     visibility: Window.Maximized
-    minimumWidth: 1300
+    minimumWidth: 1600
     minimumHeight: 920
     title: qsTr("Ityl characters viewer")
 
