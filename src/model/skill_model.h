@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include <QAbstractListModel>
 #include <QMap>
 #include <QList>

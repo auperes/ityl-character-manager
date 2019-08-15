@@ -9,11 +9,6 @@
 
 #include "../converters/converters.h"
 
-void CharacterReader::readCharacterMock()
-{
-    readCharacterFromFile("C:\\Users\\chach\\Dropbox\\Ecriture\\zzz_Les Royaumes d'Ityl\\Personnages - Groupes - Familles\\analad_edethiel.json");
-}
-
 Character CharacterReader::readCharacterFromFile(const QString& filepath)
 {
     QString content;

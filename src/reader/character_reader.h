@@ -1,23 +1,17 @@
 #pragma once
 
-#include <QObject>
 #include <QString>
 #include <QJsonArray>
 
 #include "../dataModel/character.h"
 
-class CharacterReader : public QObject
+class CharacterReader
 {
-    Q_OBJECT
-
 public:
     CharacterReader() = delete;
-    virtual ~CharacterReader();
+    virtual ~CharacterReader() = delete;
 
     static Character readCharacterFromFile(const QString& filepath);
-
-public slots:
-    static void readCharacterMock();
 
 private:
     static void fillValues(const QJsonArray& jsonValues, Character& character);

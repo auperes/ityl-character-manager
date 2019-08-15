@@ -43,7 +43,9 @@ int main(int argc, char *argv[])
             return -1;
 
         return app.exec();
-    } catch (const std::exception& e) {
+    }
+    catch (const std::exception& e) {
         std::cout << e.what() << std::endl;
+        return -1;
     }
 }

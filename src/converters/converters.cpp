@@ -202,5 +202,5 @@ Relationship Converters::convertRelationshipToEnum(const QString& relationship)
 
     std::string errorMessage("Cannot convert relationship name. Unknown value: " + relationship.toStdString());
     std::cout << errorMessage << std::endl;
-    throw std::exception(errorMessage.c_str());
+    throw std::logic_error(errorMessage.c_str());
 }
