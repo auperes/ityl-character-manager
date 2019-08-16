@@ -31,7 +31,7 @@ SOURCES += \
         src/uiModel/relationship_ui_model.cpp \
         src/uiModel/skill_ui_model.cpp
 
-RESOURCES += src/ui/qml.qrc
+RESOURCES += qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
 QML_IMPORT_PATH =
@@ -44,8 +44,7 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
-DISTFILES += \
-    qtquickcontrols2.conf
+DISTFILES +=
 
 HEADERS += \
     src/characters_provider.h \

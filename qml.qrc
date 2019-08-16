@@ -1,0 +1,9 @@
+<RCC>
+    <qresource>
+        <file>./src/ui/main.qml</file>
+        <file>./src/ui/CharacterView.qml</file>
+        <file>./src/ui/CharacterListView.qml</file>
+        <file>./src/ui/QuickNavigation.qml</file>
+        <file>qtquickcontrols2.conf</file>
+    </qresource>
+</RCC>

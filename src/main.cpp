@@ -38,7 +38,7 @@ int main(int argc, char *argv[])
         engine.rootContext()->setContextProperty(QStringLiteral("ethniesList"), charactersProvider._ethnies);
         engine.rootContext()->setContextProperty(QStringLiteral("charactersList"), &charactersUiCollection);
 
-        engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
+        engine.load(QUrl(QStringLiteral("qrc:/src/ui/main.qml")));
         if (engine.rootObjects().isEmpty())
             return -1;
 

@@ -1,8 +1,0 @@
-<RCC>
-    <qresource prefix="/">
-        <file>main.qml</file>
-        <file>CharacterView.qml</file>
-        <file>CharacterListView.qml</file>
-        <file>QuickNavigation.qml</file>
-    </qresource>
-</RCC>
