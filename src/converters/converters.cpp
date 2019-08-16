@@ -74,6 +74,9 @@ QString Converters::convertRelationshipSingularForm(const Relationship& relation
     case SecondHusband:
         value = "Second mari";
         break;
+    case Master:
+        value = "Maître";
+        break;
     };
     return value;
 }
@@ -149,6 +152,9 @@ QString Converters::convertRelationshipPluralForm(const Relationship& relationsh
     case SecondHusband:
         value = "Second mari";
         break;
+    case Master:
+        value = "Maîtres";
+        break;
     };
     return value;
 }
@@ -199,6 +205,8 @@ Relationship Converters::convertRelationshipToEnum(const QString& relationship)
         return Relationship::FirstHusband;
     if (relationship == "secondHusband")
         return Relationship::SecondHusband;
+    if (relationship == "master")
+        return Relationship::Master;
 
     std::string errorMessage("Cannot convert relationship name. Unknown value: " + relationship.toStdString());
     std::cout << errorMessage << std::endl;

@@ -23,5 +23,6 @@ enum Relationship
     Protege,
     Betrothed,
     FirstHusband,
-    SecondHusband
+    SecondHusband,
+    Master
 };
