@@ -27,10 +27,11 @@ void CharactersUiCollection::addCharacter(const std::shared_ptr<Character> &char
     if (!character) return;
 
     const int newRow = _model->rowCount();
-    CharacterUiModel* characterUi = new CharacterUiModel(character);
-    QQmlEngine::setObjectOwnership(characterUi, QQmlEngine::JavaScriptOwnership);
+    std::shared_ptr<CharacterUiModel> characterUi = std::make_shared<CharacterUiModel>(character);
+    QQmlEngine::setObjectOwnership(characterUi.get(), QQmlEngine::CppOwnership);
     _model->insertRow(newRow);
-    _model->setData(_model->index(newRow, 0), QVariant::fromValue(characterUi), Qt::DisplayRole);
+    _model->setData(_model->index(newRow, 0), QVariant::fromValue(characterUi.get()), Qt::DisplayRole);
+    _characterUiModels.push_back(std::move(characterUi));
 }
 
 void CharactersUiCollection::filterCharacters(const QString &type, const QString &name)

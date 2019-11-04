@@ -26,6 +26,7 @@ public slots:
 private:
     std::unique_ptr<QAbstractItemModel> _model;
     const CharactersProvider &_charactersProvider;
+    QList<std::shared_ptr<CharacterUiModel>> _characterUiModels;
 
     void addCharacter(const std::shared_ptr<Character> &character);
 };

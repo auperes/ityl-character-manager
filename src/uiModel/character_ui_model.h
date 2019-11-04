@@ -6,6 +6,8 @@
 #include <QObject>
 
 #include "../dataModel/character.h"
+#include "relationship_ui_model.h"
+#include "skill_ui_model.h"
 
 class CharacterUiModel : public QObject
 {
@@ -50,6 +52,8 @@ private:
     std::shared_ptr<Character> _character;
     std::unique_ptr<QAbstractItemModel> _skills;
     std::unique_ptr<QAbstractItemModel> _relationships;
+    QList<std::shared_ptr<SkillUiModel>> _skillUiModels;
+    QList<std::shared_ptr<RelationshipUiModel>> _relationshipUiModels;
 
     void addSkill(const QString& skillName, const QList<Skill>& skillValues);
     void addRelationship(const Relationship& relationType, const QList<QPair<QString, QString>> &characterNames);
