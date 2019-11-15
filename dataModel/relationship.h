@@ -22,7 +22,7 @@ enum Relationship
     Twin,
     Protege,
     Betrothed,
-    FirstHusband,
-    SecondHusband,
+    OldHusband,
+    OldWife,
     Master
 };

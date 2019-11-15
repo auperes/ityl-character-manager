@@ -68,14 +68,14 @@ QString Converters::convertRelationshipSingularForm(const Relationship& relation
     case Betrothed:
         value = "Fiancé(e)";
         break;
-    case FirstHusband:
-        value = "Premier mari";
-        break;
-    case SecondHusband:
-        value = "Second mari";
-        break;
     case Master:
         value = "Maître";
+        break;
+    case OldWife:
+        value = "Ex-femme";
+        break;
+    case OldHusband:
+        value = "Ex-mari";
         break;
     };
     return value;
@@ -146,16 +146,16 @@ QString Converters::convertRelationshipPluralForm(const Relationship& relationsh
     case Betrothed:
         value = "Fiancés";
         break;
-    case FirstHusband:
-        value = "Premier mari";
+    case OldWife:
+        value = "Ex-femmes";
         break;
-    case SecondHusband:
-        value = "Second mari";
+    case OldHusband:
+        value = "Ex-maris";
         break;
     case Master:
         value = "Maîtres";
         break;
-    };
+    }
     return value;
 }
 
@@ -201,10 +201,10 @@ Relationship Converters::convertRelationshipToEnum(const QString& relationship)
         return Relationship::Protege;
     if (relationship == "betrothed")
         return Relationship::Betrothed;
-    if (relationship == "firstHusband")
-        return Relationship::FirstHusband;
-    if (relationship == "secondHusband")
-        return Relationship::SecondHusband;
+    if (relationship == "oldWife")
+        return Relationship::OldWife;
+    if (relationship == "oldHusband")
+        return Relationship::OldHusband;
     if (relationship == "master")
         return Relationship::Master;
 
