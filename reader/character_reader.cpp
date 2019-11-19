@@ -46,6 +46,8 @@ void CharacterReader::fillValues(const QJsonArray& jsonValues, Character& charac
             character.setFirstName(object["firstName"].toString());
         else if (object.contains("lastName"))
             character.setLastName(object["lastName"].toString());
+        else if (object.contains("birthName"))
+            character.setBirthName(object["birthName"].toString());
         else if (object.contains("nickName"))
             character.setNickName(object["nickName"].toString());
         else if (object.contains("title"))
@@ -58,6 +60,12 @@ void CharacterReader::fillValues(const QJsonArray& jsonValues, Character& charac
             character.setBirthPlace(object["birthPlace"].toString());
         else if (object.contains("livelyPlace"))
             character.setLivelyPlace(object["livelyPlace"].toString());
+        else if (object.contains("birthNation"))
+            character.setBirthNation(object["birthNation"].toString());
+        else if (object.contains("currentNation"))
+            character.setCurrentNation(object["currentNation"].toString());
+        else if (object.contains("status"))
+            character.setStatus(Converters::convertStatus(object["status"].toString()));
         else if (object.contains("description"))
             character.setDescription(object["description"].toString());
     }
@@ -142,4 +150,16 @@ void CharacterReader::fillGroups(const QJsonArray& jsonGroups, Character& charac
         groups.push_back(object["group"].toString());
     }
     character.setGroups(std::move(groups));
+}
+
+void CharacterReader::fillAvatars(const QJsonArray &jsonAvatars, Character &character)
+{
+    QVector<QString> avatars;
+    avatars.reserve(jsonAvatars.size());
+    for (auto value : jsonAvatars)
+    {
+        QJsonObject object = value.toObject();
+        avatars.push_back(object["avatar"].toString());
+    }
+    character.setAvatars(std::move(avatars));
 }

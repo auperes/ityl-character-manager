@@ -41,7 +41,7 @@ void CharactersUiCollection::filterCharacters(const QString &type, const QString
 
     QVector<std::shared_ptr<Character>> characters;
 
-    if (name == "") {
+    if (name == "Tous") {
         characters = _charactersProvider.characters().toVector();
     }
 
@@ -60,6 +60,13 @@ void CharactersUiCollection::filterCharacters(const QString &type, const QString
             auto ethnies = character->getEthnies();
             auto it = std::find_if(ethnies.begin(), ethnies.end(),[name](auto ethnie) { return QString::compare(name, ethnie) == 0; });
             return it != ethnies.end();
+        }).toVector();
+    }
+
+    else if (type == QString("nation")) {
+        characters = _charactersProvider.findCharacters([name](const std::shared_ptr<Character> &character)
+        {
+            return QString::compare(name, character->getCurrentNation()) == 0;
         }).toVector();
     }
 

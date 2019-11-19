@@ -15,6 +15,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         characters_provider.cpp \
         converters/converters.cpp \
+        dataModel/app_config.cpp \
         dataModel/character.cpp \
         dataModel/skill/skill.cpp \
         main.cpp \
@@ -39,9 +40,14 @@ qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
+install_it.path = $${OUT_PWD}/settings
+install_it.files += $${PWD}/settings/app_config.json
+
+INSTALLS += install_it
+
 DISTFILES += \
     qtquickcontrols2.conf \
-    settings/appconfig.json \
+    settings/app_config.json \
     ui/CharacterListView.qml \
     ui/CharacterView.qml \
     ui/QuickNavigation.qml \
@@ -50,9 +56,11 @@ DISTFILES += \
 HEADERS += \
     characters_provider.h \
     converters/converters.h \
+    dataModel/app_config.h \
     dataModel/character.h \
     dataModel/relationship.h \
     dataModel/skill/skill.h \
+    dataModel/status.h \
     qml_types_factory.h \
     reader/character_reader.h \
     uiModel/character_ui_model.h \

@@ -20,4 +20,5 @@ private:
     static void fillRelationships(const QJsonArray& jsonRelationships, Character& character);
     static void fillEthnies(const QJsonArray& jsonEthnies, Character& character);
     static void fillGroups(const QJsonArray& jsonGroups, Character& character);
+    static void fillAvatars(const QJsonArray& jsonAvatars, Character& character);
 };

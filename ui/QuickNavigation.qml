@@ -7,6 +7,17 @@ import Character 1.0
 Item {
     RowLayout {
         Text {
+            text: "Nations : "
+        }
+
+        ComboBox {
+            implicitWidth: 300
+            model: nationsList
+
+            onActivated: { charactersList.filterCharacters("nation", currentText) }
+        }
+
+        Text {
             text: "Peuples : "
         }
 

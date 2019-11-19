@@ -2,34 +2,6 @@
 
 Character::Character() {}
 
-Character::Character(
-        const QString& firstName,
-        const QString& lastName,
-        const QString& nickName,
-        const QString& title,
-        const QString& quote,
-        const QString& avatar,
-        const QString& birthPlace,
-        const QString& livelyPlace,
-        QVector<QString>&& roles,
-        QMap<QString, QList<Skill>>&& skills,
-        QVector<QString>&& ethnies,
-        QVector<QString>&& groups)
-    : _firstName(firstName)
-    , _lastName(lastName)
-    , _nickName(nickName)
-    , _title(title)
-    , _quote(quote)
-    , _avatar(avatar)
-    , _birthPlace(birthPlace)
-    , _livelyPlace(livelyPlace)
-    , _roles(roles)
-    , _skills(skills)
-    , _ethnies(ethnies)
-    , _groups(groups)
-{
-}
-
 void Character::addRelationship(const Relationship& relationType, QPair<QString, QString> character)
 {
     auto it = _relationships.find(relationType);

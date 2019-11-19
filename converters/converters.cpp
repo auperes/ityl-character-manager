@@ -212,3 +212,29 @@ Relationship Converters::convertRelationshipToEnum(const QString& relationship)
     std::cout << errorMessage << std::endl;
     throw std::logic_error(errorMessage.c_str());
 }
+
+QString Converters::convertStatus(const Status &status)
+{
+    switch (status) {
+    case Dead:
+        return "mort";
+    case Alive:
+        return "vivant";
+    case Sealed:
+        return "scellé";
+    case Missing:
+        return "disparu";
+    }
+}
+
+Status Converters::convertStatus(const QString &status)
+{
+    if (status == "dead")
+        return Status::Dead;
+    if (status == "alive")
+        return Status::Alive;
+    if (status == "sealed")
+        return Status::Sealed;
+    if (status == "missing")
+        return Status::Missing;
+}

@@ -12,16 +12,18 @@ class CharactersProvider
 public:
     CharactersProvider(const QString &folderPath);
 
-    QStringList _ethnies;
-    QStringList _groups;
-
     QList<std::shared_ptr<Character>> characters() const;
-    QList<QString> ethnies() const;
-    QList<QString> groups() const;
+    QStringList ethnies() const;
+    QStringList groups() const;
+    QStringList nations() const;
 
     QList<std::shared_ptr<Character>> findCharacters(const std::function<bool (const std::shared_ptr<Character>&)> &predicate) const;
 
+
 private:
     QList<std::shared_ptr<Character>> _characters;
+    QStringList _ethnies;
+    QStringList _groups;
+    QStringList _nations;
 };
 

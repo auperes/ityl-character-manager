@@ -14,6 +14,7 @@ CharactersProvider::CharactersProvider(const QString &folderPath)
 
     QSet<QString> ethnies;
     QSet<QString> groups;
+    QSet<QString> nations;
 
     foreach(const std::shared_ptr<Character>& character, _characters) {
         foreach (const QString& ethnie, character->getEthnies()) {
@@ -23,15 +24,21 @@ CharactersProvider::CharactersProvider(const QString &folderPath)
         foreach (const QString& group, character->getGroups()) {
             groups.insert(group);
         }
+
+        nations.insert(character->getCurrentNation());
     }
 
     _ethnies = ethnies.toList();
     _ethnies.sort();
-    _ethnies.prepend(QString());
+    _ethnies.prepend(QString("Tous"));
 
     _groups = groups.toList();
     _groups.sort();
-    _groups.prepend(QString());
+    _groups.prepend(QString("Tous"));
+
+    _nations = nations.toList();
+    _nations.sort();
+    _nations.prepend(QString("Tous"));
 }
 
 QList<std::shared_ptr<Character>> CharactersProvider::characters() const
@@ -39,12 +46,12 @@ QList<std::shared_ptr<Character>> CharactersProvider::characters() const
     return _characters;
 }
 
-QList<QString> CharactersProvider::ethnies() const
+QStringList CharactersProvider::ethnies() const
 {
     return _ethnies;
 }
 
-QList<QString> CharactersProvider::groups() const
+QStringList CharactersProvider::groups() const
 {
     return _groups;
 }
@@ -54,4 +61,9 @@ QList<std::shared_ptr<Character>> CharactersProvider::findCharacters(const std::
     QList<std::shared_ptr<Character>> resultCharacters;
     std::copy_if(_characters.begin(), _characters.end(), std::back_inserter(resultCharacters), predicate);
     return resultCharacters;
+}
+
+QStringList CharactersProvider::nations() const
+{
+    return _nations;
 }
