@@ -24,6 +24,7 @@ class CharacterUiModel : public QObject
     Q_PROPERTY(QAbstractItemModel* relationships READ relationships CONSTANT)
     Q_PROPERTY(QStringList ethnies READ ethnies CONSTANT)
     Q_PROPERTY(QStringList groups READ groups CONSTANT)
+    Q_PROPERTY(QString nationColor READ nationColor CONSTANT)
 
 
 public:
@@ -43,6 +44,7 @@ public:
     QAbstractItemModel* relationships() const { return _relationships.get(); }
     const QStringList ethnies() const { return _character->getEthnies().toList(); }
     const QStringList groups() const { return _character->getGroups().toList(); }
+    const QString nationColor() const;
 
 signals:
 

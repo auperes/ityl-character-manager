@@ -17,4 +17,6 @@ public:
 
     static QString convertStatus(const Status& status);
     static Status convertStatus(const QString& status);
+
+    static QString convertNationToColor(const QString& nation);
 };

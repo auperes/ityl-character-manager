@@ -32,7 +32,7 @@ Component {
                     Rectangle {
                         Layout.preferredWidth: parent.width
                         Layout.preferredHeight: characterHeader.height + 6
-                        color: "#b1cae7"
+                        color: model.display.nationColor
 
                         ColumnLayout {
                             width: parent.width

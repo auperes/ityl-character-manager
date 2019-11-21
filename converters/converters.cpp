@@ -77,7 +77,10 @@ QString Converters::convertRelationshipSingularForm(const Relationship& relation
     case OldHusband:
         value = "Ex-mari";
         break;
-    };
+    case AdoptiveSibling:
+        value = "Adelphe adoptif";
+        break;
+    }
     return value;
 }
 
@@ -155,6 +158,9 @@ QString Converters::convertRelationshipPluralForm(const Relationship& relationsh
     case Master:
         value = "Maîtres";
         break;
+    case AdoptiveSibling:
+        value = "Adelphes adoptifs";
+        break;
     }
     return value;
 }
@@ -207,6 +213,8 @@ Relationship Converters::convertRelationshipToEnum(const QString& relationship)
         return Relationship::OldHusband;
     if (relationship == "master")
         return Relationship::Master;
+    if (relationship == "adoptiveSibling")
+        return Relationship::AdoptiveSibling;
 
     std::string errorMessage("Cannot convert relationship name. Unknown value: " + relationship.toStdString());
     std::cout << errorMessage << std::endl;
@@ -215,16 +223,24 @@ Relationship Converters::convertRelationshipToEnum(const QString& relationship)
 
 QString Converters::convertStatus(const Status &status)
 {
+    QString value;
+
     switch (status) {
     case Dead:
-        return "mort";
+        value = "mort";
+        break;
     case Alive:
-        return "vivant";
+        value = "vivant";
+        break;
     case Sealed:
-        return "scellé";
+        value = "scellé";
+        break;
     case Missing:
-        return "disparu";
+        value = "disparu";
+        break;
     }
+
+    return value;
 }
 
 Status Converters::convertStatus(const QString &status)
@@ -237,4 +253,26 @@ Status Converters::convertStatus(const QString &status)
         return Status::Sealed;
     if (status == "missing")
         return Status::Missing;
+
+    std::string errorMessage("Cannot convert status. Unknown value: " + status.toStdString());
+    std::cout << errorMessage << std::endl;
+    throw std::logic_error(errorMessage.c_str());
+}
+
+QString Converters::convertNationToColor(const QString &nation)
+{
+    if (nation == "Askash")
+        return "#f9d6bb";
+    if (nation == "Hystiam")
+        return "#ecc4c4";
+    if (nation == "Oskah")
+        return "#b3cff1";
+    if (nation == "Saïni")
+        return "#d3bbda";
+    if (nation == "Zherkum")
+        return "#cae6bf";
+
+    std::string errorMessage("Cannot convert nation. Unknown value: " + nation.toStdString());
+    std::cout << errorMessage << std::endl;
+    throw std::logic_error(errorMessage.c_str());
 }

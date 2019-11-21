@@ -4,6 +4,8 @@
 #include <QStandardItemModel>
 #include <QMap>
 
+#include "../converters/converters.h"
+
 CharacterUiModel::CharacterUiModel()
     : _character(nullptr)
     , _skills(nullptr)
@@ -51,6 +53,11 @@ const QString CharacterUiModel::avatar() const
 const QString CharacterUiModel::quote() const
 {
     return "« " + _character->getQuote() + " »";
+}
+
+const QString CharacterUiModel::nationColor() const
+{
+    return Converters::convertNationToColor(_character->getCurrentNation());
 }
 
 void CharacterUiModel::addSkill(const QString &skillName, const QList<Skill> &skillValues)

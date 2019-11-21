@@ -24,5 +24,6 @@ enum Relationship
     Betrothed,
     OldHusband,
     OldWife,
-    Master
+    Master,
+    AdoptiveSibling
 };
