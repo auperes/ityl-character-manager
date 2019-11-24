@@ -10,6 +10,9 @@
 
 #include <iostream>
 
+QString AppConfig::_charactersFolderPath;
+QString AppConfig::_avatarsFolderPath;
+
 AppConfig::AppConfig()
 {
     QString content;
@@ -28,12 +31,12 @@ AppConfig::AppConfig()
         _avatarsFolderPath = jsonObject["avatarsFolderPath"].toString();
 }
 
-QString AppConfig::getCharactersFolderPath() const
+QString AppConfig::getCharactersFolderPath()
 {
     return _charactersFolderPath;
 }
 
-QString AppConfig::getAvatarsFolderPath() const
+QString AppConfig::getAvatarsFolderPath()
 {
     return _avatarsFolderPath;
 }

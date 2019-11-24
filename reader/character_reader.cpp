@@ -33,6 +33,7 @@ Character CharacterReader::readCharacterFromFile(const QString& filepath)
     fillRelationships(characterObject["relationships"].toArray(), character);
     fillEthnies(characterObject["ethnies"].toArray(), character);
     fillGroups(characterObject["groups"].toArray(), character);
+    fillAvatars(characterObject["avatars"].toArray(), character);
 
     return character;
 }
@@ -54,8 +55,6 @@ void CharacterReader::fillValues(const QJsonArray& jsonValues, Character& charac
             character.setTitle(object["title"].toString());
         else if (object.contains("quote"))
             character.setQuote(object["quote"].toString());
-        else if (object.contains("avatar"))
-            character.setAvatar(object["avatar"].toString());
         else if (object.contains("birthPlace"))
             character.setBirthPlace(object["birthPlace"].toString());
         else if (object.contains("livelyPlace"))

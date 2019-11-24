@@ -19,7 +19,6 @@ public:
     const QString& getNickName() const { return _nickName; }
     const QString& getTitle() const { return _title; }
     const QString& getQuote() const { return _quote; }
-    const QString& getAvatar() const { return _avatar; }
     const QString& getBirthPlace() const { return _birthPlace; }
     const QString& getLivelyPlace() const { return _livelyPlace; }
     const QString getBirthNation() const { return _birthNation; }
@@ -41,7 +40,6 @@ public:
     void setNickName(const QString& nickName) { _nickName = nickName; }
     void setTitle(const QString& title) { _title = title; }
     void setQuote(const QString& quote) { _quote = quote; }
-    void setAvatar(const QString& avatar) { _avatar = avatar; }
     void setBirthPlace(const QString& birthPlace) { _birthPlace = birthPlace; }
     void setLivelyPlace(const QString& livelyPlace) { _livelyPlace = livelyPlace; }
     void setBirthNation(const QString &birthNation) { _birthNation = birthNation; }
@@ -72,7 +70,6 @@ private:
     QString _nickName;
     QString _title;
     QString _quote;
-    QString _avatar;
     QString _birthPlace;
     QString _livelyPlace;
     QString _birthNation;

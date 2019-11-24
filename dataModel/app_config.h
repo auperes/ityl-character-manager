@@ -7,12 +7,12 @@ class AppConfig
 public:
     AppConfig();
 
-    QString getCharactersFolderPath() const;
+    static QString getCharactersFolderPath();
 
-    QString getAvatarsFolderPath() const;
+    static QString getAvatarsFolderPath();
 
 private:
-    QString _charactersFolderPath;
-    QString _avatarsFolderPath;
+    static QString _charactersFolderPath;
+    static QString _avatarsFolderPath;
 };
 

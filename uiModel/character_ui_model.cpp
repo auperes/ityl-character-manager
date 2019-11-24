@@ -1,10 +1,13 @@
 #include "character_ui_model.h"
 
+#include <iostream>
+
 #include <QQmlEngine>
 #include <QStandardItemModel>
 #include <QMap>
 
 #include "../converters/converters.h"
+#include "../dataModel/app_config.h"
 
 CharacterUiModel::CharacterUiModel()
     : _character(nullptr)
@@ -47,7 +50,13 @@ const QString CharacterUiModel::fullName() const
 
 const QString CharacterUiModel::avatar() const
 {
-    return "file:///" + _character->getAvatar();
+    if (_character->getAvatars().isEmpty())
+    {
+        std::cout << "Character " + _character->getFirstName().toStdString() + " " + _character->getLastName().toStdString() + " has no avatar" << std::endl;
+        return "";
+    }
+    QString avatarFullPath(AppConfig::getAvatarsFolderPath() + _character->getAvatars().first());
+    return "file:///" + AppConfig::getAvatarsFolderPath() + _character->getAvatars().first();
 }
 
 const QString CharacterUiModel::quote() const
