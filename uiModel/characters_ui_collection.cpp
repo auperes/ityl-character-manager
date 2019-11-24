@@ -6,20 +6,18 @@
 CharactersUiCollection::CharactersUiCollection()
     : QObject (nullptr)
     , _model(nullptr)
-    , _charactersProvider(CharactersProvider(""))
+    , _charactersProvider(nullptr)
 {
 
 }
 
-CharactersUiCollection::CharactersUiCollection(const CharactersProvider &charactersProvider, QObject *parent)
+CharactersUiCollection::CharactersUiCollection(CharactersProvider *charactersProvider, QObject *parent)
     : QObject(parent)
     , _model(new QStandardItemModel(this))
     , _charactersProvider(charactersProvider)
 {
     _model->insertColumn(0);
-    foreach (const std::shared_ptr<Character> &character, _charactersProvider.characters()) {
-        addCharacter(character);
-    }
+    addCharacters(_charactersProvider->characters());
 }
 
 void CharactersUiCollection::addCharacter(const std::shared_ptr<Character> &character)
@@ -34,43 +32,62 @@ void CharactersUiCollection::addCharacter(const std::shared_ptr<Character> &char
     _characterUiModels.push_back(std::move(characterUi));
 }
 
-void CharactersUiCollection::filterCharacters(const QString &type, const QString &name)
+void CharactersUiCollection::clearCharacters()
 {
     const int rowCount = _model->rowCount();
     _model->removeRows(0, rowCount);
+    _characterUiModels.clear();
+}
 
-    QVector<std::shared_ptr<Character>> characters;
+void CharactersUiCollection::addCharacters(const QList<std::shared_ptr<Character>>& characters)
+{
+    foreach (const std::shared_ptr<Character> &character, characters) {
+        addCharacter(character);
+    }
+}
+
+void CharactersUiCollection::filterCharacters(const QString &type, const QString &name)
+{
+    clearCharacters();
+
+    QList<std::shared_ptr<Character>> characters;
 
     if (name == "Tous") {
-        characters = _charactersProvider.characters().toVector();
+        characters = _charactersProvider->characters();
     }
 
     else if (type == QString("group")) {
-        characters = _charactersProvider.findCharacters([name](const std::shared_ptr<Character> &character)
+        characters = _charactersProvider->findCharacters([name](const std::shared_ptr<Character> &character)
         {
             auto groups = character->getGroups();
             auto it = std::find_if(groups.begin(), groups.end(),[name](auto group) { return QString::compare(name, group) == 0; });
             return it != groups.end();
-        }).toVector();
+        });
     }
 
     else if (type == QString("ethnie")) {
-        characters = _charactersProvider.findCharacters([name](const std::shared_ptr<Character> &character)
+        characters = _charactersProvider->findCharacters([name](const std::shared_ptr<Character> &character)
         {
             auto ethnies = character->getEthnies();
             auto it = std::find_if(ethnies.begin(), ethnies.end(),[name](auto ethnie) { return QString::compare(name, ethnie) == 0; });
             return it != ethnies.end();
-        }).toVector();
+        });
     }
 
     else if (type == QString("nation")) {
-        characters = _charactersProvider.findCharacters([name](const std::shared_ptr<Character> &character)
+        characters = _charactersProvider->findCharacters([name](const std::shared_ptr<Character> &character)
         {
             return QString::compare(name, character->getCurrentNation()) == 0;
-        }).toVector();
+        });
     }
 
-    foreach (auto character, characters) {
-        addCharacter(character);
-    }
+    addCharacters(characters);
+}
+
+void CharactersUiCollection::refreshCharacters()
+{
+    clearCharacters();
+    _charactersProvider->refreshCharacters();
+    addCharacters(_charactersProvider->characters());
+    emit charactersChanged();
 }

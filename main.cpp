@@ -11,6 +11,7 @@
 #include "qml_types_factory.h"
 #include "reader/character_reader.h"
 #include "uiModel/characters_ui_collection.h"
+#include "uiModel/quick_navigation_ui_model.h"
 
 int main(int argc, char *argv[])
 {
@@ -24,7 +25,8 @@ int main(int argc, char *argv[])
         QString charactersFolderPath(appConfig.getCharactersFolderPath());
         CharactersProvider charactersProvider(charactersFolderPath);
 
-        CharactersUiCollection charactersUiCollection(charactersProvider);
+        CharactersUiCollection charactersUiCollection(&charactersProvider);
+        QuickNavigationUiModel quickNavigation(&charactersProvider);
 
         QQmlApplicationEngine engine;
 
@@ -32,6 +34,9 @@ int main(int argc, char *argv[])
         engine.rootContext()->setContextProperty(QStringLiteral("groupsList"), charactersProvider.groups());
         engine.rootContext()->setContextProperty(QStringLiteral("ethniesList"), charactersProvider.ethnies());
         engine.rootContext()->setContextProperty(QStringLiteral("charactersList"), &charactersUiCollection);
+        engine.rootContext()->setContextProperty(QStringLiteral("quickNavigation"), &quickNavigation);
+
+        QObject::connect(&charactersUiCollection, &CharactersUiCollection::charactersChanged, &quickNavigation, &QuickNavigationUiModel::refreshElements);
 
         engine.load(QUrl(QStringLiteral("qrc:/ui/main.qml")));
         if (engine.rootObjects().isEmpty())

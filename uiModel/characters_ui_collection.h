@@ -10,24 +10,27 @@ class CharactersUiCollection : public QObject
 {
     Q_OBJECT
     Q_PROPERTY(QAbstractItemModel* model READ model CONSTANT)
-//    Q_DISABLE_COPY(CharactersUiCollection)
 
 public:
     CharactersUiCollection();
-    explicit CharactersUiCollection(const CharactersProvider &charactersProvider, QObject *parent = nullptr);
+    explicit CharactersUiCollection(CharactersProvider *charactersProvider, QObject *parent = nullptr);
 
     QAbstractItemModel* model() const { return _model.get(); }
 
 signals:
+    void charactersChanged();
 
 public slots:
     void filterCharacters(const QString& type, const QString& name);
+    void refreshCharacters();
 
 private:
     std::unique_ptr<QAbstractItemModel> _model;
-    const CharactersProvider &_charactersProvider;
+    CharactersProvider *_charactersProvider;
     QList<std::shared_ptr<CharacterUiModel>> _characterUiModels;
 
     void addCharacter(const std::shared_ptr<Character> &character);
+    void clearCharacters();
+    void addCharacters(const QList<std::shared_ptr<Character>>& characters);
 };
 

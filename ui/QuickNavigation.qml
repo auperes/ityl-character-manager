@@ -6,13 +6,19 @@ import Character 1.0
 
 Item {
     RowLayout {
+        Button {
+            text: "Recharger"
+            onClicked: { charactersList.refreshCharacters() }
+        }
+
         Text {
             text: "Nations : "
         }
 
         ComboBox {
+            textRole: "display"
             implicitWidth: 300
-            model: nationsList
+            model: quickNavigation.nations
 
             onActivated: { charactersList.filterCharacters("nation", currentText) }
         }
@@ -22,8 +28,9 @@ Item {
         }
 
         ComboBox {
+            textRole: "display"
             implicitWidth: 300
-            model: ethniesList
+            model: quickNavigation.ethnies
 
             onActivated: { charactersList.filterCharacters("ethnie", currentText) }
         }
@@ -33,8 +40,9 @@ Item {
         }
 
         ComboBox {
+            textRole: "display"
             implicitWidth: 300
-            model: groupsList
+            model: quickNavigation.groups
 
             onActivated: charactersList.filterCharacters("group", currentText)
         }

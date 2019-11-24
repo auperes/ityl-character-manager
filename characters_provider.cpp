@@ -5,8 +5,14 @@
 #include "reader/character_reader.h"
 
 CharactersProvider::CharactersProvider(const QString &folderPath)
+    : _folderPath(folderPath)
 {
-    QDir directory(folderPath);
+    loadCharacters();
+}
+
+void CharactersProvider::loadCharacters()
+{
+    QDir directory(_folderPath);
     QStringList files = directory.entryList(QStringList() << "*.json", QDir::Files);
     foreach(const QString& filename, files) {
         _characters.push_back(std::make_shared<Character>(CharacterReader::readCharacterFromFile(directory.filePath(filename))));
@@ -39,6 +45,16 @@ CharactersProvider::CharactersProvider(const QString &folderPath)
     _nations = nations.toList();
     _nations.sort();
     _nations.prepend(QString("Tous"));
+}
+
+void CharactersProvider::refreshCharacters()
+{
+    _characters.clear();
+    _ethnies.clear();
+    _groups.clear();
+    _nations.clear();
+
+    loadCharacters();
 }
 
 QList<std::shared_ptr<Character>> CharactersProvider::characters() const

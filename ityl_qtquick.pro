@@ -23,6 +23,7 @@ SOURCES += \
         reader/character_reader.cpp \
         uiModel/character_ui_model.cpp \
         uiModel/characters_ui_collection.cpp \
+        uiModel/quick_navigation_ui_model.cpp \
         uiModel/relationship_ui_model.cpp \
         uiModel/skill_ui_model.cpp
 
@@ -65,5 +66,6 @@ HEADERS += \
     reader/character_reader.h \
     uiModel/character_ui_model.h \
     uiModel/characters_ui_collection.h \
+    uiModel/quick_navigation_ui_model.h \
     uiModel/relationship_ui_model.h \
     uiModel/skill_ui_model.h
