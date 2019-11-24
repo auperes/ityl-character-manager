@@ -25,5 +25,8 @@ enum Relationship
     OldHusband,
     OldWife,
     Master,
-    AdoptiveSibling
+    AdoptiveSibling,
+    Disciple,
+    RightHand,
+    Rival
 };
