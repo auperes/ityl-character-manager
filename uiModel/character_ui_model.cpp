@@ -10,7 +10,8 @@
 #include "../dataModel/app_config.h"
 
 CharacterUiModel::CharacterUiModel()
-    : _character(nullptr)
+    : QObject ()
+    , _character(nullptr)
     , _skills(nullptr)
     , _relationships(nullptr)
 {
@@ -18,7 +19,8 @@ CharacterUiModel::CharacterUiModel()
 }
 
 CharacterUiModel::CharacterUiModel(const std::shared_ptr<Character> &character)
-    : _character(character)
+    : QObject()
+    , _character(character)
     , _skills(new QStandardItemModel(this))
     , _relationships(new QStandardItemModel(this))
 {
@@ -38,7 +40,8 @@ CharacterUiModel::CharacterUiModel(const std::shared_ptr<Character> &character)
 }
 
 CharacterUiModel::CharacterUiModel(const CharacterUiModel &characterUiModel)
-    : _character(characterUiModel._character)
+    : QObject()
+    , _character(characterUiModel._character)
 {
 
 }

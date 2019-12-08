@@ -91,7 +91,7 @@ void RelationshipValidatorService::logMissingRelationships()
         auto it = _charactersNames.find(element.first);
         if (it != _charactersNames.end())
         {
-            outMissingRelationships << element.first << "\n";
+            outMissingRelationships << element.first << " " << element.second.size() << "\n";
             for (const auto& relation : element.second)
             {
                 outMissingRelationships << "- " << relation.first << " : " << Converters::convertRelationshipSingularForm(relation.second) << "\n";
@@ -99,7 +99,7 @@ void RelationshipValidatorService::logMissingRelationships()
         }
         else
         {
-            outMissingCharacters << element.first << "\n";
+            outMissingCharacters << element.first << " " << element.second.size() << "\n";
             for (const auto& relation : element.second)
             {
                 outMissingCharacters << "- " << relation.first << " : " << Converters::convertRelationshipSingularForm(relation.second) << "\n";
