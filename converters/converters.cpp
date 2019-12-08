@@ -8,8 +8,8 @@ QString Converters::convertRelationshipSingularForm(const Relationship& relation
     QString value;
     switch (relationship)
     {
-    case Aunt:
-        value = "Tante";
+    case UncleAunt:
+        value = "Oncle/Tante";
         break;
     case Wife:
         value = "Femme";
@@ -17,17 +17,11 @@ QString Converters::convertRelationshipSingularForm(const Relationship& relation
     case Child:
         value = "Enfant";
         break;
-    case Uncle:
-        value = "Oncle";
-        break;
     case Cousin:
         value = "Cousin";
         break;
-    case Father:
-        value = "Père";
-        break;
-    case Mother:
-        value = "Mère";
+    case Parent:
+        value = "Parent";
         break;
     case Nephew:
         value = "Neveu";
@@ -38,14 +32,11 @@ QString Converters::convertRelationshipSingularForm(const Relationship& relation
     case Sibling:
         value = "Adelphe";
         break;
-    case Grandchild:
+    case GrandChild:
         value = "Petit-enfant";
         break;
-    case Grandfather:
-        value = "Grand-père";
-        break;
-    case Grandmother:
-        value = "Grand-mère";
+    case GrandParent:
+        value = "Grand-parent";
         break;
     case HalfSibling:
         value = "Demi-adelphe";
@@ -55,9 +46,6 @@ QString Converters::convertRelationshipSingularForm(const Relationship& relation
         break;
     case Partner:
         value ="Partenaire";
-        break;
-    case Lover:
-        value = "Amant(e)";
         break;
     case Twin:
         value = "Jumeau";
@@ -71,12 +59,6 @@ QString Converters::convertRelationshipSingularForm(const Relationship& relation
     case Master:
         value = "Maître";
         break;
-    case OldWife:
-        value = "Ex-femme";
-        break;
-    case OldHusband:
-        value = "Ex-mari";
-        break;
     case AdoptiveSibling:
         value = "Adelphe adoptif";
         break;
@@ -85,6 +67,9 @@ QString Converters::convertRelationshipSingularForm(const Relationship& relation
         break;
     case RightHand:
         value = "Bras droit";
+        break;
+    case RightHandOf:
+        value = "Bras droit de";
         break;
     case Rival:
         value = "Rival";
@@ -98,8 +83,8 @@ QString Converters::convertRelationshipPluralForm(const Relationship& relationsh
     QString value;
     switch (relationship)
     {
-    case Aunt:
-        value = "Tantes";
+    case UncleAunt:
+        value = "Oncles/Tantes";
         break;
     case Wife:
         value = "Femmes";
@@ -107,17 +92,11 @@ QString Converters::convertRelationshipPluralForm(const Relationship& relationsh
     case Child:
         value = "Enfants";
         break;
-    case Uncle:
-        value = "Oncles";
-        break;
     case Cousin:
         value = "Cousins";
         break;
-    case Father:
-        value = "Pères";
-        break;
-    case Mother:
-        value = "Mères";
+    case Parent:
+        value = "Parents";
         break;
     case Nephew:
         value = "Neveux";
@@ -128,14 +107,11 @@ QString Converters::convertRelationshipPluralForm(const Relationship& relationsh
     case Sibling:
         value = "Adelphes";
         break;
-    case Grandchild:
+    case GrandChild:
         value = "Petits-enfants";
         break;
-    case Grandfather:
-        value = "Grands-pères";
-        break;
-    case Grandmother:
-        value = "Grands-mères";
+    case GrandParent:
+        value = "Grands-parents";
         break;
     case HalfSibling:
         value = "Demi-adelphes";
@@ -146,9 +122,6 @@ QString Converters::convertRelationshipPluralForm(const Relationship& relationsh
     case Partner:
         value = "Partenaires";
         break;
-    case Lover:
-        value = "Amants";
-        break;
     case Twin:
         value = "Jumeaux";
         break;
@@ -157,12 +130,6 @@ QString Converters::convertRelationshipPluralForm(const Relationship& relationsh
         break;
     case Betrothed:
         value = "Fiancés";
-        break;
-    case OldWife:
-        value = "Ex-femmes";
-        break;
-    case OldHusband:
-        value = "Ex-maris";
         break;
     case Master:
         value = "Maîtres";
@@ -176,6 +143,9 @@ QString Converters::convertRelationshipPluralForm(const Relationship& relationsh
     case RightHand:
         value = "Bras droits";
         break;
+    case RightHandOf:
+        value = "Bras droit de";
+        break;
     case Rival:
         value = "Rivaux";
         break;
@@ -185,20 +155,16 @@ QString Converters::convertRelationshipPluralForm(const Relationship& relationsh
 
 Relationship Converters::convertRelationshipToEnum(const QString& relationship)
 {
-    if (relationship == "aunt")
-        return Relationship::Aunt;
+    if (relationship == "uncleAunt")
+        return Relationship::UncleAunt;
     if (relationship == "wife")
         return Relationship::Wife;
     if (relationship == "child")
         return Relationship::Child;
-    if (relationship == "uncle")
-        return Relationship::Uncle;
     if (relationship == "cousin")
         return Relationship::Cousin;
-    if (relationship == "father")
-        return Relationship::Father;
-    if (relationship == "mother")
-        return Relationship::Mother;
+    if (relationship == "parent")
+        return Relationship::Parent;
     if (relationship == "nephew")
         return Relationship::Nephew;
     if (relationship == "husband")
@@ -206,29 +172,21 @@ Relationship Converters::convertRelationshipToEnum(const QString& relationship)
     if (relationship == "sibling")
         return Relationship::Sibling;
     if (relationship == "grandChild")
-        return Relationship::Grandchild;
-    if (relationship == "grandFather")
-        return Relationship::Grandfather;
-    if (relationship == "grandMother")
-        return Relationship::Grandmother;
+        return Relationship::GrandChild;
+    if (relationship == "grandParent")
+        return Relationship::GrandParent;
     if (relationship == "halfSibling")
         return Relationship::HalfSibling;
     if (relationship == "guardian")
         return Relationship::Guardian;
     if (relationship == "partner")
         return Relationship::Partner;
-    if (relationship == "lover")
-        return Relationship::Lover;
     if (relationship == "twin")
         return Relationship::Twin;
     if (relationship == "protege")
         return Relationship::Protege;
     if (relationship == "betrothed")
         return Relationship::Betrothed;
-    if (relationship == "oldWife")
-        return Relationship::OldWife;
-    if (relationship == "oldHusband")
-        return Relationship::OldHusband;
     if (relationship == "master")
         return Relationship::Master;
     if (relationship == "adoptiveSibling")
@@ -237,6 +195,8 @@ Relationship Converters::convertRelationshipToEnum(const QString& relationship)
         return Relationship::Disciple;
     if (relationship == "rightHand")
         return Relationship::RightHand;
+    if (relationship == "rightHandOf")
+        return Relationship::RightHandOf;
     if (relationship == "rival")
         return Relationship::Rival;
 
@@ -298,5 +258,6 @@ QString Converters::convertNationToColor(const QString &nation)
 
     std::string errorMessage("Cannot convert nation. Unknown value: " + nation.toStdString());
     std::cout << errorMessage << std::endl;
-    throw std::logic_error(errorMessage.c_str());
+    return "#000000";
+//    throw std::logic_error(errorMessage.c_str());
 }

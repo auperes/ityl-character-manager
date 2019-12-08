@@ -12,6 +12,8 @@
 
 QString AppConfig::_charactersFolderPath;
 QString AppConfig::_avatarsFolderPath;
+QString AppConfig::_relatedRelationshipsFilePath;
+QString AppConfig::_logFolderPath;
 
 AppConfig::AppConfig()
 {
@@ -29,6 +31,10 @@ AppConfig::AppConfig()
         _charactersFolderPath = jsonObject["charactersFolderPath"].toString();
     if (jsonObject.contains("avatarsFolderPath"))
         _avatarsFolderPath = jsonObject["avatarsFolderPath"].toString();
+    if (jsonObject.contains("relatedRelationshipsFilePath"))
+        _relatedRelationshipsFilePath = jsonObject["relatedRelationshipsFilePath"].toString();
+    if (jsonObject.contains("logFolderPath"))
+        _logFolderPath = jsonObject["logFolderPath"].toString();
 }
 
 QString AppConfig::getCharactersFolderPath()
@@ -39,4 +45,14 @@ QString AppConfig::getCharactersFolderPath()
 QString AppConfig::getAvatarsFolderPath()
 {
     return _avatarsFolderPath;
+}
+
+QString AppConfig::getRelatedRelationshipsFilePath()
+{
+    return _relatedRelationshipsFilePath;
+}
+
+QString AppConfig::getLogFolderPath()
+{
+    return _logFolderPath;
 }

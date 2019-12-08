@@ -3,6 +3,7 @@
 #include <QDir>
 
 #include "reader/character_reader.h"
+#include "services/relationship_validator_service.h"
 
 CharactersProvider::CharactersProvider(const QString &folderPath)
     : _folderPath(folderPath)
@@ -14,6 +15,7 @@ void CharactersProvider::loadCharacters()
 {
     QDir directory(_folderPath);
     QStringList files = directory.entryList(QStringList() << "*.json", QDir::Files);
+
     foreach(const QString& filename, files) {
         _characters.push_back(std::make_shared<Character>(CharacterReader::readCharacterFromFile(directory.filePath(filename))));
     }
@@ -21,6 +23,7 @@ void CharactersProvider::loadCharacters()
     QSet<QString> ethnies;
     QSet<QString> groups;
     QSet<QString> nations;
+    RelationshipValidatorService relationshipValidatorService;
 
     foreach(const std::shared_ptr<Character>& character, _characters) {
         foreach (const QString& ethnie, character->getEthnies()) {
@@ -32,6 +35,18 @@ void CharactersProvider::loadCharacters()
         }
 
         nations.insert(character->getCurrentNation());
+
+        QString characterFullName = character->getFirstName() + " " + character->getLastName();
+        relationshipValidatorService.addCharacterName(characterFullName);
+        auto relationships = character->getRelationships().keys();
+        for (const Relationship& relationship : relationships) {
+            auto relationshipNames = character->getRelationships().value(relationship);
+            for (auto& name : relationshipNames)
+            {
+                QString relatedFullName = name.first + " " + name.second;
+                relationshipValidatorService.addRelationship(characterFullName, relationship, relatedFullName);
+            }
+        }
     }
 
     _ethnies = ethnies.toList();
@@ -45,6 +60,8 @@ void CharactersProvider::loadCharacters()
     _nations = nations.toList();
     _nations.sort();
     _nations.prepend(QString("Tous"));
+
+    relationshipValidatorService.logMissingRelationships();
 }
 
 void CharactersProvider::refreshCharacters()

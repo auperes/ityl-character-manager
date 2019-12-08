@@ -21,11 +21,7 @@ Character CharacterReader::readCharacterFromFile(const QString& filepath)
     QJsonObject jsonObject = document.object();
 
     Character character;
-
-    QJsonValue characterValue = jsonObject.value("character");
-    QJsonObject characterObject = characterValue.toObject();
-
-    QJsonArray valuesArray = characterObject["values"].toArray();
+    QJsonObject characterObject = jsonObject.value("character").toObject();
 
     fillValues(characterObject["values"].toArray(), character);
     fillRoles(characterObject["roles"].toArray(), character);

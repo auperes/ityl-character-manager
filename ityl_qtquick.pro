@@ -21,6 +21,7 @@ SOURCES += \
         main.cpp \
         qml_types_factory.cpp \
         reader/character_reader.cpp \
+        services/relationship_validator_service.cpp \
         uiModel/character_ui_model.cpp \
         uiModel/characters_ui_collection.cpp \
         uiModel/quick_navigation_ui_model.cpp \
@@ -52,6 +53,7 @@ DISTFILES += \
     ui/CharacterListView.qml \
     ui/CharacterView.qml \
     ui/QuickNavigation.qml \
+    ui/ValidationsViewer.qml \
     ui/main.qml
 
 HEADERS += \
@@ -64,6 +66,7 @@ HEADERS += \
     dataModel/status.h \
     qml_types_factory.h \
     reader/character_reader.h \
+    services/relationship_validator_service.h \
     uiModel/character_ui_model.h \
     uiModel/characters_ui_collection.h \
     uiModel/quick_navigation_ui_model.h \
