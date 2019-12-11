@@ -12,8 +12,6 @@
 #include "../converters/converters.h"
 #include "../dataModel/app_config.h"
 
-//std::unordered_map<Relationship, Relationship> RelationshipValidatorService::_relatedRelationships;
-
 RelationshipValidatorService::RelationshipValidatorService()
 {
     QString content;
@@ -43,6 +41,7 @@ void RelationshipValidatorService::addCharacterName(QString characterName)
 
 void RelationshipValidatorService::addRelationship(QString characterName, Relationship relationship, QString relatedCharacterName)
 {
+    // init all needed data
     auto relatedRelationshipIterator = _relatedRelationships.find(relationship);
     if (relatedRelationshipIterator == _relatedRelationships.end())
     {
@@ -50,25 +49,33 @@ void RelationshipValidatorService::addRelationship(QString characterName, Relati
         return;
     }
 
+    auto characterNameStr = characterName.toStdString();
+    auto relatedCharacterNameStr = relatedCharacterName.toStdString();
     Relationship relatedRelationship = relatedRelationshipIterator->second;
 
-    auto missingRelationshipIterator = _missingRelationships.find(characterName);
-    if (missingRelationshipIterator == _missingRelationships.end())
+    // find relationship
+    auto missingRelationshipIterator = _missingRelationships.find(characterNameStr);
+    if (missingRelationshipIterator != _missingRelationships.end())
     {
-        _missingRelationships[relatedCharacterName][characterName] = relatedRelationship;
-        return;
+        auto [itBegin, itEnd] = missingRelationshipIterator->second.equal_range(relatedCharacterNameStr);
+        if (itBegin != missingRelationshipIterator->second.end())
+        {
+            auto it = itBegin;
+            while (it != itEnd)
+            {
+                if (it->second == relationship)
+                {
+                    missingRelationshipIterator->second.erase(it);
+                    if (missingRelationshipIterator->second.empty())
+                        _missingRelationships.erase(missingRelationshipIterator);
+                    return;
+                }
+                ++it;
+            }
+        }
     }
 
-    auto it = missingRelationshipIterator->second.find(relatedCharacterName);
-    if (it == missingRelationshipIterator->second.end() || it->second != relationship)
-    {
-        _missingRelationships[relatedCharacterName][characterName] = relatedRelationship;
-        return;
-    }
-
-    missingRelationshipIterator->second.erase(it);
-    if (missingRelationshipIterator->second.empty())
-        _missingRelationships.erase(missingRelationshipIterator);
+    _missingRelationships[relatedCharacterNameStr].emplace(characterNameStr, relatedRelationship);
 }
 
 void RelationshipValidatorService::logMissingRelationships()
@@ -88,21 +95,21 @@ void RelationshipValidatorService::logMissingRelationships()
 
     for (auto& element : _missingRelationships)
     {
-        auto it = _charactersNames.find(element.first);
+        auto it = _charactersNames.find(QString::fromStdString(element.first));
         if (it != _charactersNames.end())
         {
-            outMissingRelationships << element.first << " " << element.second.size() << "\n";
+            outMissingRelationships << QString::fromStdString(element.first) << " " << element.second.size() << "\n";
             for (const auto& relation : element.second)
             {
-                outMissingRelationships << "- " << relation.first << " : " << Converters::convertRelationshipSingularForm(relation.second) << "\n";
+                outMissingRelationships << "- " << QString::fromStdString(relation.first) << " : " << Converters::convertRelationshipSingularForm(relation.second) << "\n";
             }
         }
         else
         {
-            outMissingCharacters << element.first << " " << element.second.size() << "\n";
+            outMissingCharacters << QString::fromStdString(element.first) << " " << element.second.size() << "\n";
             for (const auto& relation : element.second)
             {
-                outMissingCharacters << "- " << relation.first << " : " << Converters::convertRelationshipSingularForm(relation.second) << "\n";
+                outMissingCharacters << "- " << QString::fromStdString(relation.first) << " : " << Converters::convertRelationshipSingularForm(relation.second) << "\n";
             }
         }
     }
