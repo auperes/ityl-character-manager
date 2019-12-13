@@ -25,6 +25,7 @@ class CharacterUiModel : public QObject
     Q_PROPERTY(QStringList ethnies READ ethnies CONSTANT)
     Q_PROPERTY(QStringList groups READ groups CONSTANT)
     Q_PROPERTY(QString nationColor READ nationColor CONSTANT)
+    Q_PROPERTY(bool hasTitle READ hasTitle CONSTANT)
 
 
 public:
@@ -36,8 +37,8 @@ public:
     const QString avatar() const;
     const QString quote() const;
     const QString& title() const { return _character->getTitle(); }
-    const QString& birthPlace() const { return _character->getBirthPlace(); }
-    const QString& livelyPlace() const { return _character->getLivelyPlace(); }
+    const QString birthPlace() const { return "Lieu de naissance : " + _character->getBirthPlace(); }
+    const QString livelyPlace() const { return "Lieu de vie : " + _character->getLivelyPlace(); }
     const QString& description() const { return _character->getDescription(); }
     const QStringList roles() const { return _character->getRoles().toList(); }
     QAbstractItemModel* skills() const { return _skills.get(); }
@@ -45,6 +46,7 @@ public:
     const QStringList ethnies() const { return _character->getEthnies().toList(); }
     const QStringList groups() const { return _character->getGroups().toList(); }
     const QString nationColor() const;
+    bool hasTitle() const;
 
 signals:
 

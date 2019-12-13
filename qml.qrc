@@ -1,9 +1,11 @@
 <RCC>
-    <qresource>
-        <file>./ui/main.qml</file>
-        <file>./ui/CharacterView.qml</file>
-        <file>./ui/CharacterListView.qml</file>
-        <file>./ui/QuickNavigation.qml</file>
+    <qresource prefix="/">
+        <file>ui/main.qml</file>
+        <file>ui/CharacterView.qml</file>
+        <file>ui/CharacterListView.qml</file>
+        <file>ui/QuickNavigation.qml</file>
         <file>qtquickcontrols2.conf</file>
+        <file>ui/IdentityView.qml</file>
+        <file>ui/AvatarView.qml</file>
     </qresource>
 </RCC>

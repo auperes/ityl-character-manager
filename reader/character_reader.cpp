@@ -1,5 +1,7 @@
 #include "character_reader.h"
 
+#include <iostream>
+
 #include <QFile>
 #include <QString>
 #include <QJsonDocument>
@@ -17,7 +19,11 @@ Character CharacterReader::readCharacterFromFile(const QString& filepath)
     file.open(QIODevice::ReadOnly | QIODevice::Text);
     content = file.readAll();
     file.close();
-    QJsonDocument document = QJsonDocument::fromJson(content.toUtf8());
+    QJsonParseError error;
+    QJsonDocument document = QJsonDocument::fromJson(content.toUtf8(), &error);
+    if (document.isNull())
+        throw std::logic_error(error.errorString().toStdString());
+
     QJsonObject jsonObject = document.object();
 
     Character character;

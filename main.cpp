@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include <QFont>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -18,6 +19,9 @@ int main(int argc, char *argv[])
     try {
         QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
         QGuiApplication app(argc, argv);
+        QFont font;
+        font.setPointSize(10);
+        app.setFont(font);
 
         QmlTypesFactory::registerTypes();
         AppConfig appConfig;

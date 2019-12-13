@@ -72,6 +72,11 @@ const QString CharacterUiModel::nationColor() const
     return Converters::convertNationToColor(_character->getCurrentNation());
 }
 
+bool CharacterUiModel::hasTitle() const
+{
+    return _character->getTitle().size() > 0;
+}
+
 void CharacterUiModel::addSkill(const QString &skillName, const QList<Skill> &skillValues)
 {
     const int newRow = _skills->rowCount();

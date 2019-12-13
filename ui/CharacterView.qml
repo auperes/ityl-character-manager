@@ -6,113 +6,49 @@ import Character 1.0
 
 Component {
     RowLayout {
-        Frame {
-            RowLayout {
-                anchors.fill: parent
-                Image {
-                    anchors.margins: 0
-                    source: model.display.avatar
-                }
-            }
+        AvatarView {
+            Layout.preferredHeight: 400
+            Layout.preferredWidth: 200
         }
 
         Frame {
             id: identityFrame
-            implicitHeight: parent.height
-            implicitWidth: 500
+            Layout.preferredHeight: 400
+            Layout.preferredWidth: 500
 
             ScrollView {
-                implicitHeight: parent.height
-                implicitWidth: 475
+                anchors.fill: parent
                 clip: true
 
                 ColumnLayout {
                     anchors.fill: parent
+                    Layout.alignment: Qt.AlignTop
 
-                    Rectangle {
+                    IdentityView {
                         Layout.preferredWidth: parent.width
-                        Layout.preferredHeight: characterHeader.height + 6
-                        color: model.display.nationColor
-
-                        ColumnLayout {
-                            width: parent.width
-                            id: characterHeader
-
-                            Item { Layout.fillHeight: true }
-
-                            Text {
-                                text: model.display.fullName
-                                Layout.alignment: Qt.AlignCenter
-                                font.pointSize: 12
-                            }
-
-                            Text {
-                                text: model.display.title
-                                Layout.alignment: Qt.AlignCenter
-                                font.pointSize: 9
-                            }
-
-                            Item { Layout.fillHeight: true }
-                        }
-                    }
-
-                    Text {
-                        Layout.preferredWidth: parent.width
-                        text: model.display.quote
-                        wrapMode: Label.WordWrap
-                        font.italic: true
-                    }
-
-                    ListView {
-                        id: rolesListView
-                        Layout.preferredHeight: rolesListView.count * 14
-                        model: display.roles
-                        delegate: RowLayout {
-                            Text {
-                                text: modelData
-                            }
-                        }
-                    }
-
-                    ListView {
-                        id: skillsListView
-                        Layout.preferredHeight: skillsListView.count * 14
-                        model: display.skills
-                        delegate: RowLayout {
-                            Text {
-                                Layout.preferredWidth: 60
-                                text: model.display.skillName
-                                font.bold: true
-                            }
-                            Text {
-                                text: model.display.skillValues
-                            }
-                        }
-                    }
-
-                    Text {
-                        text: model.display.birthPlace
-                    }
-
-                    Text {
-                        text: model.display.livelyPlace
+                        Layout.preferredHeight: 250
+                        Layout.fillHeight: true
+                        Layout.alignment: Qt.AlignTop
                     }
 
                     ListView {
                         id: relationshipsListView
-                        Layout.preferredHeight: relationshipsListView.count * 20
+                        Layout.preferredHeight: relationshipsListView.count * 22
+                        Layout.preferredWidth: parent.width
+                        Layout.fillHeight: true
+                        Layout.fillWidth: true
                         model: display.relationships
                         delegate: GridLayout {
                             columns: 2
                             Layout.fillHeight: true
                             Text {
-                                Layout.preferredWidth: 75
+                                Layout.preferredWidth: 100
                                 text: model.display.type
                                 height: parent.height
                                 font.bold: true
                             }
                             Text {
-                                Layout.preferredWidth: 390
+                                Layout.preferredWidth: 380
                                 text: model.display.names
                                 wrapMode: Text.WordWrap
                                 height: parent.height
@@ -122,7 +58,8 @@ Component {
 
                     ListView {
                         id: ethniesListView
-                        Layout.preferredHeight: ethniesListView.count * 14
+                        Layout.preferredHeight: ethniesListView.count * 16
+                        Layout.fillHeight: true
                         model: display.ethnies
                         delegate: RowLayout {
                             Text {
@@ -133,7 +70,8 @@ Component {
 
                     ListView {
                         id: groupsListView
-                        Layout.preferredHeight: groupsListView.count * 14
+                        Layout.preferredHeight: groupsListView.count * 16
+                        Layout.fillHeight: true
                         model: display.groups
                         delegate: RowLayout {
                             Text {

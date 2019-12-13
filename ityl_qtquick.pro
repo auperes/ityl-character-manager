@@ -29,6 +29,7 @@ SOURCES += \
         uiModel/skill_ui_model.cpp
 
 RESOURCES += \
+    qml.qrc \
     qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
@@ -48,10 +49,13 @@ install_it.files += $${PWD}/settings/app_config.json
 INSTALLS += install_it
 
 DISTFILES += \
+    .gitignore \
     qtquickcontrols2.conf \
     settings/app_config.json \
+    ui/AvatarView.qml \
     ui/CharacterListView.qml \
     ui/CharacterView.qml \
+    ui/IdentityView.qml \
     ui/QuickNavigation.qml \
     ui/ValidationsViewer.qml \
     ui/main.qml

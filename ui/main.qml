@@ -16,10 +16,15 @@ Window {
         QuickNavigation {
             Layout.leftMargin: 20
             Layout.fillWidth: true
+            Layout.preferredHeight: 50
         }
 
         CharacterListView {
             Layout.alignment: Qt.AlignHCenter
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.leftMargin: 20
+            Layout.rightMargin: 20
         }
     }
 }

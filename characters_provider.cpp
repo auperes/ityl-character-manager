@@ -1,5 +1,7 @@
 #include "characters_provider.h"
 
+#include <iostream>
+
 #include <QDir>
 
 #include "reader/character_reader.h"
@@ -17,7 +19,14 @@ void CharactersProvider::loadCharacters()
     QStringList files = directory.entryList(QStringList() << "*.json", QDir::Files);
 
     foreach(const QString& filename, files) {
-        _characters.push_back(std::make_shared<Character>(CharacterReader::readCharacterFromFile(directory.filePath(filename))));
+        try
+        {
+            _characters.push_back(std::make_shared<Character>(CharacterReader::readCharacterFromFile(directory.filePath(filename))));
+        }
+        catch (const std::logic_error& ex)
+        {
+            std::cout << "Warning: An error occured when reading file " << filename.toStdString() << " (" << ex.what() << ")." << std::endl;
+        }
     }
 
     QSet<QString> ethnies;
