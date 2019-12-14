@@ -52,11 +52,14 @@ DISTFILES += \
     .gitignore \
     qtquickcontrols2.conf \
     settings/app_config.json \
+    ui/AffiliationsView.qml \
     ui/AvatarView.qml \
     ui/CharacterListView.qml \
     ui/CharacterView.qml \
+    ui/DescriptionView.qml \
     ui/IdentityView.qml \
     ui/QuickNavigation.qml \
+    ui/RelationshipsView.qml \
     ui/ValidationsViewer.qml \
     ui/main.qml
 

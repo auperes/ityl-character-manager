@@ -4,10 +4,11 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
 
 Window {
+    id: mainWindow
     visible: true
     visibility: Window.Maximized
-    minimumWidth: 1600
-    minimumHeight: 920
+    minimumWidth: 1300
+    minimumHeight: 500
     title: qsTr("Ityl characters viewer")
 
     ColumnLayout {

@@ -7,5 +7,8 @@
         <file>qtquickcontrols2.conf</file>
         <file>ui/IdentityView.qml</file>
         <file>ui/AvatarView.qml</file>
+        <file>ui/RelationshipsView.qml</file>
+        <file>ui/DescriptionView.qml</file>
+        <file>ui/AffiliationsView.qml</file>
     </qresource>
 </RCC>

@@ -5,14 +5,9 @@ import QtQuick.Layouts 1.12
 import Character 1.0
 
 Item {
-    Layout.alignment: Qt.AlignTop
     ColumnLayout {
-        anchors.fill: parent
-        Layout.alignment: Qt.AlignTop
-
         Rectangle {
-            Layout.alignment: Qt.AlignTop
-            Layout.preferredWidth: parent.width
+            Layout.preferredWidth: 475
             Layout.preferredHeight: characterHeader.height + 6
             color: model.display.nationColor
 
@@ -44,11 +39,13 @@ Item {
             text: model.display.quote
             wrapMode: Label.WordWrap
             font.italic: true
+            Layout.bottomMargin: 10
         }
 
         ListView {
             id: rolesListView
             Layout.preferredHeight: rolesListView.count * 14
+            Layout.bottomMargin: 20
             model: display.roles
             delegate: RowLayout {
                 Text {
@@ -60,6 +57,7 @@ Item {
         ListView {
             id: skillsListView
             Layout.preferredHeight: skillsListView.count * 14
+            Layout.bottomMargin: 20
             model: display.skills
             delegate: RowLayout {
                 Text {
