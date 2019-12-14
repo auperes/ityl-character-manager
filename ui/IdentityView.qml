@@ -66,7 +66,9 @@ Item {
                     font.bold: true
                 }
                 Text {
+                    Layout.preferredWidth: identityFrame.width - 70
                     text: model.display.skillValues
+                    wrapMode: Text.WordWrap
                 }
             }
         }
