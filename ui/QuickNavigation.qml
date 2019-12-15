@@ -16,11 +16,17 @@ Item {
         }
 
         ComboBox {
+            id: nationsComboBox
             textRole: "display"
             implicitWidth: 300
             model: quickNavigation.nations
 
             onActivated: { charactersList.filterCharacters("nation", currentText) }
+            Connections {
+                target: quickNavigation
+                onResetNations: { nationsComboBox.currentIndex = 0 }
+            }
+
         }
 
         Text {
@@ -28,11 +34,16 @@ Item {
         }
 
         ComboBox {
+            id: ethniesComboBox
             textRole: "display"
             implicitWidth: 300
             model: quickNavigation.ethnies
 
             onActivated: { charactersList.filterCharacters("ethnie", currentText) }
+            Connections {
+                target: quickNavigation
+                onResetEthnies: { ethniesComboBox.currentIndex = 0 }
+            }
         }
 
         Text {
@@ -40,11 +51,16 @@ Item {
         }
 
         ComboBox {
+            id: groupsComboBox
             textRole: "display"
             implicitWidth: 300
             model: quickNavigation.groups
 
             onActivated: charactersList.filterCharacters("group", currentText)
+            Connections {
+                target: quickNavigation
+                onResetGroups: { groupsComboBox.currentIndex = 0 }
+            }
         }
     }
 }

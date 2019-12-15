@@ -20,9 +20,13 @@ public:
     QStringListModel *groups() const { return _groups.get(); }
 
 signals:
+    void resetNations();
+    void resetEthnies();
+    void resetGroups();
 
 public slots:
     void refreshElements();
+    void resetElements(bool needResetNations, bool needResetEthnies, bool needResetGroups);
 
 private:
     std::unique_ptr<QStringListModel> _nations;

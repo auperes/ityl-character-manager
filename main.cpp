@@ -41,6 +41,7 @@ int main(int argc, char *argv[])
         engine.rootContext()->setContextProperty(QStringLiteral("quickNavigation"), &quickNavigation);
 
         QObject::connect(&charactersUiCollection, &CharactersUiCollection::charactersChanged, &quickNavigation, &QuickNavigationUiModel::refreshElements);
+        QObject::connect(&charactersUiCollection, &CharactersUiCollection::filteringChanged, &quickNavigation, &QuickNavigationUiModel::resetElements);
 
         engine.load(QUrl(QStringLiteral("qrc:/ui/main.qml")));
         if (engine.rootObjects().isEmpty())

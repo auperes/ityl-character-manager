@@ -4,6 +4,7 @@
 
 #include "../dataModel/relationship.h"
 #include "../dataModel/status.h"
+#include "../uiModel/filtering_type.h"
 
 class Converters
 {
@@ -19,4 +20,6 @@ public:
     static Status convertStatus(const QString& status);
 
     static QString convertNationToColor(const QString& nation);
+
+    static FilteringType convertFilteringType(const QString& type);
 };

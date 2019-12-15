@@ -16,3 +16,13 @@ void QuickNavigationUiModel::refreshElements()
     _ethnies->setStringList(_charactersProvider->ethnies());
     _groups->setStringList(_charactersProvider->groups());
 }
+
+void QuickNavigationUiModel::resetElements(bool needResetNations, bool needResetEthnies, bool needResetGroups)
+{
+    if (needResetNations)
+        emit resetNations();
+    if (needResetEthnies)
+        emit resetEthnies();
+    if (needResetGroups)
+        emit resetGroups();
+}

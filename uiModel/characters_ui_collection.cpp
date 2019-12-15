@@ -3,10 +3,14 @@
 #include <QQmlEngine>
 #include <QStandardItemModel>
 
+#include "../converters/converters.h"
+
 CharactersUiCollection::CharactersUiCollection()
     : QObject (nullptr)
     , _model(nullptr)
     , _charactersProvider(nullptr)
+    , _filteringType(FilteringType::None)
+    , _filteringName("Tous")
 {
 
 }
@@ -48,37 +52,48 @@ void CharactersUiCollection::addCharacters(const QList<std::shared_ptr<Character
 
 void CharactersUiCollection::filterCharacters(const QString &type, const QString &name)
 {
+    FilteringType selectedType = Converters::convertFilteringType(type);
+    _filteringType = (name == "Tous") ? FilteringType::None : selectedType;
+    _filteringName = name;
+
+    filterCharacters(_filteringType, _filteringName);
+
+    emit filteringChanged(selectedType != Nation, selectedType != Ethnie, selectedType != Group);
+}
+
+void CharactersUiCollection::filterCharacters(const FilteringType &filteringType, const QString &filteringName)
+{
     clearCharacters();
 
     QList<std::shared_ptr<Character>> characters;
 
-    if (name == "Tous") {
+    switch (filteringType)
+    {
+    case None:
         characters = _charactersProvider->characters();
-    }
-
-    else if (type == QString("group")) {
-        characters = _charactersProvider->findCharacters([name](const std::shared_ptr<Character> &character)
+        break;
+    case Group:
+        characters = _charactersProvider->findCharacters([filteringName](const std::shared_ptr<Character> &character)
         {
             auto groups = character->getGroups();
-            auto it = std::find_if(groups.begin(), groups.end(),[name](auto group) { return QString::compare(name, group) == 0; });
+            auto it = std::find_if(groups.begin(), groups.end(),[filteringName](auto group) { return QString::compare(filteringName, group) == 0; });
             return it != groups.end();
         });
-    }
-
-    else if (type == QString("ethnie")) {
-        characters = _charactersProvider->findCharacters([name](const std::shared_ptr<Character> &character)
+        break;
+    case Ethnie:
+        characters = _charactersProvider->findCharacters([filteringName](const std::shared_ptr<Character> &character)
         {
             auto ethnies = character->getEthnies();
-            auto it = std::find_if(ethnies.begin(), ethnies.end(),[name](auto ethnie) { return QString::compare(name, ethnie) == 0; });
+            auto it = std::find_if(ethnies.begin(), ethnies.end(),[filteringName](auto ethnie) { return QString::compare(filteringName, ethnie) == 0; });
             return it != ethnies.end();
         });
-    }
-
-    else if (type == QString("nation")) {
-        characters = _charactersProvider->findCharacters([name](const std::shared_ptr<Character> &character)
+        break;
+    case Nation:
+        characters = _charactersProvider->findCharacters([filteringName](const std::shared_ptr<Character> &character)
         {
-            return QString::compare(name, character->getCurrentNation()) == 0;
+            return QString::compare(filteringName, character->getCurrentNation()) == 0;
         });
+        break;
     }
 
     addCharacters(characters);
@@ -86,8 +101,21 @@ void CharactersUiCollection::filterCharacters(const QString &type, const QString
 
 void CharactersUiCollection::refreshCharacters()
 {
-    clearCharacters();
     _charactersProvider->refreshCharacters();
-    addCharacters(_charactersProvider->characters());
+    FilteringType currentType = _filteringType;
+    bool needFilterReset = (_filteringType == Nation && !_charactersProvider->nations().contains(_filteringName))
+            || (_filteringType == Ethnie && !_charactersProvider->ethnies().contains(_filteringName))
+            || (_filteringType == Group && !_charactersProvider->groups().contains(_filteringName));
+
+    if (needFilterReset)
+    {
+        _filteringType = None;
+        _filteringName = "Tous";
+    }
+
+    filterCharacters(_filteringType, _filteringName);
     emit charactersChanged();
+
+    if (needFilterReset)
+        emit filteringChanged(currentType == Nation, currentType == Ethnie, currentType == Group);
 }

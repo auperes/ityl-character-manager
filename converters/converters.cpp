@@ -259,5 +259,21 @@ QString Converters::convertNationToColor(const QString &nation)
     std::string errorMessage("Cannot convert nation. Unknown value: " + nation.toStdString());
     std::cout << errorMessage << std::endl;
     return "#000000";
-//    throw std::logic_error(errorMessage.c_str());
+    //    throw std::logic_error(errorMessage.c_str());
+}
+
+FilteringType Converters::convertFilteringType(const QString &type)
+{
+    if (type == "Tous")
+        return FilteringType::None;
+    if (type == QString("group"))
+        return FilteringType::Group;
+    if (type == QString("ethnie"))
+        return FilteringType::Ethnie;
+    if (type == QString("nation"))
+        return FilteringType::Nation;
+
+    std::string errorMessage("Cannot convert type. Unknown value: " + type.toStdString());
+    std::cout << errorMessage << std::endl;
+    throw std::logic_error(errorMessage.c_str());
 }

@@ -76,6 +76,7 @@ HEADERS += \
     services/relationship_validator_service.h \
     uiModel/character_ui_model.h \
     uiModel/characters_ui_collection.h \
+    uiModel/filtering_type.h \
     uiModel/quick_navigation_ui_model.h \
     uiModel/relationship_ui_model.h \
     uiModel/skill_ui_model.h
