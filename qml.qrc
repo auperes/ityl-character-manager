@@ -10,5 +10,6 @@
         <file>ui/RelationshipsView.qml</file>
         <file>ui/DescriptionView.qml</file>
         <file>ui/AffiliationsView.qml</file>
+        <file>ui/HomeView.qml</file>
     </qresource>
 </RCC>

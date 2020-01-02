@@ -29,7 +29,6 @@ SOURCES += \
         uiModel/skill_ui_model.cpp
 
 RESOURCES += \
-    qml.qrc \
     qml.qrc
 
 # Additional import path used to resolve QML modules in Qt Creator's code model
@@ -52,11 +51,18 @@ DISTFILES += \
     .gitignore \
     qtquickcontrols2.conf \
     settings/app_config.json \
+    thirdParties/QtMaterialDesignIcons/qml/MaterialDesignIcon.qml \
+    thirdParties/QtMaterialDesignIcons/qml/MaterialDesignIconGlyphs.js \
+    thirdParties/QtMaterialDesignIcons/resources/MaterialDesignIcon.qml \
+    thirdParties/QtMaterialDesignIcons/resources/MaterialDesignIconGlyphs.js \
+    thirdParties/QtMaterialDesignIcons/resources/materialdesignicons-webfont.svg \
+    thirdParties/QtMaterialDesignIcons/resources/materialdesignicons-webfont.ttf \
     ui/AffiliationsView.qml \
     ui/AvatarView.qml \
     ui/CharacterListView.qml \
     ui/CharacterView.qml \
     ui/DescriptionView.qml \
+    ui/HomeView.qml \
     ui/IdentityView.qml \
     ui/QuickNavigation.qml \
     ui/RelationshipsView.qml \
