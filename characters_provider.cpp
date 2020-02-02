@@ -3,6 +3,7 @@
 #include <iostream>
 
 #include <QDir>
+#include <QSet>
 
 #include "reader/character_reader.h"
 #include "services/relationship_validator_service.h"
@@ -58,15 +59,15 @@ void CharactersProvider::loadCharacters()
         }
     }
 
-    _ethnies = ethnies.toList();
+    _ethnies = QStringList(ethnies.begin(), ethnies.end());
     _ethnies.sort();
     _ethnies.prepend(QString("Tous"));
 
-    _groups = groups.toList();
+    _groups = QStringList(groups.begin(), groups.end());
     _groups.sort();
     _groups.prepend(QString("Tous"));
 
-    _nations = nations.toList();
+    _nations = QStringList(nations.begin(), nations.end());
     _nations.sort();
     _nations.prepend(QString("Tous"));
 

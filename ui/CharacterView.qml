@@ -32,17 +32,17 @@ Component {
 
                     Button {
                         text: "Relations"
-                        onClicked: detailedView.push(relationshipsView)
+                        onClicked: detailedView.replace(relationshipsView)
                     }
 
                     Button {
                         text: "Affiliations"
-                        onClicked: detailedView.push(affiliationsView)
+                        onClicked: detailedView.replace(affiliationsView)
                     }
 
                     Button {
                         text: "Description"
-                        onClicked: detailedView.push(descriptionView)
+                        onClicked: detailedView.replace(descriptionView)
                     }
                 }
             }
