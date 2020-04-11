@@ -13,7 +13,7 @@ namespace Ityl::UiModel
         Q_PROPERTY(QAbstractItemModel* elements READ elements CONSTANT)
 
     public:
-        explicit HomeCategoryUiModel(QObject *parent = nullptr);
+        explicit HomeCategoryUiModel(QObject *parent = nullptr); //TODO get and create HomeElementUiModels
 
         QAbstractItemModel* elements() const { return _elements; }
 
