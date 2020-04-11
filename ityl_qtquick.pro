@@ -16,11 +16,13 @@ SOURCES += \
         characters_provider.cpp \
         converters/converters.cpp \
         dataModel/app_config.cpp \
-        dataModel/character.cpp \
-        dataModel/skill/skill.cpp \
+        dataModel/character/character.cpp \
+        dataModel/character/skill/skill.cpp \
+        dataModel/homeView/home_view.cpp \
         main.cpp \
         qml_types_factory.cpp \
         reader/character_reader.cpp \
+        reader/home_view_reader.cpp \
         services/relationship_validator_service.cpp \
         uiModel/character_ui_model.cpp \
         uiModel/characters_ui_collection.cpp \
@@ -74,12 +76,14 @@ HEADERS += \
     characters_provider.h \
     converters/converters.h \
     dataModel/app_config.h \
-    dataModel/character.h \
-    dataModel/relationship.h \
-    dataModel/skill/skill.h \
-    dataModel/status.h \
+    dataModel/character/character.h \
+    dataModel/character/relationship.h \
+    dataModel/character/skill/skill.h \
+    dataModel/character/status.h \
+    dataModel/homeView/home_view.h \
     qml_types_factory.h \
     reader/character_reader.h \
+    reader/home_view_reader.h \
     services/relationship_validator_service.h \
     uiModel/character_ui_model.h \
     uiModel/characters_ui_collection.h \

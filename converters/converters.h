@@ -2,8 +2,8 @@
 
 #include <QString>
 
-#include "../dataModel/relationship.h"
-#include "../dataModel/status.h"
+#include "../dataModel/character/relationship.h"
+#include "../dataModel/character/status.h"
 #include "../uiModel/filtering_type.h"
 
 class Converters

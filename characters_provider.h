@@ -5,7 +5,7 @@
 #include <QList>
 #include <QString>
 
-#include "dataModel/character.h"
+#include "dataModel/character/character.h"
 
 class CharactersProvider
 {

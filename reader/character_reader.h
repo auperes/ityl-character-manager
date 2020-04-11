@@ -3,7 +3,7 @@
 #include <QString>
 #include <QJsonArray>
 
-#include "../dataModel/character.h"
+#include "../dataModel/character/character.h"
 
 class CharacterReader
 {

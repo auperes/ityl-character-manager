@@ -6,7 +6,7 @@
 #include <QPair>
 #include <QString>
 
-#include "../dataModel/relationship.h"
+#include "../dataModel/character/relationship.h"
 
 class RelationshipValidatorService
 {

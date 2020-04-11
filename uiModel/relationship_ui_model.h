@@ -2,7 +2,7 @@
 
 #include <QObject>
 
-#include "../dataModel/relationship.h"
+#include "../dataModel/character/relationship.h"
 
 class RelationshipUiModel : public QObject
 {

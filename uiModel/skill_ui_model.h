@@ -2,7 +2,7 @@
 
 #include <QObject>
 
-#include "../dataModel/skill/skill.h"
+#include "../dataModel/character/skill/skill.h"
 
 class SkillUiModel : public QObject
 {
