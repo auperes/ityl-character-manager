@@ -7,35 +7,45 @@
 
 CharactersUiCollection::CharactersUiCollection()
     : QObject (nullptr)
+    , _id(0)
     , _model(nullptr)
-    , _charactersProvider(nullptr)
     , _filteringType(FilteringType::None)
     , _filteringName("Tous")
 {
 
 }
 
-CharactersUiCollection::CharactersUiCollection(CharactersProvider *charactersProvider, QObject *parent)
+CharactersUiCollection::CharactersUiCollection(
+        unsigned id,
+        QList<std::shared_ptr<CharacterUiModel> > &&characterUiModels,
+        FilteringType filteringType,
+        QString filteringName,
+        QObject *parent)
     : QObject(parent)
+    , _id(id)
     , _model(new QStandardItemModel(this))
-    , _charactersProvider(charactersProvider)
-    , _filteringType(FilteringType::None)
-    , _filteringName("Tous")
+    , _characterUiModels(std::move(characterUiModels))
+    , _filteringType(filteringType)
+    , _filteringName(filteringName)
 {
     _model->insertColumn(0);
-    addCharacters(_charactersProvider->characters());
+    addCharacters(_characterUiModels);
 }
 
-void CharactersUiCollection::addCharacter(const std::shared_ptr<Character> &character)
+void CharactersUiCollection::setCharacters(QList<std::shared_ptr<CharacterUiModel> > &&characterUiModels)
 {
-    if (!character) return;
+    _characterUiModels = std::move(characterUiModels);
+    addCharacters(_characterUiModels);
+}
+
+void CharactersUiCollection::addCharacter(const std::shared_ptr<CharacterUiModel> &characterUiModel)
+{
+    if (!characterUiModel) return;
 
     const int newRow = _model->rowCount();
-    std::shared_ptr<CharacterUiModel> characterUi = std::make_shared<CharacterUiModel>(character);
-    QQmlEngine::setObjectOwnership(characterUi.get(), QQmlEngine::CppOwnership);
+    QQmlEngine::setObjectOwnership(characterUiModel.get(), QQmlEngine::CppOwnership);
     _model->insertRow(newRow);
-    _model->setData(_model->index(newRow, 0), QVariant::fromValue(characterUi.get()), Qt::DisplayRole);
-    _characterUiModels.push_back(std::move(characterUi));
+    _model->setData(_model->index(newRow, 0), QVariant::fromValue(characterUiModel.get()), Qt::DisplayRole);
 }
 
 void CharactersUiCollection::clearCharacters()
@@ -45,78 +55,9 @@ void CharactersUiCollection::clearCharacters()
     _characterUiModels.clear();
 }
 
-void CharactersUiCollection::addCharacters(const QList<std::shared_ptr<Character>>& characters)
+void CharactersUiCollection::addCharacters(const QList<std::shared_ptr<CharacterUiModel>>& characterUiModels)
 {
-    foreach (const std::shared_ptr<Character> &character, characters) {
-        addCharacter(character);
+    foreach (const std::shared_ptr<CharacterUiModel> &characterUiModel, characterUiModels) {
+        addCharacter(characterUiModel);
     }
-}
-
-void CharactersUiCollection::filterCharacters(const QString &type, const QString &name)
-{
-    FilteringType selectedType = Converters::convertFilteringType(type);
-    _filteringType = (name == "Tous") ? FilteringType::None : selectedType;
-    _filteringName = name;
-
-    filterCharacters(_filteringType, _filteringName);
-
-    emit filteringChanged(selectedType != FilteringType::Nation, selectedType != FilteringType::Ethnie, selectedType != FilteringType::Group);
-}
-
-void CharactersUiCollection::filterCharacters(const FilteringType &filteringType, const QString &filteringName)
-{
-    clearCharacters();
-
-    QList<std::shared_ptr<Character>> characters;
-
-    switch (filteringType)
-    {
-    case FilteringType::None:
-        characters = _charactersProvider->characters();
-        break;
-    case FilteringType::Group:
-        characters = _charactersProvider->findCharacters([filteringName](const std::shared_ptr<Character> &character)
-        {
-            auto groups = character->getGroups();
-            auto it = std::find_if(groups.begin(), groups.end(),[filteringName](auto group) { return QString::compare(filteringName, group) == 0; });
-            return it != groups.end();
-        });
-        break;
-    case FilteringType::Ethnie:
-        characters = _charactersProvider->findCharacters([filteringName](const std::shared_ptr<Character> &character)
-        {
-            auto ethnies = character->getEthnies();
-            auto it = std::find_if(ethnies.begin(), ethnies.end(),[filteringName](auto ethnie) { return QString::compare(filteringName, ethnie) == 0; });
-            return it != ethnies.end();
-        });
-        break;
-    case FilteringType::Nation:
-        characters = _charactersProvider->findCharacters([filteringName](const std::shared_ptr<Character> &character)
-        {
-            return QString::compare(filteringName, character->getCurrentNation()) == 0;
-        });
-        break;
-    }
-
-    addCharacters(characters);
-}
-
-void CharactersUiCollection::refreshCharacters()
-{
-    _charactersProvider->refreshCharacters();
-    bool needFilterReset = (_filteringType == FilteringType::Nation && !_charactersProvider->nations().contains(_filteringName))
-            || (_filteringType == FilteringType::Ethnie && !_charactersProvider->ethnies().contains(_filteringName))
-            || (_filteringType == FilteringType::Group && !_charactersProvider->groups().contains(_filteringName));
-
-    if (needFilterReset)
-    {
-        _filteringType = FilteringType::None;
-        _filteringName = "Tous";
-    }
-
-    filterCharacters(_filteringType, _filteringName);
-    emit charactersChanged();
-
-    if (needFilterReset)
-        emit filteringChanged(true, true, true);
 }

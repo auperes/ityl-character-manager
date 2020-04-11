@@ -24,7 +24,7 @@ SOURCES += \
         services/relationship_validator_service.cpp \
         uiModel/character_ui_model.cpp \
         uiModel/characters_ui_collection.cpp \
-        uiModel/quick_navigation_ui_model.cpp \
+        uiModel/characters_ui_manager.cpp \
         uiModel/relationship_ui_model.cpp \
         uiModel/skill_ui_model.cpp
 
@@ -64,8 +64,9 @@ DISTFILES += \
     ui/DescriptionView.qml \
     ui/HomeView.qml \
     ui/IdentityView.qml \
-    ui/QuickNavigation.qml \
+    ui/LinkButton.qml \
     ui/RelationshipsView.qml \
+    ui/TabBarComponent.qml \
     ui/ValidationsViewer.qml \
     ui/main.qml
 
@@ -82,7 +83,7 @@ HEADERS += \
     services/relationship_validator_service.h \
     uiModel/character_ui_model.h \
     uiModel/characters_ui_collection.h \
+    uiModel/characters_ui_manager.h \
     uiModel/filtering_type.h \
-    uiModel/quick_navigation_ui_model.h \
     uiModel/relationship_ui_model.h \
     uiModel/skill_ui_model.h

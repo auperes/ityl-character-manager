@@ -11,7 +11,5 @@ ListView {
         policy: "AlwaysOn"
     }
 
-    model: charactersList.model
-
     delegate: CharacterView {}
 }

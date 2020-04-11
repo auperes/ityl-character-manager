@@ -9,7 +9,7 @@ class CharacterReader
 {
 public:
     CharacterReader() = delete;
-    virtual ~CharacterReader() = delete;
+    ~CharacterReader() = delete;
 
     static Character readCharacterFromFile(const QString& filepath);
 

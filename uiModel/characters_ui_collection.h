@@ -3,7 +3,6 @@
 #include <QAbstractItemModel>
 #include <QObject>
 
-#include "../characters_provider.h"
 #include "character_ui_model.h"
 #include "filtering_type.h"
 
@@ -14,28 +13,29 @@ class CharactersUiCollection : public QObject
 
 public:
     CharactersUiCollection();
-    explicit CharactersUiCollection(CharactersProvider *charactersProvider, QObject *parent = nullptr);
+    explicit CharactersUiCollection(
+            unsigned id,
+            QList<std::shared_ptr<CharacterUiModel>>&& characterUiModels,
+            FilteringType filteringType,
+            QString filteringName,
+            QObject *parent = nullptr);
 
     QAbstractItemModel* model() const { return _model.get(); }
 
-signals:
-    void charactersChanged();
-    void filteringChanged(bool needResetNations, bool needResetEthnies, bool needResetGroups);
+    unsigned id() const { return _id; }
+    FilteringType filteringType() const { return _filteringType; }
+    QString filteringName() const { return _filteringName; }
 
-public slots:
-    void filterCharacters(const QString& type, const QString& name);
-    void refreshCharacters();
+    void setCharacters(QList<std::shared_ptr<CharacterUiModel>>&& characterUiModels);
+    void addCharacter(const std::shared_ptr<CharacterUiModel> &characterUiModel);
+    void clearCharacters();
+    void addCharacters(const QList<std::shared_ptr<CharacterUiModel>>& characterUiModels);
 
 private:
+    unsigned _id;
     std::unique_ptr<QAbstractItemModel> _model;
-    CharactersProvider *_charactersProvider;
     QList<std::shared_ptr<CharacterUiModel>> _characterUiModels;
     FilteringType _filteringType;
     QString _filteringName;
-
-    void addCharacter(const std::shared_ptr<Character> &character);
-    void clearCharacters();
-    void addCharacters(const QList<std::shared_ptr<Character>>& characters);
-    void filterCharacters(const FilteringType& filteringType, const QString& filteringName);
 };
 

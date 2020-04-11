@@ -3,7 +3,10 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
 
 Item {
+    id: homeView
     anchors.fill: parent
+    signal doSomething(string message)
+    signal addEthnieTab(string ethnie)
 
     ListModel {
         id: askash
@@ -142,30 +145,9 @@ Item {
                         Layout.preferredWidth: 300
                         spacing: 5
                         model: askash
-                        delegate: Button {
-                            id: control
+                        delegate: LinkButton {
                             text: region
-                            padding: 0
-
-                            contentItem: Text {
-                                text: control.text
-                                MouseArea {
-                                    hoverEnabled: true
-                                    anchors.fill: parent
-                                    cursorShape: containsMouse ? Qt.PointingHandCursor : Qt.ArrowCursor
-                                    onEntered: {
-                                        parent.color = "blue"
-                                        parent.font.underline = true
-                                    }
-                                    onExited: {
-                                        parent.color = "black"
-                                        parent.font.underline = false
-                                    }
-                                }
-                            }
-
-                            background: Rectangle {
-                            }
+                            Component.onCompleted: buttonClicked.connect(homeView.doSomething)
                         }
                     }
                 }
@@ -180,8 +162,9 @@ Item {
                         Layout.preferredHeight: contentHeight
                         spacing: 5
                         model: askash
-                        delegate: Text {
+                        delegate: LinkButton {
                             text: ethnie
+                            Component.onCompleted: buttonClicked.connect(homeView.addEthnieTab)
                         }
                     }
                 }

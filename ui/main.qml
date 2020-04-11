@@ -11,8 +11,29 @@ ApplicationWindow {
     minimumHeight: 500
     title: qsTr("Ityl characters viewer")
 
+    Component {
+        id: tabComponent
+        TabBarComponent {
+
+        }
+    }
+
+    Component {
+        id: tabContentComponent
+        CharacterListView {
+            anchors.fill: parent
+            leftMargin: 20
+            rightMargin: 20
+        }
+    }
+
     header: ToolBar {
         RowLayout {
+            ToolButton {
+                text: qsTr("Reload")
+                onClicked: { charactersManager.refreshCharacters() }
+            }
+
             ToolButton {
                 text: qsTr("Search")
             }
@@ -38,46 +59,65 @@ ApplicationWindow {
         anchors.fill: parent
 
         TabBar {
-            id: tabBar
+            id: tabBarView
             width: parent.width
-            TabButton {
-                width: implicitWidth
+            currentIndex: tabs.currentIndex
+            signal actionOccured(string message)
+
+            Connections {
+                target: tabBarView
+                function onActionOccured(message) {
+                    tabBarView.addItem(tabComponent.createObject(tabBarView, { text: message }))
+                    tabBarView.setCurrentIndex(tabBarView.count - 1)
+                }
+            }
+
+            TabBarComponent {
                 text: qsTr("Home")
             }
-            TabButton {
-                width: implicitWidth
+            TabBarComponent {
                 text: qsTr("All characters")
             }
         }
 
         StackLayout {
-            currentIndex: tabBar.currentIndex
+            id: tabs
+            currentIndex: tabBarView.currentIndex
+            signal actionOccured(string message)
+            signal addEthnieTabOccured(string ethnie)
+
+            Connections {
+                target: tabs
+                function onActionOccured(message) {
+                    tabs.children.push(tabContentComponent.createObject(tabs))
+                }
+                function onAddEthnieTabOccured(ethnie) {
+                    var tab = tabContentComponent.createObject(tabs);
+                    tab.model = charactersManager.addCollection("ethnie", ethnie).model
+                    tabs.children.push(tab)
+                }
+            }
 
             Item {
                 id: homeTab
                 HomeView {
                     anchors.fill: parent
+                    Component.onCompleted: {
+                        doSomething.connect(tabBarView.actionOccured)
+                        doSomething.connect(tabs.actionOccured)
+                        addEthnieTab.connect(tabBarView.actionOccured)
+                        addEthnieTab.connect(tabs.addEthnieTabOccured)
+                    }
                 }
             }
 
             Item {
                 id: allCharactersTab
-                ColumnLayout {
+                CharacterListView {
                     anchors.fill: parent
-
-                    QuickNavigation {
-                        Layout.leftMargin: 20
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: 50
-                    }
-
-                    CharacterListView {
-                        Layout.alignment: Qt.AlignHCenter
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-                        Layout.leftMargin: 20
-                        Layout.rightMargin: 20
-                    }
+                    leftMargin: 20
+                    rightMargin: 20
+                    model: charactersManager.addCollection("Tous", "").model
                 }
             }
         }

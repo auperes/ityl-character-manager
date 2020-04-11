@@ -3,7 +3,6 @@
         <file>ui/main.qml</file>
         <file>ui/CharacterView.qml</file>
         <file>ui/CharacterListView.qml</file>
-        <file>ui/QuickNavigation.qml</file>
         <file>qtquickcontrols2.conf</file>
         <file>ui/IdentityView.qml</file>
         <file>ui/AvatarView.qml</file>
@@ -11,5 +10,7 @@
         <file>ui/DescriptionView.qml</file>
         <file>ui/AffiliationsView.qml</file>
         <file>ui/HomeView.qml</file>
+        <file>ui/TabBarComponent.qml</file>
+        <file>ui/LinkButton.qml</file>
     </qresource>
 </RCC>
