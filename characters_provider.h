@@ -7,27 +7,29 @@
 
 #include "dataModel/character/character.h"
 
-class CharactersProvider
+namespace Ityl
 {
-public:
-    CharactersProvider(const QString &folderPath);
+    class CharactersProvider
+    {
+    public:
+        CharactersProvider(const QString &folderPath);
 
-    QList<std::shared_ptr<Character>> characters() const;
-    QStringList ethnies() const;
-    QStringList groups() const;
-    QStringList nations() const;
+        QList<std::shared_ptr<DataModel::Character>> characters() const;
+        QStringList ethnies() const;
+        QStringList groups() const;
+        QStringList nations() const;
 
-    void refreshCharacters();
-    QList<std::shared_ptr<Character>> findCharacters(const std::function<bool (const std::shared_ptr<Character>&)> &predicate) const;
+        void refreshCharacters();
+        QList<std::shared_ptr<DataModel::Character>> findCharacters(const std::function<bool (const std::shared_ptr<DataModel::Character>&)> &predicate) const;
 
 
-private:
-    QString _folderPath;
-    QList<std::shared_ptr<Character>> _characters;
-    QStringList _ethnies;
-    QStringList _groups;
-    QStringList _nations;
+    private:
+        QString _folderPath;
+        QList<std::shared_ptr<DataModel::Character>> _characters;
+        QStringList _ethnies;
+        QStringList _groups;
+        QStringList _nations;
 
-    void loadCharacters();
-};
-
+        void loadCharacters();
+    };
+}

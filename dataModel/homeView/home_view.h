@@ -1,11 +1,12 @@
 #pragma once
 
-
-class HomeView
+namespace Ityl::DataModel
 {
-public:
-    HomeView();
+    class HomeView
+    {
+    public:
+        HomeView();
 
-private:
-};
-
+    private:
+    };
+}

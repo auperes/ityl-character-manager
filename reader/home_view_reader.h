@@ -4,11 +4,14 @@
 
 #include "../dataModel/homeView/home_view.h"
 
-class HomeViewReader
+namespace Ityl::Reader
 {
-public:
-    HomeViewReader() = delete;
-    ~HomeViewReader() = delete;
+    class HomeViewReader
+    {
+    public:
+        HomeViewReader() = delete;
+        ~HomeViewReader() = delete;
 
-    static HomeView readHomeViewFromFile(const QString& filepath);
-};
+        static DataModel::HomeView readHomeViewFromFile(const QString& filepath);
+    };
+}

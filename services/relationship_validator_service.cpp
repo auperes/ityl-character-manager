@@ -12,104 +12,107 @@
 #include "../converters/converters.h"
 #include "../dataModel/app_config.h"
 
-RelationshipValidatorService::RelationshipValidatorService()
+namespace Ityl::Services
 {
-    QString content;
-    QFile file;
-    file.setFileName(AppConfig::getRelatedRelationshipsFilePath());
-    file.open(QIODevice::ReadOnly | QIODevice::Text);
-    content = file.readAll();
-    file.close();
-    QJsonDocument document = QJsonDocument::fromJson(content.toUtf8());
-    QJsonObject jsonObject = document.object();
-
-    QJsonArray relationshipsArray = jsonObject["relatedRelationships"].toArray();
-
-    for (auto value : relationshipsArray)
+    RelationshipValidatorService::RelationshipValidatorService()
     {
-        QJsonObject object = value.toObject();
-        Relationship link = Converters::convertRelationshipToEnum(object["link"].toString());
-        Relationship relatesTo = Converters::convertRelationshipToEnum(object["relatesTo"].toString());
-        _relatedRelationships.emplace(link, relatesTo);
-    }
-}
+        QString content;
+        QFile file;
+        file.setFileName(DataModel::AppConfig::getRelatedRelationshipsFilePath());
+        file.open(QIODevice::ReadOnly | QIODevice::Text);
+        content = file.readAll();
+        file.close();
+        QJsonDocument document = QJsonDocument::fromJson(content.toUtf8());
+        QJsonObject jsonObject = document.object();
 
-void RelationshipValidatorService::addCharacterName(QString characterName)
-{
-    _charactersNames.insert(characterName);
-}
+        QJsonArray relationshipsArray = jsonObject["relatedRelationships"].toArray();
 
-void RelationshipValidatorService::addRelationship(QString characterName, Relationship relationship, QString relatedCharacterName)
-{
-    // init all needed data
-    auto relatedRelationshipIterator = _relatedRelationships.find(relationship);
-    if (relatedRelationshipIterator == _relatedRelationships.end())
-    {
-        std::cout << "Unable to find relationship " << Converters::convertRelationshipSingularForm(relationship).toStdString() << " in related relationships table." << std::endl;
-        return;
-    }
-
-    auto characterNameStr = characterName.toStdString();
-    auto relatedCharacterNameStr = relatedCharacterName.toStdString();
-    Relationship relatedRelationship = relatedRelationshipIterator->second;
-
-    // find relationship
-    auto missingRelationshipIterator = _missingRelationships.find(characterNameStr);
-    if (missingRelationshipIterator != _missingRelationships.end())
-    {
-        auto [itBegin, itEnd] = missingRelationshipIterator->second.equal_range(relatedCharacterNameStr);
-        if (itBegin != missingRelationshipIterator->second.end())
+        for (auto value : relationshipsArray)
         {
-            auto it = itBegin;
-            while (it != itEnd)
+            QJsonObject object = value.toObject();
+            DataModel::Relationship link = DataModel::Converters::Converters::convertRelationshipToEnum(object["link"].toString());
+            DataModel::Relationship relatesTo = DataModel::Converters::Converters::convertRelationshipToEnum(object["relatesTo"].toString());
+            _relatedRelationships.emplace(link, relatesTo);
+        }
+    }
+
+    void RelationshipValidatorService::addCharacterName(QString characterName)
+    {
+        _charactersNames.insert(characterName);
+    }
+
+    void RelationshipValidatorService::addRelationship(QString characterName, DataModel::Relationship relationship, QString relatedCharacterName)
+    {
+        // init all needed data
+        auto relatedRelationshipIterator = _relatedRelationships.find(relationship);
+        if (relatedRelationshipIterator == _relatedRelationships.end())
+        {
+            std::cout << "Unable to find relationship " << DataModel::Converters::Converters::convertRelationshipSingularForm(relationship).toStdString() << " in related relationships table." << std::endl;
+            return;
+        }
+
+        auto characterNameStr = characterName.toStdString();
+        auto relatedCharacterNameStr = relatedCharacterName.toStdString();
+        DataModel::Relationship relatedRelationship = relatedRelationshipIterator->second;
+
+        // find relationship
+        auto missingRelationshipIterator = _missingRelationships.find(characterNameStr);
+        if (missingRelationshipIterator != _missingRelationships.end())
+        {
+            auto [itBegin, itEnd] = missingRelationshipIterator->second.equal_range(relatedCharacterNameStr);
+                    if (itBegin != missingRelationshipIterator->second.end())
             {
-                if (it->second == relationship)
+                auto it = itBegin;
+                while (it != itEnd)
                 {
-                    missingRelationshipIterator->second.erase(it);
-                    if (missingRelationshipIterator->second.empty())
-                        _missingRelationships.erase(missingRelationshipIterator);
-                    return;
+                    if (it->second == relationship)
+                    {
+                        missingRelationshipIterator->second.erase(it);
+                        if (missingRelationshipIterator->second.empty())
+                            _missingRelationships.erase(missingRelationshipIterator);
+                        return;
+                    }
+                    ++it;
                 }
-                ++it;
             }
         }
+
+        _missingRelationships[relatedCharacterNameStr].emplace(characterNameStr, relatedRelationship);
     }
 
-    _missingRelationships[relatedCharacterNameStr].emplace(characterNameStr, relatedRelationship);
-}
-
-void RelationshipValidatorService::logMissingRelationships()
-{
-    QFile missingRelationshipsFile;
-    missingRelationshipsFile.setFileName(AppConfig::getLogFolderPath() + "missingRelationships.log");
-    missingRelationshipsFile.open(QIODevice::WriteOnly | QIODevice::Text);
-
-    QFile missingCharactersFile;
-    missingCharactersFile.setFileName(AppConfig::getLogFolderPath() + "missingCharacters.log");
-    missingCharactersFile.open(QIODevice::WriteOnly | QIODevice::Text);
-
-    QTextStream outMissingRelationships(&missingRelationshipsFile);
-    outMissingRelationships.setCodec("UTF-8");
-    QTextStream outMissingCharacters(&missingCharactersFile);
-    outMissingCharacters.setCodec("UTF-8");
-
-    for (auto& element : _missingRelationships)
+    void RelationshipValidatorService::logMissingRelationships()
     {
-        auto it = _charactersNames.find(QString::fromStdString(element.first));
-        if (it != _charactersNames.end())
+        QFile missingRelationshipsFile;
+        missingRelationshipsFile.setFileName(DataModel::AppConfig::getLogFolderPath() + "missingRelationships.log");
+        missingRelationshipsFile.open(QIODevice::WriteOnly | QIODevice::Text);
+
+        QFile missingCharactersFile;
+        missingCharactersFile.setFileName(DataModel::AppConfig::getLogFolderPath() + "missingCharacters.log");
+        missingCharactersFile.open(QIODevice::WriteOnly | QIODevice::Text);
+
+        QTextStream outMissingRelationships(&missingRelationshipsFile);
+        outMissingRelationships.setCodec("UTF-8");
+        QTextStream outMissingCharacters(&missingCharactersFile);
+        outMissingCharacters.setCodec("UTF-8");
+
+        for (auto& element : _missingRelationships)
         {
-            outMissingRelationships << QString::fromStdString(element.first) << " " << element.second.size() << "\n";
-            for (const auto& relation : element.second)
+            auto it = _charactersNames.find(QString::fromStdString(element.first));
+            if (it != _charactersNames.end())
             {
-                outMissingRelationships << "- " << QString::fromStdString(relation.first) << " : " << Converters::convertRelationshipSingularForm(relation.second) << "\n";
+                outMissingRelationships << QString::fromStdString(element.first) << " " << element.second.size() << "\n";
+                for (const auto& relation : element.second)
+                {
+                    outMissingRelationships << "- " << QString::fromStdString(relation.first) << " : " << DataModel::Converters::Converters::convertRelationshipSingularForm(relation.second) << "\n";
+                }
             }
-        }
-        else
-        {
-            outMissingCharacters << QString::fromStdString(element.first) << " " << element.second.size() << "\n";
-            for (const auto& relation : element.second)
+            else
             {
-                outMissingCharacters << "- " << QString::fromStdString(relation.first) << " : " << Converters::convertRelationshipSingularForm(relation.second) << "\n";
+                outMissingCharacters << QString::fromStdString(element.first) << " " << element.second.size() << "\n";
+                for (const auto& relation : element.second)
+                {
+                    outMissingCharacters << "- " << QString::fromStdString(relation.first) << " : " << DataModel::Converters::Converters::convertRelationshipSingularForm(relation.second) << "\n";
+                }
             }
         }
     }

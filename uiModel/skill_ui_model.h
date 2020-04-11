@@ -4,28 +4,30 @@
 
 #include "../dataModel/character/skill/skill.h"
 
-class SkillUiModel : public QObject
+namespace Ityl::UiModel
 {
-    Q_OBJECT
-    Q_PROPERTY(QString skillName READ skillName CONSTANT)
-    Q_PROPERTY(QString skillValues READ skillValues CONSTANT)
+    class SkillUiModel : public QObject
+    {
+        Q_OBJECT
+        Q_PROPERTY(QString skillName READ skillName CONSTANT)
+        Q_PROPERTY(QString skillValues READ skillValues CONSTANT)
 
-public:
-    explicit SkillUiModel(QObject *parent = nullptr);
-    SkillUiModel(const QString &skillName, const QList<Skill> &skillValues, QObject *parent = nullptr);
+    public:
+        explicit SkillUiModel(QObject *parent = nullptr);
+        SkillUiModel(const QString &skillName, const QList<DataModel::Skill> &skillValues, QObject *parent = nullptr);
 
-    QString skillName() const { return _skillName; }
-    QString skillValues() const {return _skillValues; }
+        QString skillName() const { return _skillName; }
+        QString skillValues() const {return _skillValues; }
 
-signals:
+    signals:
 
-public slots:
+    public slots:
 
-private:
-    QString _skillName;
-    QList<Skill> _skills;
-    QString _skillValues;
+    private:
+        QString _skillName;
+        QList<DataModel::Skill> _skills;
+        QString _skillValues;
 
-    QString createSkillValuesStringFromSkills(const QList<Skill>& skills) const;
-};
-
+        QString createSkillValuesStringFromSkills(const QList<DataModel::Skill>& skills) const;
+    };
+}

@@ -2,23 +2,25 @@
 
 #include <QString>
 
-class AppConfig
+namespace Ityl::DataModel
 {
-public:
-    AppConfig();
+    class AppConfig
+    {
+    public:
+        AppConfig();
 
-    static QString getCharactersFolderPath();
+        static QString getCharactersFolderPath();
 
-    static QString getAvatarsFolderPath();
+        static QString getAvatarsFolderPath();
 
-    static QString getRelatedRelationshipsFilePath();
+        static QString getRelatedRelationshipsFilePath();
 
-    static QString getLogFolderPath();
+        static QString getLogFolderPath();
 
-private:
-    static QString _charactersFolderPath;
-    static QString _avatarsFolderPath;
-    static QString _relatedRelationshipsFilePath;
-    static QString _logFolderPath;
-};
-
+    private:
+        static QString _charactersFolderPath;
+        static QString _avatarsFolderPath;
+        static QString _relatedRelationshipsFilePath;
+        static QString _logFolderPath;
+    };
+}

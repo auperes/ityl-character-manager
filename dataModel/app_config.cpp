@@ -10,49 +10,52 @@
 
 #include <iostream>
 
-QString AppConfig::_charactersFolderPath;
-QString AppConfig::_avatarsFolderPath;
-QString AppConfig::_relatedRelationshipsFilePath;
-QString AppConfig::_logFolderPath;
-
-AppConfig::AppConfig()
+namespace Ityl::DataModel
 {
-    QString content;
-    QFile file;
+    QString AppConfig::_charactersFolderPath;
+    QString AppConfig::_avatarsFolderPath;
+    QString AppConfig::_relatedRelationshipsFilePath;
+    QString AppConfig::_logFolderPath;
 
-    file.setFileName("settings/app_config.json");
-    file.open(QIODevice::ReadOnly | QIODevice::Text);
-    content = file.readAll();
-    file.close();
-    QJsonDocument document = QJsonDocument::fromJson(content.toUtf8());
-    QJsonObject jsonObject = document.object();
+    AppConfig::AppConfig()
+    {
+        QString content;
+        QFile file;
 
-    if (jsonObject.contains("charactersFolderPath"))
-        _charactersFolderPath = jsonObject["charactersFolderPath"].toString();
-    if (jsonObject.contains("avatarsFolderPath"))
-        _avatarsFolderPath = jsonObject["avatarsFolderPath"].toString();
-    if (jsonObject.contains("relatedRelationshipsFilePath"))
-        _relatedRelationshipsFilePath = jsonObject["relatedRelationshipsFilePath"].toString();
-    if (jsonObject.contains("logFolderPath"))
-        _logFolderPath = jsonObject["logFolderPath"].toString();
-}
+        file.setFileName("settings/app_config.json");
+        file.open(QIODevice::ReadOnly | QIODevice::Text);
+        content = file.readAll();
+        file.close();
+        QJsonDocument document = QJsonDocument::fromJson(content.toUtf8());
+        QJsonObject jsonObject = document.object();
 
-QString AppConfig::getCharactersFolderPath()
-{
-    return _charactersFolderPath;
-}
+        if (jsonObject.contains("charactersFolderPath"))
+            _charactersFolderPath = jsonObject["charactersFolderPath"].toString();
+        if (jsonObject.contains("avatarsFolderPath"))
+            _avatarsFolderPath = jsonObject["avatarsFolderPath"].toString();
+        if (jsonObject.contains("relatedRelationshipsFilePath"))
+            _relatedRelationshipsFilePath = jsonObject["relatedRelationshipsFilePath"].toString();
+        if (jsonObject.contains("logFolderPath"))
+            _logFolderPath = jsonObject["logFolderPath"].toString();
+    }
 
-QString AppConfig::getAvatarsFolderPath()
-{
-    return _avatarsFolderPath;
-}
+    QString AppConfig::getCharactersFolderPath()
+    {
+        return _charactersFolderPath;
+    }
 
-QString AppConfig::getRelatedRelationshipsFilePath()
-{
-    return _relatedRelationshipsFilePath;
-}
+    QString AppConfig::getAvatarsFolderPath()
+    {
+        return _avatarsFolderPath;
+    }
 
-QString AppConfig::getLogFolderPath()
-{
-    return _logFolderPath;
+    QString AppConfig::getRelatedRelationshipsFilePath()
+    {
+        return _relatedRelationshipsFilePath;
+    }
+
+    QString AppConfig::getLogFolderPath()
+    {
+        return _logFolderPath;
+    }
 }

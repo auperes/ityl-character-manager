@@ -1,9 +1,12 @@
 #pragma once
 
-enum Status
+namespace Ityl::DataModel
 {
-    Alive,
-    Dead,
-    Sealed,
-    Missing
-};
+    enum Status
+    {
+        Alive,
+        Dead,
+        Sealed,
+        Missing
+    };
+}

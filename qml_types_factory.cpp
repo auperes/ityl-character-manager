@@ -7,9 +7,13 @@
 #include "uiModel/character_ui_model.h"
 #include "uiModel/characters_ui_collection.h"
 
-void QmlTypesFactory::registerTypes()
+namespace Ityl
 {
-    qmlRegisterType<CharactersUiCollection>("Character", 1, 0, "CharactersUiCollection");
-    qmlRegisterUncreatableType<CharacterUiModel>("Character", 1, 0, "CharacterUiModel",
-        QStringLiteral("CharacterUiModel should not be created in QML"));
+    void QmlTypesFactory::registerTypes()
+    {
+        qmlRegisterType<UiModel::CharactersUiCollection>("Character", 1, 0, "CharactersUiCollection");
+        qRegisterMetaType<UiModel::CharactersUiCollection*>("CharactersUiCollection*");
+        qmlRegisterUncreatableType<UiModel::CharacterUiModel>("Character", 1, 0, "CharacterUiModel",
+                                                     QStringLiteral("CharacterUiModel should not be created in QML"));
+    }
 }

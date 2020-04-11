@@ -1,27 +1,30 @@
 #pragma once
 
-enum Relationship
+namespace Ityl::DataModel
 {
-    Parent,
-    Sibling,
-    Husband,
-    Wife,
-    Child,
-    UncleAunt,
-    Nephew,
-    Cousin,
-    GrandParent,
-    GrandChild,
-    HalfSibling,
-    Guardian,
-    Partner,
-    Twin,
-    Protege,
-    Betrothed,
-    Master,
-    AdoptiveSibling,
-    Disciple,
-    RightHand,
-    RightHandOf,
-    Rival
-};
+    enum Relationship
+    {
+        Parent,
+        Sibling,
+        Husband,
+        Wife,
+        Child,
+        UncleAunt,
+        Nephew,
+        Cousin,
+        GrandParent,
+        GrandChild,
+        HalfSibling,
+        Guardian,
+        Partner,
+        Twin,
+        Protege,
+        Betrothed,
+        Master,
+        AdoptiveSibling,
+        Disciple,
+        RightHand,
+        RightHandOf,
+        Rival
+    };
+}

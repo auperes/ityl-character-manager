@@ -23,13 +23,13 @@ int main(int argc, char *argv[])
         font.setPointSize(10);
         app.setFont(font);
 
-        QmlTypesFactory::registerTypes();
-        AppConfig appConfig;
+        Ityl::QmlTypesFactory::registerTypes();
+        Ityl::DataModel::AppConfig appConfig;
 
         QString charactersFolderPath(appConfig.getCharactersFolderPath());
-        CharactersProvider charactersProvider(charactersFolderPath);
+        Ityl::CharactersProvider charactersProvider(charactersFolderPath);
 
-        CharactersUiManager charatersUiManager(&charactersProvider);
+        Ityl::UiModel::CharactersUiManager charatersUiManager(&charactersProvider);
 
         QQmlApplicationEngine engine;
 

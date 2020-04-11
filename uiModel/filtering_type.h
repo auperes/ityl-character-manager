@@ -1,9 +1,12 @@
 #pragma once
 
-enum FilteringType
+namespace Ityl::UiModel
 {
-    None,
-    Nation,
-    Ethnie,
-    Group
-};
+    enum FilteringType
+    {
+        None,
+        Nation,
+        Ethnie,
+        Group
+    };
+}
