@@ -279,4 +279,42 @@ namespace Ityl::DataModel::Converters
         std::cout << errorMessage << std::endl;
         throw std::logic_error(errorMessage.c_str());
     }
+
+    HomeElementType Converters::convertElementType(const QString &type)
+    {
+        if (type == "region")
+            return HomeElementType::Region;
+        if (type == "organization")
+            return HomeElementType::Organization;
+        if (type == "family")
+            return HomeElementType::Family;
+        if (type == "guild")
+            return HomeElementType::Guild;
+        if (type == "group")
+            return HomeElementType::Group;
+        if (type == "background")
+            return HomeElementType::Background;
+
+        std::string errorMessage("Cannot convert type. Unknown value: " + type.toStdString());
+        std::cout << errorMessage << std::endl;
+        throw std::logic_error(errorMessage.c_str());
+    }
+
+    QString Converters::convertElementType(const HomeElementType &type)
+    {
+        switch (type) {
+        case HomeElementType::Region:
+            return "region";
+        case HomeElementType::Organization:
+            return "organization";
+        case HomeElementType::Family:
+            return "family";
+        case HomeElementType::Guild:
+            return "guild";
+        case HomeElementType::Group:
+            return "group";
+        case HomeElementType::Background:
+            return "background";
+        }
+    }
 }

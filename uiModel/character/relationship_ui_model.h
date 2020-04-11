@@ -2,7 +2,7 @@
 
 #include <QObject>
 
-#include "../dataModel/character/relationship.h"
+#include "../../dataModel/character/relationship.h"
 
 namespace Ityl::UiModel
 {

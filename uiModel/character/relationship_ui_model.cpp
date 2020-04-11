@@ -1,6 +1,6 @@
 #include "relationship_ui_model.h"
 
-#include "../converters/converters.h"
+#include "../../converters/converters.h"
 
 namespace Ityl::UiModel
 {

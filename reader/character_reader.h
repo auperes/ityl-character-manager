@@ -17,11 +17,11 @@ namespace Ityl::Reader
 
     private:
         static void fillValues(const QJsonArray& jsonValues, DataModel::Character& character);
-        static void fillRoles(const QJsonArray& jsonRoles, DataModel::Character& character);
-        static void fillSkills(const QJsonArray& jsonSkills, DataModel::Character& character);
+        static QVector<QString> readRoles(const QJsonArray& jsonRoles);
+        static QMap<QString, QList<DataModel::Skill>> readSkills(const QJsonArray& jsonSkills);
         static void fillRelationships(const QJsonArray& jsonRelationships, DataModel::Character& character);
-        static void fillEthnies(const QJsonArray& jsonEthnies, DataModel::Character& character);
-        static void fillGroups(const QJsonArray& jsonGroups, DataModel::Character& character);
-        static void fillAvatars(const QJsonArray& jsonAvatars, DataModel::Character& character);
+        static QVector<QString> readEthnies(const QJsonArray& jsonEthnies);
+        static QVector<QString> readGroups(const QJsonArray& jsonGroups);
+        static QVector<QString> readAvatars(const QJsonArray& jsonAvatars);
     };
 }

@@ -6,8 +6,8 @@
 #include <QStandardItemModel>
 #include <QMap>
 
-#include "../converters/converters.h"
-#include "../dataModel/app_config.h"
+#include "../../converters/converters.h"
+#include "../../dataModel/app_config.h"
 
 namespace Ityl::UiModel
 {

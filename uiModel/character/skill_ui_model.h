@@ -2,7 +2,7 @@
 
 #include <QObject>
 
-#include "../dataModel/character/skill/skill.h"
+#include "../../dataModel/character/skill/skill.h"
 
 namespace Ityl::UiModel
 {

@@ -3,7 +3,7 @@
 #include <QObject>
 
 #include "characters_ui_collection.h"
-#include "../characters_provider.h"
+#include "../../characters_provider.h"
 
 namespace Ityl::UiModel
 {

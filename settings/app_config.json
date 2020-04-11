@@ -2,5 +2,6 @@
   "charactersFolderPath": "C:\\Users\\chach\\Dropbox\\Ecriture\\zzz_Les Royaumes d'Ityl\\Personnages - Groupes - Familles\\characters_json\\" ,
   "avatarsFolderPath": "C:\\Users\\chach\\Dropbox\\Ecriture\\zzz_Les Royaumes d'Ityl\\Personnages - Groupes - Familles\\images\\",
   "relatedRelationshipsFilePath": "C:\\Users\\chach\\Dropbox\\Ecriture\\zzz_Les Royaumes d'Ityl\\Personnages - Groupes - Familles\\characters_json\\templates\\relatedRelationships.json",
-  "logFolderPath": "D:\\"
+  "logFolderPath": "D:\\",
+  "homeViewFilePath": "C:\\Users\\chach\\Dropbox\\Ecriture\\zzz_Les Royaumes d'Ityl\\Personnages - Groupes - Familles\\characters_json\templates\\home_view.json"
 }

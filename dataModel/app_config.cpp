@@ -16,6 +16,7 @@ namespace Ityl::DataModel
     QString AppConfig::_avatarsFolderPath;
     QString AppConfig::_relatedRelationshipsFilePath;
     QString AppConfig::_logFolderPath;
+    QString AppConfig::_homeViewFilePath;
 
     AppConfig::AppConfig()
     {
@@ -37,25 +38,7 @@ namespace Ityl::DataModel
             _relatedRelationshipsFilePath = jsonObject["relatedRelationshipsFilePath"].toString();
         if (jsonObject.contains("logFolderPath"))
             _logFolderPath = jsonObject["logFolderPath"].toString();
-    }
-
-    QString AppConfig::getCharactersFolderPath()
-    {
-        return _charactersFolderPath;
-    }
-
-    QString AppConfig::getAvatarsFolderPath()
-    {
-        return _avatarsFolderPath;
-    }
-
-    QString AppConfig::getRelatedRelationshipsFilePath()
-    {
-        return _relatedRelationshipsFilePath;
-    }
-
-    QString AppConfig::getLogFolderPath()
-    {
-        return _logFolderPath;
+        if (jsonObject.contains("homeViewFilePath"))
+            _homeViewFilePath = jsonObject["homeViewFilePath"].toString();
     }
 }

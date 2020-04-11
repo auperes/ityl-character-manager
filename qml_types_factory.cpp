@@ -4,8 +4,8 @@
 #include <QMetaType>
 
 #include "reader/character_reader.h"
-#include "uiModel/character_ui_model.h"
-#include "uiModel/characters_ui_collection.h"
+#include "uiModel/character/character_ui_model.h"
+#include "uiModel/character/characters_ui_collection.h"
 
 namespace Ityl
 {

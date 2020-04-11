@@ -5,7 +5,7 @@
 #include <QAbstractItemModel>
 #include <QObject>
 
-#include "../dataModel/character/character.h"
+#include "../../dataModel/character/character.h"
 #include "relationship_ui_model.h"
 #include "skill_ui_model.h"
 

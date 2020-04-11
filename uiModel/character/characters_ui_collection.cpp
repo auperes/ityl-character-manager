@@ -3,7 +3,7 @@
 #include <QQmlEngine>
 #include <QStandardItemModel>
 
-#include "../converters/converters.h"
+#include "../../converters/converters.h"
 
 namespace Ityl::UiModel
 {

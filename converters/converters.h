@@ -4,7 +4,8 @@
 
 #include "../dataModel/character/relationship.h"
 #include "../dataModel/character/status.h"
-#include "../uiModel/filtering_type.h"
+#include "../dataModel/homeView/home_element_type.h"
+#include "../uiModel/character/filtering_type.h"
 
 namespace Ityl::DataModel::Converters
 {
@@ -24,5 +25,8 @@ namespace Ityl::DataModel::Converters
         static QString convertNationToColor(const QString& nation);
 
         static UiModel::FilteringType convertFilteringType(const QString& type);
+
+        static HomeElementType convertElementType(const QString& type);
+        static QString convertElementType(const HomeElementType& type);
     };
 }

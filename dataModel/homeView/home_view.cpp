@@ -2,7 +2,8 @@
 
 namespace Ityl::DataModel
 {
-    HomeView::HomeView()
+    HomeView::HomeView(QList<HomeCategory> &&categories)
+        : _categories(std::move(categories))
     {
 
     }

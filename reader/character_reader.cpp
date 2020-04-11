@@ -1,43 +1,30 @@
 #include "character_reader.h"
 
-#include <iostream>
-
 #include <QFile>
 #include <QString>
-#include <QJsonDocument>
 #include <QJsonValue>
 #include <QJsonObject>
 #include <QJsonArray>
 
 #include "../converters/converters.h"
+#include "json_reader_helpers.h"
 
 namespace Ityl::Reader
 {
     DataModel::Character CharacterReader::readCharacterFromFile(const QString& filepath)
     {
-        QString content;
-        QFile file;
-        file.setFileName(filepath);
-        file.open(QIODevice::ReadOnly | QIODevice::Text);
-        content = file.readAll();
-        file.close();
-        QJsonParseError error;
-        QJsonDocument document = QJsonDocument::fromJson(content.toUtf8(), &error);
-        if (document.isNull())
-            throw std::logic_error(error.errorString().toStdString());
-
-        QJsonObject jsonObject = document.object();
+        QJsonObject jsonObject = JsonReaderHelpers::readJsonFile(filepath);
 
         DataModel::Character character;
         QJsonObject characterObject = jsonObject.value("character").toObject();
 
         fillValues(characterObject["values"].toArray(), character);
-        fillRoles(characterObject["roles"].toArray(), character);
-        fillSkills(characterObject["skills"].toArray(), character);
+        character.setRoles(readRoles(characterObject["roles"].toArray()));
+        character.setSkills(readSkills(characterObject["skills"].toArray()));
         fillRelationships(characterObject["relationships"].toArray(), character);
-        fillEthnies(characterObject["ethnies"].toArray(), character);
-        fillGroups(characterObject["groups"].toArray(), character);
-        fillAvatars(characterObject["avatars"].toArray(), character);
+        character.setEthnies(readEthnies(characterObject["ethnies"].toArray()));
+        character.setGroups(readGroups(characterObject["groups"].toArray()));
+        character.setAvatars(readAvatars(characterObject["avatars"].toArray()));
 
         return character;
     }
@@ -74,7 +61,7 @@ namespace Ityl::Reader
         }
     }
 
-    void CharacterReader::fillRoles(const QJsonArray& jsonRoles, DataModel::Character& character)
+    QVector<QString> CharacterReader::readRoles(const QJsonArray& jsonRoles)
     {
         QVector<QString> roles;
         roles.reserve(jsonRoles.size());
@@ -83,10 +70,11 @@ namespace Ityl::Reader
             QJsonObject object = value.toObject();
             roles.push_back(object["role"].toString());
         }
-        character.setRoles(std::move(roles));
+
+        return roles;
     }
 
-    void CharacterReader::fillSkills(const QJsonArray& jsonSkills, DataModel::Character& character)
+    QMap<QString, QList<DataModel::Skill>> CharacterReader::readSkills(const QJsonArray& jsonSkills)
     {
         QMap<QString, QList<DataModel::Skill>> skills;
 
@@ -116,7 +104,8 @@ namespace Ityl::Reader
             }
             skills[category].push_back(skill);
         }
-        character.setSkills(std::move(skills));
+
+        return skills;
     }
 
     void CharacterReader::fillRelationships(const QJsonArray& jsonRelationships, DataModel::Character& character)
@@ -131,7 +120,7 @@ namespace Ityl::Reader
         }
     }
 
-    void CharacterReader::fillEthnies(const QJsonArray& jsonEthnies, DataModel::Character& character)
+    QVector<QString> CharacterReader::readEthnies(const QJsonArray& jsonEthnies)
     {
         QVector<QString> ethnies;
         ethnies.reserve(jsonEthnies.size());
@@ -140,10 +129,11 @@ namespace Ityl::Reader
             QJsonObject object = value.toObject();
             ethnies.push_back(object["ethnie"].toString());
         }
-        character.setEthnies(std::move(ethnies));
+
+        return ethnies;
     }
 
-    void CharacterReader::fillGroups(const QJsonArray& jsonGroups, DataModel::Character& character)
+    QVector<QString> CharacterReader::readGroups(const QJsonArray& jsonGroups)
     {
         QVector<QString> groups;
         groups.reserve(jsonGroups.size());
@@ -152,10 +142,11 @@ namespace Ityl::Reader
             QJsonObject object = value.toObject();
             groups.push_back(object["group"].toString());
         }
-        character.setGroups(std::move(groups));
+
+        return groups;
     }
 
-    void CharacterReader::fillAvatars(const QJsonArray &jsonAvatars, DataModel::Character &character)
+    QVector<QString> CharacterReader::readAvatars(const QJsonArray &jsonAvatars)
     {
         QVector<QString> avatars;
         avatars.reserve(jsonAvatars.size());
@@ -164,6 +155,7 @@ namespace Ityl::Reader
             QJsonObject object = value.toObject();
             avatars.push_back(object["avatar"].toString());
         }
-        character.setAvatars(std::move(avatars));
+
+        return avatars;
     }
 }

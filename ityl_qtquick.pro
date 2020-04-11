@@ -18,17 +18,22 @@ SOURCES += \
         dataModel/app_config.cpp \
         dataModel/character/character.cpp \
         dataModel/character/skill/skill.cpp \
+        dataModel/homeView/home_category.cpp \
         dataModel/homeView/home_view.cpp \
         main.cpp \
         qml_types_factory.cpp \
         reader/character_reader.cpp \
         reader/home_view_reader.cpp \
+        reader/json_reader_helpers.cpp \
         services/relationship_validator_service.cpp \
-        uiModel/character_ui_model.cpp \
-        uiModel/characters_ui_collection.cpp \
-        uiModel/characters_ui_manager.cpp \
-        uiModel/relationship_ui_model.cpp \
-        uiModel/skill_ui_model.cpp
+        uiModel/character/character_ui_model.cpp \
+        uiModel/character/characters_ui_collection.cpp \
+        uiModel/character/characters_ui_manager.cpp \
+        uiModel/character/relationship_ui_model.cpp \
+        uiModel/character/skill_ui_model.cpp \
+        uiModel/homeView/home_category_ui_model.cpp \
+        uiModel/homeView/home_element_ui_model.cpp \
+        uiModel/homeView/home_view_ui_model.cpp
 
 RESOURCES += \
     qml.qrc
@@ -80,14 +85,20 @@ HEADERS += \
     dataModel/character/relationship.h \
     dataModel/character/skill/skill.h \
     dataModel/character/status.h \
+    dataModel/homeView/home_category.h \
+    dataModel/homeView/home_element_type.h \
     dataModel/homeView/home_view.h \
     qml_types_factory.h \
     reader/character_reader.h \
     reader/home_view_reader.h \
+    reader/json_reader_helpers.h \
     services/relationship_validator_service.h \
-    uiModel/character_ui_model.h \
-    uiModel/characters_ui_collection.h \
-    uiModel/characters_ui_manager.h \
-    uiModel/filtering_type.h \
-    uiModel/relationship_ui_model.h \
-    uiModel/skill_ui_model.h
+    uiModel/character/character_ui_model.h \
+    uiModel/character/characters_ui_collection.h \
+    uiModel/character/characters_ui_manager.h \
+    uiModel/character/filtering_type.h \
+    uiModel/character/relationship_ui_model.h \
+    uiModel/character/skill_ui_model.h \
+    uiModel/homeView/home_category_ui_model.h \
+    uiModel/homeView/home_element_ui_model.h \
+    uiModel/homeView/home_view_ui_model.h
