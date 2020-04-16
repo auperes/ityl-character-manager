@@ -28,5 +28,8 @@ namespace Ityl::UiModel
 
         if (elements.contains(DataModel::HomeElementType::Organization))
             _organizations = elements[DataModel::HomeElementType::Organization];
+
+        if (elements.contains(DataModel::HomeElementType::Ethnie))
+            _ethnies = elements[DataModel::HomeElementType::Ethnie];
     }
 }

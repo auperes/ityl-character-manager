@@ -16,6 +16,7 @@ namespace Ityl::UiModel
         Q_PROPERTY(QStringList guilds READ getGuilds CONSTANT)
         Q_PROPERTY(QStringList groups READ getGroups CONSTANT)
         Q_PROPERTY(QStringList backgrounds READ getBackgrounds CONSTANT)
+        Q_PROPERTY(QStringList ethnies READ getEthnies CONSTANT)
 
     public:
         explicit HomeCategoryUiModel(QObject *parent = nullptr);
@@ -27,6 +28,7 @@ namespace Ityl::UiModel
         QList<QString> getGuilds() const { return _guilds; }
         QList<QString> getGroups() const { return _groups; }
         QList<QString> getBackgrounds() const { return _backgrounds; }
+        QList<QString> getEthnies() const { return _ethnies; }
 
     signals:
 
@@ -37,5 +39,6 @@ namespace Ityl::UiModel
         QList<QString> _guilds;
         QList<QString> _groups;
         QList<QString> _backgrounds;
+        QList<QString> _ethnies;
     };
 }

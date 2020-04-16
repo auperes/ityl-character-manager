@@ -294,6 +294,8 @@ namespace Ityl::DataModel::Converters
             return HomeElementType::Group;
         if (type == "background")
             return HomeElementType::Background;
+        if (type == "ethnie")
+            return HomeElementType::Ethnie;
 
         std::string errorMessage("Cannot convert type. Unknown value: " + type.toStdString());
         std::cout << errorMessage << std::endl;
@@ -315,6 +317,8 @@ namespace Ityl::DataModel::Converters
             return "group";
         case HomeElementType::Background:
             return "background";
+        case HomeElementType::Ethnie:
+            return "ethnie";
         }
 
         return QString();

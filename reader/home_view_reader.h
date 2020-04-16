@@ -23,5 +23,11 @@ namespace Ityl::Reader
         static QList<DataModel::HomeCategory> readCategories(const QJsonArray& jsonCategories);
         static DataModel::HomeCategory readCategory(const QJsonObject& jsonCategory);
         static QMap<DataModel::HomeElementType, QList<QString>> readElements(const QJsonArray& jsonElements);
+        static void readEthnieElement(QMap<DataModel::HomeElementType, QList<QString>>& elements, const QJsonObject& jsonRegion);
+
+        static void insertElement(
+                QMap<DataModel::HomeElementType, QList<QString>>& elements,
+                const DataModel::HomeElementType& elementType,
+                const QString& elementName);
     };
 }

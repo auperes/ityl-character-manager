@@ -4,8 +4,11 @@ import QtQuick.Layouts 1.12
 Item {
     GridLayout {
         columns: 2
+        rowSpacing: 20
 
         ColumnLayout {
+            Layout.alignment: Qt.AlignTop
+
             Text {
                 font.bold: true
                 text: "Régions"
@@ -25,26 +28,30 @@ Item {
             }
         }
 
-//        ColumnLayout {
-//            Text {
-//                font.bold: true
-//                text: "Peuples"
-//            }
+        ColumnLayout {
+            Layout.alignment: Qt.AlignTop
 
-//            ListView {
-//                id: ethniesList
-//                Layout.preferredHeight: contentHeight
-//                Layout.preferredWidth: 300
-//                spacing: 5
-//                model: homeView.selectedCategory.ethnies
-//                delegate: LinkButton {
-//                    text: modelData
-////                    Component.onCompleted: buttonClicked.connect(homeViewUi.doSomething)
-//                }
-//            }
-//        }
+            Text {
+                font.bold: true
+                text: "Peuples"
+            }
+
+            ListView {
+                id: ethniesList
+                Layout.preferredHeight: contentHeight
+                Layout.preferredWidth: 300
+                spacing: 5
+                model: homeView.selectedCategory.ethnies
+                delegate: LinkButton {
+                    text: modelData
+//                    Component.onCompleted: buttonClicked.connect(homeViewUi.doSomething)
+                }
+            }
+        }
 
         ColumnLayout {
+            Layout.alignment: Qt.AlignTop
+
             Text {
                 font.bold: true
                 text: "Organisations"
@@ -56,6 +63,90 @@ Item {
                 Layout.preferredWidth: 300
                 spacing: 5
                 model: homeView.selectedCategory.organizations
+                delegate: LinkButton {
+                    text: modelData
+//                    Component.onCompleted: buttonClicked.connect(homeViewUi.doSomething)
+                }
+            }
+        }
+
+        ColumnLayout {
+            Layout.alignment: Qt.AlignTop
+
+            Text {
+                font.bold: true
+                text: "Familles"
+            }
+
+            ListView {
+                id: familiesList
+                Layout.preferredHeight: contentHeight
+                Layout.preferredWidth: 300
+                spacing: 5
+                model: homeView.selectedCategory.families
+                delegate: LinkButton {
+                    text: modelData
+//                    Component.onCompleted: buttonClicked.connect(homeViewUi.doSomething)
+                }
+            }
+        }
+
+        ColumnLayout {
+            Layout.alignment: Qt.AlignTop
+
+            Text {
+                font.bold: true
+                text: "Guildes"
+            }
+
+            ListView {
+                id: guildsList
+                Layout.preferredHeight: contentHeight
+                Layout.preferredWidth: 300
+                spacing: 5
+                model: homeView.selectedCategory.guild
+                delegate: LinkButton {
+                    text: modelData
+//                    Component.onCompleted: buttonClicked.connect(homeViewUi.doSomething)
+                }
+            }
+        }
+
+        ColumnLayout {
+            Layout.alignment: Qt.AlignTop
+
+            Text {
+                font.bold: true
+                text: "Groupes"
+            }
+
+            ListView {
+                id: groupsList
+                Layout.preferredHeight: contentHeight
+                Layout.preferredWidth: 300
+                spacing: 5
+                model: homeView.selectedCategory.guilds
+                delegate: LinkButton {
+                    text: modelData
+//                    Component.onCompleted: buttonClicked.connect(homeViewUi.doSomething)
+                }
+            }
+        }
+
+        ColumnLayout {
+            Layout.alignment: Qt.AlignTop
+
+            Text {
+                font.bold: true
+                text: "Background"
+            }
+
+            ListView {
+                id: backgroundList
+                Layout.preferredHeight: contentHeight
+                Layout.preferredWidth: 300
+                spacing: 5
+                model: homeView.selectedCategory.backgrounds
                 delegate: LinkButton {
                     text: modelData
 //                    Component.onCompleted: buttonClicked.connect(homeViewUi.doSomething)

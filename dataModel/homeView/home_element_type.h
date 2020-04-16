@@ -9,6 +9,7 @@ namespace Ityl::DataModel
         Family,
         Guild,
         Group,
-        Background
+        Background,
+        Ethnie
     };
 }
