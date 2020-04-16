@@ -26,7 +26,7 @@ namespace Ityl::Reader
 
     DataModel::HomeCategory HomeViewReader::readCategory(const QJsonObject &jsonCategory)
     {
-        QString name = jsonCategory["character"].toString();
+        QString name = jsonCategory["name"].toString();
         auto elements = readElements(jsonCategory["elements"].toArray());
 
         return DataModel::HomeCategory(name, std::move(elements));

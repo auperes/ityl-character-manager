@@ -32,7 +32,6 @@ SOURCES += \
         uiModel/character/relationship_ui_model.cpp \
         uiModel/character/skill_ui_model.cpp \
         uiModel/homeView/home_category_ui_model.cpp \
-        uiModel/homeView/home_element_ui_model.cpp \
         uiModel/homeView/home_view_ui_model.cpp
 
 RESOURCES += \
@@ -69,6 +68,7 @@ DISTFILES += \
     ui/CharacterListView.qml \
     ui/CharacterView.qml \
     ui/DescriptionView.qml \
+    ui/HomeCategoryView.qml \
     ui/HomeView.qml \
     ui/IdentityView.qml \
     ui/LinkButton.qml \
@@ -100,5 +100,4 @@ HEADERS += \
     uiModel/character/relationship_ui_model.h \
     uiModel/character/skill_ui_model.h \
     uiModel/homeView/home_category_ui_model.h \
-    uiModel/homeView/home_element_ui_model.h \
     uiModel/homeView/home_view_ui_model.h

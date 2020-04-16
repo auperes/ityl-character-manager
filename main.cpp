@@ -13,6 +13,7 @@
 #include "reader/home_view_reader.h"
 #include "uiModel/character/characters_ui_collection.h"
 #include "uiModel/character/characters_ui_manager.h"
+#include "uiModel/homeView/home_view_ui_model.h"
 
 int main(int argc, char *argv[])
 {
@@ -30,17 +31,12 @@ int main(int argc, char *argv[])
         Ityl::CharactersProvider charactersProvider(charactersFolderPath);
 
         Ityl::UiModel::CharactersUiManager charatersUiManager(&charactersProvider);
-
-        //TODO convert HomeView to HomeViewUi
-        Ityl::DataModel::HomeView homeView = Ityl::Reader::HomeViewReader::readHomeViewFromFile(appConfig.getHomeViewFilePath());
+        Ityl::UiModel::HomeViewUIModel homeViewUi(Ityl::Reader::HomeViewReader::readHomeViewFromFile(appConfig.getHomeViewFilePath()));
 
         QQmlApplicationEngine engine;
 
-        engine.rootContext()->setContextProperty(QStringLiteral("nationsList"), charactersProvider.nations());
-        engine.rootContext()->setContextProperty(QStringLiteral("groupsList"), charactersProvider.groups());
-        engine.rootContext()->setContextProperty(QStringLiteral("ethniesList"), charactersProvider.ethnies());
         engine.rootContext()->setContextProperty(QStringLiteral("charactersManager"), &charatersUiManager);
-//        engine.rootContext()->setContextProperty(QStringLiteral("homeView"), &homeViewUi);
+        engine.rootContext()->setContextProperty(QStringLiteral("homeView"), &homeViewUi);
 
         engine.load(QUrl(QStringLiteral("qrc:/ui/main.qml")));
         if (engine.rootObjects().isEmpty())

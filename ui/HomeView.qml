@@ -3,7 +3,7 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
 
 Item {
-    id: homeView
+    id: homeViewUi
     anchors.fill: parent
     signal doSomething(string message)
     signal addEthnieTab(string ethnie)
@@ -85,122 +85,106 @@ Item {
             Layout.preferredWidth: 160
 
             ColumnLayout {
-                id: navigation
                 anchors.fill: parent
 
-                Button {
-                    Layout.topMargin: 20
-                    Layout.alignment: Qt.AlignHCenter
-                    Layout.preferredWidth: 120
-                    text: "Askash"
-                }
-                Button {
-                    Layout.alignment: Qt.AlignHCenter
-                    Layout.preferredWidth: 120
-                    text: "Hystiam"
-                }
-                Button {
-                    Layout.alignment: Qt.AlignHCenter
-                    Layout.preferredWidth: 120
-                    text: "Oskah"
-                }
-                Button {
-                    Layout.alignment: Qt.AlignHCenter
-                    Layout.preferredWidth: 120
-                    text: "Saïni"
-                }
-                Button {
-                    Layout.alignment: Qt.AlignHCenter
-                    Layout.preferredWidth: 120
-                    text: "Zherkum"
-                }
-                Button {
-                    Layout.alignment: Qt.AlignHCenter
-                    Layout.preferredWidth: 120
-                    text: "Autre"
-                }
-
-                Item {
+                ListView {
+                    id: navigation
+                    Layout.preferredHeight: navigation.count
                     Layout.fillHeight: true
+                    Layout.minimumWidth: 120
+                    Layout.alignment: Qt.AlignCenter
+                    Layout.topMargin: 20
+
+                    model: homeView.categoryNames
+                    delegate: Button {
+                        implicitWidth: 120
+                        text: modelData
+                    }
                 }
             }
         }
 
-        ColumnLayout {
+        HomeCategoryView {
+            Layout.fillHeight: true
+            Layout.fillWidth: true
             Layout.topMargin: 20
             Layout.leftMargin: 20
-            Layout.alignment: Qt.AlignTop
-            RowLayout {
-                Layout.bottomMargin: 10
-
-                ColumnLayout {
-                    Text {
-                        font.bold: true
-                        text: "Régions"
-                    }
-
-                    ListView {
-                        id: askashRegionsList
-                        Layout.preferredHeight: contentHeight
-                        Layout.preferredWidth: 300
-                        spacing: 5
-                        model: askash
-                        delegate: LinkButton {
-                            text: region
-                            Component.onCompleted: buttonClicked.connect(homeView.doSomething)
-                        }
-                    }
-                }
-                ColumnLayout {
-                    Text {
-                        font.bold: true
-                        text: "Peuples"
-                    }
-
-                    ListView {
-                        id: askashEthniesList
-                        Layout.preferredHeight: contentHeight
-                        spacing: 5
-                        model: askash
-                        delegate: LinkButton {
-                            text: ethnie
-                            Component.onCompleted: buttonClicked.connect(homeView.addEthnieTab)
-                        }
-                    }
-                }
-            }
-
-            Text {
-                font.bold: true
-                text: "Organisations"
-            }
-
-            ListView {
-                id: askashOrganisationsList
-                Layout.preferredHeight: contentHeight
-                Layout.bottomMargin: 10
-                spacing: 5
-                model: askashOrganisations
-                delegate: Text {
-                    text: organisation
-                }
-            }
-
-            Text {
-                font.bold: true
-                text: "Familles"
-            }
-
-            ListView {
-                id: askashFamiliesList
-                Layout.preferredHeight: contentHeight
-                spacing: 5
-                model: askashFamilies
-                delegate: Text {
-                    text: family
-                }
-            }
         }
+//        ColumnLayout {
+//            Layout.topMargin: 20
+//            Layout.leftMargin: 20
+//            Layout.alignment: Qt.AlignTop
+//            RowLayout {
+//                Layout.bottomMargin: 10
+
+//                ColumnLayout {
+//                    Text {
+//                        font.bold: true
+//                        text: "Régions"
+//                    }
+
+//                    ListView {
+//                        id: askashRegionsList
+//                        Layout.preferredHeight: contentHeight
+//                        Layout.preferredWidth: 300
+//                        spacing: 5
+//                        model: askash
+//                        delegate: LinkButton {
+//                            text: region
+//                            Component.onCompleted: buttonClicked.connect(homeViewUi.doSomething)
+//                        }
+//                    }
+//                }
+//                ColumnLayout {
+//                    Text {
+//                        font.bold: true
+//                        text: "Peuples"
+//                    }
+
+//                    ListView {
+//                        id: askashEthniesList
+//                        Layout.preferredHeight: contentHeight
+//                        spacing: 5
+//                        model: askash
+//                        delegate: LinkButton {
+//                            text: ethnie
+//                            Component.onCompleted: buttonClicked.connect(homeViewUi.addEthnieTab)
+//                        }
+//                    }
+//                }
+//            }
+
+//            Text {
+//                font.bold: true
+//                text: "Organisations"
+//            }
+
+//            ListView {
+//                id: askashOrganisationsList
+//                Layout.preferredHeight: contentHeight
+//                Layout.bottomMargin: 10
+//                spacing: 5
+//                model: askashOrganisations
+//                delegate: Text {
+//                    text: organisation
+//                }
+//            }
+
+//            Text {
+//                font.bold: true
+//                text: "Familles"
+//            }
+
+//            ListView {
+//                id: askashFamiliesList
+//                Layout.preferredHeight: contentHeight
+//                spacing: 5
+//                model: askashFamilies
+//                delegate: Text {
+//                    text: family
+//                }
+//            }
+//        }
 
         Item {
             Layout.fillWidth: true

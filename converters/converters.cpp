@@ -316,5 +316,7 @@ namespace Ityl::DataModel::Converters
         case HomeElementType::Background:
             return "background";
         }
+
+        return QString();
     }
 }

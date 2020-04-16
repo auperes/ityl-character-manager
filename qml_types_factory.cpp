@@ -6,14 +6,14 @@
 #include "reader/character_reader.h"
 #include "uiModel/character/character_ui_model.h"
 #include "uiModel/character/characters_ui_collection.h"
+#include "uiModel/homeView/home_category_ui_model.h"
 
 namespace Ityl
 {
     void QmlTypesFactory::registerTypes()
     {
-        qmlRegisterType<UiModel::CharactersUiCollection>("Character", 1, 0, "CharactersUiCollection");
         qRegisterMetaType<UiModel::CharactersUiCollection*>("CharactersUiCollection*");
-        qmlRegisterUncreatableType<UiModel::CharacterUiModel>("Character", 1, 0, "CharacterUiModel",
-                                                     QStringLiteral("CharacterUiModel should not be created in QML"));
+
+        qRegisterMetaType<UiModel::HomeCategoryUiModel*>("HomeCategoryUiModel*");
     }
 }

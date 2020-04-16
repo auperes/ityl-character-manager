@@ -9,6 +9,8 @@ namespace Ityl::DataModel
     public:
         HomeView(QList<HomeCategory>&& categories);
 
+        const QList<HomeCategory>& categories() const { return _categories; }
+
     private:
         QList<HomeCategory> _categories;
     };
