@@ -4,7 +4,6 @@ import QtQuick.Controls 2.12
 Button {
     id: buttonLink
     padding: 0
-    signal buttonClicked(string message)
 
     contentItem: Text {
         text: buttonLink.text
@@ -20,7 +19,7 @@ Button {
                 parent.color = "black"
                 parent.font.underline = false
             }
-            onClicked: buttonClicked(text)
+            onClicked: buttonLink.clicked()
         }
     }
 

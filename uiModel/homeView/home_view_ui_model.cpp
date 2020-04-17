@@ -31,4 +31,12 @@ namespace Ityl::UiModel
         _selectedCategory = *it;
         emit selectedCategoryChanged();
     }
+
+    void HomeViewUIModel::selectElement(const QString& elementType, const QString& elementName)
+    {
+        if (elementType == "ethnie" || elementType == "group")
+            emit elementSelected(elementType, elementName);
+        if (elementType == "guild")
+            emit elementSelected("group", QString("Guilde - " + elementName));
+    }
 }

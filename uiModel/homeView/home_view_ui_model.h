@@ -1,5 +1,7 @@
 #pragma once
 
+#include <memory>
+
 #include <QList>
 #include <QMap>
 #include <QObject>
@@ -25,9 +27,11 @@ namespace Ityl::UiModel
 
     signals:
         void selectedCategoryChanged();
+        void elementSelected(const QString& elementType, const QString& elementName);
 
     public slots:
         void updateSelectedCategory(const QString& categoryName);
+        void selectElement(const QString& elementType, const QString& elementName);
 
     private:
         QList<QString> _categoryNames;

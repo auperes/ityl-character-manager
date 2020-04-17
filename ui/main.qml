@@ -61,13 +61,13 @@ ApplicationWindow {
         TabBar {
             id: tabBarView
             width: parent.width
-            currentIndex: tabs.currentIndex
+            currentIndex: tabContent.currentIndex
             signal actionOccured(string message)
 
             Connections {
-                target: tabBarView
-                function onActionOccured(message) {
-                    tabBarView.addItem(tabComponent.createObject(tabBarView, { text: message }))
+                target: homeView
+                function onElementSelected(elementType, elementName) {
+                    tabBarView.addItem(tabComponent.createObject(tabBarView, { text: elementName }))
                     tabBarView.setCurrentIndex(tabBarView.count - 1)
                 }
             }
@@ -81,20 +81,15 @@ ApplicationWindow {
         }
 
         StackLayout {
-            id: tabs
+            id: tabContent
             currentIndex: tabBarView.currentIndex
-            signal actionOccured(string message)
-            signal addEthnieTabOccured(string ethnie)
 
             Connections {
-                target: tabs
-                function onActionOccured(message) {
-                    tabs.children.push(tabContentComponent.createObject(tabs))
-                }
-                function onAddEthnieTabOccured(ethnie) {
-                    var tab = tabContentComponent.createObject(tabs);
-                    tab.model = charactersManager.addCollection("ethnie", ethnie).model
-                    tabs.children.push(tab)
+                target: homeView
+                function onElementSelected(elementType, elementName) {
+                    var tab = tabContentComponent.createObject(tabContent);
+                    tab.model = charactersManager.addCollection(elementType, elementName).model
+                    tabContent.children.push(tab)
                 }
             }
 
@@ -102,12 +97,6 @@ ApplicationWindow {
                 id: homeTab
                 HomeView {
                     anchors.fill: parent
-                    Component.onCompleted: {
-                        doSomething.connect(tabBarView.actionOccured)
-                        doSomething.connect(tabs.actionOccured)
-                        addEthnieTab.connect(tabBarView.actionOccured)
-                        addEthnieTab.connect(tabs.addEthnieTabOccured)
-                    }
                 }
             }
 

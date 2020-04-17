@@ -2,6 +2,8 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.12
 
 Item {
+    id: homeCategoryView
+
     GridLayout {
         columns: 2
         rowSpacing: 20
@@ -24,7 +26,7 @@ Item {
                 model: homeView.selectedCategory.regions
                 delegate: LinkButton {
                     text: modelData
-//                    Component.onCompleted: buttonClicked.connect(homeViewUi.doSomething)
+                    onClicked: homeView.selectElement("region", modelData)
                 }
             }
         }
@@ -46,7 +48,7 @@ Item {
                 model: homeView.selectedCategory.ethnies
                 delegate: LinkButton {
                     text: modelData
-//                    Component.onCompleted: buttonClicked.connect(homeViewUi.doSomething)
+                    onClicked: homeView.selectElement("ethnie", modelData)
                 }
             }
         }
@@ -68,7 +70,7 @@ Item {
                 model: homeView.selectedCategory.organizations
                 delegate: LinkButton {
                     text: modelData
-//                    Component.onCompleted: buttonClicked.connect(homeViewUi.doSomething)
+                    onClicked: homeView.selectElement("group", modelData)
                 }
             }
         }
@@ -90,7 +92,7 @@ Item {
                 model: homeView.selectedCategory.families
                 delegate: LinkButton {
                     text: modelData
-//                    Component.onCompleted: buttonClicked.connect(homeViewUi.doSomething)
+                    onClicked: homeView.selectElement("group", modelData)
                 }
             }
         }
@@ -109,10 +111,10 @@ Item {
                 Layout.preferredHeight: contentHeight
                 Layout.preferredWidth: 300
                 spacing: 5
-                model: homeView.selectedCategory.guild
+                model: homeView.selectedCategory.guilds
                 delegate: LinkButton {
                     text: modelData
-//                    Component.onCompleted: buttonClicked.connect(homeViewUi.doSomething)
+                    onClicked: homeView.selectElement("guild", modelData)
                 }
             }
         }
@@ -131,10 +133,10 @@ Item {
                 Layout.preferredHeight: contentHeight
                 Layout.preferredWidth: 300
                 spacing: 5
-                model: homeView.selectedCategory.guilds
+                model: homeView.selectedCategory.groups
                 delegate: LinkButton {
                     text: modelData
-//                    Component.onCompleted: buttonClicked.connect(homeViewUi.doSomething)
+                    onClicked: homeView.selectElement("group", modelData)
                 }
             }
         }
@@ -157,7 +159,7 @@ Item {
                 model: homeView.selectedCategory.backgrounds
                 delegate: LinkButton {
                     text: modelData
-//                    Component.onCompleted: buttonClicked.connect(homeViewUi.doSomething)
+                    onClicked: homeView.selectElement("background", modelData)
                 }
             }
         }
