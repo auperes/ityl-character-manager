@@ -8,6 +8,7 @@ Item {
 
         ColumnLayout {
             Layout.alignment: Qt.AlignTop
+            visible: regionsList.count > 0
 
             Text {
                 font.bold: true
@@ -30,6 +31,7 @@ Item {
 
         ColumnLayout {
             Layout.alignment: Qt.AlignTop
+            visible: ethniesList.count > 0
 
             Text {
                 font.bold: true
@@ -51,6 +53,7 @@ Item {
 
         ColumnLayout {
             Layout.alignment: Qt.AlignTop
+            visible: organizationsList.count > 0
 
             Text {
                 font.bold: true
@@ -72,6 +75,7 @@ Item {
 
         ColumnLayout {
             Layout.alignment: Qt.AlignTop
+            visible: familiesList.count > 0
 
             Text {
                 font.bold: true
@@ -93,6 +97,7 @@ Item {
 
         ColumnLayout {
             Layout.alignment: Qt.AlignTop
+            visible: guildsList.count > 0
 
             Text {
                 font.bold: true
@@ -114,6 +119,7 @@ Item {
 
         ColumnLayout {
             Layout.alignment: Qt.AlignTop
+            visible: groupsList.count > 0
 
             Text {
                 font.bold: true
@@ -135,10 +141,12 @@ Item {
 
         ColumnLayout {
             Layout.alignment: Qt.AlignTop
+            visible: backgroundList.count > 0
 
             Text {
                 font.bold: true
                 text: "Background"
+
             }
 
             ListView {

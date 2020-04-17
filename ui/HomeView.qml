@@ -31,6 +31,7 @@ Item {
                     delegate: Button {
                         implicitWidth: 120
                         text: modelData
+                        onClicked: homeView.updateSelectedCategory(modelData)
                     }
                 }
             }
