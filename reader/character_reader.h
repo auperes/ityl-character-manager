@@ -3,22 +3,25 @@
 #include <QString>
 #include <QJsonArray>
 
-#include "../dataModel/character.h"
+#include "../dataModel/character/character.h"
 
-class CharacterReader
+namespace Ityl::Reader
 {
-public:
-    CharacterReader() = delete;
-    virtual ~CharacterReader() = delete;
+    class CharacterReader
+    {
+    public:
+        CharacterReader() = delete;
+        ~CharacterReader() = delete;
 
-    static Character readCharacterFromFile(const QString& filepath);
+        static DataModel::Character readCharacterFromFile(const QString& filepath);
 
-private:
-    static void fillValues(const QJsonArray& jsonValues, Character& character);
-    static void fillRoles(const QJsonArray& jsonRoles, Character& character);
-    static void fillSkills(const QJsonArray& jsonSkills, Character& character);
-    static void fillRelationships(const QJsonArray& jsonRelationships, Character& character);
-    static void fillEthnies(const QJsonArray& jsonEthnies, Character& character);
-    static void fillGroups(const QJsonArray& jsonGroups, Character& character);
-    static void fillAvatars(const QJsonArray& jsonAvatars, Character& character);
-};
+    private:
+        static void fillValues(const QJsonArray& jsonValues, DataModel::Character& character);
+        static QVector<QString> readRoles(const QJsonArray& jsonRoles);
+        static QMap<QString, QList<DataModel::Skill>> readSkills(const QJsonArray& jsonSkills);
+        static void fillRelationships(const QJsonArray& jsonRelationships, DataModel::Character& character);
+        static QVector<QString> readEthnies(const QJsonArray& jsonEthnies);
+        static QVector<QString> readGroups(const QJsonArray& jsonGroups);
+        static QVector<QString> readAvatars(const QJsonArray& jsonAvatars);
+    };
+}

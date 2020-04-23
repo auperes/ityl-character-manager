@@ -6,20 +6,22 @@
 #include <QPair>
 #include <QString>
 
-#include "../dataModel/relationship.h"
+#include "../dataModel/character/relationship.h"
 
-class RelationshipValidatorService
+namespace Ityl::Services
 {
-public:
-    explicit RelationshipValidatorService();
+    class RelationshipValidatorService
+    {
+    public:
+        explicit RelationshipValidatorService();
 
-    void addCharacterName(QString characterName);
-    void addRelationship(QString characterName, Relationship relationship, QString relatedCharacterName);
-    void logMissingRelationships();
+        void addCharacterName(QString characterName);
+        void addRelationship(QString characterName, DataModel::Relationship relationship, QString relatedCharacterName);
+        void logMissingRelationships();
 
-private:
-    std::unordered_map<std::string, std::unordered_multimap<std::string, Relationship>> _missingRelationships;
-    std::unordered_map<Relationship, Relationship> _relatedRelationships;
-    std::set<QString> _charactersNames;
-};
-
+    private:
+        std::unordered_map<std::string, std::unordered_multimap<std::string, DataModel::Relationship>> _missingRelationships;
+        std::unordered_map<DataModel::Relationship, DataModel::Relationship> _relatedRelationships;
+        std::set<QString> _charactersNames;
+    };
+}

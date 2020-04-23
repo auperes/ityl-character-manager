@@ -1,9 +1,12 @@
 #pragma once
 
-class QmlTypesFactory
+namespace Ityl
 {
-public:
-    QmlTypesFactory() = delete;
+    class QmlTypesFactory
+    {
+    public:
+        QmlTypesFactory() = delete;
 
-    static void registerTypes();
-};
+        static void registerTypes();
+    };
+}

@@ -4,12 +4,16 @@
 #include <QMetaType>
 
 #include "reader/character_reader.h"
-#include "uiModel/character_ui_model.h"
-#include "uiModel/characters_ui_collection.h"
+#include "uiModel/character/character_ui_model.h"
+#include "uiModel/character/characters_ui_collection.h"
+#include "uiModel/homeView/home_category_ui_model.h"
 
-void QmlTypesFactory::registerTypes()
+namespace Ityl
 {
-    qmlRegisterType<CharactersUiCollection>("Character", 1, 0, "CharactersUiCollection");
-    qmlRegisterUncreatableType<CharacterUiModel>("Character", 1, 0, "CharacterUiModel",
-        QStringLiteral("CharacterUiModel should not be created in QML"));
+    void QmlTypesFactory::registerTypes()
+    {
+        qRegisterMetaType<UiModel::CharactersUiCollection*>("CharactersUiCollection*");
+
+        qRegisterMetaType<UiModel::HomeCategoryUiModel*>("HomeCategoryUiModel*");
+    }
 }

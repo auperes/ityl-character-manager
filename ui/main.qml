@@ -11,8 +11,29 @@ ApplicationWindow {
     minimumHeight: 500
     title: qsTr("Ityl characters viewer")
 
+    Component {
+        id: tabComponent
+        TabBarComponent {
+
+        }
+    }
+
+    Component {
+        id: tabContentComponent
+        CharacterListView {
+            anchors.fill: parent
+            leftMargin: 20
+            rightMargin: 20
+        }
+    }
+
     header: ToolBar {
         RowLayout {
+            ToolButton {
+                text: qsTr("Reload")
+                onClicked: { charactersManager.refreshCharacters() }
+            }
+
             ToolButton {
                 text: qsTr("Search")
             }
@@ -38,20 +59,39 @@ ApplicationWindow {
         anchors.fill: parent
 
         TabBar {
-            id: tabBar
+            id: tabBarView
             width: parent.width
-            TabButton {
-                width: implicitWidth
+            currentIndex: tabContent.currentIndex
+            signal actionOccured(string message)
+
+            Connections {
+                target: homeView
+                function onElementSelected(elementType, elementName) {
+                    tabBarView.addItem(tabComponent.createObject(tabBarView, { text: elementName }))
+                    tabBarView.setCurrentIndex(tabBarView.count - 1)
+                }
+            }
+
+            TabBarComponent {
                 text: qsTr("Home")
             }
-            TabButton {
-                width: implicitWidth
+            TabBarComponent {
                 text: qsTr("All characters")
             }
         }
 
         StackLayout {
-            currentIndex: tabBar.currentIndex
+            id: tabContent
+            currentIndex: tabBarView.currentIndex
+
+            Connections {
+                target: homeView
+                function onElementSelected(elementType, elementName) {
+                    var tab = tabContentComponent.createObject(tabContent);
+                    tab.model = charactersManager.addCollection(elementType, elementName).model
+                    tabContent.children.push(tab)
+                }
+            }
 
             Item {
                 id: homeTab
@@ -62,22 +102,11 @@ ApplicationWindow {
 
             Item {
                 id: allCharactersTab
-                ColumnLayout {
+                CharacterListView {
                     anchors.fill: parent
-
-                    QuickNavigation {
-                        Layout.leftMargin: 20
-                        Layout.fillWidth: true
-                        Layout.preferredHeight: 50
-                    }
-
-                    CharacterListView {
-                        Layout.alignment: Qt.AlignHCenter
-                        Layout.fillWidth: true
-                        Layout.fillHeight: true
-                        Layout.leftMargin: 20
-                        Layout.rightMargin: 20
-                    }
+                    leftMargin: 20
+                    rightMargin: 20
+                    model: charactersManager.addCollection("Tous", "").model
                 }
             }
         }
