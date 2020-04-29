@@ -1,0 +1,62 @@
+{
+  "character": {
+    "values": [
+      { "firstName": "firstname" },
+      { "lastName": "lastname" },
+      { "birthName": "birthname" },
+      { "nickName": "nickname" },
+      { "title": "title" },
+      { "quote": "quote" },
+      { "birthPlace": "place" },
+      { "livelyPlace": "place" },
+      { "birthNation": "nation" },
+      { "currentNation": "nation1" },
+      { "status": "alive" },
+      { "description": "description" }
+    ],
+    "roles": [
+      { "role": "role1" },
+      { "role": "role2" }
+    ],
+    "skills": [
+      { "category": "cat1", "name": "skill1" },
+      { "category": "cat1", "name": "skill2" },
+      { "category": "cat1", "name": "skill3" },
+      { "category": "cat2", "name": "skill4" },
+      { "category": "cat2", "name": "skill5", "specialties": [ { "specialty": "specialty1" }, { "specialty": "specialty2" }, { "specialty": "specialty3" } ] }
+    ],
+    "relationships": [
+      { "link": "parent", "firstName": "prenom", "lastName": "nom" },
+      { "link": "parent", "firstName": "prenom", "lastName": "nom" },
+      { "link": "grandParent", "firstName": "prenom", "lastName": "nom" },
+      { "link": "grandParent", "firstName": "prenom", "lastName": "nom" },
+      { "link": "twin", "firstName": "prenom", "lastName": "nom" },
+      { "link": "sibling", "firstName": "prenom", "lastName": "nom" },
+      { "link": "husband", "firstName": "prenom", "lastName": "nom" },
+      { "link": "wife", "firstName": "prenom", "lastName": "nom" },
+      { "link": "partner", "firstName": "prenom", "lastName": "nom" },
+      { "link": "child", "firstName": "prenom", "lastName": "nom" },
+      { "link": "uncleAunt", "firstName": "prenom", "lastName": "nom" },
+      { "link": "uncleAunt", "firstName": "prenom", "lastName": "nom" },
+      { "link": "nephew", "firstName": "prenom", "lastName": "nom" },
+      { "link": "cousin", "firstName": "prenom", "lastName": "nom" },
+      { "link": "grandChild", "firstName": "prenom", "lastName": "nom" },
+      { "link": "guardian", "firstName": "prenom", "lastName": "nom" },
+      { "link": "protege", "firstName": "prenom", "lastName": "nom" },
+      { "link": "disciple", "firstName": "prenom", "lastName": "nom" },
+      { "link": "rightHand", "firstName": "prenom", "lastName": "nom" },
+      { "link": "rival", "firstName": "prenom", "lastName": "nom", "old": true }
+    ],
+    "ethnies": [
+      { "ethnie": "ethnie1", "ratio": "1" },
+      { "ethnie": "ethnie2", "ratio": "1" }
+    ],
+    "groups": [
+      { "group": "group1" },
+      { "group": "group2", "old": true, "subGroup": "subgroup" }
+    ],
+    "avatars": [
+      { "avatar": "avatar.png" }
+    ]
+  }
+}

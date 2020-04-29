@@ -1,0 +1,27 @@
+{
+  "relatedRelationships": [
+    { "link": "parent", "relatesTo": "child" },
+    { "link": "grandParent", "relatesTo": "grandChild" },
+    { "link": "twin", "relatesTo": "twin" },
+    { "link": "sibling", "relatesTo": "sibling" },
+    { "link": "halfSibling", "relatesTo": "halfSibling" },
+    { "link": "adoptiveSibling", "relatesTo": "adoptiveSibling" },
+    { "link": "husband", "relatesTo": "wife" },
+    { "link": "wife", "relatesTo": "husband" },
+    { "link": "betrothed", "relatesTo": "betrothed" },
+    { "link": "partner", "relatesTo": "partner" },
+    { "link": "child", "relatesTo": "parent" },
+    { "link": "uncleAunt", "relatesTo": "nephew" },
+    { "link": "nephew", "relatesTo": "uncleAunt" },
+    { "link": "cousin", "relatesTo": "cousin" },
+    { "link": "grandChild", "relatesTo": "grandParent" },
+    { "link": "guardian", "relatesTo": "protege" },
+    { "link": "protege", "relatesTo": "guardian" },
+    { "link": "master", "relatesTo": "disciple" },
+    { "link": "disciple", "relatesTo": "master" },
+    { "link": "rightHand", "relatesTo": "rightHandOf" },
+    { "link": "rightHandOf", "relatesTo": "rightHand" },
+    { "link": "rival", "relatesTo": "rival" }
+  ]
+}
+

@@ -1,5 +1,7 @@
 #include "characters_ui_manager.h"
 
+#include <iostream>
+
 #include <QQmlEngine>
 
 #include "../../converters/converters.h"
@@ -13,9 +15,10 @@ namespace Ityl::UiModel
 
     }
 
-    CharactersUiManager::CharactersUiManager(CharactersProvider *charactersProvider, QObject *parent)
+    CharactersUiManager::CharactersUiManager(CharactersProvider *charactersProvider, const QMap<QString, QString>& nationColors, QObject *parent)
         : QObject(parent)
         , _charactersProvider(charactersProvider)
+        , _nationColors(nationColors)
     {
 
     }
@@ -85,8 +88,19 @@ namespace Ityl::UiModel
 
         QList<std::shared_ptr<CharacterUiModel>> characterUiModels;
         for (const std::shared_ptr<DataModel::Character>& character : characters)
-            characterUiModels.push_back(std::make_shared<CharacterUiModel>(character));
+            characterUiModels.push_back(std::make_shared<CharacterUiModel>(character, getNationColor(character->getCurrentNation())));
 
         return characterUiModels;
+    }
+
+    QString CharactersUiManager::getNationColor(const QString& nationName) const
+    {
+        if (_nationColors.contains(nationName))
+            return _nationColors[nationName];
+
+        std::string errorMessage("Cannot convert nation. Unknown value: " + nationName.toStdString());
+        std::cout << errorMessage << std::endl;
+
+        return "#969696";
     }
 }

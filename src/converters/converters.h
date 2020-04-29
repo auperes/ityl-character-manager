@@ -22,8 +22,6 @@ namespace Ityl::DataModel::Converters
         static QString convertStatus(const Status& status);
         static Status convertStatus(const QString& status);
 
-        static QString convertNationToColor(const QString& nation);
-
         static UiModel::FilteringType convertFilteringType(const QString& type);
 
         static HomeElementType convertElementType(const QString& type);

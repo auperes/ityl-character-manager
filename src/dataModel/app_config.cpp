@@ -17,6 +17,7 @@ namespace Ityl::DataModel
     QString AppConfig::_relatedRelationshipsFilePath;
     QString AppConfig::_logFolderPath;
     QString AppConfig::_homeViewFilePath;
+    QString AppConfig::_colorsFilePath;
 
     AppConfig::AppConfig()
     {
@@ -40,5 +41,7 @@ namespace Ityl::DataModel
             _logFolderPath = jsonObject["logFolderPath"].toString();
         if (jsonObject.contains("homeViewFilePath"))
             _homeViewFilePath = jsonObject["homeViewFilePath"].toString();
+        if (jsonObject.contains("homeViewFilePath"))
+            _colorsFilePath = jsonObject["colorsFilePath"].toString();
     }
 }

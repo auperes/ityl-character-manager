@@ -14,6 +14,7 @@ namespace Ityl::DataModel
         static QString getRelatedRelationshipsFilePath() { return _relatedRelationshipsFilePath; }
         static QString getLogFolderPath() { return _logFolderPath; }
         static QString getHomeViewFilePath() { return _homeViewFilePath; }
+        static QString getColorsFilePath() { return _colorsFilePath; }
 
     private:
         static QString _charactersFolderPath;
@@ -21,5 +22,6 @@ namespace Ityl::DataModel
         static QString _relatedRelationshipsFilePath;
         static QString _logFolderPath;
         static QString _homeViewFilePath;
+        static QString _colorsFilePath;
     };
 }

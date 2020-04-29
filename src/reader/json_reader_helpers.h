@@ -2,6 +2,7 @@
 
 #include <QJsonObject>
 #include <QString>
+#include <QMap>
 
 namespace Ityl::Reader
 {
@@ -12,5 +13,7 @@ namespace Ityl::Reader
         ~JsonReaderHelpers() = delete;
 
         static QJsonObject readJsonFile(const QString& filepath);
+
+        static QMap<QString, QString> readNationsColor(const QString& filepath);
     };
 }

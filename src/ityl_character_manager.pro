@@ -51,18 +51,23 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 install_it.path = $${OUT_PWD}/settings
 install_it.files += $${PWD}/settings/app_config.json
 
-INSTALLS += install_it
+install_mock.path = $${OUT_PWD}
+install_mock.files += $${PWD}/mock/
+
+INSTALLS += \
+    install_it \
+    install_mock
 
 DISTFILES += \
-    .gitignore \
+    mock/characters/character1.json \
+    mock/characters/character2.json \
+    mock/characters/character3.json \
+    mock/colors.json \
+    mock/home_view.json \
+    mock/images/avatar.png \
+    mock/related_relationships.json \
     qtquickcontrols2.conf \
     settings/app_config.json \
-    thirdParties/QtMaterialDesignIcons/qml/MaterialDesignIcon.qml \
-    thirdParties/QtMaterialDesignIcons/qml/MaterialDesignIconGlyphs.js \
-    thirdParties/QtMaterialDesignIcons/resources/MaterialDesignIcon.qml \
-    thirdParties/QtMaterialDesignIcons/resources/MaterialDesignIconGlyphs.js \
-    thirdParties/QtMaterialDesignIcons/resources/materialdesignicons-webfont.svg \
-    thirdParties/QtMaterialDesignIcons/resources/materialdesignicons-webfont.ttf \
     ui/AffiliationsView.qml \
     ui/AvatarView.qml \
     ui/CharacterListView.qml \

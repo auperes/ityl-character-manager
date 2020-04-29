@@ -1,0 +1,6 @@
+{
+  "nations": [
+    { "name": "nation1", "color": "#e69d9d" },
+    { "name": "nation2", "color": "#7fb390" }
+  ]
+}

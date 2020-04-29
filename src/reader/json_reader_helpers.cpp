@@ -3,6 +3,7 @@
 #include <QFile>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QJsonArray>
 
 namespace Ityl::Reader
 {
@@ -21,6 +22,21 @@ namespace Ityl::Reader
             throw std::logic_error(error.errorString().toStdString());
 
         return document.object();
+    }
+
+    QMap<QString, QString> JsonReaderHelpers::readNationsColor(const QString& filepath)
+    {
+        QMap<QString, QString> nationColors;
+        QJsonObject jsonObject = JsonReaderHelpers::readJsonFile(filepath);
+        QJsonArray nations = jsonObject["nations"].toArray();
+
+        for (auto nation : nations)
+        {
+            auto nationObject = nation.toObject();
+            nationColors.insert(nationObject["name"].toString(), nationObject["color"].toString());
+        }
+
+        return nationColors;
     }
 
 }

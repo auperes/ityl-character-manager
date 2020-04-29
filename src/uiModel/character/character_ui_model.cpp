@@ -2,6 +2,7 @@
 
 #include <iostream>
 
+#include <QDir>
 #include <QQmlEngine>
 #include <QStandardItemModel>
 #include <QMap>
@@ -20,11 +21,12 @@ namespace Ityl::UiModel
 
     }
 
-    CharacterUiModel::CharacterUiModel(const std::shared_ptr<DataModel::Character> &character)
+    CharacterUiModel::CharacterUiModel(const std::shared_ptr<DataModel::Character> &character, const QString& nationColor)
         : QObject()
         , _character(character)
         , _skills(new QStandardItemModel(this))
         , _relationships(new QStandardItemModel(this))
+        , _nationColor(nationColor)
     {
         _skills->insertColumn(0);
 
@@ -41,9 +43,10 @@ namespace Ityl::UiModel
         }
     }
 
-    CharacterUiModel::CharacterUiModel(const CharacterUiModel &characterUiModel)
+    CharacterUiModel::CharacterUiModel(const CharacterUiModel &characterUiModel, const QString& nationColor)
         : QObject()
         , _character(characterUiModel._character)
+        , _nationColor(nationColor)
     {
 
     }
@@ -60,18 +63,13 @@ namespace Ityl::UiModel
             std::cout << "Character " + _character->getFirstName().toStdString() + " " + _character->getLastName().toStdString() + " has no avatar" << std::endl;
             return "";
         }
-        QString avatarFullPath(DataModel::AppConfig::getAvatarsFolderPath() + _character->getAvatars().first());
-        return "file:///" + DataModel::AppConfig::getAvatarsFolderPath() + _character->getAvatars().first();
+        QString avatarFullPath(QDir::currentPath() + "/" + DataModel::AppConfig::getAvatarsFolderPath() + _character->getAvatars().first());
+        return "file:///" + avatarFullPath;
     }
 
     const QString CharacterUiModel::quote() const
     {
         return "« " + _character->getQuote() + " »";
-    }
-
-    const QString CharacterUiModel::nationColor() const
-    {
-        return DataModel::Converters::Converters::convertNationToColor(_character->getCurrentNation());
     }
 
     bool CharacterUiModel::hasTitle() const

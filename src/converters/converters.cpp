@@ -245,25 +245,6 @@ namespace Ityl::DataModel::Converters
         throw std::logic_error(errorMessage.c_str());
     }
 
-    QString Converters::convertNationToColor(const QString &nation)
-    {
-        if (nation == "Askash")
-            return "#f9d6bb";
-        if (nation == "Hystiam")
-            return "#ecc4c4";
-        if (nation == "Oskah")
-            return "#b3cff1";
-        if (nation == "Saïni")
-            return "#d3bbda";
-        if (nation == "Zherkum")
-            return "#cae6bf";
-
-        std::string errorMessage("Cannot convert nation. Unknown value: " + nation.toStdString());
-        std::cout << errorMessage << std::endl;
-        return "#000000";
-        //    throw std::logic_error(errorMessage.c_str());
-    }
-
     UiModel::FilteringType Converters::convertFilteringType(const QString &type)
     {
         if (type == "Tous")

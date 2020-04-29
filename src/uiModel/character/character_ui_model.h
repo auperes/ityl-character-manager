@@ -32,8 +32,8 @@ namespace Ityl::UiModel
 
     public:
         CharacterUiModel();
-        explicit CharacterUiModel(const std::shared_ptr<DataModel::Character> &character);
-        explicit CharacterUiModel(const CharacterUiModel &characterUiModel);
+        explicit CharacterUiModel(const std::shared_ptr<DataModel::Character> &character, const QString& nationColor);
+        explicit CharacterUiModel(const CharacterUiModel &characterUiModel, const QString& nationColor);
 
         const QString fullName() const;
         const QString avatar() const;
@@ -47,7 +47,7 @@ namespace Ityl::UiModel
         QAbstractItemModel* relationships() const { return _relationships.get(); }
         const QStringList ethnies() const { return _character->getEthnies().toList(); }
         const QStringList groups() const { return _character->getGroups().toList(); }
-        const QString nationColor() const;
+        const QString nationColor() const { return _nationColor; }
         bool hasTitle() const;
 
     signals:
@@ -60,6 +60,7 @@ namespace Ityl::UiModel
         std::unique_ptr<QAbstractItemModel> _relationships;
         QList<std::shared_ptr<SkillUiModel>> _skillUiModels;
         QList<std::shared_ptr<RelationshipUiModel>> _relationshipUiModels;
+        QString _nationColor;
 
         void addSkill(const QString& skillName, const QList<DataModel::Skill>& skillValues);
         void addRelationship(const DataModel::Relationship& relationType, const QList<QPair<QString, QString>> &characterNames);

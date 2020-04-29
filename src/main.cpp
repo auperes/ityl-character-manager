@@ -11,6 +11,7 @@
 #include "dataModel/app_config.h"
 #include "qml_types_factory.h"
 #include "reader/home_view_reader.h"
+#include "reader/json_reader_helpers.h"
 #include "uiModel/character/characters_ui_collection.h"
 #include "uiModel/character/characters_ui_manager.h"
 #include "uiModel/homeView/home_view_ui_model.h"
@@ -30,7 +31,8 @@ int main(int argc, char *argv[])
         QString charactersFolderPath(appConfig.getCharactersFolderPath());
         Ityl::CharactersProvider charactersProvider(charactersFolderPath);
 
-        Ityl::UiModel::CharactersUiManager charatersUiManager(&charactersProvider);
+        auto nationColors = Ityl::Reader::JsonReaderHelpers::readNationsColor(appConfig.getColorsFilePath());
+        Ityl::UiModel::CharactersUiManager charatersUiManager(&charactersProvider, nationColors);
         Ityl::UiModel::HomeViewUIModel homeViewUi(Ityl::Reader::HomeViewReader::readHomeViewFromFile(appConfig.getHomeViewFilePath()));
 
         QQmlApplicationEngine engine;
