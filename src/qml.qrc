@@ -13,5 +13,7 @@
         <file>ui/TabBarComponent.qml</file>
         <file>ui/LinkButton.qml</file>
         <file>ui/HomeCategoryView.qml</file>
+        <file>ui/GroupView.qml</file>
+        <file>ui/GroupPartView.qml</file>
     </qresource>
 </RCC>
