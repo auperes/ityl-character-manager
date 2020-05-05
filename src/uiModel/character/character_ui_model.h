@@ -9,6 +9,7 @@
 #include "../../dataModel/character/character.h"
 #include "relationship_ui_model.h"
 #include "skill_ui_model.h"
+#include "../group/group_info_ui_model.h"
 
 namespace Ityl::UiModel
 {
@@ -26,7 +27,7 @@ namespace Ityl::UiModel
         Q_PROPERTY(QAbstractItemModel* skills READ skills CONSTANT)
         Q_PROPERTY(QAbstractItemModel* relationships READ relationships CONSTANT)
         Q_PROPERTY(QStringList ethnies READ ethnies CONSTANT)
-        Q_PROPERTY(QStringList groups READ groups CONSTANT)
+        Q_PROPERTY(QAbstractItemModel* groups READ groups CONSTANT)
         Q_PROPERTY(QString nationColor READ nationColor CONSTANT)
         Q_PROPERTY(bool hasTitle READ hasTitle CONSTANT)
 
@@ -46,8 +47,8 @@ namespace Ityl::UiModel
         const QStringList roles() const { return _character->getRoles().toList(); }
         QAbstractItemModel* skills() const { return _skills.get(); }
         QAbstractItemModel* relationships() const { return _relationships.get(); }
-        const QStringList ethnies() const { return _character->getEthnies().toList(); }
-        const QStringList groups() const { return _character->getGroups().toList(); }
+        const QStringList ethnies() const { return _ethnies; }
+        QAbstractItemModel* groups() const { return _groups.get(); }
         const QString nationColor() const { return _nationColor; }
         bool hasTitle() const;
 
@@ -62,8 +63,12 @@ namespace Ityl::UiModel
         QList<std::shared_ptr<SkillUiModel>> _skillUiModels;
         QList<std::shared_ptr<RelationshipUiModel>> _relationshipUiModels;
         QString _nationColor;
+        QList<QString> _ethnies;
+        std::unique_ptr<QAbstractItemModel> _groups;
+        QList<std::shared_ptr<GroupInfoUiModel>> _groupInfoUiModels;
 
         void addSkill(const QString& skillName, const QList<DataModel::Skill>& skillValues);
         void addRelationship(const DataModel::Relationship& relationType, const QList<QPair<QString, QString>> &characterNames);
+        void addGroup(const DataModel::GroupInfo& groupInfo);
     };
 }

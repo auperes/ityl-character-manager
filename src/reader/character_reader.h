@@ -4,6 +4,7 @@
 #include <QJsonArray>
 
 #include "../dataModel/character/character.h"
+#include "../dataModel/group/group_info.h"
 
 namespace Ityl::Reader
 {
@@ -22,8 +23,8 @@ namespace Ityl::Reader
         static QVector<QString> readRoles(const QJsonArray& jsonRoles);
         static QMap<QString, QList<DataModel::Skill>> readSkills(const QJsonArray& jsonSkills);
         static void fillRelationships(const QJsonArray& jsonRelationships, DataModel::Character& character);
-        static QVector<QString> readEthnies(const QJsonArray& jsonEthnies);
-        static QVector<QString> readGroups(const QJsonArray& jsonGroups);
+        static QVector<DataModel::GroupInfo> readEthnies(const QJsonArray& jsonEthnies);
+        static QVector<DataModel::GroupInfo> readGroups(const QJsonArray& jsonGroups);
         static QVector<QString> readAvatars(const QJsonArray& jsonAvatars);
     };
 }

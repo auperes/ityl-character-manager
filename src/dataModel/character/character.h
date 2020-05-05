@@ -7,6 +7,7 @@
 #include "skill/skill.h"
 #include "status.h"
 #include "relationship.h"
+#include "../group/group_info.h"
 
 namespace Ityl::DataModel
 {
@@ -30,8 +31,8 @@ namespace Ityl::DataModel
         QVector<QString> getRoles() const { return _roles; }
         QMap<QString, QList<Skill>> getSkills() const { return _skills; }
         QMap<Relationship, QList<QPair<QString, QString>>> getRelationships() const { return _relationships; }
-        QVector<QString> getEthnies() const { return _ethnies; }
-        QVector<QString> getGroups() const { return _groups; }
+        QVector<GroupInfo> getEthnies() const { return _ethnies; }
+        QVector<GroupInfo> getGroups() const { return _groups; }
         QVector<QString> getAvatars() const { return _avatars; }
 
         const QString& getDescription() const { return _description; }
@@ -52,10 +53,10 @@ namespace Ityl::DataModel
         void setRoles(QVector<QString>&& roles) { _roles = std::move(roles); }
         void setSkills(const QMap<QString, QList<Skill>>& skills) { _skills = skills; }
         void setSkills(QMap<QString, QList<Skill>>&& skills) { _skills = std::move(skills); }
-        void setEthnies(const QVector<QString>& ethnies) { _ethnies = ethnies; }
-        void setEthnies(QVector<QString>&& ethnies) { _ethnies = std::move(ethnies); }
-        void setGroups(const QVector<QString>& groups) { _groups = groups; }
-        void setGroups(QVector<QString>&& groups) { _groups = std::move(groups); }
+        void setEthnies(const QVector<GroupInfo>& ethnies) { _ethnies = ethnies; }
+        void setEthnies(QVector<GroupInfo>&& ethnies) { _ethnies = std::move(ethnies); }
+        void setGroups(const QVector<GroupInfo>& groups) { _groups = groups; }
+        void setGroups(QVector<GroupInfo>&& groups) { _groups = std::move(groups); }
         void setAvatars(const QVector<QString> &avatars) { _avatars = avatars; }
         void setAvatars(QVector<QString> &&avatars) { _avatars = std::move(avatars); }
 
@@ -81,8 +82,8 @@ namespace Ityl::DataModel
         QVector<QString> _roles;
         QMap<QString, QList<Skill>> _skills;
         QMap<Relationship, QList<QPair<QString, QString>>> _relationships;
-        QVector<QString> _ethnies;
-        QVector<QString> _groups;
+        QVector<GroupInfo> _ethnies;
+        QVector<GroupInfo> _groups;
         QVector<QString> _avatars;
 
         QString _description;

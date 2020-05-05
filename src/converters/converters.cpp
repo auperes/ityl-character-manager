@@ -285,7 +285,8 @@ namespace Ityl::DataModel::Converters
 
     QString Converters::convertElementType(const HomeElementType &type)
     {
-        switch (type) {
+        switch (type)
+        {
         case HomeElementType::Region:
             return "region";
         case HomeElementType::Organization:
@@ -300,6 +301,39 @@ namespace Ityl::DataModel::Converters
             return "background";
         case HomeElementType::Ethnie:
             return "ethnie";
+        }
+
+        return QString();
+    }
+
+    GroupType Converters::convertGroupType(const QString& type)
+    {
+        if (type == "ethnie")
+            return GroupType::Ethnie;
+        if (type == "organization")
+            return GroupType::Organization;
+        if (type == "family")
+            return GroupType::Family;
+        if (type == "guild")
+            return GroupType::Guild;
+
+        return GroupType::Group;
+    }
+
+    QString Converters::convertGroupType(const GroupType& type)
+    {
+        switch (type)
+        {
+        case GroupType::Group:
+            return "group";
+        case GroupType::Ethnie:
+            return "ethnie";
+        case GroupType::Organization:
+            return "organization";
+        case GroupType::Family:
+            return "family";
+        case GroupType::Guild:
+            return "guild";
         }
 
         return QString();

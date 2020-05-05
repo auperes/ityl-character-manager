@@ -18,6 +18,9 @@ SOURCES += \
         dataModel/app_config.cpp \
         dataModel/character/character.cpp \
         dataModel/character/skill/skill.cpp \
+        dataModel/group/group.cpp \
+        dataModel/group/group_info.cpp \
+        dataModel/group/group_part.cpp \
         dataModel/homeView/home_category.cpp \
         dataModel/homeView/home_view.cpp \
         main.cpp \
@@ -33,6 +36,7 @@ SOURCES += \
         uiModel/character/characters_ui_manager.cpp \
         uiModel/character/relationship_ui_model.cpp \
         uiModel/character/skill_ui_model.cpp \
+        uiModel/group/group_info_ui_model.cpp \
         uiModel/homeView/home_category_ui_model.cpp \
         uiModel/homeView/home_view_ui_model.cpp \
         uiModel/settings_ui_manager.cpp
@@ -93,6 +97,10 @@ HEADERS += \
     dataModel/character/relationship.h \
     dataModel/character/skill/skill.h \
     dataModel/character/status.h \
+    dataModel/group/group.h \
+    dataModel/group/group_info.h \
+    dataModel/group/group_part.h \
+    dataModel/group/group_type.h \
     dataModel/homeView/home_category.h \
     dataModel/homeView/home_element_type.h \
     dataModel/homeView/home_view.h \
@@ -109,6 +117,7 @@ HEADERS += \
     uiModel/character/filtering_type.h \
     uiModel/character/relationship_ui_model.h \
     uiModel/character/skill_ui_model.h \
+    uiModel/group/group_info_ui_model.h \
     uiModel/homeView/home_category_ui_model.h \
     uiModel/homeView/home_view_ui_model.h \
     uiModel/settings_ui_manager.h

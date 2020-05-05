@@ -38,12 +38,12 @@ namespace Ityl
         Services::RelationshipValidatorService relationshipValidatorService;
 
         foreach(const std::shared_ptr<DataModel::Character>& character, _characters) {
-            foreach (const QString& ethnie, character->getEthnies()) {
-                ethnies.insert(ethnie);
+            foreach (const auto& ethnie, character->getEthnies()) {
+                ethnies.insert(ethnie.getName());
             }
 
-            foreach (const QString& group, character->getGroups()) {
-                groups.insert(group);
+            foreach (const auto& group, character->getGroups()) {
+                groups.insert(group.getName());
             }
 
             nations.insert(character->getCurrentNation());

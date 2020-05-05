@@ -17,6 +17,7 @@ namespace Ityl::UiModel
         , _character(nullptr)
         , _skills(nullptr)
         , _relationships(nullptr)
+        , _groups(nullptr)
     {
 
     }
@@ -27,20 +28,30 @@ namespace Ityl::UiModel
         , _skills(new QStandardItemModel(this))
         , _relationships(new QStandardItemModel(this))
         , _nationColor(nationColor)
+        , _groups(new QStandardItemModel(this))
     {
         _skills->insertColumn(0);
 
         auto skills = _character->getSkills();
-        for (auto skillName : skills.keys()) {
+        for (auto skillName : skills.keys())
             addSkill(skillName, skills.value(skillName));
-        }
 
         _relationships->insertColumn(0);
 
         auto relationships = _character->getRelationships();
-        for (auto relationship : relationships.keys()) {
+        for (auto relationship : relationships.keys())
             addRelationship(relationship, relationships.value(relationship));
-        }
+
+        _groups->insertColumn(0);
+
+        auto groups = _character->getGroups();
+        for (auto group : groups)
+            addGroup(group);
+
+        _ethnies.reserve(_character->getEthnies().size());
+        for (const auto& ethnie : _character->getEthnies())
+            _ethnies.push_back(ethnie.getName());
+
     }
 
     CharacterUiModel::CharacterUiModel(const CharacterUiModel &characterUiModel, const QString& nationColor)
@@ -99,5 +110,15 @@ namespace Ityl::UiModel
         _relationships->insertRow(newRow);
         _relationships->setData(_relationships->index(newRow, 0), QVariant::fromValue(relationshipUi.get()), Qt::DisplayRole);
         _relationshipUiModels.push_back(std::move(relationshipUi));
+    }
+
+    void CharacterUiModel::addGroup(const DataModel::GroupInfo& groupInfo)
+    {
+        const int newRow = _groups->rowCount();
+        std::shared_ptr<GroupInfoUiModel> groupInfoUi = std::make_shared<GroupInfoUiModel>(groupInfo);
+        QQmlEngine::setObjectOwnership(groupInfoUi.get(), QQmlEngine::CppOwnership);
+        _groups->insertRow(newRow);
+        _groups->setData(_groups->index(newRow, 0), QVariant::fromValue(groupInfoUi.get()), Qt::DisplayRole);
+        _groupInfoUiModels.push_back(std::move(groupInfoUi));
     }
 }

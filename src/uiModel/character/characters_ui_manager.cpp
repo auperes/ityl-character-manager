@@ -77,7 +77,7 @@ namespace Ityl::UiModel
             characters = _charactersProvider->findCharacters([filteringName](const std::shared_ptr<DataModel::Character> &character)
             {
                 auto groups = character->getGroups();
-                auto it = std::find_if(groups.begin(), groups.end(),[filteringName](auto group) { return QString::compare(filteringName, group) == 0; });
+                auto it = std::find_if(groups.begin(), groups.end(),[filteringName](const auto& group) { return QString::compare(filteringName, group.getName()) == 0; });
                 return it != groups.end();
             });
             break;
@@ -85,7 +85,7 @@ namespace Ityl::UiModel
             characters = _charactersProvider->findCharacters([filteringName](const std::shared_ptr<DataModel::Character> &character)
             {
                 auto ethnies = character->getEthnies();
-                auto it = std::find_if(ethnies.begin(), ethnies.end(),[filteringName](auto ethnie) { return QString::compare(filteringName, ethnie) == 0; });
+                auto it = std::find_if(ethnies.begin(), ethnies.end(),[filteringName](const auto& ethnie) { return QString::compare(filteringName, ethnie.getName()) == 0; });
                 return it != ethnies.end();
             });
             break;

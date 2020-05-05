@@ -11,7 +11,7 @@ Component {
 
         ListView {
             id: ethniesListView
-            Layout.preferredHeight: ethniesListView.count
+            Layout.preferredHeight: contentHeight
             Layout.fillHeight: true
             model: display.ethnies
             delegate: RowLayout {
@@ -29,12 +29,12 @@ Component {
 
         ListView {
             id: groupsListView
-            Layout.preferredHeight: groupsListView.count
+            Layout.preferredHeight: contentHeight
             Layout.fillHeight: true
             model: display.groups
             delegate: RowLayout {
                 Text {
-                    text: modelData
+                    text: display.name
                 }
             }
         }
