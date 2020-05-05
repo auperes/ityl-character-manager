@@ -12,13 +12,7 @@ namespace Ityl::UiModel
     HomeViewUIModel::HomeViewUIModel(const DataModel::HomeView& homeView, QObject *parent)
         : QObject(parent)
     {
-        for (const auto& category : homeView.categories())
-        {
-            _categoryNames.push_back(category.getName());
-            _categoriesByName.insert(category.getName(), std::make_shared<HomeCategoryUiModel>(category.getElements()));
-        }
-
-        _selectedCategory = _categoriesByName.first();
+        resetHomeView(homeView);
     }
 
     void HomeViewUIModel::updateSelectedCategory(const QString &categoryName)
@@ -38,5 +32,22 @@ namespace Ityl::UiModel
             emit elementSelected(elementType, elementName);
         if (elementType == "guild")
             emit elementSelected("group", QString("Guilde - " + elementName));
+    }
+
+    void HomeViewUIModel::resetHomeView(const DataModel::HomeView& homeView)
+    {
+        _categoryNames.clear();
+        _categoriesByName.clear();
+
+        for (const auto& category : homeView.categories())
+        {
+            _categoryNames.push_back(category.getName());
+            _categoriesByName.insert(category.getName(), std::make_shared<HomeCategoryUiModel>(category.getElements()));
+        }
+
+        _selectedCategory = _categoriesByName.first();
+
+        emit categoryNamesChanged();
+        emit selectedCategoryChanged();
     }
 }

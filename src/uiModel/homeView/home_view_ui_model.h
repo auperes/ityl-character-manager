@@ -15,7 +15,7 @@ namespace Ityl::UiModel
     class HomeViewUIModel : public QObject
     {
         Q_OBJECT
-        Q_PROPERTY(QStringList categoryNames READ getCategoryNames CONSTANT)
+        Q_PROPERTY(QStringList categoryNames READ getCategoryNames NOTIFY categoryNamesChanged)
         Q_PROPERTY(HomeCategoryUiModel* selectedCategory READ getSelectedCategory NOTIFY selectedCategoryChanged)
 
     public:
@@ -27,11 +27,13 @@ namespace Ityl::UiModel
 
     signals:
         void selectedCategoryChanged();
+        void categoryNamesChanged();
         void elementSelected(const QString& elementType, const QString& elementName);
 
     public slots:
         void updateSelectedCategory(const QString& categoryName);
         void selectElement(const QString& elementType, const QString& elementName);
+        void resetHomeView(const DataModel::HomeView& homeView);
 
     private:
         QList<QString> _categoryNames;

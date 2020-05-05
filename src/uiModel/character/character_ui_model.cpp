@@ -56,15 +56,19 @@ namespace Ityl::UiModel
         return _character->getFirstName() + " " + _character->getLastName();
     }
 
-    const QString CharacterUiModel::avatar() const
+    const QUrl CharacterUiModel::avatar() const
     {
         if (_character->getAvatars().isEmpty())
         {
             std::cout << "Character " + _character->getFirstName().toStdString() + " " + _character->getLastName().toStdString() + " has no avatar" << std::endl;
-            return "";
+            return QUrl();
         }
-        QString avatarFullPath(QDir::currentPath() + "/" + DataModel::AppConfig::getAvatarsFolderPath() + _character->getAvatars().first());
-        return "file:///" + avatarFullPath;
+
+        QUrl avatarFolderUrl("file:///" + DataModel::AppConfig::getAvatarsFolderPath() + _character->getAvatars().first());
+        if (QDir(DataModel::AppConfig::getAvatarsFolderPath()).isRelative())
+            return QUrl("file:///" + QDir::currentPath() + "/" + DataModel::AppConfig::getAvatarsFolderPath() + _character->getAvatars().first());
+
+        return QUrl("file:///" + DataModel::AppConfig::getAvatarsFolderPath() + _character->getAvatars().first());
     }
 
     const QString CharacterUiModel::quote() const

@@ -2,6 +2,7 @@ import QtQuick 2.12
 import QtQuick.Window 2.12
 import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.3
+import QtQuick.Dialogs 1.3
 
 ApplicationWindow {
     id: mainWindow
@@ -27,30 +28,23 @@ ApplicationWindow {
         }
     }
 
+    FileDialog {
+        id: settingsFileDialog
+        title: "Choose a settings file"
+        onAccepted: {
+            settingsManager.changeSettings(fileUrl.toString())
+        }
+    }
+
     header: ToolBar {
         RowLayout {
             ToolButton {
                 text: qsTr("Reload")
                 onClicked: { charactersManager.refreshCharacters() }
             }
-
             ToolButton {
-                text: qsTr("Search")
-            }
-            ToolButton {
-                text: qsTr("Compact")
-            }
-            ToolButton {
-                text: qsTr("Detailed")
-            }
-            ToolButton {
-                text: qsTr("Notifications")
-            }
-            ToolButton {
-                text: qsTr("Options")
-            }
-            ToolButton {
-                text: qsTr("About")
+                text: qsTr("Settings")
+                onClicked: { settingsFileDialog.open() }
             }
         }
     }

@@ -12,7 +12,7 @@ namespace Ityl::UiModel
         Q_OBJECT
     public:
         explicit CharactersUiManager(QObject *parent = nullptr);
-        explicit CharactersUiManager(CharactersProvider *charactersProvider, const QMap<QString, QString>& nationColors, QObject *parent = nullptr);
+        explicit CharactersUiManager(CharactersProvider *charactersProvider, QMap<QString, QString>&& nationColors, QObject *parent = nullptr);
 
         Q_INVOKABLE CharactersUiCollection* addCollection(const QString& type, const QString& name);
         Q_INVOKABLE void removeCollection(unsigned id);
@@ -21,6 +21,8 @@ namespace Ityl::UiModel
 
     public slots:
         void refreshCharacters();
+        void changeCharactersLocation(const QString& folderPath);
+        void changeNationColors(QMap<QString, QString> nationColors);
 
     private:
         unsigned _idSequence = 0;
