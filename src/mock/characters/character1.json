@@ -53,7 +53,8 @@
     ],
     "groups": [
       { "group": "group1" },
-      { "group": "group2", "old": true, "subGroup": "subgroup" }
+      { "group": "guild aaa", "type": "guild", "subGroup": "subgroup aaa", "old": true },
+      { "group": "organization zzz", "type": "organization", "subGroup": "subgroup bbb" }
     ],
     "avatars": [
       { "avatar": "avatar.png" }

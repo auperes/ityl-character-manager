@@ -149,7 +149,7 @@ namespace Ityl::Reader
             if (object.contains("old"))
                 groupInfo.setIsOld(object["old"].toBool());
 
-            groups.push_back(object["group"].toString());
+            groups.push_back(groupInfo);
         }
 
         return groups;

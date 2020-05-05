@@ -34,7 +34,7 @@ Component {
             model: display.groups
             delegate: RowLayout {
                 Text {
-                    text: display.name
+                    text: display.styledGroupInfo
                 }
             }
         }

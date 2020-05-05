@@ -325,15 +325,15 @@ namespace Ityl::DataModel::Converters
         switch (type)
         {
         case GroupType::Group:
-            return "group";
+            return "Groupe";
         case GroupType::Ethnie:
-            return "ethnie";
+            return "Ethnie";
         case GroupType::Organization:
-            return "organization";
+            return "Organisation";
         case GroupType::Family:
-            return "family";
+            return "Famille";
         case GroupType::Guild:
-            return "guild";
+            return "Guilde";
         }
 
         return QString();
