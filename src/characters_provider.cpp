@@ -108,6 +108,11 @@ namespace Ityl
         return resultCharacters;
     }
 
+    void CharactersProvider::setFolderPath(const QString& folderPath)
+    {
+        _folderPath = folderPath;
+    }
+
     QStringList CharactersProvider::nations() const
     {
         return _nations;

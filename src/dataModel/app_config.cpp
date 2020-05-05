@@ -19,29 +19,33 @@ namespace Ityl::DataModel
     QString AppConfig::_homeViewFilePath;
     QString AppConfig::_colorsFilePath;
 
-    AppConfig::AppConfig()
+    void AppConfig::setCharactersFolderPath(const QString& charactersFolderPath)
     {
-        QString content;
-        QFile file;
+        _charactersFolderPath = charactersFolderPath;
+    }
 
-        file.setFileName("settings/app_config.json");
-        file.open(QIODevice::ReadOnly | QIODevice::Text);
-        content = file.readAll();
-        file.close();
-        QJsonDocument document = QJsonDocument::fromJson(content.toUtf8());
-        QJsonObject jsonObject = document.object();
+    void AppConfig::setAvatarsFolderPath(const QString& avatarsFolderPath)
+    {
+        _avatarsFolderPath = avatarsFolderPath;
+    }
 
-        if (jsonObject.contains("charactersFolderPath"))
-            _charactersFolderPath = jsonObject["charactersFolderPath"].toString();
-        if (jsonObject.contains("avatarsFolderPath"))
-            _avatarsFolderPath = jsonObject["avatarsFolderPath"].toString();
-        if (jsonObject.contains("relatedRelationshipsFilePath"))
-            _relatedRelationshipsFilePath = jsonObject["relatedRelationshipsFilePath"].toString();
-        if (jsonObject.contains("logFolderPath"))
-            _logFolderPath = jsonObject["logFolderPath"].toString();
-        if (jsonObject.contains("homeViewFilePath"))
-            _homeViewFilePath = jsonObject["homeViewFilePath"].toString();
-        if (jsonObject.contains("homeViewFilePath"))
-            _colorsFilePath = jsonObject["colorsFilePath"].toString();
+    void AppConfig::setRelatedRelationshipsFilePath(const QString& relatedRelationshipsFilePath)
+    {
+        _relatedRelationshipsFilePath = relatedRelationshipsFilePath;
+    }
+
+    void AppConfig::setLogFolderPath(const QString& logFolderPath)
+    {
+        _logFolderPath = logFolderPath;
+    }
+
+    void AppConfig::setHomeViewFilePath(const QString& homeViewFilePath)
+    {
+        _homeViewFilePath = homeViewFilePath;
+    }
+
+    void AppConfig::setColorsFilePath(const QString& colorsFilePath)
+    {
+        _colorsFilePath = colorsFilePath;
     }
 }

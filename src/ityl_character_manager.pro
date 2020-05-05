@@ -1,4 +1,4 @@
-QT += quick widgets
+QT += quick widgets quickcontrols2
 CONFIG += c++17 warn_on
 
 # The following define makes your compiler emit warnings if you use
@@ -21,10 +21,12 @@ SOURCES += \
         dataModel/homeView/home_category.cpp \
         dataModel/homeView/home_view.cpp \
         main.cpp \
+        q_custom_gui_application.cpp \
         qml_types_factory.cpp \
         reader/character_reader.cpp \
         reader/home_view_reader.cpp \
         reader/json_reader_helpers.cpp \
+        reader/settings_reader.cpp \
         services/relationship_validator_service.cpp \
         uiModel/character/character_ui_model.cpp \
         uiModel/character/characters_ui_collection.cpp \
@@ -32,7 +34,8 @@ SOURCES += \
         uiModel/character/relationship_ui_model.cpp \
         uiModel/character/skill_ui_model.cpp \
         uiModel/homeView/home_category_ui_model.cpp \
-        uiModel/homeView/home_view_ui_model.cpp
+        uiModel/homeView/home_view_ui_model.cpp \
+        uiModel/settings_ui_manager.cpp
 
 RESOURCES += \
     qml.qrc
@@ -93,10 +96,12 @@ HEADERS += \
     dataModel/homeView/home_category.h \
     dataModel/homeView/home_element_type.h \
     dataModel/homeView/home_view.h \
+    q_custom_gui_application.h \
     qml_types_factory.h \
     reader/character_reader.h \
     reader/home_view_reader.h \
     reader/json_reader_helpers.h \
+    reader/settings_reader.h \
     services/relationship_validator_service.h \
     uiModel/character/character_ui_model.h \
     uiModel/character/characters_ui_collection.h \
@@ -105,4 +110,5 @@ HEADERS += \
     uiModel/character/relationship_ui_model.h \
     uiModel/character/skill_ui_model.h \
     uiModel/homeView/home_category_ui_model.h \
-    uiModel/homeView/home_view_ui_model.h
+    uiModel/homeView/home_view_ui_model.h \
+    uiModel/settings_ui_manager.h

@@ -4,6 +4,7 @@
 
 #include <QAbstractItemModel>
 #include <QObject>
+#include <QUrl>
 
 #include "../../dataModel/character/character.h"
 #include "relationship_ui_model.h"
@@ -15,7 +16,7 @@ namespace Ityl::UiModel
     {
         Q_OBJECT
         Q_PROPERTY(QString fullName READ fullName CONSTANT)
-        Q_PROPERTY(QString avatar READ avatar CONSTANT)
+        Q_PROPERTY(QUrl avatar READ avatar CONSTANT)
         Q_PROPERTY(QString title READ title CONSTANT)
         Q_PROPERTY(QString quote READ quote CONSTANT)
         Q_PROPERTY(QString birthPlace READ birthPlace CONSTANT)
@@ -36,7 +37,7 @@ namespace Ityl::UiModel
         explicit CharacterUiModel(const CharacterUiModel &characterUiModel, const QString& nationColor);
 
         const QString fullName() const;
-        const QString avatar() const;
+        const QUrl avatar() const;
         const QString quote() const;
         const QString& title() const { return _character->getTitle(); }
         const QString birthPlace() const { return "Lieu de naissance : " + _character->getBirthPlace(); }

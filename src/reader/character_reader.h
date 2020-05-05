@@ -12,6 +12,8 @@ namespace Ityl::Reader
     public:
         CharacterReader() = delete;
         ~CharacterReader() = delete;
+        CharacterReader(const CharacterReader&) = delete;
+        CharacterReader& operator=(const CharacterReader&) = delete;
 
         static DataModel::Character readCharacterFromFile(const QString& filepath);
 

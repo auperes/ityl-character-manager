@@ -5,6 +5,7 @@
 #include <QQmlEngine>
 
 #include "../../converters/converters.h"
+#include "../../dataModel/app_config.h"
 
 namespace Ityl::UiModel
 {
@@ -15,12 +16,11 @@ namespace Ityl::UiModel
 
     }
 
-    CharactersUiManager::CharactersUiManager(CharactersProvider *charactersProvider, const QMap<QString, QString>& nationColors, QObject *parent)
+    CharactersUiManager::CharactersUiManager(CharactersProvider *charactersProvider, QMap<QString, QString>&& nationColors, QObject *parent)
         : QObject(parent)
         , _charactersProvider(charactersProvider)
-        , _nationColors(nationColors)
+        , _nationColors(std::move(nationColors))
     {
-
     }
 
     CharactersUiCollection* CharactersUiManager::addCollection(const QString& type, const QString& name)
@@ -45,6 +45,17 @@ namespace Ityl::UiModel
         _charactersProvider->refreshCharacters();
         for (auto& collection : _charactersUiCollections)
             refreshCharacters(*collection);
+    }
+
+    void CharactersUiManager::changeNationColors(QMap<QString, QString> nationColors)
+    {
+        _nationColors = nationColors;
+    }
+
+    void CharactersUiManager::changeCharactersLocation(const QString& folderPath)
+    {
+        _charactersProvider->setFolderPath(folderPath);
+        refreshCharacters();
     }
 
     void CharactersUiManager::refreshCharacters(CharactersUiCollection &collection)

@@ -22,6 +22,7 @@ namespace Ityl
         void refreshCharacters();
         QList<std::shared_ptr<DataModel::Character>> findCharacters(const std::function<bool (const std::shared_ptr<DataModel::Character>&)> &predicate) const;
 
+        void setFolderPath(const QString& folderPath);
 
     private:
         QString _folderPath;
