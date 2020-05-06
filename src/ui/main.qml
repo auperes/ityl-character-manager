@@ -67,13 +67,13 @@ ApplicationWindow {
             }
 
             TabBarComponent {
+                text: qsTr("Group mock")
+            }
+            TabBarComponent {
                 text: qsTr("Home")
             }
             TabBarComponent {
                 text: qsTr("All characters")
-            }
-            TabBarComponent {
-                text: qsTr("Group mock")
             }
         }
 
@@ -91,6 +91,15 @@ ApplicationWindow {
             }
 
             Item {
+                id: groupMockTab
+                GroupView {
+                    anchors.fill: parent
+                    anchors.leftMargin: 20
+                    anchors.rightMargin: 20
+                }
+            }
+
+            Item {
                 id: homeTab
                 HomeView {
                     anchors.fill: parent
@@ -104,15 +113,6 @@ ApplicationWindow {
                     leftMargin: 20
                     rightMargin: 20
                     model: charactersManager.addCollection("Tous", "").model
-                }
-            }
-
-            Item {
-                id: groupMockTab
-                GroupView {
-                    anchors.fill: parent
-                    anchors.leftMargin: 20
-                    anchors.rightMargin: 20
                 }
             }
         }
