@@ -12,12 +12,13 @@ namespace Ityl::DataModel
     {
     public:
         Group();
+        Group(const QString& name, const QString& nation, const GroupType& type, const QString& description);
 
-        QString getName() const { return _name; }
-        QString getNation() const { return _nation; }
-        GroupType getType() const { return _type; }
-        QString getDescription() const { return _description; }
-        QVector<GroupPart> getParts() const { return _parts; }
+        const QString& getName() const { return _name; }
+        const QString& getNation() const { return _nation; }
+        const GroupType& getType() const { return _type; }
+        const QString& getDescription() const { return _description; }
+        const QVector<GroupPart>& getParts() const { return _parts; }
 
         void setName(const QString& name) { _name = name; }
         void setNation(const QString& nation) { _nation = nation; }

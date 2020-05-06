@@ -1,6 +1,9 @@
 #include "group_part.h"
 
-GroupPart::GroupPart()
+namespace Ityl::DataModel
 {
+    GroupPart::GroupPart()
+    {
 
+    }
 }

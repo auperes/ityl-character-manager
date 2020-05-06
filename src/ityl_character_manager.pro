@@ -27,6 +27,7 @@ SOURCES += \
         q_custom_gui_application.cpp \
         qml_types_factory.cpp \
         reader/character_reader.cpp \
+        reader/group_reader.cpp \
         reader/home_view_reader.cpp \
         reader/json_reader_helpers.cpp \
         reader/settings_reader.cpp \
@@ -37,6 +38,8 @@ SOURCES += \
         uiModel/character/relationship_ui_model.cpp \
         uiModel/character/skill_ui_model.cpp \
         uiModel/group/group_info_ui_model.cpp \
+        uiModel/group/group_part_ui_model.cpp \
+        uiModel/group/group_ui_model.cpp \
         uiModel/homeView/home_category_ui_model.cpp \
         uiModel/homeView/home_view_ui_model.cpp \
         uiModel/settings_ui_manager.cpp
@@ -109,6 +112,7 @@ HEADERS += \
     q_custom_gui_application.h \
     qml_types_factory.h \
     reader/character_reader.h \
+    reader/group_reader.h \
     reader/home_view_reader.h \
     reader/json_reader_helpers.h \
     reader/settings_reader.h \
@@ -120,6 +124,8 @@ HEADERS += \
     uiModel/character/relationship_ui_model.h \
     uiModel/character/skill_ui_model.h \
     uiModel/group/group_info_ui_model.h \
+    uiModel/group/group_part_ui_model.h \
+    uiModel/group/group_ui_model.h \
     uiModel/homeView/home_category_ui_model.h \
     uiModel/homeView/home_view_ui_model.h \
     uiModel/settings_ui_manager.h

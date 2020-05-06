@@ -34,8 +34,8 @@ namespace Ityl::UiModel
 
     public:
         CharacterUiModel();
-        explicit CharacterUiModel(const std::shared_ptr<DataModel::Character> &character, const QString& nationColor);
-        explicit CharacterUiModel(const CharacterUiModel &characterUiModel, const QString& nationColor);
+        CharacterUiModel(const std::shared_ptr<DataModel::Character> &character, const QString& nationColor);
+        CharacterUiModel(const CharacterUiModel &characterUiModel, const QString& nationColor);
 
         const QString fullName() const;
         const QUrl avatar() const;
