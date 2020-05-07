@@ -13,7 +13,6 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        characters_provider.cpp \
         converters/converters.cpp \
         dataModel/app_config.cpp \
         dataModel/character/character.cpp \
@@ -24,6 +23,8 @@ SOURCES += \
         dataModel/homeView/home_category.cpp \
         dataModel/homeView/home_view.cpp \
         main.cpp \
+        provider/characters_provider.cpp \
+        provider/groups_provider.cpp \
         q_custom_gui_application.cpp \
         qml_types_factory.cpp \
         reader/character_reader.cpp \
@@ -40,6 +41,7 @@ SOURCES += \
         uiModel/group/group_info_ui_model.cpp \
         uiModel/group/group_part_ui_model.cpp \
         uiModel/group/group_ui_model.cpp \
+        uiModel/group/groups_ui_manager.cpp \
         uiModel/homeView/home_category_ui_model.cpp \
         uiModel/homeView/home_view_ui_model.cpp \
         uiModel/settings_ui_manager.cpp
@@ -95,7 +97,6 @@ DISTFILES += \
     ui/main.qml
 
 HEADERS += \
-    characters_provider.h \
     converters/converters.h \
     dataModel/app_config.h \
     dataModel/character/character.h \
@@ -109,6 +110,8 @@ HEADERS += \
     dataModel/homeView/home_category.h \
     dataModel/homeView/home_element_type.h \
     dataModel/homeView/home_view.h \
+    provider/characters_provider.h \
+    provider/groups_provider.h \
     q_custom_gui_application.h \
     qml_types_factory.h \
     reader/character_reader.h \
@@ -126,6 +129,7 @@ HEADERS += \
     uiModel/group/group_info_ui_model.h \
     uiModel/group/group_part_ui_model.h \
     uiModel/group/group_ui_model.h \
+    uiModel/group/groups_ui_manager.h \
     uiModel/homeView/home_category_ui_model.h \
     uiModel/homeView/home_view_ui_model.h \
     uiModel/settings_ui_manager.h

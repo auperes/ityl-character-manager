@@ -18,13 +18,15 @@ namespace Ityl::DataModel
         static QString getLogFolderPath() { return _logFolderPath; }
         static QString getHomeViewFilePath() { return _homeViewFilePath; }
         static QString getColorsFilePath() { return _colorsFilePath; }
+        static QString getGroupsFolderPath() { return _groupsFolderPath; }
 
-        static void setCharactersFolderPath(const QString& charactersFolderPath);
-        static void setAvatarsFolderPath(const QString& avatarsFolderPath);
-        static void setRelatedRelationshipsFilePath(const QString& relatedRelationshipsFilePath);
-        static void setLogFolderPath(const QString& logFolderPath);
-        static void setHomeViewFilePath(const QString& homeViewFilePath);
-        static void setColorsFilePath(const QString& colorsFilePath);
+        static void setCharactersFolderPath(const QString& charactersFolderPath) { _charactersFolderPath = charactersFolderPath; }
+        static void setAvatarsFolderPath(const QString& avatarsFolderPath) { _avatarsFolderPath = avatarsFolderPath; }
+        static void setRelatedRelationshipsFilePath(const QString& relatedRelationshipsFilePath) { _relatedRelationshipsFilePath = relatedRelationshipsFilePath; }
+        static void setLogFolderPath(const QString& logFolderPath) { _logFolderPath = logFolderPath; }
+        static void setHomeViewFilePath(const QString& homeViewFilePath) { _homeViewFilePath = homeViewFilePath; }
+        static void setColorsFilePath(const QString& colorsFilePath) { _colorsFilePath = colorsFilePath; }
+        static void setGroupsFolderPath(const QString& groupsFolderPart) { _groupsFolderPath = groupsFolderPart; }
 
     private:
         static QString _charactersFolderPath;
@@ -33,5 +35,6 @@ namespace Ityl::DataModel
         static QString _logFolderPath;
         static QString _homeViewFilePath;
         static QString _colorsFilePath;
+        static QString _groupsFolderPath;
     };
 }

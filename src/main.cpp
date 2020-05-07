@@ -8,8 +8,8 @@
 #include <QDir>
 #include <QObject>
 
-#include "characters_provider.h"
 #include "dataModel/app_config.h"
+#include "provider/characters_provider.h"
 #include "qml_types_factory.h"
 #include "reader/home_view_reader.h"
 #include "reader/json_reader_helpers.h"
@@ -39,13 +39,12 @@ int main(int argc, char *argv[])
         QString appConfigFilepath("settings/app_config.json");
         Ityl::Reader::SettingsReader::readSettingsFromFile(appConfigFilepath);
         QString charactersFolderPath(Ityl::DataModel::AppConfig::getCharactersFolderPath());
-        Ityl::CharactersProvider charactersProvider(charactersFolderPath);
 
-        Ityl::UiModel::CharactersUiManager charatersUiManager(&charactersProvider, std::move(Ityl::Reader::JsonReaderHelpers::readNationsColor(Ityl::DataModel::AppConfig::getColorsFilePath())));
+        Ityl::UiModel::CharactersUiManager charatersUiManager(charactersFolderPath, Ityl::Reader::JsonReaderHelpers::readNationsColor(Ityl::DataModel::AppConfig::getColorsFilePath()));
         Ityl::UiModel::HomeViewUIModel homeViewUi(Ityl::Reader::HomeViewReader::readHomeViewFromFile(Ityl::DataModel::AppConfig::getHomeViewFilePath()));
         Ityl::UiModel::SettingsUiManager settingsUiManager;
 
-        QObject::connect(&settingsUiManager, SIGNAL(nationColorsChanged(QMap<QString, QString>)), &charatersUiManager, SLOT(changeNationColors(QMap<QString, QString>)));
+        QObject::connect(&settingsUiManager, SIGNAL(nationColorsChanged(const QMap<QString, QString>&)), &charatersUiManager, SLOT(changeNationColors(const QMap<QString, QString>&)));
         QObject::connect(&settingsUiManager, SIGNAL(charactersFolderPathChanged(const QString&)), &charatersUiManager, SLOT(changeCharactersLocation(const QString&)));
         QObject::connect(&settingsUiManager, SIGNAL(homeViewChanged(const DataModel::HomeView&)), &homeViewUi, SLOT(resetHomeView(const DataModel::HomeView&)));
 
