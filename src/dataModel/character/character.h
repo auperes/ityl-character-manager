@@ -31,9 +31,9 @@ namespace Ityl::DataModel
         QVector<QString> getRoles() const { return _roles; }
         QMap<QString, QList<Skill>> getSkills() const { return _skills; }
         QMap<Relationship, QList<QPair<QString, QString>>> getRelationships() const { return _relationships; }
-        QVector<GroupInfo> getEthnies() const { return _ethnies; }
-        QVector<GroupInfo> getGroups() const { return _groups; }
-        QVector<QString> getAvatars() const { return _avatars; }
+        const QVector<GroupInfo>& getEthnies() const { return _ethnies; }
+        const QVector<GroupInfo>& getGroups() const { return _groups; }
+        const QVector<QString>& getAvatars() const { return _avatars; }
 
         const QString& getDescription() const { return _description; }
 

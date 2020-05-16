@@ -28,10 +28,10 @@ namespace Ityl::UiModel
 
     QString GroupInfoUiModel::getRichTextSubGroup() const
     {
-        if (_groupInfo.getSubGroupName().isEmpty())
+        if (_groupInfo.getSubgroupName().isEmpty())
             return "";
 
-        return " (" + _groupInfo.getSubGroupName() + ")";
+        return " (" + _groupInfo.getSubgroupName() + ")";
     }
 
     QString GroupInfoUiModel::getRichTextType() const

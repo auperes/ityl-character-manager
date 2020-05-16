@@ -33,6 +33,26 @@ namespace Ityl::UiModel
         _charactersUiCollections.remove(id);
     }
 
+    QMap<QString, GroupedUiCharacters> CharactersUiManager::getCollectionsFromGroup(const QString& groupName)
+    {
+        auto charactersBySubgroup = _charactersProvider.findCharactersBySubgroups(groupName);
+        QMap<QString, GroupedUiCharacters> groupedUiCharactersBySubgroup;
+
+        for (const auto& subgroup : charactersBySubgroup.keys())
+        {
+            auto groupedCharacters = charactersBySubgroup[subgroup];
+            auto currentUiCharacters = std::make_shared<CharactersUiCollection>(_idSequence, toUiModel(groupedCharacters._currentCharacters), FilteringType::Group, groupName);
+//            _charactersUiCollections.insert(_idSequence++, currentUiCharacters); //TODO need to handle reload
+            auto oldUiCharacters = std::make_shared<CharactersUiCollection>(_idSequence, toUiModel(groupedCharacters._oldCharacters), FilteringType::Group, groupName);
+//            _charactersUiCollections.insert(_idSequence++, oldUiCharacters);
+
+            GroupedUiCharacters groupedUiCharacters(currentUiCharacters, oldUiCharacters);
+            groupedUiCharactersBySubgroup.insert(subgroup, groupedUiCharacters);
+        }
+
+        return groupedUiCharactersBySubgroup;
+    }
+
     void CharactersUiManager::refreshCharacters()
     {
         _charactersProvider.refreshCharacters();
@@ -51,50 +71,33 @@ namespace Ityl::UiModel
         refreshCharacters();
     }
 
-    void CharactersUiManager::refreshCollection(CharactersUiCollection &collection)
+    void CharactersUiManager::refreshCollection(CharactersUiCollection& collection)
     {
         collection.clearCharacters();
         auto characterUiModels = createModels(collection.filteringType(), collection.filteringName());
         collection.setCharacters(std::move(characterUiModels));
     }
 
-    QList<std::shared_ptr<CharacterUiModel> > CharactersUiManager::createModels(const FilteringType &filteringType, const QString &filteringName)
+    QList<std::shared_ptr<CharacterUiModel> > CharactersUiManager::createModels(const FilteringType& filteringType, const QString& filteringName)
     {
         QList<std::shared_ptr<DataModel::Character>> characters;
         switch (filteringType)
         {
         case FilteringType::None:
-            characters = _charactersProvider.getCharacters();
+            characters = _charactersProvider.getAllCharacters();
             break;
         case FilteringType::Group:
-            characters = _charactersProvider.findCharacters([filteringName](const std::shared_ptr<DataModel::Character> &character)
-            {
-                auto groups = character->getGroups();
-                auto it = std::find_if(groups.begin(), groups.end(),[filteringName](const auto& group) { return QString::compare(filteringName, group.getName()) == 0; });
-                return it != groups.end();
-            });
+            characters = _charactersProvider.findCharactersFromGroup(filteringName);
             break;
         case FilteringType::Ethnie:
-            characters = _charactersProvider.findCharacters([filteringName](const std::shared_ptr<DataModel::Character> &character)
-            {
-                auto ethnies = character->getEthnies();
-                auto it = std::find_if(ethnies.begin(), ethnies.end(),[filteringName](const auto& ethnie) { return QString::compare(filteringName, ethnie.getName()) == 0; });
-                return it != ethnies.end();
-            });
+            characters = _charactersProvider.findCharactersFromEthnie(filteringName);
             break;
         case FilteringType::Nation:
-            characters = _charactersProvider.findCharacters([filteringName](const std::shared_ptr<DataModel::Character> &character)
-            {
-                return QString::compare(filteringName, character->getCurrentNation()) == 0;
-            });
+            characters = _charactersProvider.findCharactersFromNation(filteringName);
             break;
         }
 
-        QList<std::shared_ptr<CharacterUiModel>> characterUiModels;
-        for (const std::shared_ptr<DataModel::Character>& character : characters)
-            characterUiModels.push_back(std::make_shared<CharacterUiModel>(character, getNationColor(character->getCurrentNation())));
-
-        return characterUiModels;
+        return toUiModel(characters);
     }
 
     QString CharactersUiManager::getNationColor(const QString& nationName) const
@@ -106,5 +109,14 @@ namespace Ityl::UiModel
         std::cout << errorMessage << std::endl;
 
         return "#969696";
+    }
+
+    QList<std::shared_ptr<CharacterUiModel> > CharactersUiManager::toUiModel(const QList<std::shared_ptr<DataModel::Character> >& characters)
+    {
+        QList<std::shared_ptr<CharacterUiModel>> characterUiModels;
+        for (const std::shared_ptr<DataModel::Character>& character : characters)
+            characterUiModels.push_back(std::make_shared<CharacterUiModel>(character, getNationColor(character->getCurrentNation())));
+
+        return characterUiModels;
     }
 }

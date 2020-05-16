@@ -10,11 +10,11 @@ namespace Ityl::UiModel
     CharactersUiCollection::CharactersUiCollection()
         : QObject (nullptr)
         , _id(0)
-        , _model(nullptr)
+        , _model(new QStandardItemModel(this))
         , _filteringType(FilteringType::None)
         , _filteringName("Tous")
     {
-
+        _model->insertColumn(0);
     }
 
     CharactersUiCollection::CharactersUiCollection(

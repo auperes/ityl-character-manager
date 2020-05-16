@@ -37,7 +37,7 @@ namespace Ityl::Reader
     {
         DataModel::GroupPart part;
         part.setPartName(jsonPart["name"].toString());
-        part.setSubGroupName(jsonPart["subGroupName"].toString());
+        part.setSubgroupName(jsonPart["subgroup"].toString());
         part.setDescription(jsonPart["description"].toString());
 
         if (jsonPart.contains("parts"))

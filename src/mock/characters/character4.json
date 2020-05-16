@@ -10,7 +10,7 @@
       { "birthPlace": "place" },
       { "livelyPlace": "place" },
       { "birthNation": "nation" },
-      { "currentNation": "nation1" },
+      { "currentNation": "nation" },
       { "status": "alive" },
       { "description": "description" }
     ],
@@ -52,10 +52,8 @@
       { "ethnie": "ethnie2", "ratio": "1" }
     ],
     "groups": [
-      { "group": "group1" },
-      { "group": "group2" },
-      { "group": "guild aaa", "type": "guild", "subGroup": "subgroup aaa", "old": true },
-      { "group": "organization zzz", "type": "organization", "subGroup": "subgroup bbb" }
+      { "group": "group1", "subGroup": "subgroupName2a" },
+      { "group": "group2", "subGroup": "subgroup" }
     ],
     "avatars": [
       { "avatar": "avatar.png" }

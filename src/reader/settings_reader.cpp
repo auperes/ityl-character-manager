@@ -15,6 +15,7 @@ namespace Ityl::Reader
             return false;
 
         DataModel::AppConfig::setCharactersFolderPath(settings["charactersFolderPath"].toString());
+        DataModel::AppConfig::setGroupsFolderPath(settings["groupsFolderPath"].toString());
         DataModel::AppConfig::setAvatarsFolderPath(settings["avatarsFolderPath"].toString());
         DataModel::AppConfig::setRelatedRelationshipsFilePath(settings["relatedRelationshipsFilePath"].toString());
         DataModel::AppConfig::setLogFolderPath(settings["logFolderPath"].toString());
@@ -27,6 +28,7 @@ namespace Ityl::Reader
     bool SettingsReader::isSettings(const QJsonObject& settings)
     {
         if (!settings.contains("charactersFolderPath")) return false;
+        if (!settings.contains("groupsFolderPath")) return false;
         if (!settings.contains("avatarsFolderPath")) return false;
         if (!settings.contains("relatedRelationshipsFilePath")) return false;
         if (!settings.contains("logFolderPath")) return false;

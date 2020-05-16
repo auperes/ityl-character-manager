@@ -21,7 +21,7 @@ namespace Ityl::UiModel
         explicit GroupInfoUiModel(const DataModel::GroupInfo& groupInfo, QObject *parent = nullptr);
 
         QString name() const { return _groupInfo.getName(); }
-        QString subGroupName() const { return _groupInfo.getSubGroupName(); }
+        QString subGroupName() const { return _groupInfo.getSubgroupName(); }
         QString type() const { return DataModel::Converters::Converters::convertGroupType(_groupInfo.getType()); }
         bool isOld() const { return _groupInfo.getIsOld(); }
         QString styledGroupInfo() const;

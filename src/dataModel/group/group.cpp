@@ -2,6 +2,9 @@
 
 namespace Ityl::DataModel
 {
+    const QString Group::RootPart = "rootPart";
+    const QString Group::RootSubgroup = "rootSubgroup";
+
     Group::Group()
     {
 

@@ -21,6 +21,7 @@ namespace Ityl::Provider
             try
             {
                 auto group = std::make_shared<DataModel::Group>(Reader::GroupReader::readGroupFromFile(_folder.filePath(filename)));
+                group->addPart(DataModel::GroupPart(DataModel::Group::RootPart, DataModel::Group::RootSubgroup));
                 _groupsByName.insert(group->getName(), group);
             }
             catch (const std::logic_error& ex)

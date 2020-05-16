@@ -74,8 +74,12 @@ DISTFILES += \
     mock/characters/character1.json \
     mock/characters/character2.json \
     mock/characters/character3.json \
+    mock/characters/character4.json \
     mock/colors.json \
     mock/home_view.json \
+    mock/groups/group1.json \
+    mock/groups/group2.json \
+    mock/groups/group3.json \
     mock/images/avatar.png \
     mock/related_relationships.json \
     qtquickcontrols2.conf \
@@ -85,6 +89,7 @@ DISTFILES += \
     ui/CharacterListView.qml \
     ui/CharacterView.qml \
     ui/DescriptionView.qml \
+    ui/GroupPartListView.qml \
     ui/GroupPartView.qml \
     ui/GroupView.qml \
     ui/HomeCategoryView.qml \
@@ -97,6 +102,7 @@ DISTFILES += \
     ui/main.qml
 
 HEADERS += \
+    businessModel/grouped_characters.h \
     converters/converters.h \
     dataModel/app_config.h \
     dataModel/character/character.h \
@@ -124,6 +130,7 @@ HEADERS += \
     uiModel/character/characters_ui_collection.h \
     uiModel/character/characters_ui_manager.h \
     uiModel/character/filtering_type.h \
+    uiModel/character/grouped_ui_characters.h \
     uiModel/character/relationship_ui_model.h \
     uiModel/character/skill_ui_model.h \
     uiModel/group/group_info_ui_model.h \

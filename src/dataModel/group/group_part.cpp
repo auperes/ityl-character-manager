@@ -6,4 +6,11 @@ namespace Ityl::DataModel
     {
 
     }
+
+    GroupPart::GroupPart(const QString& partName, const QString& subgroupName)
+        : _partName(partName)
+        , _subgroupName(subgroupName)
+    {
+
+    }
 }

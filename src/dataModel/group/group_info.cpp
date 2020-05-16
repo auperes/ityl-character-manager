@@ -18,9 +18,9 @@ namespace Ityl::DataModel
 
     }
 
-    GroupInfo::GroupInfo(const QString& name, const QString& subGroupName, const GroupType& type, bool isOld)
+    GroupInfo::GroupInfo(const QString& name, const QString& subgroupName, const GroupType& type, bool isOld)
         : _name(name)
-        , _subGroupName(subGroupName)
+        , _subgroupName(subgroupName)
         , _type(type)
         , _isOld(isOld)
     {

@@ -3,6 +3,7 @@
 #include <QObject>
 
 #include "characters_ui_collection.h"
+#include "grouped_ui_characters.h"
 #include "../../provider/characters_provider.h"
 
 namespace Ityl::UiModel
@@ -15,6 +16,8 @@ namespace Ityl::UiModel
 
         Q_INVOKABLE CharactersUiCollection* addCollection(const QString& type, const QString& name);
         Q_INVOKABLE void removeCollection(unsigned id);
+
+        QMap<QString, GroupedUiCharacters> getCollectionsFromGroup(const QString& groupName);
 
     signals:
 
@@ -32,5 +35,6 @@ namespace Ityl::UiModel
         void refreshCollection(CharactersUiCollection& collection);
         QList<std::shared_ptr<CharacterUiModel>> createModels(const FilteringType& filteringType, const QString& filteringName);
         QString getNationColor(const QString& nationName) const;
+        QList<std::shared_ptr<CharacterUiModel>> toUiModel(const QList<std::shared_ptr<DataModel::Character>>& characters);
     };
 }

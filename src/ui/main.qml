@@ -14,17 +14,22 @@ ApplicationWindow {
 
     Component {
         id: tabComponent
-        TabBarComponent {
+        TabBarComponent {}
+    }
 
+    Component {
+        id: tabContentCharacterComponent
+        CharacterListView {
+            leftMargin: 20
+            rightMargin: 20
         }
     }
 
     Component {
-        id: tabContentComponent
-        CharacterListView {
-            anchors.fill: parent
-            leftMargin: 20
-            rightMargin: 20
+        id: tabContentGroupComponent
+        GroupView {
+            anchors.leftMargin: 20
+            anchors.rightMargin: 20
         }
     }
 
@@ -67,9 +72,6 @@ ApplicationWindow {
             }
 
             TabBarComponent {
-                text: qsTr("Group mock")
-            }
-            TabBarComponent {
                 text: qsTr("Home")
             }
             TabBarComponent {
@@ -84,18 +86,11 @@ ApplicationWindow {
             Connections {
                 target: homeView
                 function onElementSelected(elementType, elementName) {
-                    var tab = tabContentComponent.createObject(tabContent);
-                    tab.model = charactersManager.addCollection(elementType, elementName).model
+                    var groupUiView = groupsManager.addGroup(elementName);
+                    var tab =  groupUiView === null
+                            ? tabContentCharacterComponent.createObject(tabContent, { model: charactersManager.addCollection(elementType, elementName).model })
+                            : tabContentGroupComponent.createObject(tabContent, { groupUiView: groupUiView });
                     tabContent.children.push(tab)
-                }
-            }
-
-            Item {
-                id: groupMockTab
-                GroupView {
-                    anchors.fill: parent
-                    anchors.leftMargin: 20
-                    anchors.rightMargin: 20
                 }
             }
 

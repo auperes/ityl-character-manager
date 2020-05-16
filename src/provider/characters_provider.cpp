@@ -5,6 +5,7 @@
 #include <QDir>
 #include <QSet>
 
+#include "../dataModel/group/group.h"
 #include "../reader/character_reader.h"
 #include "../services/relationship_validator_service.h"
 
@@ -64,5 +65,56 @@ namespace Ityl::Provider
         QList<std::shared_ptr<DataModel::Character>> resultCharacters;
         std::copy_if(_characters.begin(), _characters.end(), std::back_inserter(resultCharacters), predicate);
         return resultCharacters;
+    }
+
+    QList<std::shared_ptr<DataModel::Character> > CharactersProvider::findCharactersFromEthnie(const QString& ethnieName)
+    {
+        return findCharacters([ethnieName](const std::shared_ptr<DataModel::Character> &character)
+        {
+            auto ethnies = character->getEthnies();
+            auto it = std::find_if(ethnies.begin(), ethnies.end(),[ethnieName](const auto& ethnie) { return QString::compare(ethnieName, ethnie.getName()) == 0; });
+            return it != ethnies.end();
+        });
+    }
+
+    QList<std::shared_ptr<DataModel::Character> > CharactersProvider::findCharactersFromGroup(const QString& groupName)
+    {
+        return findCharacters([groupName](const std::shared_ptr<DataModel::Character> &character)
+        {
+            auto groups = character->getGroups();
+            auto it = std::find_if(groups.begin(), groups.end(),[groupName](const auto& group) { return QString::compare(groupName, group.getName()) == 0; });
+            return it != groups.end();
+        });
+    }
+
+    QList<std::shared_ptr<DataModel::Character> > CharactersProvider::findCharactersFromNation(const QString& nationName)
+    {
+        return findCharacters([nationName](const std::shared_ptr<DataModel::Character>& character)
+        {
+            return QString::compare(nationName, character->getCurrentNation()) == 0;
+        });
+    }
+
+    QMap<QString, BusinessModel::GroupedCharacters> CharactersProvider::findCharactersBySubgroups(const QString& groupName)
+    {
+        QMap<QString, BusinessModel::GroupedCharacters> charactersBySubgroup;
+        charactersBySubgroup.insert(DataModel::Group::RootSubgroup, BusinessModel::GroupedCharacters());
+
+        for (const auto& character : _characters)
+        {
+            const auto& groups = character->getGroups();
+            auto it = std::find_if(groups.begin(), groups.end(),[groupName](const auto& group) { return QString::compare(groupName, group.getName()) == 0; });
+            if (it != groups.end())
+            {
+                auto subgroup = it->getSubgroupName().isEmpty() ? DataModel::Group::RootSubgroup : it->getSubgroupName();
+
+                    if (it->getIsOld())
+                        charactersBySubgroup[subgroup]._currentCharacters.push_back(character);
+                    else
+                        charactersBySubgroup[subgroup]._oldCharacters.push_back(character);
+            }
+        }
+
+        return charactersBySubgroup;
     }
 }

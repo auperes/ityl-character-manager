@@ -5,7 +5,13 @@
 
 namespace Ityl::UiModel
 {
-    GroupUiModel::GroupUiModel(const DataModel::Group& group, const QString& nationColor, QObject* parent)
+    GroupUiModel::GroupUiModel()
+        : QObject()
+    {
+
+    }
+
+    GroupUiModel::GroupUiModel(const std::shared_ptr<DataModel::Group>& group, const QString& nationColor, QObject* parent)
         : QObject(parent)
         , _group(group)
         , _nationColor(nationColor)
@@ -13,8 +19,7 @@ namespace Ityl::UiModel
     {
         _parts->insertColumn(0);
 
-        auto parts = _group.getParts();
-        for (const auto& part : parts)
+        for (const auto& part : _group->getParts())
             addPart(part);
     }
 

@@ -11,6 +11,9 @@ namespace Ityl::DataModel
     class Group
     {
     public:
+        static const QString RootPart;
+        static const QString RootSubgroup;
+
         Group();
         Group(const QString& name, const QString& nation, const GroupType& type, const QString& description);
 
@@ -25,6 +28,8 @@ namespace Ityl::DataModel
         void setType(const GroupType& type) { _type = type; }
         void setDescription(const QString& description) { _description = description; }
         void setParts(const QVector<GroupPart>& parts) { _parts = parts; }
+
+        void addPart(const GroupPart& part) { _parts.push_back(part); }
 
     private:
         QString _name;

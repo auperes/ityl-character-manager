@@ -143,7 +143,7 @@ namespace Ityl::Reader
             DataModel::GroupInfo groupInfo(object["group"].toString());
 
             if (object.contains("subGroup"))
-                groupInfo.setSubGroupName(object["subGroup"].toString());
+                groupInfo.setSubgroupName(object["subGroup"].toString());
             if (object.contains("type"))
                 groupInfo.setType(DataModel::Converters::Converters::convertGroupType(object["type"].toString()));
             if (object.contains("old"))

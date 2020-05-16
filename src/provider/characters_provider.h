@@ -6,6 +6,7 @@
 #include <QList>
 #include <QString>
 
+#include "../businessModel/grouped_characters.h"
 #include "../dataModel/character/character.h"
 
 namespace Ityl::Provider
@@ -15,13 +16,17 @@ namespace Ityl::Provider
     public:
         CharactersProvider(const QString &folderPath);
 
-        QList<std::shared_ptr<DataModel::Character>> getCharacters() const { return _characters; }
+        QList<std::shared_ptr<DataModel::Character>> getAllCharacters() const { return _characters; }
 
         void setFolderPath(const QString& folderPath) { _folder = QDir(folderPath); }
 
         void refreshCharacters();
         QList<std::shared_ptr<DataModel::Character>> findCharacters(const std::function<bool (const std::shared_ptr<DataModel::Character>&)> &predicate) const;
+        QList<std::shared_ptr<DataModel::Character>> findCharactersFromEthnie(const QString& ethnieName);
+        QList<std::shared_ptr<DataModel::Character>> findCharactersFromGroup(const QString& groupName);
+        QList<std::shared_ptr<DataModel::Character>> findCharactersFromNation(const QString& nationName);
 
+        QMap<QString, BusinessModel::GroupedCharacters> findCharactersBySubgroups(const QString& groupName);
 
     private:
         QDir _folder;
