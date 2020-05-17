@@ -121,16 +121,17 @@ namespace Ityl::Provider
 
         for (const auto& character : _characters)
         {
-            const auto& groups = character->getGroups();
-            auto it = std::find_if(groups.begin(), groups.end(),[groupName](const auto& group) { return QString::compare(groupName, group.getName()) == 0; });
-            if (it != groups.end())
+            for (const auto& groupInfo : character->getGroups())
             {
-                auto subgroup = it->getSubgroupName().isEmpty() ? DataModel::Group::RootSubgroup : it->getSubgroupName();
+                if (QString::compare(groupName, groupInfo.getName()) == 0)
+                {
+                    auto subgroup = groupInfo.getSubgroupName().isEmpty() ? DataModel::Group::RootSubgroup : groupInfo.getSubgroupName();
 
-                    if (it->getIsOld())
+                    if (groupInfo.getIsOld())
                         charactersBySubgroup[subgroup]._oldCharacters.push_back(character);
                     else
                         charactersBySubgroup[subgroup]._currentCharacters.push_back(character);
+                }
             }
         }
 
