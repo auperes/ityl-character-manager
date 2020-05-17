@@ -24,6 +24,7 @@ namespace Ityl::Provider
         QList<std::shared_ptr<DataModel::Character>> findCharacters(const std::function<bool (const std::shared_ptr<DataModel::Character>&)> &predicate) const;
         QList<std::shared_ptr<DataModel::Character>> findCharactersFromEthnie(const QString& ethnieName);
         QList<std::shared_ptr<DataModel::Character>> findCharactersFromGroup(const QString& groupName);
+        QList<std::shared_ptr<DataModel::Character>> findCharactersFromGroup(const QString& groupName, const QString& groupSubname);
         QList<std::shared_ptr<DataModel::Character>> findCharactersFromNation(const QString& nationName);
 
         QMap<QString, BusinessModel::GroupedCharacters> findCharactersBySubgroups(const QString& groupName);

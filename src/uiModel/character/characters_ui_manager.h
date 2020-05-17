@@ -33,7 +33,7 @@ namespace Ityl::UiModel
         QMap<QString, QString> _nationColors;
 
         void refreshCollection(CharactersUiCollection& collection);
-        QList<std::shared_ptr<CharacterUiModel>> createModels(const FilteringType& filteringType, const QString& filteringName);
+        QList<std::shared_ptr<CharacterUiModel>> createModels(const FilteringData& filteringData);
         QString getNationColor(const QString& nationName) const;
         QList<std::shared_ptr<CharacterUiModel>> toUiModel(const QList<std::shared_ptr<DataModel::Character>>& characters);
     };

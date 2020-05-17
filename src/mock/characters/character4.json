@@ -52,8 +52,8 @@
       { "ethnie": "ethnie2", "ratio": "1" }
     ],
     "groups": [
-      { "group": "group1", "subGroup": "subgroupName2a" },
-      { "group": "group2", "subGroup": "subgroup" }
+      { "group": "group1", "subgroup": "subgroupName2a" },
+      { "group": "group2", "subgroup": "subgroup" }
     ],
     "avatars": [
       { "avatar": "avatar.png" }

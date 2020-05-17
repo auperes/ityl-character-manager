@@ -129,6 +129,7 @@ HEADERS += \
     uiModel/character/character_ui_model.h \
     uiModel/character/characters_ui_collection.h \
     uiModel/character/characters_ui_manager.h \
+    uiModel/character/filtering_data.h \
     uiModel/character/filtering_type.h \
     uiModel/character/grouped_ui_characters.h \
     uiModel/character/relationship_ui_model.h \

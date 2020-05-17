@@ -19,8 +19,9 @@ namespace Ityl::UiModel
     CharactersUiCollection* CharactersUiManager::addCollection(const QString& type, const QString& name)
     {
         auto filteringType = DataModel::Converters::Converters::convertFilteringType(type);
-        auto characterUiModels = createModels(filteringType, name);
-        auto charactersUiCollection = std::make_shared<CharactersUiCollection>(_idSequence, std::move(characterUiModels), filteringType, name);
+        FilteringData filteringData(filteringType, name, "");
+        auto characterUiModels = createModels(filteringData);
+        auto charactersUiCollection = std::make_shared<CharactersUiCollection>(_idSequence, std::move(characterUiModels), filteringData);
         _charactersUiCollections.insert(_idSequence++, charactersUiCollection);
 
         QQmlEngine::setObjectOwnership(charactersUiCollection.get(), QQmlEngine::CppOwnership);
@@ -41,9 +42,10 @@ namespace Ityl::UiModel
         for (const auto& subgroup : charactersBySubgroup.keys())
         {
             auto groupedCharacters = charactersBySubgroup[subgroup];
-            auto currentUiCharacters = std::make_shared<CharactersUiCollection>(_idSequence, toUiModel(groupedCharacters._currentCharacters), FilteringType::Group, groupName);
+            FilteringData filteringData(FilteringType::Group, groupName, subgroup);
+            auto currentUiCharacters = std::make_shared<CharactersUiCollection>(_idSequence, toUiModel(groupedCharacters._currentCharacters), filteringData);
 //            _charactersUiCollections.insert(_idSequence++, currentUiCharacters); //TODO need to handle reload
-            auto oldUiCharacters = std::make_shared<CharactersUiCollection>(_idSequence, toUiModel(groupedCharacters._oldCharacters), FilteringType::Group, groupName);
+            auto oldUiCharacters = std::make_shared<CharactersUiCollection>(_idSequence, toUiModel(groupedCharacters._oldCharacters), filteringData);
 //            _charactersUiCollections.insert(_idSequence++, oldUiCharacters);
 
             GroupedUiCharacters groupedUiCharacters(currentUiCharacters, oldUiCharacters);
@@ -74,26 +76,26 @@ namespace Ityl::UiModel
     void CharactersUiManager::refreshCollection(CharactersUiCollection& collection)
     {
         collection.clearCharacters();
-        auto characterUiModels = createModels(collection.filteringType(), collection.filteringName());
+        auto characterUiModels = createModels(collection.getFilteringData());
         collection.setCharacters(std::move(characterUiModels));
     }
 
-    QList<std::shared_ptr<CharacterUiModel> > CharactersUiManager::createModels(const FilteringType& filteringType, const QString& filteringName)
+    QList<std::shared_ptr<CharacterUiModel> > CharactersUiManager::createModels(const FilteringData& filteringData)
     {
         QList<std::shared_ptr<DataModel::Character>> characters;
-        switch (filteringType)
+        switch (filteringData._type)
         {
         case FilteringType::None:
             characters = _charactersProvider.getAllCharacters();
             break;
         case FilteringType::Group:
-            characters = _charactersProvider.findCharactersFromGroup(filteringName);
+            characters = _charactersProvider.findCharactersFromGroup(filteringData._name, filteringData._subname);
             break;
         case FilteringType::Ethnie:
-            characters = _charactersProvider.findCharactersFromEthnie(filteringName);
+            characters = _charactersProvider.findCharactersFromEthnie(filteringData._name);
             break;
         case FilteringType::Nation:
-            characters = _charactersProvider.findCharactersFromNation(filteringName);
+            characters = _charactersProvider.findCharactersFromNation(filteringData._name);
             break;
         }
 

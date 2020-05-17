@@ -61,6 +61,8 @@ Component {
             id: groupPartsLoader
             source: display.hasParts ? "GroupPartListView.qml" : ""
             Layout.preferredHeight: childrenRect.height
+            Layout.preferredWidth: parent.parent.width
+            Layout.fillWidth: true
         }
 
         Item {

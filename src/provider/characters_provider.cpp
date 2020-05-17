@@ -87,6 +87,25 @@ namespace Ityl::Provider
         });
     }
 
+    QList<std::shared_ptr<DataModel::Character> > CharactersProvider::findCharactersFromGroup(const QString& groupName, const QString& groupSubname)
+    {
+        auto subname = QString::compare(groupSubname, DataModel::Group::RootSubgroup) == 0 ? "" : groupSubname;
+
+        return findCharacters([groupName, subname](const std::shared_ptr<DataModel::Character> &character)
+        {
+            auto groups = character->getGroups();
+            auto it = std::find_if(
+                        groups.begin(),
+                        groups.end(),
+                        [groupName, subname](const auto& group)
+            {
+                return (QString::compare(groupName, group.getName()) == 0) && (QString::compare(subname, group.getSubgroupName()));
+            });
+
+            return it != groups.end();
+        });
+    }
+
     QList<std::shared_ptr<DataModel::Character> > CharactersProvider::findCharactersFromNation(const QString& nationName)
     {
         return findCharacters([nationName](const std::shared_ptr<DataModel::Character>& character)
@@ -109,9 +128,9 @@ namespace Ityl::Provider
                 auto subgroup = it->getSubgroupName().isEmpty() ? DataModel::Group::RootSubgroup : it->getSubgroupName();
 
                     if (it->getIsOld())
-                        charactersBySubgroup[subgroup]._currentCharacters.push_back(character);
-                    else
                         charactersBySubgroup[subgroup]._oldCharacters.push_back(character);
+                    else
+                        charactersBySubgroup[subgroup]._currentCharacters.push_back(character);
             }
         }
 

@@ -142,8 +142,8 @@ namespace Ityl::Reader
             QJsonObject object = value.toObject();
             DataModel::GroupInfo groupInfo(object["group"].toString());
 
-            if (object.contains("subGroup"))
-                groupInfo.setSubgroupName(object["subGroup"].toString());
+            if (object.contains("subgroup"))
+                groupInfo.setSubgroupName(object["subgroup"].toString());
             if (object.contains("type"))
                 groupInfo.setType(DataModel::Converters::Converters::convertGroupType(object["type"].toString()));
             if (object.contains("old"))

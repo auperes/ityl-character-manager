@@ -4,7 +4,7 @@
 #include <QObject>
 
 #include "character_ui_model.h"
-#include "filtering_type.h"
+#include "filtering_data.h"
 
 namespace Ityl::UiModel
 {
@@ -18,18 +18,16 @@ namespace Ityl::UiModel
         explicit CharactersUiCollection(
                 unsigned id,
                 QList<std::shared_ptr<CharacterUiModel>>&& characterUiModels,
-                FilteringType filteringType,
-                QString filteringName,
+                FilteringData filteringData,
                 QObject *parent = nullptr);
 
         QAbstractItemModel* model() const { return _model.get(); }
 
-        unsigned id() const { return _id; }
-        FilteringType filteringType() const { return _filteringType; }
-        QString filteringName() const { return _filteringName; }
+        unsigned getId() const { return _id; }
+        FilteringData getFilteringData() const { return _filteringData; }
 
         void setCharacters(QList<std::shared_ptr<CharacterUiModel>>&& characterUiModels);
-        void addCharacter(const std::shared_ptr<CharacterUiModel> &characterUiModel);
+        void addCharacter(const std::shared_ptr<CharacterUiModel>& characterUiModel);
         void clearCharacters();
         void addCharacters(const QList<std::shared_ptr<CharacterUiModel>>& characterUiModels);
 
@@ -37,7 +35,6 @@ namespace Ityl::UiModel
         unsigned _id;
         std::unique_ptr<QAbstractItemModel> _model;
         QList<std::shared_ptr<CharacterUiModel>> _characterUiModels;
-        FilteringType _filteringType;
-        QString _filteringName;
+        FilteringData _filteringData;
     };
 }

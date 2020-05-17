@@ -49,7 +49,9 @@ int main(int argc, char *argv[])
         Ityl::UiModel::GroupsUiManager groupUiManager(groupsFolderPath, nationsColor, &charatersUiManager);
 
         QObject::connect(&settingsUiManager, SIGNAL(nationColorsChanged(const QMap<QString, QString>&)), &charatersUiManager, SLOT(changeNationColors(const QMap<QString, QString>&)));
+        QObject::connect(&settingsUiManager, SIGNAL(nationColorsChanged(const QMap<QString, QString>&)), &groupUiManager, SLOT(changeNationColors(const QMap<QString, QString>&)));
         QObject::connect(&settingsUiManager, SIGNAL(charactersFolderPathChanged(const QString&)), &charatersUiManager, SLOT(changeCharactersLocation(const QString&)));
+        QObject::connect(&settingsUiManager, SIGNAL(groupsFolderPathChanged(const QString&)), &groupUiManager, SLOT(changeGroupsLocation(const QString&)));
         QObject::connect(&settingsUiManager, SIGNAL(homeViewChanged(const DataModel::HomeView&)), &homeViewUi, SLOT(resetHomeView(const DataModel::HomeView&)));
 
         QQmlApplicationEngine engine;

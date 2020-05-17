@@ -11,36 +11,33 @@ namespace Ityl::UiModel
         : QObject (nullptr)
         , _id(0)
         , _model(new QStandardItemModel(this))
-        , _filteringType(FilteringType::None)
-        , _filteringName("Tous")
+        , _filteringData(FilteringData(FilteringType::None, "Tous", ""))
     {
         _model->insertColumn(0);
     }
 
     CharactersUiCollection::CharactersUiCollection(
             unsigned id,
-            QList<std::shared_ptr<CharacterUiModel> > &&characterUiModels,
-            FilteringType filteringType,
-            QString filteringName,
-            QObject *parent)
+            QList<std::shared_ptr<CharacterUiModel>>&& characterUiModels,
+            FilteringData filteringData,
+            QObject* parent)
         : QObject(parent)
         , _id(id)
         , _model(new QStandardItemModel(this))
         , _characterUiModels(std::move(characterUiModels))
-        , _filteringType(filteringType)
-        , _filteringName(filteringName)
+        , _filteringData(filteringData)
     {
         _model->insertColumn(0);
         addCharacters(_characterUiModels);
     }
 
-    void CharactersUiCollection::setCharacters(QList<std::shared_ptr<CharacterUiModel> > &&characterUiModels)
+    void CharactersUiCollection::setCharacters(QList<std::shared_ptr<CharacterUiModel>>&& characterUiModels)
     {
         _characterUiModels = std::move(characterUiModels);
         addCharacters(_characterUiModels);
     }
 
-    void CharactersUiCollection::addCharacter(const std::shared_ptr<CharacterUiModel> &characterUiModel)
+    void CharactersUiCollection::addCharacter(const std::shared_ptr<CharacterUiModel>& characterUiModel)
     {
         if (!characterUiModel) return;
 

@@ -20,7 +20,6 @@ namespace Ityl::UiModel
     signals:
 
     public slots:
-        void refreshGroups();
         void changeGroupsLocation(const QString& folderPath);
         void changeNationColors(const QMap<QString, QString>& nationColors);
 

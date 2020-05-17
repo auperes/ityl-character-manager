@@ -53,15 +53,10 @@ namespace Ityl::UiModel
         _groupUiModels.remove(id);
     }
 
-    void GroupsUiManager::refreshGroups()
-    {
-
-    }
-
     void GroupsUiManager::changeGroupsLocation(const QString& folderPath)
     {
         _groupsProvider.setFolderPath(folderPath);
-        refreshGroups();
+        _groupsProvider.refreshGroups();
     }
 
     void GroupsUiManager::changeNationColors(const QMap<QString, QString>& nationColors)

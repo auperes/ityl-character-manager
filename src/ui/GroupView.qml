@@ -44,6 +44,7 @@ Item {
 
             Loader {
                 sourceComponent: groupUiView.hasParts ? groupParts : ""
+                Layout.fillWidth: true
             }
 
             Item {

@@ -2,7 +2,9 @@
 
 namespace Ityl::DataModel
 {
-    Character::Character() {}
+    Character::Character()
+        : _status(Status::Alive)
+    {}
 
     void Character::addRelationship(const Relationship& relationType, QPair<QString, QString> character)
     {
