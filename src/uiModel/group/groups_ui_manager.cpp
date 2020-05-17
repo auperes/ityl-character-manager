@@ -25,22 +25,9 @@ namespace Ityl::UiModel
             return nullptr;
         }
 
-        auto collectionsBySubgroup = _characterUiManager->getCollectionsFromGroup(name);
-        auto groupUiModel = std::make_shared<GroupUiModel>(group, getNationColor(group->getNation()));
-
-        auto& partsBySubgroup = groupUiModel->getPartUiModelsBySubgroupName();
-
-        for (const auto& subgroup : collectionsBySubgroup.keys())
-        {
-            if (partsBySubgroup.contains(subgroup))
-            {
-                auto& partUiModel = partsBySubgroup[subgroup];
-                partUiModel->setCurrentCharactersUiCollection(collectionsBySubgroup[subgroup]._currentUiCharacters);
-                partUiModel->setOldCharactersUiCollection(collectionsBySubgroup[subgroup]._oldUiCharacters);
-            }
-            else
-                std::cout << "Missing subgroup " << subgroup.toStdString() << " in group " << name.toStdString() << std::endl;
-        }
+        auto groupUiModel = group->getType() == DataModel::GroupType::Ethnie
+                ? createGroupUiModelFromEthnie(name, group)
+                : createGroupUiModelFromGroup(name, group);
 
         _groupUiModels.insert(_idSequence++, groupUiModel);
         QQmlEngine::setObjectOwnership(groupUiModel.get(), QQmlEngine::CppOwnership);
@@ -73,6 +60,41 @@ namespace Ityl::UiModel
         std::cout << errorMessage << std::endl;
 
         return "#969696";
+    }
+
+    std::shared_ptr<GroupUiModel> GroupsUiManager::createGroupUiModelFromGroup(const QString& groupName, const std::shared_ptr<DataModel::Group>& group)
+    {
+        auto collectionsBySubgroup = _characterUiManager->getCollectionsFromGroup(groupName);
+        auto groupUiModel = std::make_shared<GroupUiModel>(group, getNationColor(group->getNation()));
+
+        auto& partsBySubgroup = groupUiModel->getPartUiModelsBySubgroupName();
+
+        for (const auto& subgroup : collectionsBySubgroup.keys())
+        {
+            if (partsBySubgroup.contains(subgroup))
+            {
+                auto& partUiModel = partsBySubgroup[subgroup];
+                partUiModel->setCurrentCharactersUiCollection(collectionsBySubgroup[subgroup]._currentUiCharacters);
+                partUiModel->setOldCharactersUiCollection(collectionsBySubgroup[subgroup]._oldUiCharacters);
+            }
+            else
+                std::cout << "Missing subgroup " << subgroup.toStdString() << " in group " << groupName.toStdString() << std::endl;
+        }
+
+        return groupUiModel;
+    }
+
+    std::shared_ptr<GroupUiModel> GroupsUiManager::createGroupUiModelFromEthnie(const QString& ethnieName, const std::shared_ptr<DataModel::Group>& group)
+    {
+        auto collection = _characterUiManager->getCollectionsFromEthnie(ethnieName);
+        auto groupUiModel = std::make_shared<GroupUiModel>(group, getNationColor(group->getNation()));
+
+        auto it = groupUiModel->getPartUiModelsBySubgroupName().find(DataModel::Group::RootSubgroup);
+
+        if (collection && it != groupUiModel->getPartUiModelsBySubgroupName().end())
+            it.value()->setCurrentCharactersUiCollection(collection);
+
+        return groupUiModel;
     }
 
 }

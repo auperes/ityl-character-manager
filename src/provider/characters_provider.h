@@ -27,7 +27,7 @@ namespace Ityl::Provider
         QList<std::shared_ptr<DataModel::Character>> findCharactersFromGroup(const QString& groupName, const QString& groupSubname);
         QList<std::shared_ptr<DataModel::Character>> findCharactersFromNation(const QString& nationName);
 
-        QMap<QString, BusinessModel::GroupedCharacters> findCharactersBySubgroups(const QString& groupName);
+        QMap<QString, BusinessModel::GroupedCharacters> findGroupedCharactersBySubgroups(const QString& groupName);
 
     private:
         QDir _folder;

@@ -114,7 +114,7 @@ namespace Ityl::Provider
         });
     }
 
-    QMap<QString, BusinessModel::GroupedCharacters> CharactersProvider::findCharactersBySubgroups(const QString& groupName)
+    QMap<QString, BusinessModel::GroupedCharacters> CharactersProvider::findGroupedCharactersBySubgroups(const QString& groupName)
     {
         QMap<QString, BusinessModel::GroupedCharacters> charactersBySubgroup;
         charactersBySubgroup.insert(DataModel::Group::RootSubgroup, BusinessModel::GroupedCharacters());

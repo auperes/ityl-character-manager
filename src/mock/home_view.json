@@ -24,7 +24,7 @@
       {
         "name": "category3",
         "elements": [
-          { "type": "guild", "name": "guild1" },
+          { "type": "guild", "name": "guild aaa" },
           { "type": "guild", "name": "guild2" },
           { "type": "group", "name": "group1" },
           { "type": "group", "name": "group2" },

@@ -48,8 +48,7 @@
       { "link": "rival", "firstName": "prenom", "lastName": "nom", "old": true }
     ],
     "ethnies": [
-      { "ethnie": "ethnie1", "ratio": "1" },
-      { "ethnie": "ethnie2", "ratio": "1" }
+      { "ethnie": "ethnie1" }
     ],
     "groups": [
       { "group": "group1" },

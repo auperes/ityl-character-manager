@@ -18,6 +18,7 @@ namespace Ityl::UiModel
         Q_INVOKABLE void removeCollection(unsigned id);
 
         QMap<QString, GroupedUiCharacters> getCollectionsFromGroup(const QString& groupName);
+        std::shared_ptr<CharactersUiCollection> getCollectionsFromEthnie(const QString& ethnieName);
 
     signals:
 

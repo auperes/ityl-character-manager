@@ -77,9 +77,12 @@ DISTFILES += \
     mock/characters/character4.json \
     mock/colors.json \
     mock/home_view.json \
+    mock/groups/ethnie1.json \
     mock/groups/group1.json \
     mock/groups/group2.json \
     mock/groups/group3.json \
+    mock/groups/group4.json \
+    mock/groups/guild1.json \
     mock/images/avatar.png \
     mock/related_relationships.json \
     qtquickcontrols2.conf \

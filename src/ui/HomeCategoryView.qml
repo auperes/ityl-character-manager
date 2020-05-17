@@ -114,7 +114,7 @@ Item {
                 model: homeView.selectedCategory.guilds
                 delegate: LinkButton {
                     text: modelData
-                    onClicked: homeView.selectElement("guild", modelData)
+                    onClicked: homeView.selectElement("group", modelData)
                 }
             }
         }

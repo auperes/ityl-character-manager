@@ -31,5 +31,8 @@ namespace Ityl::UiModel
         CharactersUiManager* _characterUiManager; //TODO get CharacterUiCollections without CharacterUiManager
 
         QString getNationColor(const QString& nationName) const;
+
+        std::shared_ptr<GroupUiModel> createGroupUiModelFromGroup(const QString& groupName, const std::shared_ptr<DataModel::Group>& group);
+        std::shared_ptr<GroupUiModel> createGroupUiModelFromEthnie(const QString& ethnieName, const std::shared_ptr<DataModel::Group>& group);
     };
 }

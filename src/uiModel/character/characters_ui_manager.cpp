@@ -36,7 +36,7 @@ namespace Ityl::UiModel
 
     QMap<QString, GroupedUiCharacters> CharactersUiManager::getCollectionsFromGroup(const QString& groupName)
     {
-        auto charactersBySubgroup = _charactersProvider.findCharactersBySubgroups(groupName);
+        auto charactersBySubgroup = _charactersProvider.findGroupedCharactersBySubgroups(groupName);
         QMap<QString, GroupedUiCharacters> groupedUiCharactersBySubgroup;
 
         for (const auto& subgroup : charactersBySubgroup.keys())
@@ -53,6 +53,17 @@ namespace Ityl::UiModel
         }
 
         return groupedUiCharactersBySubgroup;
+    }
+
+    std::shared_ptr<CharactersUiCollection> CharactersUiManager::getCollectionsFromEthnie(const QString& ethnieName)
+    {
+        auto characters = _charactersProvider.findCharactersFromEthnie(ethnieName);
+        auto characterUiModels = toUiModel(characters);
+        FilteringData filteringData(FilteringType::Ethnie, ethnieName, "");
+        auto charactersUiCollection = std::make_shared<CharactersUiCollection>(_idSequence, std::move(characterUiModels), filteringData);
+//        _charactersUiCollections.insert(_idSequence++, charactersUiCollection); //TODO need to handle reload
+
+        return charactersUiCollection;
     }
 
     void CharactersUiManager::refreshCharacters()
