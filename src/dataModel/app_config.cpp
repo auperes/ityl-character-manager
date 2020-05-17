@@ -18,34 +18,5 @@ namespace Ityl::DataModel
     QString AppConfig::_logFolderPath;
     QString AppConfig::_homeViewFilePath;
     QString AppConfig::_colorsFilePath;
-
-    void AppConfig::setCharactersFolderPath(const QString& charactersFolderPath)
-    {
-        _charactersFolderPath = charactersFolderPath;
-    }
-
-    void AppConfig::setAvatarsFolderPath(const QString& avatarsFolderPath)
-    {
-        _avatarsFolderPath = avatarsFolderPath;
-    }
-
-    void AppConfig::setRelatedRelationshipsFilePath(const QString& relatedRelationshipsFilePath)
-    {
-        _relatedRelationshipsFilePath = relatedRelationshipsFilePath;
-    }
-
-    void AppConfig::setLogFolderPath(const QString& logFolderPath)
-    {
-        _logFolderPath = logFolderPath;
-    }
-
-    void AppConfig::setHomeViewFilePath(const QString& homeViewFilePath)
-    {
-        _homeViewFilePath = homeViewFilePath;
-    }
-
-    void AppConfig::setColorsFilePath(const QString& colorsFilePath)
-    {
-        _colorsFilePath = colorsFilePath;
-    }
+    QString AppConfig::_groupsFolderPath;
 }

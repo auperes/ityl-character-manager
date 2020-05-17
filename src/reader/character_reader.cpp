@@ -120,27 +120,36 @@ namespace Ityl::Reader
         }
     }
 
-    QVector<QString> CharacterReader::readEthnies(const QJsonArray& jsonEthnies)
+    QVector<DataModel::GroupInfo> CharacterReader::readEthnies(const QJsonArray& jsonEthnies)
     {
-        QVector<QString> ethnies;
+        QVector<DataModel::GroupInfo> ethnies;
         ethnies.reserve(jsonEthnies.size());
         for (auto value : jsonEthnies)
         {
             QJsonObject object = value.toObject();
-            ethnies.push_back(object["ethnie"].toString());
+            ethnies.push_back(DataModel::GroupInfo(object["ethnie"].toString(), DataModel::GroupType::Ethnie));
         }
 
         return ethnies;
     }
 
-    QVector<QString> CharacterReader::readGroups(const QJsonArray& jsonGroups)
+    QVector<DataModel::GroupInfo> CharacterReader::readGroups(const QJsonArray& jsonGroups)
     {
-        QVector<QString> groups;
+        QVector<DataModel::GroupInfo> groups;
         groups.reserve(jsonGroups.size());
         for (auto value : jsonGroups)
         {
             QJsonObject object = value.toObject();
-            groups.push_back(object["group"].toString());
+            DataModel::GroupInfo groupInfo(object["group"].toString());
+
+            if (object.contains("subgroup"))
+                groupInfo.setSubgroupName(object["subgroup"].toString());
+            if (object.contains("type"))
+                groupInfo.setType(DataModel::Converters::Converters::convertGroupType(object["type"].toString()));
+            if (object.contains("old"))
+                groupInfo.setIsOld(object["old"].toBool());
+
+            groups.push_back(groupInfo);
         }
 
         return groups;

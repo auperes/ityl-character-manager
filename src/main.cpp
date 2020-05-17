@@ -8,14 +8,15 @@
 #include <QDir>
 #include <QObject>
 
-#include "characters_provider.h"
 #include "dataModel/app_config.h"
+#include "provider/characters_provider.h"
 #include "qml_types_factory.h"
 #include "reader/home_view_reader.h"
 #include "reader/json_reader_helpers.h"
 #include "reader/settings_reader.h"
 #include "uiModel/character/characters_ui_collection.h"
 #include "uiModel/character/characters_ui_manager.h"
+#include "uiModel/group/groups_ui_manager.h"
 #include "uiModel/homeView/home_view_ui_model.h"
 #include "uiModel/settings_ui_manager.h"
 
@@ -38,20 +39,25 @@ int main(int argc, char *argv[])
 
         QString appConfigFilepath("settings/app_config.json");
         Ityl::Reader::SettingsReader::readSettingsFromFile(appConfigFilepath);
-        QString charactersFolderPath(Ityl::DataModel::AppConfig::getCharactersFolderPath());
-        Ityl::CharactersProvider charactersProvider(charactersFolderPath);
+        QString charactersFolderPath = Ityl::DataModel::AppConfig::getCharactersFolderPath();
+        QString groupsFolderPath = Ityl::DataModel::AppConfig::getGroupsFolderPath();
+        auto nationsColor = Ityl::Reader::JsonReaderHelpers::readNationsColor(Ityl::DataModel::AppConfig::getColorsFilePath());
 
-        Ityl::UiModel::CharactersUiManager charatersUiManager(&charactersProvider, std::move(Ityl::Reader::JsonReaderHelpers::readNationsColor(Ityl::DataModel::AppConfig::getColorsFilePath())));
+        Ityl::UiModel::CharactersUiManager charatersUiManager(charactersFolderPath, nationsColor);
         Ityl::UiModel::HomeViewUIModel homeViewUi(Ityl::Reader::HomeViewReader::readHomeViewFromFile(Ityl::DataModel::AppConfig::getHomeViewFilePath()));
         Ityl::UiModel::SettingsUiManager settingsUiManager;
+        Ityl::UiModel::GroupsUiManager groupUiManager(groupsFolderPath, nationsColor, &charatersUiManager);
 
-        QObject::connect(&settingsUiManager, SIGNAL(nationColorsChanged(QMap<QString, QString>)), &charatersUiManager, SLOT(changeNationColors(QMap<QString, QString>)));
+        QObject::connect(&settingsUiManager, SIGNAL(nationColorsChanged(const QMap<QString, QString>&)), &charatersUiManager, SLOT(changeNationColors(const QMap<QString, QString>&)));
+        QObject::connect(&settingsUiManager, SIGNAL(nationColorsChanged(const QMap<QString, QString>&)), &groupUiManager, SLOT(changeNationColors(const QMap<QString, QString>&)));
         QObject::connect(&settingsUiManager, SIGNAL(charactersFolderPathChanged(const QString&)), &charatersUiManager, SLOT(changeCharactersLocation(const QString&)));
+        QObject::connect(&settingsUiManager, SIGNAL(groupsFolderPathChanged(const QString&)), &groupUiManager, SLOT(changeGroupsLocation(const QString&)));
         QObject::connect(&settingsUiManager, SIGNAL(homeViewChanged(const DataModel::HomeView&)), &homeViewUi, SLOT(resetHomeView(const DataModel::HomeView&)));
 
         QQmlApplicationEngine engine;
 
         engine.rootContext()->setContextProperty(QStringLiteral("charactersManager"), &charatersUiManager);
+        engine.rootContext()->setContextProperty(QStringLiteral("groupsManager"), &groupUiManager);
         engine.rootContext()->setContextProperty(QStringLiteral("homeView"), &homeViewUi);
         engine.rootContext()->setContextProperty(QStringLiteral("settingsManager"), &settingsUiManager);
 

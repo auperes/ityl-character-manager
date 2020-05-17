@@ -48,12 +48,14 @@
       { "link": "rival", "firstName": "prenom", "lastName": "nom", "old": true }
     ],
     "ethnies": [
-      { "ethnie": "ethnie1", "ratio": "1" },
-      { "ethnie": "ethnie2", "ratio": "1" }
+      { "ethnie": "ethnie1" },
+      { "ethnie": "ethnie2" }
     ],
     "groups": [
       { "group": "group1" },
-      { "group": "group2", "old": true, "subGroup": "subgroup" }
+      { "group": "group2" },
+      { "group": "guild aaa", "type": "guild", "subgroup": "subgroup aaa", "old": true },
+      { "group": "organization zzz", "type": "organization", "subgroup": "subgroup bbb" }
     ],
     "avatars": [
       { "avatar": "avatar.png" }

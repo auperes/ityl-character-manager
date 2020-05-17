@@ -1,5 +1,6 @@
 {
   "charactersFolderPath": "mock\\characters\\" ,
+  "groupsFolderPath": "mock\\groups\\",
   "avatarsFolderPath": "mock\\images\\",
   "relatedRelationshipsFilePath": "mock\\related_relationships.json",
   "logFolderPath": "",

@@ -16,8 +16,9 @@ namespace Ityl::UiModel
 
     signals:
         void charactersFolderPathChanged(const QString& folderPath);
+        void groupsFolderPathChanged(const QString& folderPath);
         void homeViewChanged(const DataModel::HomeView& homeView);
-        void nationColorsChanged(QMap<QString, QString> nationColors);
+        void nationColorsChanged(const QMap<QString, QString>& nationColors);
 
     public slots:
         void changeSettings(const QUrl& fileUrl);

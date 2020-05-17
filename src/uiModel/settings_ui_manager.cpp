@@ -31,6 +31,7 @@ namespace Ityl::UiModel
 
         emit nationColorsChanged(nationColors);
         emit charactersFolderPathChanged(DataModel::AppConfig::getCharactersFolderPath());
+        emit groupsFolderPathChanged(DataModel::AppConfig::getGroupsFolderPath());
         emit homeViewChanged(homeView);
     }
 

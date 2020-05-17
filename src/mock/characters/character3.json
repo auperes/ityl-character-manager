@@ -48,12 +48,11 @@
       { "link": "rival", "firstName": "prenom", "lastName": "nom", "old": true }
     ],
     "ethnies": [
-      { "ethnie": "ethnie1", "ratio": "1" },
-      { "ethnie": "ethnie2", "ratio": "1" }
+      { "ethnie": "ethnie2" }
     ],
     "groups": [
       { "group": "group1" },
-      { "group": "group2", "old": true, "subGroup": "subgroup" }
+      { "group": "group2", "old": true, "subgroup": "subgroup" }
     ],
     "avatars": [
       { "avatar": "avatar.png" }

@@ -13,17 +13,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-        characters_provider.cpp \
         converters/converters.cpp \
         dataModel/app_config.cpp \
         dataModel/character/character.cpp \
         dataModel/character/skill/skill.cpp \
+        dataModel/group/group.cpp \
+        dataModel/group/group_info.cpp \
+        dataModel/group/group_part.cpp \
         dataModel/homeView/home_category.cpp \
         dataModel/homeView/home_view.cpp \
         main.cpp \
+        provider/characters_provider.cpp \
+        provider/groups_provider.cpp \
         q_custom_gui_application.cpp \
         qml_types_factory.cpp \
         reader/character_reader.cpp \
+        reader/group_reader.cpp \
         reader/home_view_reader.cpp \
         reader/json_reader_helpers.cpp \
         reader/settings_reader.cpp \
@@ -33,6 +38,10 @@ SOURCES += \
         uiModel/character/characters_ui_manager.cpp \
         uiModel/character/relationship_ui_model.cpp \
         uiModel/character/skill_ui_model.cpp \
+        uiModel/group/group_info_ui_model.cpp \
+        uiModel/group/group_part_ui_model.cpp \
+        uiModel/group/group_ui_model.cpp \
+        uiModel/group/groups_ui_manager.cpp \
         uiModel/homeView/home_category_ui_model.cpp \
         uiModel/homeView/home_view_ui_model.cpp \
         uiModel/settings_ui_manager.cpp
@@ -65,8 +74,15 @@ DISTFILES += \
     mock/characters/character1.json \
     mock/characters/character2.json \
     mock/characters/character3.json \
+    mock/characters/character4.json \
     mock/colors.json \
     mock/home_view.json \
+    mock/groups/ethnie1.json \
+    mock/groups/group1.json \
+    mock/groups/group2.json \
+    mock/groups/group3.json \
+    mock/groups/group4.json \
+    mock/groups/guild1.json \
     mock/images/avatar.png \
     mock/related_relationships.json \
     qtquickcontrols2.conf \
@@ -76,6 +92,8 @@ DISTFILES += \
     ui/CharacterListView.qml \
     ui/CharacterView.qml \
     ui/DescriptionView.qml \
+    ui/GroupPartView.qml \
+    ui/GroupView.qml \
     ui/HomeCategoryView.qml \
     ui/HomeView.qml \
     ui/IdentityView.qml \
@@ -86,19 +104,26 @@ DISTFILES += \
     ui/main.qml
 
 HEADERS += \
-    characters_provider.h \
+    businessModel/grouped_characters.h \
     converters/converters.h \
     dataModel/app_config.h \
     dataModel/character/character.h \
     dataModel/character/relationship.h \
     dataModel/character/skill/skill.h \
     dataModel/character/status.h \
+    dataModel/group/group.h \
+    dataModel/group/group_info.h \
+    dataModel/group/group_part.h \
+    dataModel/group/group_type.h \
     dataModel/homeView/home_category.h \
     dataModel/homeView/home_element_type.h \
     dataModel/homeView/home_view.h \
+    provider/characters_provider.h \
+    provider/groups_provider.h \
     q_custom_gui_application.h \
     qml_types_factory.h \
     reader/character_reader.h \
+    reader/group_reader.h \
     reader/home_view_reader.h \
     reader/json_reader_helpers.h \
     reader/settings_reader.h \
@@ -106,9 +131,15 @@ HEADERS += \
     uiModel/character/character_ui_model.h \
     uiModel/character/characters_ui_collection.h \
     uiModel/character/characters_ui_manager.h \
+    uiModel/character/filtering_data.h \
     uiModel/character/filtering_type.h \
+    uiModel/character/grouped_ui_characters.h \
     uiModel/character/relationship_ui_model.h \
     uiModel/character/skill_ui_model.h \
+    uiModel/group/group_info_ui_model.h \
+    uiModel/group/group_part_ui_model.h \
+    uiModel/group/group_ui_model.h \
+    uiModel/group/groups_ui_manager.h \
     uiModel/homeView/home_category_ui_model.h \
     uiModel/homeView/home_view_ui_model.h \
     uiModel/settings_ui_manager.h
