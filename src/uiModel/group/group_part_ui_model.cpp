@@ -12,4 +12,10 @@ namespace Ityl::UiModel
         , _oldCharacters(std::make_shared<CharactersUiCollection>())
     {
     }
+
+    unsigned GroupPartUiModel::nameSize()
+    {
+        unsigned size = 16 - (_part.getNestedLevel() * 2);
+        return size > 10 ? size : 11;
+    }
 }

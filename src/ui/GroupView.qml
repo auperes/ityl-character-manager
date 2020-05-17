@@ -43,7 +43,7 @@ Item {
                     Text {
                         Layout.alignment: Qt.AlignCenter
                         text: groupUiView.name
-                        font.pointSize: 16
+                        font.pointSize: 18
                         font.bold: true
                     }
 

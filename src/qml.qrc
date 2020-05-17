@@ -15,6 +15,5 @@
         <file>ui/HomeCategoryView.qml</file>
         <file>ui/GroupView.qml</file>
         <file>ui/GroupPartView.qml</file>
-        <file>ui/GroupPartListView.qml</file>
     </qresource>
 </RCC>

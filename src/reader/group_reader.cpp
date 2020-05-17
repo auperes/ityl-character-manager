@@ -32,12 +32,13 @@ namespace Ityl::Reader
         return parts;
     }
 
-    std::shared_ptr<DataModel::GroupPart> GroupReader::readPart(const QJsonObject& jsonPart, QVector<std::shared_ptr<DataModel::GroupPart>>& parts)
+    std::shared_ptr<DataModel::GroupPart> GroupReader::readPart(const QJsonObject& jsonPart, QVector<std::shared_ptr<DataModel::GroupPart>>& parts, unsigned nestedLevel)
     {
         auto part = std::make_shared<DataModel::GroupPart>();
         part->setPartName(jsonPart["name"].toString());
         part->setSubgroupName(jsonPart["subgroup"].toString());
         part->setDescription(jsonPart["description"].toString());
+        part->setNestedLevel(nestedLevel);
         parts.push_back(part);
 
         if (jsonPart.contains("parts"))
@@ -46,7 +47,7 @@ namespace Ityl::Reader
 
             for (const auto& jsonPart : jsonParts)
             {
-                auto childPart = readPart(jsonPart.toObject(), parts);
+                auto childPart = readPart(jsonPart.toObject(), parts, nestedLevel + 1);
                 childPart->setParentPart(part);
             }
         }

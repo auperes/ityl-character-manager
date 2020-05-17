@@ -10,7 +10,7 @@ Component {
         Text {
             id: subGroupTitle
             text: display.name
-            font.pointSize: 14
+            font.pointSize: display.nameSize
             font.bold: true
         }
 
@@ -55,5 +55,6 @@ Component {
             Layout.preferredHeight: contentHeight
             model: display.oldCharacters.model
             delegate: CharacterView {}
+        }
     }
 }

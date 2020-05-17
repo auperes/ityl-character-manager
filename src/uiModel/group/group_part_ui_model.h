@@ -13,6 +13,7 @@ namespace Ityl::UiModel
     {
         Q_OBJECT
         Q_PROPERTY(QString name READ name CONSTANT)
+        Q_PROPERTY(unsigned nameSize READ nameSize CONSTANT)
         Q_PROPERTY(QString subgroupName READ subgroupName CONSTANT)
         Q_PROPERTY(QString description READ description CONSTANT)
         Q_PROPERTY(CharactersUiCollection* currentCharacters READ currentCharacters CONSTANT)
@@ -22,6 +23,7 @@ namespace Ityl::UiModel
         explicit GroupPartUiModel(const DataModel::GroupPart& part, QObject *parent = nullptr);
 
         const QString& name() { return _part.getPartName(); }
+        unsigned nameSize();
         const QString& subgroupName() { return _part.getSubgroupName(); }
         const QString& description() { return _part.getDescription(); }
         CharactersUiCollection* currentCharacters() { return _currentCharacters.get(); }

@@ -18,6 +18,6 @@ namespace Ityl::Reader
 
     private:
         static QVector<std::shared_ptr<DataModel::GroupPart>> readParts(const QJsonArray& jsonParts);
-        static std::shared_ptr<DataModel::GroupPart> readPart(const QJsonObject& jsonPart, QVector<std::shared_ptr<DataModel::GroupPart>>& parts);
+        static std::shared_ptr<DataModel::GroupPart> readPart(const QJsonObject& jsonPart, QVector<std::shared_ptr<DataModel::GroupPart>>& parts, unsigned nestedLevel = 0);
     };
 }
