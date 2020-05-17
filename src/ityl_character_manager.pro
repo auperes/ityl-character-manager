@@ -89,7 +89,6 @@ DISTFILES += \
     ui/CharacterListView.qml \
     ui/CharacterView.qml \
     ui/DescriptionView.qml \
-    ui/GroupPartListView.qml \
     ui/GroupPartView.qml \
     ui/GroupView.qml \
     ui/HomeCategoryView.qml \

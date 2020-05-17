@@ -29,6 +29,7 @@
           { "type": "group", "name": "group1" },
           { "type": "group", "name": "group2" },
           { "type": "group", "name": "group3" },
+          { "type": "group", "name": "group4" },
           { "type": "background", "name": "background1" }
         ]
       }

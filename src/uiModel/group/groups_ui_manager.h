@@ -30,8 +30,6 @@ namespace Ityl::UiModel
         QMap<QString, QString> _nationColors;
         CharactersUiManager* _characterUiManager; //TODO get CharacterUiCollections without CharacterUiManager
 
-        QMap<QString, std::shared_ptr<GroupPartUiModel>> getPartUiModelsByName(const GroupUiModel& groupUiModel) const;
-        QMap<QString, std::shared_ptr<GroupPartUiModel>> getPartUiModelsByName(const QList<std::shared_ptr<GroupPartUiModel>>& partUiModels) const;
         QString getNationColor(const QString& nationName) const;
     };
 }

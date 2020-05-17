@@ -14,6 +14,7 @@ Item {
         ListView {
             id: groupPartsList
             model: groupUiView.parts
+            interactive: false
             implicitHeight: contentHeight
             spacing: 30
             delegate: GroupPartView {}
@@ -28,11 +29,26 @@ Item {
         ColumnLayout {
             implicitWidth: groupView.width
 
-            Text {
-                Layout.alignment: Qt.AlignCenter
-                text: groupUiView.name
-                font.pointSize: 16
-                font.bold: true
+            Rectangle {
+                Layout.preferredHeight: groupHeader.height + 6
+                Layout.fillWidth: true
+                color: groupUiView.nationColor
+
+                ColumnLayout {
+                    width: parent.width
+                    id: groupHeader
+
+                    Item { Layout.fillHeight: true }
+
+                    Text {
+                        Layout.alignment: Qt.AlignCenter
+                        text: groupUiView.name
+                        font.pointSize: 16
+                        font.bold: true
+                    }
+
+                    Item { Layout.fillHeight: true }
+                }
             }
 
             Text {

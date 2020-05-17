@@ -4,7 +4,9 @@
 
 #include <QAbstractItemModel>
 #include <QList>
+#include <QMap>
 #include <QObject>
+#include <QString>
 
 #include "../../converters/converters.h"
 #include "../../dataModel/group/group.h"
@@ -32,9 +34,9 @@ namespace Ityl::UiModel
         const QString& nationColor() { return _nationColor; }
         const QString& description() { return _group->getDescription(); }
         QAbstractItemModel* parts() { return _parts.get(); }
-        bool hasParts() { return _partUiModels.count() > 0; }
+        bool hasParts() { return _partUiModelsBySubgroupName.count() > 0; }
 
-        QList<std::shared_ptr<GroupPartUiModel>> getPartUiModels() const { return _partUiModels; }
+        const QMap<QString, std::shared_ptr<GroupPartUiModel>>& getPartUiModelsBySubgroupName() const { return _partUiModelsBySubgroupName; }
 
     private:
         std::shared_ptr<DataModel::Group> _group;
@@ -42,6 +44,7 @@ namespace Ityl::UiModel
 
         std::unique_ptr<QAbstractItemModel> _parts;
         QList<std::shared_ptr<GroupPartUiModel>> _partUiModels;
+        QMap<QString, std::shared_ptr<GroupPartUiModel>> _partUiModelsBySubgroupName;
 
         void addPart(const DataModel::GroupPart& part);
     };

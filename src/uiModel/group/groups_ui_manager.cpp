@@ -28,7 +28,7 @@ namespace Ityl::UiModel
         auto collectionsBySubgroup = _characterUiManager->getCollectionsFromGroup(name);
         auto groupUiModel = std::make_shared<GroupUiModel>(group, getNationColor(group->getNation()));
 
-        auto partsBySubgroup = getPartUiModelsByName(*groupUiModel);
+        auto& partsBySubgroup = groupUiModel->getPartUiModelsBySubgroupName();
 
         for (const auto& subgroup : collectionsBySubgroup.keys())
         {
@@ -62,40 +62,6 @@ namespace Ityl::UiModel
     void GroupsUiManager::changeNationColors(const QMap<QString, QString>& nationColors)
     {
         _nationColors = nationColors;
-    }
-
-    QMap<QString, std::shared_ptr<GroupPartUiModel>> GroupsUiManager::getPartUiModelsByName(const GroupUiModel& groupUiModel) const
-    {
-        QMap<QString, std::shared_ptr<GroupPartUiModel>> partsBySubgroup;
-        for (const auto& partUiModel : groupUiModel.getPartUiModels())
-        {
-            partsBySubgroup.insert(partUiModel->subgroupName(), partUiModel);
-            if (!partUiModel->getPartUiModels().empty())
-            {
-                auto parts = getPartUiModelsByName(partUiModel->getPartUiModels());
-                for (const auto& subgroup : parts.keys())
-                    partsBySubgroup.insert(subgroup, parts[subgroup]);
-            }
-        }
-
-        return partsBySubgroup;
-    }
-
-    QMap<QString, std::shared_ptr<GroupPartUiModel>> GroupsUiManager::getPartUiModelsByName(const QList<std::shared_ptr<GroupPartUiModel>>& partUiModels) const
-    {
-        QMap<QString, std::shared_ptr<GroupPartUiModel>> partsBySubgroup;
-        for (const auto& partUiModel : partUiModels)
-        {
-            partsBySubgroup.insert(partUiModel->subgroupName(), partUiModel);
-            if (!partUiModel->getPartUiModels().empty())
-            {
-                auto parts = getPartUiModelsByName(partUiModel->getPartUiModels());
-                for (const auto& subgroup : parts.keys())
-                    partsBySubgroup.insert(subgroup, parts[subgroup]);
-            }
-        }
-
-        return partsBySubgroup;
     }
 
     QString GroupsUiManager::getNationColor(const QString& nationName) const

@@ -21,15 +21,15 @@ namespace Ityl::DataModel
         const QString& getNation() const { return _nation; }
         const GroupType& getType() const { return _type; }
         const QString& getDescription() const { return _description; }
-        const QVector<GroupPart>& getParts() const { return _parts; }
+        const QVector<std::shared_ptr<GroupPart>>& getParts() const { return _parts; }
 
         void setName(const QString& name) { _name = name; }
         void setNation(const QString& nation) { _nation = nation; }
         void setType(const GroupType& type) { _type = type; }
         void setDescription(const QString& description) { _description = description; }
-        void setParts(const QVector<GroupPart>& parts) { _parts = parts; }
+        void setParts(const QVector<std::shared_ptr<GroupPart>>& parts) { _parts = parts; }
 
-        void addPart(const GroupPart& part) { _parts.push_back(part); }
+        void addPart(const std::shared_ptr<GroupPart>& part) { _parts.push_back(part); }
 
     private:
         QString _name;
@@ -37,6 +37,6 @@ namespace Ityl::DataModel
         GroupType _type;
         QString _description;
 
-        QVector<GroupPart> _parts;
+        QVector<std::shared_ptr<GroupPart>> _parts;
     };
 }

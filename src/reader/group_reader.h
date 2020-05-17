@@ -17,7 +17,7 @@ namespace Ityl::Reader
         static DataModel::Group readGroupFromFile(const QString& filepath);
 
     private:
-        static QVector<DataModel::GroupPart> readParts(const QJsonArray& jsonParts);
-        static DataModel::GroupPart readPart(const QJsonObject& jsonPart);
+        static QVector<std::shared_ptr<DataModel::GroupPart>> readParts(const QJsonArray& jsonParts);
+        static std::shared_ptr<DataModel::GroupPart> readPart(const QJsonObject& jsonPart, QVector<std::shared_ptr<DataModel::GroupPart>>& parts);
     };
 }

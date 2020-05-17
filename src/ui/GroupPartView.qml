@@ -55,18 +55,5 @@ Component {
             Layout.preferredHeight: contentHeight
             model: display.oldCharacters.model
             delegate: CharacterView {}
-        }
-
-        Loader {
-            id: groupPartsLoader
-            source: display.hasParts ? "GroupPartListView.qml" : ""
-            Layout.preferredHeight: childrenRect.height
-            Layout.preferredWidth: parent.parent.width
-            Layout.fillWidth: true
-        }
-
-        Item {
-            Layout.fillHeight: true
-        }
     }
 }

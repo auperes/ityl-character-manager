@@ -8,7 +8,6 @@ namespace Ityl::UiModel
     GroupUiModel::GroupUiModel()
         : QObject()
     {
-
     }
 
     GroupUiModel::GroupUiModel(const std::shared_ptr<DataModel::Group>& group, const QString& nationColor, QObject* parent)
@@ -20,7 +19,7 @@ namespace Ityl::UiModel
         _parts->insertColumn(0);
 
         for (const auto& part : _group->getParts())
-            addPart(part);
+            addPart(*part);
     }
 
     void GroupUiModel::addPart(const DataModel::GroupPart& part)
@@ -30,6 +29,8 @@ namespace Ityl::UiModel
         QQmlEngine::setObjectOwnership(groupPartUi.get(), QQmlEngine::CppOwnership);
         _parts->insertRow(newRow);
         _parts->setData(_parts->index(newRow, 0), QVariant::fromValue(groupPartUi.get()), Qt::DisplayRole);
-        _partUiModels.push_back(std::move(groupPartUi));
+        _partUiModels.push_back(groupPartUi);
+        if (!groupPartUi->subgroupName().isEmpty())
+            _partUiModelsBySubgroupName.insert(part.getSubgroupName(), groupPartUi);
     }
 }

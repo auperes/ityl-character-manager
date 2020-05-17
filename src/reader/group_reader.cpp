@@ -22,26 +22,34 @@ namespace Ityl::Reader
         return group;
     }
 
-    QVector<DataModel::GroupPart> GroupReader::readParts(const QJsonArray& jsonParts)
+    QVector<std::shared_ptr<DataModel::GroupPart>> GroupReader::readParts(const QJsonArray& jsonParts)
     {
-        QVector<DataModel::GroupPart> parts;
-        parts.reserve(jsonParts.size());
+        QVector<std::shared_ptr<DataModel::GroupPart>> parts;
 
         for (const auto& jsonPart : jsonParts)
-            parts.push_back(readPart(jsonPart.toObject()));
+            readPart(jsonPart.toObject(), parts);
 
         return parts;
     }
 
-    DataModel::GroupPart GroupReader::readPart(const QJsonObject& jsonPart)
+    std::shared_ptr<DataModel::GroupPart> GroupReader::readPart(const QJsonObject& jsonPart, QVector<std::shared_ptr<DataModel::GroupPart>>& parts)
     {
-        DataModel::GroupPart part;
-        part.setPartName(jsonPart["name"].toString());
-        part.setSubgroupName(jsonPart["subgroup"].toString());
-        part.setDescription(jsonPart["description"].toString());
+        auto part = std::make_shared<DataModel::GroupPart>();
+        part->setPartName(jsonPart["name"].toString());
+        part->setSubgroupName(jsonPart["subgroup"].toString());
+        part->setDescription(jsonPart["description"].toString());
+        parts.push_back(part);
 
         if (jsonPart.contains("parts"))
-            part.setParts(readParts(jsonPart["parts"].toArray()));
+        {
+            auto jsonParts = jsonPart["parts"].toArray();
+
+            for (const auto& jsonPart : jsonParts)
+            {
+                auto childPart = readPart(jsonPart.toObject(), parts);
+                childPart->setParentPart(part);
+            }
+        }
 
         return part;
     }
