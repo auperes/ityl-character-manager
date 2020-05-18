@@ -5,7 +5,6 @@ import Ityl 1.0
 
 Item {
     id: groupView
-    anchors.fill: parent
     property GroupUiView groupUiView
 
     Component {
@@ -27,12 +26,14 @@ Item {
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
 
         ColumnLayout {
-            implicitWidth: groupView.width
+            implicitWidth: groupView.width - 40
 
             Rectangle {
                 Layout.preferredHeight: groupHeader.height + 6
                 Layout.fillWidth: true
                 color: groupUiView.nationColor
+                Layout.leftMargin: 20
+                Layout.rightMargin: 20
 
                 ColumnLayout {
                     width: parent.width
@@ -53,18 +54,25 @@ Item {
 
             Text {
                 Layout.fillWidth: true
-                Layout.preferredWidth: groupView.width
+                Layout.preferredWidth: groupView.width - 40
                 text: groupUiView.description
                 wrapMode: Text.WordWrap
+                horizontalAlignment: Text.AlignJustify
+                Layout.leftMargin: 20
+                Layout.rightMargin: 20
             }
 
             Loader {
                 sourceComponent: groupUiView.hasParts ? groupParts : ""
                 Layout.fillWidth: true
+                Layout.leftMargin: 20
+                Layout.rightMargin: 20
             }
 
             Item {
                 Layout.fillHeight: true
+                Layout.leftMargin: 20
+                Layout.rightMargin: 20
             }
         }
     }

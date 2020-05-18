@@ -28,13 +28,13 @@ namespace Ityl::UiModel
         , _filteringData(filteringData)
     {
         _model->insertColumn(0);
-        addCharacters(_characterUiModels);
+        addCharactersInternal(_characterUiModels);
     }
 
     void CharactersUiCollection::setCharacters(QList<std::shared_ptr<CharacterUiModel>>&& characterUiModels)
     {
         _characterUiModels = std::move(characterUiModels);
-        addCharacters(_characterUiModels);
+        addCharactersInternal(_characterUiModels);
     }
 
     void CharactersUiCollection::addCharacter(const std::shared_ptr<CharacterUiModel>& characterUiModel)
@@ -56,8 +56,13 @@ namespace Ityl::UiModel
 
     void CharactersUiCollection::addCharacters(const QList<std::shared_ptr<CharacterUiModel>>& characterUiModels)
     {
-        foreach (const std::shared_ptr<CharacterUiModel> &characterUiModel, characterUiModels) {
+        _characterUiModels.append(characterUiModels);
+        addCharactersInternal(characterUiModels);
+    }
+
+    void CharactersUiCollection::addCharactersInternal(const QList<std::shared_ptr<CharacterUiModel> >& characterUiModels)
+    {
+        for (const std::shared_ptr<CharacterUiModel>&characterUiModel : characterUiModels)
             addCharacter(characterUiModel);
-        }
     }
 }

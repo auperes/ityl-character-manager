@@ -28,8 +28,6 @@ ApplicationWindow {
     Component {
         id: tabContentGroupComponent
         GroupView {
-            anchors.leftMargin: 20
-            anchors.rightMargin: 20
         }
     }
 

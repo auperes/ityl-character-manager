@@ -20,6 +20,7 @@ Component {
             Layout.preferredWidth: parent.parent.width
             text: display.description
             wrapMode: Text.WordWrap
+            horizontalAlignment: Text.AlignJustify
             visible: Boolean(display.description)
         }
 

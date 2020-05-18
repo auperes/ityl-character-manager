@@ -25,6 +25,7 @@ namespace Ityl::UiModel
 
         unsigned getId() const { return _id; }
         FilteringData getFilteringData() const { return _filteringData; }
+        const QList<std::shared_ptr<CharacterUiModel>>& getCharacterUiModels() const { return _characterUiModels; }
 
         void setCharacters(QList<std::shared_ptr<CharacterUiModel>>&& characterUiModels);
         void addCharacter(const std::shared_ptr<CharacterUiModel>& characterUiModel);
@@ -36,5 +37,7 @@ namespace Ityl::UiModel
         std::unique_ptr<QAbstractItemModel> _model;
         QList<std::shared_ptr<CharacterUiModel>> _characterUiModels;
         FilteringData _filteringData;
+
+        void addCharactersInternal(const QList<std::shared_ptr<CharacterUiModel>>& characterUiModels);
     };
 }
