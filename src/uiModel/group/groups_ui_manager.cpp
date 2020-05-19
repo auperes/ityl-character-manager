@@ -69,16 +69,35 @@ namespace Ityl::UiModel
 
         auto& partsBySubgroup = groupUiModel->getPartUiModelsBySubgroupName();
 
+        QList<std::shared_ptr<CharacterUiModel>> missingCurrentCharacters;
+        QList<std::shared_ptr<CharacterUiModel>> missingOldCharacters;
+
         for (const auto& subgroup : collectionsBySubgroup.keys())
         {
+            auto& collections = collectionsBySubgroup[subgroup];
+
             if (partsBySubgroup.contains(subgroup))
             {
                 auto& partUiModel = partsBySubgroup[subgroup];
-                partUiModel->setCurrentCharactersUiCollection(collectionsBySubgroup[subgroup]._currentUiCharacters);
-                partUiModel->setOldCharactersUiCollection(collectionsBySubgroup[subgroup]._oldUiCharacters);
+                partUiModel->setCurrentCharactersUiCollection(collections._currentUiCharacters);
+                partUiModel->setOldCharactersUiCollection(collections._oldUiCharacters);
             }
             else
+            {
                 std::cout << "Missing subgroup " << subgroup.toStdString() << " in group " << groupName.toStdString() << std::endl;
+                if (partsBySubgroup.contains(DataModel::Group::RootSubgroup))
+                {
+                    missingCurrentCharacters.append(collections._currentUiCharacters->getCharacterUiModels());
+                    missingOldCharacters.append(collections._oldUiCharacters->getCharacterUiModels());
+                }
+            }
+        }
+
+        if (partsBySubgroup.contains(DataModel::Group::RootSubgroup))
+        {
+            auto& partUiModel = partsBySubgroup[DataModel::Group::RootSubgroup];
+            partUiModel->currentCharacters()->addCharacters(missingCurrentCharacters);
+            partUiModel->oldCharacters()->addCharacters(missingOldCharacters);
         }
 
         return groupUiModel;
