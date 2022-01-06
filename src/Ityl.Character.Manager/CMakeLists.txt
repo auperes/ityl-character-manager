@@ -15,8 +15,7 @@ set(SOURCES
     uiModels/group/groups_ui_manager.cpp
     uiModels/homeView/home_category_ui_model.cpp
     uiModels/homeView/home_view_ui_model.cpp
-    uiModels/settings_ui_manager.cpp
-    ityl_ui_plugin.cpp)
+    uiModels/settings_ui_manager.cpp)
 
 set(HEADERS
     q_custom_gui_application.h
@@ -37,8 +36,7 @@ set(HEADERS
     uiModels/group/groups_ui_manager.h
     uiModels/homeView/home_category_ui_model.h
     uiModels/homeView/home_view_ui_model.h
-    uiModels/settings_ui_manager.h
-    ityl_ui_plugin.h)
+    uiModels/settings_ui_manager.h)
 
 qt5_add_resources(APP_RESOURCES ${CMAKE_CURRENT_LIST_DIR}/qml.qrc)
 
@@ -64,9 +62,3 @@ add_custom_command(
     POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/mock/
             ${CMAKE_CURRENT_BINARY_DIR}/mock/)
-
-add_custom_command(
-    TARGET Ityl.Character.Manager
-    POST_BUILD
-    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_CURRENT_BINARY_DIR}/../plugins/ItylUi/
-            ${CMAKE_CURRENT_BINARY_DIR}/plugins/ItylUi/)

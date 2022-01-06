@@ -55,9 +55,6 @@ int main(int argc, char *argv[])
         QObject::connect(&settingsUiManager, SIGNAL(homeViewChanged(const DataModel::HomeView&)), &homeViewUi, SLOT(resetHomeView(const DataModel::HomeView&)));
 
         QQmlApplicationEngine engine;
-       engine.addImportPath("./plugins");
-
-        auto paths = engine.importPathList();
 
         engine.rootContext()->setContextProperty(QStringLiteral("charactersManager"), &charatersUiManager);
         engine.rootContext()->setContextProperty(QStringLiteral("groupsManager"), &groupUiManager);
