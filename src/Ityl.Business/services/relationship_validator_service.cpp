@@ -6,7 +6,6 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 #include <QJsonObject>
-#include <QTextCodec>
 #include <QTextStream>
 
 #include <converters/data_model_converters.h>
@@ -91,9 +90,7 @@ namespace Ityl::Business::Services
         missingCharactersFile.open(QIODevice::WriteOnly | QIODevice::Text);
 
         QTextStream outMissingRelationships(&missingRelationshipsFile);
-        outMissingRelationships.setCodec("UTF-8");
         QTextStream outMissingCharacters(&missingCharactersFile);
-        outMissingCharacters.setCodec("UTF-8");
 
         for (auto& element : _missingRelationships)
         {

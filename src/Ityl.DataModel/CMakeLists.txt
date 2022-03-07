@@ -38,4 +38,4 @@ target_include_directories(
 
 target_link_libraries(
     Ityl.DataModel
-    PRIVATE Qt5::Core)
+    PRIVATE Qt6::Core)

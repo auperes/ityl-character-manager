@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.1...3.22)
+cmake_minimum_required(VERSION 3.1...3.23)
 
 if(${CMAKE_VERSION} VERSION_LESS 3.12)
     cmake_policy(VERSION ${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION})
@@ -19,7 +19,7 @@ if(CMAKE_VERSION VERSION_LESS 3.7.0)
     set(CMAKE_INCLUDE_CURRENT_DIR ON)
 endif()
 
-find_package(Qt5 COMPONENTS Widgets Qml Quick QuickControls2 REQUIRED)
+find_package(Qt6 COMPONENTS Widgets Qml Quick QuickControls2 REQUIRED)
 
 if(CMAKE_VERSION VERSION_LESS 3.12.0)
     add_definitions(-DQT_DEPRECATED_WARNINGS)

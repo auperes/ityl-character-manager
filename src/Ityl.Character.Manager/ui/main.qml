@@ -1,8 +1,8 @@
-import QtQuick 2.12
-import QtQuick.Window 2.12
-import QtQuick.Controls 2.0
-import QtQuick.Layouts 1.3
-import QtQuick.Dialogs 1.3
+import QtQuick
+import QtQuick.Window
+import QtQuick.Controls
+import QtQuick.Layouts
+import QtQuick.Dialogs
 
 ApplicationWindow {
     id: mainWindow
@@ -35,7 +35,7 @@ ApplicationWindow {
         id: settingsFileDialog
         title: "Choose a settings file"
         onAccepted: {
-            settingsManager.changeSettings(fileUrl.toString())
+            settingsManager.changeSettings(selectedFile.toString())
         }
     }
 

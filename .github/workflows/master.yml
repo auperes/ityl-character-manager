@@ -52,7 +52,7 @@ jobs:
 
       - name: Configure CMake
         env:
-          CMAKE_PREFIX_PATH: ${{ env.Qt5_Dir }}
+          CMAKE_PREFIX_PATH: ${{ env.Qt6_Dir }}
         run: cmake -S ${{ github.workspace}}/src -B ${{ github.workspace }}/build -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
 
       - name: Build

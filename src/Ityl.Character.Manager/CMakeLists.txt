@@ -38,7 +38,7 @@ set(HEADERS
     uiModels/homeView/home_view_ui_model.h
     uiModels/settings_ui_manager.h)
 
-qt5_add_resources(APP_RESOURCES ${CMAKE_CURRENT_LIST_DIR}/qml.qrc)
+qt6_add_resources(APP_RESOURCES ${CMAKE_CURRENT_LIST_DIR}/qml.qrc)
 
 add_executable(Ityl.Character.Manager ${SOURCES} ${HEADERS} ${APP_RESOURCES})
 
@@ -49,7 +49,7 @@ target_link_libraries(
     PRIVATE Ityl.DataModel
     PRIVATE Ityl.JsonReader
     PRIVATE Ityl.Business
-    Qt5::Widgets Qt5::Qml Qt5::Quick)
+    Qt6::Widgets Qt6::Qml Qt6::Quick)
 
 add_custom_command(
     TARGET Ityl.Character.Manager
