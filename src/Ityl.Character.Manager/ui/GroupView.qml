@@ -23,55 +23,63 @@ Item {
     ScrollView {
         anchors.fill: parent
         ScrollBar.horizontal.policy: ScrollBar.AlwaysOff
+        contentHeight: groupContent.height
+        contentWidth: availableWidth
 
-        ColumnLayout {
-            implicitWidth: groupView.width - 40
+        Flickable {
+            contentHeight: groupContent.height
+            clip: true
 
-            Rectangle {
-                Layout.preferredHeight: groupHeader.height + 6
-                Layout.fillWidth: true
-                color: groupUiView.nationColor
-                Layout.leftMargin: 20
-                Layout.rightMargin: 20
+            ColumnLayout {
+                id: groupContent
+                implicitWidth: groupView.width - 40
 
-                ColumnLayout {
-                    width: parent.width
-                    id: groupHeader
+                Rectangle {
+                    Layout.preferredHeight: groupHeader.height + 6
+                    Layout.fillWidth: true
+                    color: groupUiView.nationColor
+                    Layout.leftMargin: 20
+                    Layout.rightMargin: 20
 
-                    Item { Layout.fillHeight: true }
+                    ColumnLayout {
+                        width: parent.width
+                        id: groupHeader
 
-                    Text {
-                        Layout.alignment: Qt.AlignCenter
-                        text: groupUiView.name
-                        font.pointSize: 18
-                        font.bold: true
+                        Item { Layout.fillHeight: true }
+
+                        Text {
+                            Layout.alignment: Qt.AlignCenter
+                            text: groupUiView.name
+                            font.pointSize: 18
+                            font.bold: true
+                        }
+
+                        Item { Layout.fillHeight: true }
                     }
-
-                    Item { Layout.fillHeight: true }
                 }
-            }
 
-            Text {
-                Layout.fillWidth: true
-                Layout.preferredWidth: groupView.width - 40
-                text: groupUiView.description
-                wrapMode: Text.WordWrap
-                horizontalAlignment: Text.AlignJustify
-                Layout.leftMargin: 20
-                Layout.rightMargin: 20
-            }
+                Text {
+                    Layout.fillWidth: true
+                    Layout.preferredWidth: groupView.width - 40
+                    text: groupUiView.description
+                    wrapMode: Text.WordWrap
+                    horizontalAlignment: Text.AlignJustify
+                    Layout.leftMargin: 20
+                    Layout.rightMargin: 20
+                }
 
-            Loader {
-                sourceComponent: groupUiView.hasParts ? groupParts : ""
-                Layout.fillWidth: true
-                Layout.leftMargin: 20
-                Layout.rightMargin: 20
-            }
+                Loader {
+                    sourceComponent: groupUiView.hasParts ? groupParts : ""
+                    Layout.fillWidth: true
+                    Layout.leftMargin: 20
+                    Layout.rightMargin: 20
+                }
 
-            Item {
-                Layout.fillHeight: true
-                Layout.leftMargin: 20
-                Layout.rightMargin: 20
+                Item {
+                    Layout.fillHeight: true
+                    Layout.leftMargin: 20
+                    Layout.rightMargin: 20
+                }
             }
         }
     }
