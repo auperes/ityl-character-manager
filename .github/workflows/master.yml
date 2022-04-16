@@ -25,6 +25,8 @@ jobs:
 
       - name: Install Qt
         uses: jurplel/install-qt-action@v2
+        with:
+          version: '6.3.0'
 
       - name: Cache SonarCloud packages
         uses: actions/cache@v1
@@ -52,7 +54,7 @@ jobs:
 
       - name: Configure CMake
         env:
-          CMAKE_PREFIX_PATH: ${{ env.Qt5_Dir }}
+          CMAKE_PREFIX_PATH: ${{ env.Qt6_Dir }}
         run: cmake -S ${{ github.workspace}}/src -B ${{ github.workspace }}/build -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
 
       - name: Build

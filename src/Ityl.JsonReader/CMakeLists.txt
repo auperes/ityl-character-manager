@@ -22,4 +22,4 @@ target_include_directories(
 target_link_libraries(
     Ityl.JsonReader
     PRIVATE Ityl.DataModel
-    PRIVATE Qt5::Core)
+    PRIVATE Qt6::Core)

@@ -78,7 +78,7 @@ namespace Ityl::Ui::UiModels
 
             if (partsBySubgroup.contains(subgroup))
             {
-                auto& partUiModel = partsBySubgroup[subgroup];
+                const auto& partUiModel = partsBySubgroup[subgroup];
                 partUiModel->setCurrentCharactersUiCollection(collections._currentUiCharacters);
                 partUiModel->setOldCharactersUiCollection(collections._oldUiCharacters);
             }
@@ -95,7 +95,7 @@ namespace Ityl::Ui::UiModels
 
         if (partsBySubgroup.contains(DataModel::Group::RootSubgroup))
         {
-            auto& partUiModel = partsBySubgroup[DataModel::Group::RootSubgroup];
+            const auto& partUiModel = partsBySubgroup[DataModel::Group::RootSubgroup];
             partUiModel->currentCharacters()->addCharacters(missingCurrentCharacters);
             partUiModel->oldCharacters()->addCharacters(missingOldCharacters);
         }

@@ -26,7 +26,6 @@ int main(int argc, char *argv[])
 {
     try
     {
-        QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
         QCustomGuiApplication app(argc, argv);
         QFont font;
         font.setPointSize(10);

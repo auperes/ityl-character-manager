@@ -8,6 +8,7 @@
 *.so
 *.dll
 *.dylib
+*/out
 
 # Qt-es
 object_script.*.Release
@@ -44,3 +45,6 @@ CMakeLists.txt.user*
 
 # VS Code
 .vscode
+
+.sonarlint
+.vs

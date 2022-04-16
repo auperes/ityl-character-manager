@@ -22,4 +22,4 @@ target_link_libraries(
     Ityl.Business
     PRIVATE Ityl.DataModel
     PRIVATE Ityl.JsonReader
-    PRIVATE Qt5::Core)
+    PRIVATE Qt6::Core)
