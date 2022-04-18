@@ -4,6 +4,8 @@ import QtQuick.Controls
 import QtQuick.Layouts
 import QtQuick.Dialogs
 
+import "MaterialIcons.js" as MdiFont
+
 ApplicationWindow {
     id: mainWindow
     visible: true
@@ -14,14 +16,14 @@ ApplicationWindow {
 
     Component {
         id: tabComponent
-        TabBarComponent {}
-    }
+        TabBarComponent {
+            closeButtonVisible: true
 
-    Component {
-        id: tabContentCharacterComponent
-        CharacterListView {
-            leftMargin: 20
-            rightMargin: 20
+            onClosedTab: {
+                var index = TabBar.index;
+                tabBarView.removeItem(this)
+                tabContentUiCollection.removeGroup(index - 1)
+            }
         }
     }
 
@@ -29,6 +31,11 @@ ApplicationWindow {
         id: tabContentGroupComponent
         GroupView {
         }
+    }
+
+    FontLoader {
+        id: materialFont
+        source: "qrc:/ui/materialdesignicons-webfont.ttf"
     }
 
     FileDialog {
@@ -70,10 +77,10 @@ ApplicationWindow {
             }
 
             TabBarComponent {
-                text: qsTr("Home")
-            }
-            TabBarComponent {
-                text: qsTr("All characters")
+                text: MdiFont.Icon.home
+                font.family: materialFont.name
+                font.pointSize: 14
+                closeButtonVisible: false
             }
         }
 
@@ -84,11 +91,7 @@ ApplicationWindow {
             Connections {
                 target: homeView
                 function onElementSelected(elementType, elementName) {
-                    var groupUiView = groupsManager.addGroup(elementName);
-                    var tab =  groupUiView === null
-                            ? tabContentCharacterComponent.createObject(tabContent, { model: charactersManager.addCollection(elementType, elementName).model })
-                            : tabContentGroupComponent.createObject(tabContent, { groupUiView: groupUiView });
-                    tabContent.children.push(tab)
+                    tabContentUiCollection.addGroup(elementName)
                 }
             }
 
@@ -99,13 +102,9 @@ ApplicationWindow {
                 }
             }
 
-            Item {
-                id: allCharactersTab
-                CharacterListView {
-                    anchors.fill: parent
-                    leftMargin: 20
-                    rightMargin: 20
-                    model: charactersManager.addCollection("Tous", "").model
+            Repeater {
+                model: tabContentUiCollection
+                delegate: GroupView {
                 }
             }
         }

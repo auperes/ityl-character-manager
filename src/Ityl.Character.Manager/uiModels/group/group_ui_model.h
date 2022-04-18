@@ -30,6 +30,8 @@ namespace Ityl::Ui::UiModels
         GroupUiModel();
         GroupUiModel(const std::shared_ptr<DataModel::Group>& group, const QString& nationColor, QObject *parent = nullptr);
 
+        ~GroupUiModel() override = default;
+
         const QString& name() { return _group->getName(); }
         const QString type() { return DataModel::Converters::convertGroupType(_group->getType()); }
         const QString& nationColor() { return _nationColor; }

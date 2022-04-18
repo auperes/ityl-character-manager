@@ -15,7 +15,8 @@ set(SOURCES
     uiModels/group/groups_ui_manager.cpp
     uiModels/homeView/home_category_ui_model.cpp
     uiModels/homeView/home_view_ui_model.cpp
-    uiModels/settings_ui_manager.cpp)
+    uiModels/settings_ui_manager.cpp
+    uiModels/tab_content_ui_collection.cpp)
 
 set(HEADERS
     q_custom_gui_application.h
@@ -36,7 +37,8 @@ set(HEADERS
     uiModels/group/groups_ui_manager.h
     uiModels/homeView/home_category_ui_model.h
     uiModels/homeView/home_view_ui_model.h
-    uiModels/settings_ui_manager.h)
+    uiModels/settings_ui_manager.h
+    uiModels/tab_content_ui_collection.h)
 
 qt6_add_resources(APP_RESOURCES ${CMAKE_CURRENT_LIST_DIR}/qml.qrc)
 
