@@ -49,11 +49,22 @@ ApplicationWindow {
     header: ToolBar {
         RowLayout {
             ToolButton {
-                text: qsTr("Reload")
+                text: MdiFont.Icon.sync
+                font.family: materialFont.name
+                font.pointSize: 14
+                ToolTip.text: qsTr("Reload data")
+                ToolTip.visible: hovered
+                ToolTip.delay: 1000
                 onClicked: { charactersManager.refreshCharacters() }
             }
+
             ToolButton {
-                text: qsTr("Settings")
+                text: MdiFont.Icon.cog
+                font.family: materialFont.name
+                font.pointSize: 14
+                ToolTip.text: qsTr("Load new App Settings File")
+                ToolTip.visible: hovered
+                ToolTip.delay: 1000
                 onClicked: { settingsFileDialog.open() }
             }
         }
