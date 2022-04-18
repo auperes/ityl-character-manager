@@ -20,6 +20,8 @@ namespace Ityl::Ui::UiModels
         explicit GroupInfoUiModel(QObject *parent = nullptr);
         explicit GroupInfoUiModel(const DataModel::GroupInfo& groupInfo, QObject *parent = nullptr);
 
+        ~GroupInfoUiModel() override = default;
+
         QString name() const { return _groupInfo.getName(); }
         QString subGroupName() const { return _groupInfo.getSubgroupName(); }
         QString type() const { return DataModel::Converters::convertGroupType(_groupInfo.getType()); }

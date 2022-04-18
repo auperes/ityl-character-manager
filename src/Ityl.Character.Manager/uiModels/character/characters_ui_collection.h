@@ -21,6 +21,8 @@ namespace Ityl::Ui::UiModels
                 Models::FilteringData filteringData,
                 QObject *parent = nullptr);
 
+        ~CharactersUiCollection() override = default;
+
         QAbstractItemModel* model() const { return _model.get(); }
 
         unsigned getId() const { return _id; }

@@ -14,6 +14,8 @@ namespace Ityl::Ui::UiModels
     public:
         explicit SettingsUiManager(QObject *parent = nullptr);
 
+        ~SettingsUiManager() override = default;
+
     signals:
         void charactersFolderPathChanged(const QString& folderPath);
         void groupsFolderPathChanged(const QString& folderPath);

@@ -23,6 +23,8 @@ namespace Ityl::Ui::UiModels
         explicit HomeViewUIModel(QObject *parent = nullptr);
         explicit HomeViewUIModel(const DataModel::HomeView& homeView, QObject *parent = nullptr);
 
+        ~HomeViewUIModel() override = default;
+
         const QStringList getCategoryNames() const { return _categoryNames; }
         HomeCategoryUiModel* getSelectedCategory() const { return _selectedCategory.get(); }
 

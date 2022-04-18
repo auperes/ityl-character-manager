@@ -16,6 +16,8 @@ namespace Ityl::Ui::UiModels
         explicit SkillUiModel(QObject *parent = nullptr);
         SkillUiModel(const QString &skillName, const QList<DataModel::Skill> &skillValues, QObject *parent = nullptr);
 
+        ~SkillUiModel() override = default;
+
         QString skillName() const { return _skillName; }
         QString skillValues() const {return _skillValues; }
 

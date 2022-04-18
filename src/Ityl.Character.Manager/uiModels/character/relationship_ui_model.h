@@ -16,6 +16,8 @@ namespace Ityl::Ui::UiModels
         explicit RelationshipUiModel(QObject *parent = nullptr);
         RelationshipUiModel(const DataModel::Relationship &relationship, const QList<QPair<QString, QString>> &names, QObject *parent = nullptr);
 
+        ~RelationshipUiModel() override = default;
+
         QString type() const { return _type; }
         QString names() const { return _names; }
 

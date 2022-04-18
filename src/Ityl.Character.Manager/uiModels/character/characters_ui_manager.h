@@ -15,6 +15,8 @@ namespace Ityl::Ui::UiModels
     public:
         CharactersUiManager(const QString& charactersFolderPath, const QMap<QString, QString>& nationColors, QObject *parent = nullptr);
 
+        ~CharactersUiManager() override = default;
+
         Q_INVOKABLE CharactersUiCollection* addCollection(const QString& type, const QString& name);
         Q_INVOKABLE void removeCollection(unsigned id);
 

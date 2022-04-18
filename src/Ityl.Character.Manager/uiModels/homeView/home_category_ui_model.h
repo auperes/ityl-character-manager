@@ -22,6 +22,8 @@ namespace Ityl::Ui::UiModels
         explicit HomeCategoryUiModel(QObject *parent = nullptr);
         explicit HomeCategoryUiModel(const QMap<DataModel::HomeElementType, QList<QString>>& elements, QObject *parent = nullptr);
 
+        ~HomeCategoryUiModel() override = default;
+
         QList<QString> getRegions() const { return _regions; }
         QList<QString> getOrganizations() const { return _organizations; }
         QList<QString> getFamilies() const { return _families; }
