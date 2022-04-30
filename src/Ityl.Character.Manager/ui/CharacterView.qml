@@ -8,6 +8,7 @@ Component {
         AvatarView {
             Layout.preferredHeight: 400
             Layout.preferredWidth: 200
+            source: model.display.avatar
         }
 
         Frame {
@@ -53,6 +54,7 @@ Component {
             StackView {
                 id: detailedView
                 anchors.fill: parent
+                initialItem: descriptionView
 
                 RelationshipsView {
                     id: relationshipsView
@@ -65,8 +67,6 @@ Component {
                 DescriptionView {
                     id: descriptionView
                 }
-
-                initialItem: descriptionView
             }
         }
     }

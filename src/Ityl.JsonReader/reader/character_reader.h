@@ -25,6 +25,6 @@ namespace Ityl::Reader
         static void fillRelationships(const QJsonArray& jsonRelationships, DataModel::Character& character);
         static QVector<DataModel::GroupInfo> readEthnies(const QJsonArray& jsonEthnies);
         static QVector<DataModel::GroupInfo> readGroups(const QJsonArray& jsonGroups);
-        static QVector<QString> readAvatars(const QJsonArray& jsonAvatars);
+        static void fillAvatars(const QJsonArray& jsonAvatars, DataModel::Character& character);
     };
 }

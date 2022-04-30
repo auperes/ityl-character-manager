@@ -5385,7 +5385,7 @@ var Icon = {
   "textSearch": "\u{f13B8}",
   "textShadow": "\u{f0669}",
   "textShort": "\u{f09A9}",
-  "textSubject": "\u{f09AA}",
+  "textLong": "\u{f09AA}",
   "textToSpeech": "\u{f050A}",
   "textToSpeechOff": "\u{f050B}",
   "texture": "\u{f050C}",

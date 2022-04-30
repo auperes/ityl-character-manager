@@ -3,9 +3,13 @@ import QtQuick.Controls
 import QtQuick.Layouts
 
 Item {
+    id: identityView
+
     ColumnLayout {
+        anchors.fill: parent
+
         Rectangle {
-            Layout.preferredWidth: 475
+            Layout.preferredWidth: identityView.width
             Layout.preferredHeight: characterHeader.height + 6
             color: model.display.nationColor
 
@@ -48,6 +52,7 @@ Item {
             delegate: RowLayout {
                 Text {
                     text: modelData
+                    wrapMode: Text.WordWrap
                 }
             }
         }
@@ -64,7 +69,7 @@ Item {
                     font.bold: true
                 }
                 Text {
-                    Layout.preferredWidth: identityFrame.width - 70
+                    Layout.preferredWidth: identityView.width - 70
                     text: model.display.skillValues
                     wrapMode: Text.WordWrap
                 }

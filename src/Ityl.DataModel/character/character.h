@@ -34,6 +34,7 @@ namespace Ityl::DataModel
         const QVector<GroupInfo>& getEthnies() const { return _ethnies; }
         const QVector<GroupInfo>& getGroups() const { return _groups; }
         const QVector<QString>& getAvatars() const { return _avatars; }
+        const QString& getMiniAvatar() const { return _miniAvatar; }
 
         const QString& getDescription() const { return _description; }
 
@@ -59,6 +60,7 @@ namespace Ityl::DataModel
         void setGroups(QVector<GroupInfo>&& groups) { _groups = std::move(groups); }
         void setAvatars(const QVector<QString> &avatars) { _avatars = avatars; }
         void setAvatars(QVector<QString> &&avatars) { _avatars = std::move(avatars); }
+        void setMiniAvatar(const QString& miniAvatar) { _miniAvatar = miniAvatar;}
 
         void setDescription(const QString& description) { _description = description; }
         void setDescription(QString&& description) { _description = std::move(description); }
@@ -85,6 +87,7 @@ namespace Ityl::DataModel
         QVector<GroupInfo> _ethnies;
         QVector<GroupInfo> _groups;
         QVector<QString> _avatars;
+        QString _miniAvatar;
 
         QString _description;
     };

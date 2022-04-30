@@ -68,17 +68,34 @@ namespace Ityl::Ui::UiModels
 
     const QUrl CharacterUiModel::avatar() const
     {
-        if (_character->getAvatars().isEmpty())
+        auto avatar = _character->getAvatars().isEmpty() ? "" : _character->getAvatars().first();
+
+        return loadImage(avatar, DataModel::AppConfig::getAvatarsFolderPath(), "avatar");
+    }
+
+    const QUrl CharacterUiModel::miniAvatar() const
+    {
+        if (_character->getMiniAvatar().isEmpty())
         {
-            std::cout << "Character " + _character->getFirstName().toStdString() + " " + _character->getLastName().toStdString() + " has no avatar" << std::endl;
+            std::cout << "Warning: no mini avatar provided for " << fullName().toStdString() << ", use first avatar as a fallback." << std::endl;
+            return avatar();
+        }
+
+        return loadImage(_character->getMiniAvatar(), DataModel::AppConfig::getMiniAvatarFolderPath(), "mini avatar");
+    }
+
+    QUrl CharacterUiModel::loadImage(QString name, QString path, QString type) const
+    {
+        if (name.isEmpty())
+        {
+            std::cout << "Character " + _character->getFirstName().toStdString() + " " + _character->getLastName().toStdString() + " has no " + type.toStdString() << std::endl;
             return QUrl();
         }
 
-        QUrl avatarFolderUrl("file:///" + DataModel::AppConfig::getAvatarsFolderPath() + _character->getAvatars().first());
-        if (QDir(DataModel::AppConfig::getAvatarsFolderPath()).isRelative())
-            return QUrl("file:///" + QDir::currentPath() + "/" + DataModel::AppConfig::getAvatarsFolderPath() + _character->getAvatars().first());
+        if (QDir(path).isRelative())
+            return QUrl("file:///" + QDir::currentPath() + "/" + path + name);
 
-        return QUrl("file:///" + DataModel::AppConfig::getAvatarsFolderPath() + _character->getAvatars().first());
+        return QUrl("file:///" + path + name);
     }
 
     const QString CharacterUiModel::quote() const
