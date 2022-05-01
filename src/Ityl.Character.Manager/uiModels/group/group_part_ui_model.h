@@ -21,14 +21,14 @@ namespace Ityl::Ui::UiModels
         Q_PROPERTY(CharactersUiCollection* oldCharacters READ oldCharacters CONSTANT)
 
     public:
-        explicit GroupPartUiModel(const DataModel::GroupPart& part, QObject *parent = nullptr);
+        explicit GroupPartUiModel(std::shared_ptr<DataModel::GroupPart> part, QObject *parent = nullptr);
 
         ~GroupPartUiModel() override = default;
 
-        const QString& name() { return _part.getPartName(); }
+        const QString& name() { return _part->getPartName(); }
         unsigned nameSize();
-        const QString& subgroupName() { return _part.getSubgroupName(); }
-        const QString& description() { return _part.getDescription(); }
+        const QString& subgroupName() { return _part->getSubgroupName(); }
+        const QString& description() { return _part->getDescription(); }
         CharactersUiCollection* currentCharacters() { return _currentCharacters.get(); }
         CharactersUiCollection* oldCharacters() { return _oldCharacters.get(); }
 
@@ -38,7 +38,7 @@ namespace Ityl::Ui::UiModels
     signals:
 
     private:
-        const DataModel::GroupPart& _part;
+        std::shared_ptr<DataModel::GroupPart> _part;
 
         std::shared_ptr<CharactersUiCollection> _currentCharacters;
         std::shared_ptr<CharactersUiCollection> _oldCharacters;

@@ -144,6 +144,8 @@ namespace Ityl::Reader
 
             if (object.contains("subgroup"))
                 groupInfo.setSubgroupName(object["subgroup"].toString());
+            if (object.contains("role"))
+                groupInfo.setRole(object["role"].toString());
             if (object.contains("type"))
                 groupInfo.setType(DataModel::Converters::convertGroupType(object["type"].toString()));
             if (object.contains("old"))

@@ -77,16 +77,15 @@ namespace Ityl::Ui::UiModels
             else
             {
                 std::cout << "Missing subgroup " << subgroup.toStdString() << " in group " << groupName.toStdString() << std::endl;
-                if (partsBySubgroup.contains(DataModel::Group::RootSubgroup))
-                {
-                    missingCurrentCharacters.append(collections._currentUiCharacters->getCharacterUiModels());
-                    missingOldCharacters.append(collections._oldUiCharacters->getCharacterUiModels());
-                }
+                missingCurrentCharacters.append(collections._currentUiCharacters->getCharacterUiModels());
+                missingOldCharacters.append(collections._oldUiCharacters->getCharacterUiModels());
             }
         }
 
-        if (partsBySubgroup.contains(DataModel::Group::RootSubgroup))
+        if (!missingCurrentCharacters.empty() || !missingOldCharacters.empty())
         {
+            auto part = std::make_shared<DataModel::GroupPart>(DataModel::Group::RootPartName, DataModel::Group::RootSubgroup);
+            groupUiModel->addPart(part);
             const auto& partUiModel = partsBySubgroup[DataModel::Group::RootSubgroup];
             partUiModel->currentCharacters()->addCharacters(missingCurrentCharacters);
             partUiModel->oldCharacters()->addCharacters(missingOldCharacters);
@@ -100,10 +99,14 @@ namespace Ityl::Ui::UiModels
         auto collection = _characterUiManager->getCollectionsFromEthnie(ethnieName);
         auto groupUiModel = std::make_shared<GroupUiModel>(group, getNationColor(group->getNation()));
 
-        auto it = groupUiModel->getPartUiModelsBySubgroupName().find(DataModel::Group::RootSubgroup);
+        if (!collection->getCharacterUiModels().empty())
+        {
+            auto part = std::make_shared<DataModel::GroupPart>(DataModel::Group::RootPartName, DataModel::Group::RootSubgroup);
+            groupUiModel->addPart(part);
 
-        if (collection && it != groupUiModel->getPartUiModelsBySubgroupName().end())
-            it.value()->setCurrentCharactersUiCollection(collection);
+            const auto& partUiModel = groupUiModel->getPartUiModelsBySubgroupName()[DataModel::Group::RootSubgroup];
+            partUiModel->setCurrentCharactersUiCollection(collection);
+        }
 
         return groupUiModel;
     }

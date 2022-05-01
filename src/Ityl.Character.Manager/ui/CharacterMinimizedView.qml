@@ -13,6 +13,8 @@ Item {
         //TODO: link button to handle event (new tab with character details)
         Text {
             text: model.display.fullName
+            wrapMode: Text.WordWrap
+            Layout.preferredWidth: 100
         }
     }
 }

@@ -11,6 +11,7 @@ namespace Ityl::Ui::UiModels
     {
         Q_OBJECT
         Q_PROPERTY(QString name READ name CONSTANT)
+        Q_PROPERTY(QString role READ role CONSTANT)
         Q_PROPERTY(QString subGroupName READ subGroupName CONSTANT)
         Q_PROPERTY(QString type READ type CONSTANT)
         Q_PROPERTY(bool isOld READ isOld CONSTANT)
@@ -23,6 +24,7 @@ namespace Ityl::Ui::UiModels
         ~GroupInfoUiModel() override = default;
 
         QString name() const { return _groupInfo.getName(); }
+        QString role() const { return _groupInfo.getRole(); }
         QString subGroupName() const { return _groupInfo.getSubgroupName(); }
         QString type() const { return DataModel::Converters::convertGroupType(_groupInfo.getType()); }
         bool isOld() const { return _groupInfo.getIsOld(); }
@@ -34,7 +36,7 @@ namespace Ityl::Ui::UiModels
         DataModel::GroupInfo _groupInfo;
 
         QString getColor() const;
-        QString getRichTextSubGroup() const;
+        QString getRichTextRole() const;
         QString getRichTextType() const;
         QString getRichTextGroup() const;
     };
