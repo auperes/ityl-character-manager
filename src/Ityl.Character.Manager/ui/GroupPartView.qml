@@ -16,8 +16,7 @@ Component {
 
         Text {
             id: subGroupDescription
-            Layout.fillWidth: true
-            Layout.preferredWidth: parent.parent.width
+            Layout.preferredWidth: parent.width
             text: display.description
             wrapMode: Text.WordWrap
             horizontalAlignment: Text.AlignJustify
