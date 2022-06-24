@@ -14,6 +14,7 @@ namespace Ityl::DataModel
 {
     QString AppConfig::_charactersFolderPath;
     QString AppConfig::_avatarsFolderPath;
+    QString AppConfig::_miniAvatarFolderPath;
     QString AppConfig::_relatedRelationshipsFilePath;
     QString AppConfig::_logFolderPath;
     QString AppConfig::_homeViewFilePath;

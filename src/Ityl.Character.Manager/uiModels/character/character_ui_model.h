@@ -19,6 +19,7 @@ namespace Ityl::Ui::UiModels
         Q_OBJECT
         Q_PROPERTY(QString fullName READ fullName CONSTANT)
         Q_PROPERTY(QUrl avatar READ avatar CONSTANT)
+        Q_PROPERTY(QUrl miniAvatar READ miniAvatar CONSTANT)
         Q_PROPERTY(QString title READ title CONSTANT)
         Q_PROPERTY(QString quote READ quote CONSTANT)
         Q_PROPERTY(QString birthPlace READ birthPlace CONSTANT)
@@ -42,6 +43,7 @@ namespace Ityl::Ui::UiModels
 
         const QString fullName() const;
         const QUrl avatar() const;
+        const QUrl miniAvatar() const;
         const QString quote() const;
         const QString& title() const { return _character->getTitle(); }
         const QString birthPlace() const { return "Lieu de naissance : " + _character->getBirthPlace(); }
@@ -73,5 +75,6 @@ namespace Ityl::Ui::UiModels
         void addSkill(const QString& skillName, const QList<DataModel::Skill>& skillValues);
         void addRelationship(const DataModel::Relationship& relationType, const QList<QPair<QString, QString>> &characterNames);
         void addGroup(const DataModel::GroupInfo& groupInfo);
+        QUrl loadImage(QString name, QString path, QString type) const;
     };
 }

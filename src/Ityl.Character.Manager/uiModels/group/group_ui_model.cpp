@@ -19,10 +19,10 @@ namespace Ityl::Ui::UiModels
         _parts->insertColumn(0);
 
         for (const auto& part : _group->getParts())
-            addPart(*part);
+            addPart(part);
     }
 
-    void GroupUiModel::addPart(const DataModel::GroupPart& part)
+    void GroupUiModel::addPart(std::shared_ptr<DataModel::GroupPart> part)
     {
         const int newRow = _parts->rowCount();
         std::shared_ptr<GroupPartUiModel> groupPartUi = std::make_shared<GroupPartUiModel>(part);
@@ -31,6 +31,6 @@ namespace Ityl::Ui::UiModels
         _parts->setData(_parts->index(newRow, 0), QVariant::fromValue(groupPartUi.get()), Qt::DisplayRole);
         _partUiModels.push_back(groupPartUi);
         if (!groupPartUi->subgroupName().isEmpty())
-            _partUiModelsBySubgroupName.insert(part.getSubgroupName(), groupPartUi);
+            _partUiModelsBySubgroupName.insert(part->getSubgroupName(), groupPartUi);
     }
 }

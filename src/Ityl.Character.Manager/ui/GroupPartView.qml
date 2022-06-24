@@ -16,29 +16,25 @@ Component {
 
         Text {
             id: subGroupDescription
-            Layout.fillWidth: true
-            Layout.preferredWidth: parent.parent.width
+            Layout.preferredWidth: parent.width
             text: display.description
             wrapMode: Text.WordWrap
             horizontalAlignment: Text.AlignJustify
             visible: Boolean(display.description)
         }
 
-        Text {
-            text: "Current characters"
-            font.pointSize: 10
-            visible: currentCharacters.count > 0
-        }
-
-        ListView {
+        GridView {
             id: currentCharacters
             visible: currentCharacters.count > 0
-            interactive: false
-            spacing: 10
-            Layout.fillWidth: true
+            cellHeight: 370
+            cellWidth: 580
+            Layout.preferredWidth: parent.width
             Layout.preferredHeight: contentHeight
+            flow: GridView.FlowLeftToRight
+            layoutDirection: GridView.LeftToRight
+
             model: display.currentCharacters.model
-            delegate: CharacterView {}
+            delegate: CharacterCompactView {}
         }
 
         Text {
@@ -47,15 +43,19 @@ Component {
             visible: oldCharacters.count > 0
         }
 
-        ListView {
+        GridView {
             id: oldCharacters
             visible: oldCharacters.count > 0
             interactive: false
-            spacing: 10
+            cellWidth: 110
+            cellHeight: 150
             Layout.fillWidth: true
             Layout.preferredHeight: contentHeight
+            flow: GridView.FlowLeftToRight
+            layoutDirection: GridView.LeftToRight
+
             model: display.oldCharacters.model
-            delegate: CharacterView {}
+            delegate: CharacterMinimizedView {}
         }
     }
 }

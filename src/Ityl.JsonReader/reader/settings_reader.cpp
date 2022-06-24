@@ -17,6 +17,7 @@ namespace Ityl::Reader
         DataModel::AppConfig::setCharactersFolderPath(settings["charactersFolderPath"].toString());
         DataModel::AppConfig::setGroupsFolderPath(settings["groupsFolderPath"].toString());
         DataModel::AppConfig::setAvatarsFolderPath(settings["avatarsFolderPath"].toString());
+        DataModel::AppConfig::setMiniAvatarFolderPath(settings["miniAvatarFolderPath"].toString());
         DataModel::AppConfig::setRelatedRelationshipsFilePath(settings["relatedRelationshipsFilePath"].toString());
         DataModel::AppConfig::setLogFolderPath(settings["logFolderPath"].toString());
         DataModel::AppConfig::setHomeViewFilePath(settings["homeViewFilePath"].toString());
@@ -30,6 +31,7 @@ namespace Ityl::Reader
         if (!settings.contains("charactersFolderPath")) return false;
         if (!settings.contains("groupsFolderPath")) return false;
         if (!settings.contains("avatarsFolderPath")) return false;
+        if (!settings.contains("miniAvatarFolderPath")) return false;
         if (!settings.contains("relatedRelationshipsFilePath")) return false;
         if (!settings.contains("logFolderPath")) return false;
         if (!settings.contains("homeViewFilePath")) return false;

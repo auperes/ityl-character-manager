@@ -2,10 +2,12 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-Item {
+Component {
     ColumnLayout {
+        id: identityView
+
         Rectangle {
-            Layout.preferredWidth: 475
+            Layout.preferredWidth: identityView.width
             Layout.preferredHeight: characterHeader.height + 6
             color: model.display.nationColor
 
@@ -42,20 +44,22 @@ Item {
 
         ListView {
             id: rolesListView
-            Layout.preferredHeight: rolesListView.count * 14
-            Layout.bottomMargin: 20
+            Layout.preferredHeight: contentHeight
+            Layout.bottomMargin: 5
             model: display.roles
             delegate: RowLayout {
                 Text {
                     text: modelData
+                    wrapMode: Text.WordWrap
+                    Layout.preferredWidth: identityView.width
                 }
             }
         }
 
         ListView {
             id: skillsListView
-            Layout.preferredHeight: skillsListView.count * 14
-            Layout.bottomMargin: 20
+            Layout.preferredHeight: contentHeight
+            Layout.bottomMargin: 5
             model: display.skills
             delegate: RowLayout {
                 Text {
@@ -64,7 +68,7 @@ Item {
                     font.bold: true
                 }
                 Text {
-                    Layout.preferredWidth: identityFrame.width - 70
+                    Layout.preferredWidth: identityView.width - 70
                     text: model.display.skillValues
                     wrapMode: Text.WordWrap
                 }
@@ -78,5 +82,7 @@ Item {
         Text {
             text: model.display.livelyPlace
         }
+
+        Item { Layout.fillHeight: true }
     }
 }

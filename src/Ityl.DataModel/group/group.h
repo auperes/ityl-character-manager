@@ -11,7 +11,7 @@ namespace Ityl::DataModel
     class Group
     {
     public:
-        static const QString RootPart;
+        static const QString RootPartName;
         static const QString RootSubgroup;
 
         Group();

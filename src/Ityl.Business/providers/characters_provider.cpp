@@ -118,7 +118,6 @@ namespace Ityl::Business::Providers
     QMap<QString, Models::GroupedCharacters> CharactersProvider::findGroupedCharactersBySubgroups(const QString& groupName)
     {
         QMap<QString, Models::GroupedCharacters> charactersBySubgroup;
-        charactersBySubgroup.insert(DataModel::Group::RootSubgroup, Models::GroupedCharacters());
 
         for (const auto& character : _characters)
         {
@@ -126,12 +125,19 @@ namespace Ityl::Business::Providers
             {
                 if (QString::compare(groupName, groupInfo.getName()) == 0)
                 {
-                    auto subgroup = groupInfo.getSubgroupName().isEmpty() ? DataModel::Group::RootSubgroup : groupInfo.getSubgroupName();
+                    auto subgroupName = groupInfo.getSubgroupName().isEmpty() ? DataModel::Group::RootSubgroup : groupInfo.getSubgroupName();
+                    auto& subgroup = charactersBySubgroup[subgroupName];
 
                     if (groupInfo.getIsOld())
-                        charactersBySubgroup[subgroup]._oldCharacters.push_back(character);
+                    {
+                        if (!subgroup._oldCharacters.contains(character))
+                            subgroup._oldCharacters.push_back(character);
+                    }
                     else
-                        charactersBySubgroup[subgroup]._currentCharacters.push_back(character);
+                    {
+                        if (!subgroup._currentCharacters.contains(character))
+                            subgroup._currentCharacters.push_back(character);
+                    }
                 }
             }
         }

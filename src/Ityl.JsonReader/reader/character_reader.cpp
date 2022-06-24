@@ -24,7 +24,7 @@ namespace Ityl::Reader
         fillRelationships(characterObject["relationships"].toArray(), character);
         character.setEthnies(readEthnies(characterObject["ethnies"].toArray()));
         character.setGroups(readGroups(characterObject["groups"].toArray()));
-        character.setAvatars(readAvatars(characterObject["avatars"].toArray()));
+        fillAvatars(characterObject["avatars"].toArray(), character);
 
         return character;
     }
@@ -144,6 +144,8 @@ namespace Ityl::Reader
 
             if (object.contains("subgroup"))
                 groupInfo.setSubgroupName(object["subgroup"].toString());
+            if (object.contains("role"))
+                groupInfo.setRole(object["role"].toString());
             if (object.contains("type"))
                 groupInfo.setType(DataModel::Converters::convertGroupType(object["type"].toString()));
             if (object.contains("old"))
@@ -155,16 +157,19 @@ namespace Ityl::Reader
         return groups;
     }
 
-    QVector<QString> CharacterReader::readAvatars(const QJsonArray &jsonAvatars)
+    void CharacterReader::fillAvatars(const QJsonArray &jsonAvatars, DataModel::Character& character)
     {
         QVector<QString> avatars;
         avatars.reserve(jsonAvatars.size());
         for (auto value : jsonAvatars)
         {
             QJsonObject object = value.toObject();
+            if (object.contains("isMiniAvatar") && object["isMiniAvatar"].toBool())
+                character.setMiniAvatar(object["avatar"].toString());
+
             avatars.push_back(object["avatar"].toString());
         }
 
-        return avatars;
+        character.setAvatars(avatars);
     }
 }

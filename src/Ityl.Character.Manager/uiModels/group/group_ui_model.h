@@ -41,6 +41,8 @@ namespace Ityl::Ui::UiModels
 
         const QMap<QString, std::shared_ptr<GroupPartUiModel>>& getPartUiModelsBySubgroupName() const { return _partUiModelsBySubgroupName; }
 
+        void addPart(std::shared_ptr<DataModel::GroupPart> part);
+
     private:
         std::shared_ptr<DataModel::Group> _group;
         QString _nationColor;
@@ -48,7 +50,5 @@ namespace Ityl::Ui::UiModels
         std::unique_ptr<QAbstractItemModel> _parts;
         QList<std::shared_ptr<GroupPartUiModel>> _partUiModels;
         QMap<QString, std::shared_ptr<GroupPartUiModel>> _partUiModelsBySubgroupName;
-
-        void addPart(const DataModel::GroupPart& part);
     };
 }

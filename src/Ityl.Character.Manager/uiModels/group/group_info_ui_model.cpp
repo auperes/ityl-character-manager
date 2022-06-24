@@ -26,12 +26,12 @@ namespace Ityl::Ui::UiModels
         return _groupInfo.getIsOld() ? "#555555" : "#000000";
     }
 
-    QString GroupInfoUiModel::getRichTextSubGroup() const
+    QString GroupInfoUiModel::getRichTextRole() const
     {
-        if (_groupInfo.getSubgroupName().isEmpty())
+        if (_groupInfo.getRole().isEmpty())
             return "";
 
-        return " (" + _groupInfo.getSubgroupName() + ")";
+        return " (" + _groupInfo.getRole() + ")";
     }
 
     QString GroupInfoUiModel::getRichTextType() const
@@ -44,6 +44,6 @@ namespace Ityl::Ui::UiModels
 
     QString GroupInfoUiModel::getRichTextGroup() const
     {
-        return "<font color=\"" + getColor() + "\">" + _groupInfo.getName() + getRichTextSubGroup() + "</font>";
+        return "<font color=\"" + getColor() + "\">" + _groupInfo.getName() + getRichTextRole() + "</font>";
     }
 }

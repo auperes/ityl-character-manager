@@ -1,20 +1,25 @@
 <RCC>
     <qresource prefix="/">
         <file>ui/main.qml</file>
-        <file>ui/CharacterView.qml</file>
-        <file>ui/CharacterListView.qml</file>
         <file>qtquickcontrols2.conf</file>
-        <file>ui/IdentityView.qml</file>
-        <file>ui/AvatarView.qml</file>
-        <file>ui/RelationshipsView.qml</file>
-        <file>ui/DescriptionView.qml</file>
-        <file>ui/AffiliationsView.qml</file>
         <file>ui/HomeView.qml</file>
         <file>ui/TabBarComponent.qml</file>
         <file>ui/LinkButton.qml</file>
         <file>ui/HomeCategoryView.qml</file>
-        <file>ui/GroupView.qml</file>
+        <file>ui/MaterialIcons.js</file>
+        <file>ui/materialdesignicons-webfont.ttf</file>
+        <file>ui/AffiliationsView.qml</file>
+        <file>ui/AvatarView.qml</file>
+        <file>ui/CharacterCompactView.qml</file>
+        <file>ui/CharacterListView.qml</file>
+        <file>ui/CharacterView.qml</file>
+        <file>ui/DescriptionView.qml</file>
         <file>ui/GroupPartView.qml</file>
+        <file>ui/GroupView.qml</file>
+        <file>ui/IdentityView.qml</file>
+        <file>ui/RelationshipsView.qml</file>
+        <file>ui/ValidationsViewer.qml</file>
+        <file>ui/CharacterMinimizedView.qml</file>
         <file>ui/MaterialIcons.js</file>
         <file>ui/materialdesignicons-webfont.ttf</file>
     </qresource>
