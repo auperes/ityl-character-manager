@@ -20,5 +20,7 @@
         <file>ui/RelationshipsView.qml</file>
         <file>ui/ValidationsViewer.qml</file>
         <file>ui/CharacterMinimizedView.qml</file>
+        <file>ui/MaterialIcons.js</file>
+        <file>ui/materialdesignicons-webfont.ttf</file>
     </qresource>
 </RCC>
