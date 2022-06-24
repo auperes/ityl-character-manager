@@ -15,8 +15,9 @@ namespace Ityl::Ui::UiModels
     public:
         GroupsUiManager(const QString& groupsFolderPath, const QMap<QString, QString>& nationColors, CharactersUiManager* characterUiManager, QObject *parent = nullptr);
 
-        Q_INVOKABLE GroupUiModel* addGroup(const QString& name);
-        Q_INVOKABLE void removeGroup(unsigned id);
+        ~GroupsUiManager() override = default;
+
+        std::shared_ptr<GroupUiModel> createGroup(const QString& name);
 
     signals:
 
@@ -25,9 +26,7 @@ namespace Ityl::Ui::UiModels
         void changeNationColors(const QMap<QString, QString>& nationColors);
 
     private:
-        unsigned _idSequence = 0;
         Business::Providers::GroupsProvider _groupsProvider;
-        QMap<unsigned, std::shared_ptr<GroupUiModel>> _groupUiModels;
         QMap<QString, QString> _nationColors;
         CharactersUiManager* _characterUiManager; //TODO get CharacterUiCollections without CharacterUiManager
 

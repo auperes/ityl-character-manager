@@ -15,5 +15,7 @@
         <file>ui/HomeCategoryView.qml</file>
         <file>ui/GroupView.qml</file>
         <file>ui/GroupPartView.qml</file>
+        <file>ui/MaterialIcons.js</file>
+        <file>ui/materialdesignicons-webfont.ttf</file>
     </qresource>
 </RCC>

@@ -15,7 +15,7 @@ namespace Ityl::Ui::UiModels
     {
     }
 
-    GroupUiModel* GroupsUiManager::addGroup(const QString& name)
+    std::shared_ptr<GroupUiModel> GroupsUiManager::createGroup(const QString& name)
     {
         auto group = _groupsProvider.getGroup(name);
 
@@ -29,15 +29,7 @@ namespace Ityl::Ui::UiModels
                 ? createGroupUiModelFromEthnie(name, group)
                 : createGroupUiModelFromGroup(name, group);
 
-        _groupUiModels.insert(_idSequence++, groupUiModel);
-        QQmlEngine::setObjectOwnership(groupUiModel.get(), QQmlEngine::CppOwnership);
-
-        return groupUiModel.get();
-    }
-
-    void GroupsUiManager::removeGroup(unsigned id)
-    {
-        _groupUiModels.remove(id);
+        return groupUiModel;
     }
 
     void GroupsUiManager::changeGroupsLocation(const QString& folderPath)

@@ -18,6 +18,7 @@
 #include <uiModels/group/groups_ui_manager.h>
 #include <uiModels/homeView/home_view_ui_model.h>
 #include <uiModels/settings_ui_manager.h>
+#include <uiModels/tab_content_ui_collection.h>
 
 #include "qml_types_factory.h"
 #include "q_custom_gui_application.h"
@@ -46,6 +47,7 @@ int main(int argc, char *argv[])
         Ityl::Ui::UiModels::HomeViewUIModel homeViewUi(Ityl::Reader::HomeViewReader::readHomeViewFromFile(Ityl::DataModel::AppConfig::getHomeViewFilePath()));
         Ityl::Ui::UiModels::SettingsUiManager settingsUiManager;
         Ityl::Ui::UiModels::GroupsUiManager groupUiManager(groupsFolderPath, nationsColor, &charatersUiManager);
+        Ityl::Ui::UiModels::TabContentUiCollection tabContentUiCollection(&groupUiManager);
 
         QObject::connect(&settingsUiManager, SIGNAL(nationColorsChanged(const QMap<QString, QString>&)), &charatersUiManager, SLOT(changeNationColors(const QMap<QString, QString>&)));
         QObject::connect(&settingsUiManager, SIGNAL(nationColorsChanged(const QMap<QString, QString>&)), &groupUiManager, SLOT(changeNationColors(const QMap<QString, QString>&)));
@@ -59,6 +61,7 @@ int main(int argc, char *argv[])
         engine.rootContext()->setContextProperty(QStringLiteral("groupsManager"), &groupUiManager);
         engine.rootContext()->setContextProperty(QStringLiteral("homeView"), &homeViewUi);
         engine.rootContext()->setContextProperty(QStringLiteral("settingsManager"), &settingsUiManager);
+        engine.rootContext()->setContextProperty(QStringLiteral("tabContentUiCollection"), &tabContentUiCollection);
 
         engine.load(QUrl(QLatin1String("qrc:/ui/main.qml")));
         if (engine.rootObjects().isEmpty())

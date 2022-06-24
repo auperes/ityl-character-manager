@@ -23,6 +23,8 @@ namespace Ityl::Ui::UiModels
     public:
         explicit GroupPartUiModel(const DataModel::GroupPart& part, QObject *parent = nullptr);
 
+        ~GroupPartUiModel() override = default;
+
         const QString& name() { return _part.getPartName(); }
         unsigned nameSize();
         const QString& subgroupName() { return _part.getSubgroupName(); }
@@ -30,8 +32,8 @@ namespace Ityl::Ui::UiModels
         CharactersUiCollection* currentCharacters() { return _currentCharacters.get(); }
         CharactersUiCollection* oldCharacters() { return _oldCharacters.get(); }
 
-        void setCurrentCharactersUiCollection(const std::shared_ptr<CharactersUiCollection>& collection) { _currentCharacters = collection; }
-        void setOldCharactersUiCollection(const std::shared_ptr<CharactersUiCollection>& collection) { _oldCharacters = collection; }
+        void setCurrentCharactersUiCollection(std::shared_ptr<CharactersUiCollection> collection) { _currentCharacters = collection; }
+        void setOldCharactersUiCollection(std::shared_ptr<CharactersUiCollection> collection) { _oldCharacters = collection; }
 
     signals:
 
