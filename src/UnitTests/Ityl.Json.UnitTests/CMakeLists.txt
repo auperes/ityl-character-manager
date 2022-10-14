@@ -5,10 +5,8 @@ set(SOURCES
 
 find_package(Qt6 REQUIRED COMPONENTS Test)
 
-#add_library(Ityl.Json.UnitTests SHARED ${SOURCES})
-
-qt_add_executable(Ityl.Json.UnitTests ${SOURCES}
-)
+add_executable(Ityl.Json.UnitTests ${SOURCES})
+add_test(NAME Ityl.Json.UnitTests COMMAND Ityl.Json.UnitTests)
 
 #set_target_properties(Ityl.Json.UnitTests PROPERTIES
 #    WIN32_EXECUTABLE TRUE
