@@ -1,3 +1,3 @@
-enable_testing(true)
+enable_testing()
 
 add_subdirectory(Ityl.Json.UnitTests)

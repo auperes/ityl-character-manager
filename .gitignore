@@ -9,6 +9,7 @@
 *.dll
 *.dylib
 */out
+**/Testing
 
 # Qt-es
 object_script.*.Release
