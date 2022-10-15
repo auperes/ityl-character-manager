@@ -55,7 +55,7 @@ jobs:
       - name: Configure CMake
         env:
           CMAKE_PREFIX_PATH: ${{ env.Qt6_Dir }}
-        run: cmake -S ${{ github.workspace}}/src -B ${{ github.workspace }}/build -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }} -DCMAKE
+        run: cmake -S ${{ github.workspace}}/src -B ${{ github.workspace }}/build -DCMAKE_BUILD_TYPE=${{ env.BUILD_TYPE }}
 
       - name: Build
         run: build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build ${{ github.workspace }}/build --config ${{ env.BUILD_TYPE }}
