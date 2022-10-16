@@ -26,7 +26,7 @@ jobs:
       - name: Set up GCC
         uses: egor-tensin/setup-gcc@v1
         with:
-          version: 12.2
+          version: 11.3
           platform: x64
 
       - name: Install Qt
