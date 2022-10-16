@@ -5,7 +5,6 @@ set(SOURCES
 
 find_package(Qt6 REQUIRED COMPONENTS Test)
 
-add_link_options("--coverage")
 add_executable(Ityl.Json.UnitTests ${SOURCES})
 add_test(NAME Ityl.Json.UnitTests COMMAND Ityl.Json.UnitTests)
 

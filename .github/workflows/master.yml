@@ -86,11 +86,11 @@ jobs:
 
       - name: Collect coverage into one XML report
         run: |
-          gcovr --sonarqube > coverage.xml
+          gcovr -r ${{ github.workspace }}/src/UnitTests --sonarqube > coverage.xml
 
       - name: Run sonar-scanner
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
         run: |
-          sonar-scanner --define sonar.host.url="${{ env.SONAR_SERVER_URL }}" --define sonar.cfamily.build-wrapper-output="${{ env.BUILD_WRAPPER_OUT_DIR }}" --define sonar.coverageReportPaths=coverage.xml --define sonar.cfamily.cppunit.reportsPath=tests_report.xml
+          sonar-scanner --define sonar.host.url="${{ env.SONAR_SERVER_URL }}" --define sonar.cfamily.build-wrapper-output="${{ env.BUILD_WRAPPER_OUT_DIR }}" --define sonar.coverageReportPaths=coverage.xml --define sonar.cfamily.cppunit.reportsPath=UnitTests/tests_report.xml
