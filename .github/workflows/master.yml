@@ -28,6 +28,11 @@ jobs:
         with:
           version: '6.3.0'
 
+      - name: Set up JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11
+
       - name: Set up Python 3.8 for gcovr
         uses: actions/setup-python@v2
         with:
@@ -71,7 +76,7 @@ jobs:
 
       - name: Test
         working-directory: ${{ github.workspace }}/build/UnitTests
-        run: ctest -C ${{ env.BUILD_TYPE }}
+        run: ctest -C ${{ env.BUILD_TYPE }} --output-on-failure --output-junit tests_report.xml
 
       - name: Collect coverage into one XML report
         run: |
@@ -86,3 +91,4 @@ jobs:
             --define sonar.host.url="${{ env.SONAR_SERVER_URL }}"
             --define sonar.cfamily.build-wrapper-output="${{ env.BUILD_WRAPPER_OUT_DIR }}"
             --define sonar.coverageReportPaths=coverage.xml
+            --define sonar.cfamily.cppunit.reportsPath=tests_report.xml
