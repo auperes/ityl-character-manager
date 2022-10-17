@@ -51,87 +51,87 @@ namespace Ityl::Json
 
     CharacterDto CharacterAdapter::toCharacterDto(const Core::Character& character)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
     std::string CharacterAdapter::toAvatar(const AvatarDto& avatarDto)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
     AvatarDto CharacterAdapter::toAvatarDto(const std::string& avatar)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
     std::vector<std::string> CharacterAdapter::toAvatars(const QVector<AvatarDto>& avatarDtos)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
     QVector<AvatarDto> CharacterAdapter::toAvatarDtos(std::vector<std::string> avatars)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
     Core::GroupInfo CharacterAdapter::toGroup(GroupDto groupDto)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
     GroupDto CharacterAdapter::toGroupDto(const Core::GroupInfo& group)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
     std::vector<Core::GroupInfo> CharacterAdapter::toGroups(const QVector<GroupDto>& groupDtos)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
     QVector<GroupDto> CharacterAdapter::toGroupDtos(const std::vector<Core::GroupInfo>& groups)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
     Core::GroupInfo CharacterAdapter::toEthnie(QString ethnieDto)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
     QString CharacterAdapter::toEthnieDto(const Core::GroupInfo& ethnie)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
     std::vector<Core::GroupInfo> CharacterAdapter::toEthnies(const QVector<QString>& ethnieDtos)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
     QVector<QString> CharacterAdapter::toEthnieDtos(const std::vector<Core::GroupInfo>& ethnies)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
     std::unordered_map<Core::Relationship, std::vector<std::pair<std::string, std::string> > > CharacterAdapter::toRelationships(const QVector<RelationshipDto>& relationshipDtos)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
     QVector<RelationshipDto> CharacterAdapter::toRelationshipDtos(const std::unordered_map<Core::Relationship, std::vector<std::pair<std::string, std::string> > >& relationships)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
     std::string CharacterAdapter::toRole(QString roleDto)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
     QString CharacterAdapter::toRoleDto(const std::string& role)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
     std::vector<std::string> CharacterAdapter::toRoles(const QVector<QString>& roleDtos)
@@ -147,27 +147,27 @@ namespace Ityl::Json
 
     QVector<QString> CharacterAdapter::toRoleDtos(const std::vector<std::string>& roles)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
     std::vector<Core::Skill> CharacterAdapter::toSkill(SkillDto skillDto)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
     SkillDto CharacterAdapter::toSkillDto(const std::vector<Core::Skill>& skill)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
     std::unordered_map<std::string, std::vector<Core::Skill> > CharacterAdapter::toSkills(const QVector<SkillDto>& skillDtos)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
     QVector<SkillDto> CharacterAdapter::toSkillDtos(const std::unordered_map<std::string, std::vector<Core::Skill> >& skills)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
     Core::Status CharacterAdapter::toStatus(QString statusDto)
@@ -188,6 +188,6 @@ namespace Ityl::Json
 
     QString CharacterAdapter::toStatusDto(const Core::Status& status)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 }

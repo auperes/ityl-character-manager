@@ -13,7 +13,7 @@ namespace Ityl::Json
 
     std::vector<Core::Character> JsonCharacterProvider::loadCharacters()
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
     Core::Character JsonCharacterProvider::loadCharacter(const std::string& firstName, const std::string& lastName)
@@ -28,12 +28,12 @@ namespace Ityl::Json
 
     void JsonCharacterProvider::saveCharacter(const Core::Character& character)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
     void JsonCharacterProvider::deleteCharacter(const std::string firstName, const std::string lastName)
     {
-
+        throw std::runtime_error("Not implemented");
     }
 
 

@@ -7,17 +7,6 @@ namespace Ityl::Json
 {
     const std::string JsonCharacterProviderTests::firstName = "firstName";
     const std::string JsonCharacterProviderTests::lastName = "lastName";
-    const std::string JsonCharacterProviderTests::birthName = "birthName";
-    const std::string JsonCharacterProviderTests::nickName = "nickName";
-    const std::string JsonCharacterProviderTests::title = "title";
-    const std::string JsonCharacterProviderTests::quote = "quote";
-    const std::string JsonCharacterProviderTests::birthPlace = "birthPlace";
-    const std::string JsonCharacterProviderTests::livelyPlace = "livelyPlace";
-    const std::string JsonCharacterProviderTests::birthNation = "birthNation";
-    const std::string JsonCharacterProviderTests::currentNation = "currentNation";
-    const std::string JsonCharacterProviderTests::birthDate = "birthDate";
-    const std::string JsonCharacterProviderTests::deathDate = "deathDate";
-    const std::string JsonCharacterProviderTests::description = "description";
 
     void JsonCharacterProviderTests::init()
     {
@@ -33,91 +22,102 @@ namespace Ityl::Json
         _characterProvider = nullptr;
     }
 
-    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveFirstName()
+    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveFirstName() const
     {
-        auto character = _characterProvider->loadCharacter(firstName, "lastName");
+        auto character = _characterProvider->loadCharacter(firstName, lastName);
         QCOMPARE(character.getFirstName(), firstName);
     }
 
-    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveLastName()
+    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveLastName() const
     {
         auto character = _characterProvider->loadCharacter(firstName, lastName);
         QCOMPARE(character.getLastName(), lastName);
     }
 
-    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveBirthName()
+    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveBirthName() const
     {
+        const std::string expectedBirthName = "birthName";
         auto character = _characterProvider->loadCharacter(firstName, lastName);
-        QCOMPARE(character.getBirthName(), birthName);
+        QCOMPARE(character.getBirthName(), expectedBirthName);
     }
 
-    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveNickName()
+    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveNickName() const
     {
+        const std::string expectedNickName = "nickName";
         auto character = _characterProvider->loadCharacter(firstName, lastName);
-        QCOMPARE(character.getNickName(), nickName);
+        QCOMPARE(character.getNickName(), expectedNickName);
     }
 
-    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveTitle()
+    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveTitle() const
     {
+        const std::string expectedTitle = "title";
         auto character = _characterProvider->loadCharacter(firstName, lastName);
-        QCOMPARE(character.getTitle(), title);
+        QCOMPARE(character.getTitle(), expectedTitle);
     }
 
-    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveQuote()
+    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveQuote() const
     {
+        const std::string expectedQuote = "quote";
         auto character = _characterProvider->loadCharacter(firstName, lastName);
-        QCOMPARE(character.getQuote(), quote);
+        QCOMPARE(character.getQuote(), expectedQuote);
     }
 
-    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveBirthPlace()
+    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveBirthPlace() const
     {
+        const std::string expectedBirthPlace = "birthPlace";
         auto character = _characterProvider->loadCharacter(firstName, lastName);
-        QCOMPARE(character.getBirthPlace(), birthPlace);
+        QCOMPARE(character.getBirthPlace(), expectedBirthPlace);
     }
 
-    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveLivelyPlace()
+    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveLivelyPlace() const
     {
+        const std::string expectedLivelyPlace = "livelyPlace";
         auto character = _characterProvider->loadCharacter(firstName, lastName);
-        QCOMPARE(character.getLivelyPlace(), livelyPlace);
+        QCOMPARE(character.getLivelyPlace(), expectedLivelyPlace);
     }
 
-    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveBirthNation()
+    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveBirthNation() const
     {
+        const std::string expectedBirthNation = "birthNation";
         auto character = _characterProvider->loadCharacter(firstName, lastName);
-        QCOMPARE(character.getBirthNation(), birthNation);
+        QCOMPARE(character.getBirthNation(), expectedBirthNation);
     }
 
-    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveCurrentNation()
+    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveCurrentNation() const
     {
+        const std::string expectedCurrentNation = "currentNation";
         auto character = _characterProvider->loadCharacter(firstName, lastName);
-        QCOMPARE(character.getCurrentNation(), currentNation);
+        QCOMPARE(character.getCurrentNation(), expectedCurrentNation);
     }
 
 //    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveBirthDate()
 //    {
+//        const std::string expectedBirthDate = "birthDate";
 //        auto character = _characterProvider->loadCharacter(firstName, lastName);
-//        QCOMPARE(character.getBirthDate(), birthDate);
+//        QCOMPARE(character.getBirthDate(), expectedBirthDate);
 //    }
 
 //    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveDeathDate()
 //    {
+//        const std::string expectedDeathDate = "deathDate";
 //        auto character = _characterProvider->loadCharacter(firstName, lastName);
-//        QCOMPARE(character.getDeathDate(), deathDate);
+//        QCOMPARE(character.getDeathDate(), expectedDeathDate);
 //    }
 
-    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveStatus()
+    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveStatus() const
     {
         auto character = _characterProvider->loadCharacter(firstName, lastName);
         QCOMPARE(character.getStatus(), Core::Status::Alive);
     }
 
-    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveDescription()
+    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveDescription() const
     {
+        const std::string expectedDescription = "description";
         auto character = _characterProvider->loadCharacter(firstName, lastName);
-        QCOMPARE(character.getDescription(), description);
+        QCOMPARE(character.getDescription(), expectedDescription);
     }
 
-    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveRoles()
+    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveRoles() const
     {
         const std::vector<std::string> expectedRoles { "role1", "role2"};
 
@@ -134,27 +134,27 @@ namespace Ityl::Json
         }
     }
 
-//    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveSkills()
+//    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveSkills() const
 //    {
 
 //    }
 
-//    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveRelationships()
+//    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveRelationships() const
 //    {
 
 //    }
 
-//    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveEthnies()
+//    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveEthnies() const
 //    {
 
 //    }
 
-//    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveGroups()
+//    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveGroups() const
 //    {
 
 //    }
 
-//    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveAvatars()
+//    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveAvatars() const
 //    {
 
 //    }

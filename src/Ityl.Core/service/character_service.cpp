@@ -44,11 +44,11 @@ namespace Ityl::Core::Internal
 
     std::unordered_map<std::string, const Character&> CharacterService::getCharactersOfGroup(const std::string& groupName)
     {
-        return {};
+        throw std::runtime_error("Not implemented");
     }
 
     std::vector<std::reference_wrapper<const Character>> CharacterService::getCharactersOfEthnie(const std::string ethnieName)
     {
-        return {};
+        throw std::runtime_error("Not implemented");
     }
 }
