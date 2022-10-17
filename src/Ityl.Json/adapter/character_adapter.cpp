@@ -37,7 +37,7 @@ namespace Ityl::Json
                 .setCurrentNation(characterDto.getValues().value(currentNation).toStdString())
                 .setStatus(toStatus(characterDto.getValues().value(status)))
                 .setDescription(characterDto.getValues().value(description).toStdString())
-//                .setRoles(toRoles(characterDto.getRoles()))
+                .setRoles(toRoles(characterDto.getRoles()))
 //                .setSkills(toSkills(characterDto.getSkills()))
 //                .setRelationships(toRelationships(characterDto.getRelationships()))
 //                .setEthnies(toEthnies(characterDto.getEthnies()))
@@ -136,7 +136,13 @@ namespace Ityl::Json
 
     std::vector<std::string> CharacterAdapter::toRoles(const QVector<QString>& roleDtos)
     {
+        std::vector<std::string> roles;
+        roles.reserve(roleDtos.size());
 
+        for (const auto& role : roleDtos)
+            roles.push_back(role.toStdString());
+
+        return roles;
     }
 
     QVector<QString> CharacterAdapter::toRoleDtos(const std::vector<std::string>& roles)

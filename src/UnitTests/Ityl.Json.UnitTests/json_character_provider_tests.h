@@ -31,6 +31,12 @@ namespace Ityl::Json
 //      void LoadCharacter_ShouldHaveDeathDate();
       void LoadCharacter_ShouldHaveStatus();
       void LoadCharacter_ShouldHaveDescription();
+      void LoadCharacter_ShouldHaveRoles();
+//      void LoadCharacter_ShouldHaveSkills();
+//      void LoadCharacter_ShouldHaveRelationships();
+//      void LoadCharacter_ShouldHaveEthnies();
+//      void LoadCharacter_ShouldHaveGroups();
+//      void LoadCharacter_ShouldHaveAvatars();
 
     private:
         static const std::string firstName;

@@ -116,6 +116,48 @@ namespace Ityl::Json
         auto character = _characterProvider->loadCharacter(firstName, lastName);
         QCOMPARE(character.getDescription(), description);
     }
+
+    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveRoles()
+    {
+        const std::vector<std::string> expectedRoles { "role1", "role2"};
+
+        auto character = _characterProvider->loadCharacter(firstName, lastName);
+
+        const auto& roles = character.getRoles();
+        QCOMPARE(roles.size(), expectedRoles.size());
+
+        unsigned i = 0;
+        for (const auto& role : roles)
+        {
+            QCOMPARE(role, expectedRoles[i]);
+            i++;
+        }
+    }
+
+//    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveSkills()
+//    {
+
+//    }
+
+//    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveRelationships()
+//    {
+
+//    }
+
+//    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveEthnies()
+//    {
+
+//    }
+
+//    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveGroups()
+//    {
+
+//    }
+
+//    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveAvatars()
+//    {
+
+//    }
 }
 
 QTEST_MAIN(Ityl::Json::JsonCharacterProviderTests)
