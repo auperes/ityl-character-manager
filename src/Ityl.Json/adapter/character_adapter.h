@@ -5,42 +5,20 @@
 #include <model/character.h>
 
 #include "../model/character_dto.h"
+#include "../model/json_model_mapper.h"
 
 namespace Ityl::Json
 {
     class CharacterAdapter
     {
     public:
+        CharacterAdapter(std::shared_ptr<JsonModelMapper> mapper);
+
         Core::Character toCharacter(const CharacterDto& characterDto);
         CharacterDto toCharacterDto(const Core::Character& character);
 
     private:
-        static const QString firstNameKey;
-        static const QString lastNameKey;
-        static const QString birthName;
-        static const QString nickName;
-        static const QString title;
-        static const QString quote;
-        static const QString birthPlace;
-        static const QString livelyPlace;
-        static const QString birthNation;
-        static const QString currentNation;
-        static const QString birthDate;
-        static const QString deathDate;
-        static const QString status;
-        static const QString description;
-
-        static const QString group;
-        static const QString type;
-        static const QString subgroup;
-        static const QString role;
-        static const QString isOld;
-
-        static const QString ethnieKey;
-        static const QString organizationKey;
-        static const QString familyKey;
-        static const QString guildKey;
-        static const QString groupKey;
+        std::shared_ptr<JsonModelMapper> _mapper;
 
         // Avatar
         std::string toAvatar(const AvatarDto& avatarDto);

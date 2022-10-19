@@ -11,9 +11,10 @@ namespace Ityl::Json
     void JsonCharacterProviderTests::init()
     {
         std::stringstream fullpath;
+        auto mapper = std::make_shared<Json::JsonModelMapper>();
         fullpath << QCoreApplication::applicationDirPath().toStdString() << "/" << "testFiles";
-        Ityl::Json::JsonItemProvider<Ityl::Json::CharacterDto> provider(fullpath.str());
-        Ityl::Json::CharacterAdapter adapter;
+        Ityl::Json::JsonItemProvider<Ityl::Json::CharacterDto> provider(fullpath.str(), mapper);
+        Ityl::Json::CharacterAdapter adapter(mapper);
         _characterProvider = std::make_unique<Ityl::Json::JsonCharacterProvider>(std::move(provider), std::move(adapter));
     }
 
@@ -144,10 +145,32 @@ namespace Ityl::Json
 
 //    }
 
-//    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveEthnies() const
-//    {
+    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveEthnies() const
+    {
+        Core::GroupInfo ethnie1("ethnie1");
+        ethnie1.setType(Core::GroupType::Ethnie);
 
-//    }
+        Core::GroupInfo ethnie2("ethnie2");
+        ethnie2.setType(Core::GroupType::Ethnie);
+
+        const std::vector<Core::GroupInfo> expectedEthnies { ethnie1, ethnie2 };
+
+        auto character = _characterProvider->loadCharacter(firstName, lastName);
+
+        const auto& ethnies = character.getEthnies();
+        QCOMPARE(ethnies.size(), expectedEthnies.size());
+
+        unsigned i = 0;
+        for (const auto& ethnie : ethnies)
+        {
+            QCOMPARE(ethnie.getName(), expectedEthnies[i].getName());
+            QCOMPARE(ethnie.getType(), expectedEthnies[i].getType());
+            QCOMPARE(ethnie.getSubgroupName(), expectedEthnies[i].getSubgroupName());
+            QCOMPARE(ethnie.getRole(), expectedEthnies[i].getRole());
+            QCOMPARE(ethnie.getIsOld(), expectedEthnies[i].getIsOld());
+            i++;
+        }
+    }
 
     void JsonCharacterProviderTests::LoadCharacter_ShouldHaveGroups() const
     {

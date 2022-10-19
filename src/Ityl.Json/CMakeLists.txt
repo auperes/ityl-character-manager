@@ -1,6 +1,7 @@
 set(SOURCES
     adapter/character_adapter.h adapter/character_adapter.cpp
 
+    model/json_model_mapper.h model/json_model_mapper.cpp
     model/character_dto.h model/character_dto.cpp
     model/skill_dto.h model/skill_dto.cpp
     model/relationship_dto.h model/relationship_dto.cpp
