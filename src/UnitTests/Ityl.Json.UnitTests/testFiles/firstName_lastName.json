@@ -51,8 +51,8 @@
       { "ethnie": "ethnie2" }
     ],
     "groups": [
-      { "group": "group1", "type": "type1", "role": "role1" },
-      { "group": "group2", "type": "type2", "subgroup": "subgroup", "role": "role2", "rank": 1, "old": true, "begin": "", "end": "" }
+      { "group": "group1", "type": "organization", "role": "role1" },
+      { "group": "group2", "type": "group", "subgroup": "subgroup", "role": "role2", "old": true }
     ],
     "avatars": [
       { "avatar": "avatar.png" },

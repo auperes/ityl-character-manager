@@ -35,7 +35,7 @@ namespace Ityl::Json
 //      void LoadCharacter_ShouldHaveSkills() const;
 //      void LoadCharacter_ShouldHaveRelationships() const;
 //      void LoadCharacter_ShouldHaveEthnies() const;
-//      void LoadCharacter_ShouldHaveGroups() const;
+      void LoadCharacter_ShouldHaveGroups() const;
 //      void LoadCharacter_ShouldHaveAvatars() const;
 
     private:

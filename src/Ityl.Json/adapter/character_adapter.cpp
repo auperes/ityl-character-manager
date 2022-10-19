@@ -6,27 +6,39 @@
 
 namespace Ityl::Json
 {
-    const QString firstName = "firstName";
-    const QString lastName = "lastName";
-    const QString birthName = "birthName";
-    const QString nickName = "nickName";
-    const QString title = "title";
-    const QString quote = "quote";
-    const QString birthPlace = "birthPlace";
-    const QString livelyPlace = "livelyPlace";
-    const QString birthNation = "birthNation";
-    const QString currentNation = "currentNation";
-    const QString birthDate = "birthDate";
-    const QString deathDate = "deathDate";
-    const QString status = "status";
-    const QString description = "description";
+    const QString CharacterAdapter::firstNameKey = "firstName";
+    const QString CharacterAdapter::lastNameKey = "lastName";
+    const QString CharacterAdapter::birthName = "birthName";
+    const QString CharacterAdapter::nickName = "nickName";
+    const QString CharacterAdapter::title = "title";
+    const QString CharacterAdapter::quote = "quote";
+    const QString CharacterAdapter::birthPlace = "birthPlace";
+    const QString CharacterAdapter::livelyPlace = "livelyPlace";
+    const QString CharacterAdapter::birthNation = "birthNation";
+    const QString CharacterAdapter::currentNation = "currentNation";
+    const QString CharacterAdapter::birthDate = "birthDate";
+    const QString CharacterAdapter::deathDate = "deathDate";
+    const QString CharacterAdapter::status = "status";
+    const QString CharacterAdapter::description = "description";
+
+    const QString CharacterAdapter::group = "group";
+    const QString CharacterAdapter::type = "type";
+    const QString CharacterAdapter::subgroup = "subgroup";
+    const QString CharacterAdapter::role = "role";
+    const QString CharacterAdapter::isOld = "old";
+
+    const QString CharacterAdapter::ethnieKey = "ethnie";
+    const QString CharacterAdapter::organizationKey = "organization";
+    const QString CharacterAdapter::familyKey = "family";
+    const QString CharacterAdapter::guildKey = "guild";
+    const QString CharacterAdapter::groupKey = "group";
 
     Core::Character CharacterAdapter::toCharacter(const CharacterDto& characterDto)
     {
         Core::Character character;
         character
-                .setFirstName(characterDto.getValues().value(firstName).toStdString())
-                .setLastName(characterDto.getValues().value(lastName).toStdString())
+                .setFirstName(characterDto.getValues().value(firstNameKey).toStdString())
+                .setLastName(characterDto.getValues().value(lastNameKey).toStdString())
                 .setBirthName(characterDto.getValues().value(birthName).toStdString())
                 .setNickName(characterDto.getValues().value(nickName).toStdString())
                 .setTitle(characterDto.getValues().value(title).toStdString())
@@ -41,7 +53,7 @@ namespace Ityl::Json
 //                .setSkills(toSkills(characterDto.getSkills()))
 //                .setRelationships(toRelationships(characterDto.getRelationships()))
 //                .setEthnies(toEthnies(characterDto.getEthnies()))
-//                .setGroups(toGroups(characterDto.getGroups()))
+                .setGroups(toGroups(characterDto.getGroups()))
 //                .setMiniAvatar(characterDto.getAvatars())
 //                .setAvatars(toAvatars(characterDto.getAvatars()))
                 ;
@@ -76,7 +88,20 @@ namespace Ityl::Json
 
     Core::GroupInfo CharacterAdapter::toGroup(GroupDto groupDto)
     {
-        throw std::runtime_error("Not implemented");
+        Core::GroupInfo groupInfo;
+        const auto& values = groupDto.getValues();
+        if (values.contains(group))
+            groupInfo.setName(values[group].toString().toStdString());
+        if (values.contains(type))
+            groupInfo.setType(toGroupType(values[type].toString()));
+        if (values.contains(subgroup))
+            groupInfo.setSubgroupName(values[subgroup].toString().toStdString());
+        if (values.contains(role))
+            groupInfo.setRole(values[role].toString().toStdString());
+        if (values.contains(isOld))
+            groupInfo.setIsOld(QVariant(values[isOld]).toBool());
+
+        return groupInfo;
     }
 
     GroupDto CharacterAdapter::toGroupDto(const Core::GroupInfo& group)
@@ -86,10 +111,37 @@ namespace Ityl::Json
 
     std::vector<Core::GroupInfo> CharacterAdapter::toGroups(const QVector<GroupDto>& groupDtos)
     {
-        throw std::runtime_error("Not implemented");
+        std::vector<Core::GroupInfo> groups;
+        groups.reserve(groupDtos.size());
+
+        for (const auto& groupDto : groupDtos)
+            groups.push_back(toGroup(groupDto));
+
+        return groups;
     }
 
     QVector<GroupDto> CharacterAdapter::toGroupDtos(const std::vector<Core::GroupInfo>& groups)
+    {
+        throw std::runtime_error("Not implemented");
+    }
+
+    Core::GroupType CharacterAdapter::toGroupType(const QString& typeDto)
+    {
+        if (typeDto == ethnieKey)
+            return Core::GroupType::Ethnie;
+        if (typeDto == familyKey)
+            return Core::GroupType::Family;
+        if (typeDto == organizationKey)
+            return Core::GroupType::Organization;
+        if (typeDto == guildKey)
+            return Core::GroupType::Guild;
+        if (typeDto == groupKey)
+            return Core::GroupType::Group;
+
+        throw std::runtime_error("Unsupported GroupType " + typeDto.toStdString());
+    }
+
+    QString CharacterAdapter::toGroupTypeDto(const Core::GroupType& type)
     {
         throw std::runtime_error("Not implemented");
     }
@@ -126,7 +178,7 @@ namespace Ityl::Json
 
     std::string CharacterAdapter::toRole(QString roleDto)
     {
-        throw std::runtime_error("Not implemented");
+        return roleDto.toStdString();
     }
 
     QString CharacterAdapter::toRoleDto(const std::string& role)
@@ -139,8 +191,8 @@ namespace Ityl::Json
         std::vector<std::string> roles;
         roles.reserve(roleDtos.size());
 
-        for (const auto& role : roleDtos)
-            roles.push_back(role.toStdString());
+        for (const auto& roleDto : roleDtos)
+            roles.push_back(toRole(roleDto));
 
         return roles;
     }

@@ -119,7 +119,7 @@ namespace Ityl::Json
 
     void JsonCharacterProviderTests::LoadCharacter_ShouldHaveRoles() const
     {
-        const std::vector<std::string> expectedRoles { "role1", "role2"};
+        const std::vector<std::string> expectedRoles { "role1", "role2" };
 
         auto character = _characterProvider->loadCharacter(firstName, lastName);
 
@@ -149,10 +149,36 @@ namespace Ityl::Json
 
 //    }
 
-//    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveGroups() const
-//    {
+    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveGroups() const
+    {
+        Core::GroupInfo group1("group1");
+        group1.setType(Core::GroupType::Organization)
+               .setRole("role1");
 
-//    }
+        Core::GroupInfo group2("group2");
+        group2.setType(Core::GroupType::Group)
+               .setSubgroupName("subgroup")
+               .setRole("role2")
+               .setIsOld(true);
+
+        const std::vector<Core::GroupInfo> expectedGroups { group1, group2 };
+
+        auto character = _characterProvider->loadCharacter(firstName, lastName);
+
+        const auto& groups = character.getGroups();
+        QCOMPARE(groups.size(), expectedGroups.size());
+
+        unsigned i = 0;
+        for (const auto& group : groups)
+        {
+            QCOMPARE(group.getName(), expectedGroups[i].getName());
+            QCOMPARE(group.getType(), expectedGroups[i].getType());
+            QCOMPARE(group.getSubgroupName(), expectedGroups[i].getSubgroupName());
+            QCOMPARE(group.getRole(), expectedGroups[i].getRole());
+            QCOMPARE(group.getIsOld(), expectedGroups[i].getIsOld());
+            i++;
+        }
+    }
 
 //    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveAvatars() const
 //    {

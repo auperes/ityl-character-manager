@@ -8,22 +8,37 @@ namespace Ityl::Core
     }
 
     GroupInfo::GroupInfo(const std::string& name)
-        : GroupInfo(name, GroupType::Group)
-    {
-    }
-
-    GroupInfo::GroupInfo(const std::string& name, const GroupType& type)
-        : GroupInfo(name, "", "", type, false)
-    {
-
-    }
-
-    GroupInfo::GroupInfo(const std::string& name, const std::string& role, const std::string& subgroupName, const GroupType& type, bool isOld)
         : _name(name)
-        , _role(role)
-        , _subgroupName(subgroupName)
-        , _type(type)
-        , _isOld(isOld)
     {
+    }
+
+    GroupInfo &GroupInfo::setName(const std::string &name)
+    {
+      _name = name;
+      return *this;
+    }
+
+    GroupInfo &GroupInfo::setRole(const std::string &role)
+    {
+      _role = role;
+      return *this;
+    }
+
+    GroupInfo &GroupInfo::setSubgroupName(const std::string &subgroupName)
+    {
+      _subgroupName = subgroupName;
+      return *this;
+    }
+
+    GroupInfo &GroupInfo::setType(const GroupType &type)
+    {
+      _type = type;
+      return *this;
+    }
+
+    GroupInfo &GroupInfo::setIsOld(bool isOld)
+    {
+      _isOld = isOld;
+      return *this;
     }
 }
