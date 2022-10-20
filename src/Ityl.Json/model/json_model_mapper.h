@@ -40,7 +40,9 @@ namespace Ityl::Json
         Missing,
         Sealed,
         Skills,
-        Relationships
+        Relationships,
+        Avatar,
+        IsMiniAvatar
     };
 
     class JsonModelMapper

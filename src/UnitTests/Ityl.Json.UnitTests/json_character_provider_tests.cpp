@@ -203,10 +203,18 @@ namespace Ityl::Json
         }
     }
 
-//    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveAvatars() const
-//    {
+    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveAvatars() const
+    {
+        const std::string expectedAvatar = "avatar.png";
+        const std::string expectedMiniAvatar = "miniAvatar.png";
 
-//    }
+        auto character = _characterProvider->loadCharacter(firstName, lastName);
+
+        const auto& avatars = character.getAvatars();
+        QCOMPARE(avatars.size(), 2);
+        QCOMPARE(avatars[0], expectedAvatar);
+        QCOMPARE(character.getMiniAvatar(), expectedMiniAvatar);
+    }
 }
 
 QTEST_MAIN(Ityl::Json::JsonCharacterProviderTests)

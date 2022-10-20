@@ -39,6 +39,8 @@ namespace Ityl::Json
         _keys.emplace(JsonKey::Ethnies, "ethnies");
         _keys.emplace(JsonKey::Groups, "groups");
         _keys.emplace(JsonKey::Avatars, "avatars");
+        _keys.emplace(JsonKey::Avatar, "avatar");
+        _keys.emplace(JsonKey::IsMiniAvatar, "isMiniAvatar");
     }
 
     QString JsonModelMapper::get(JsonKey key) const

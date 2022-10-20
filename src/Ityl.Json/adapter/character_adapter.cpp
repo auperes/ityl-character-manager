@@ -32,9 +32,8 @@ namespace Ityl::Json
 //                .setRelationships(toRelationships(characterDto.getRelationships()))
                 .setEthnies(toEthnies(characterDto.getEthnies()))
                 .setGroups(toGroups(characterDto.getGroups()))
-//                .setMiniAvatar(characterDto.getAvatars())
-//                .setAvatars(toAvatars(characterDto.getAvatars()))
-                ;
+                .setMiniAvatar(toMiniAvatar(characterDto.getAvatars()))
+                .setAvatars(toAvatars(characterDto.getAvatars()));
 
         return character;
     }
@@ -56,12 +55,34 @@ namespace Ityl::Json
 
     std::vector<std::string> CharacterAdapter::toAvatars(const QVector<AvatarDto>& avatarDtos)
     {
-        throw std::runtime_error("Not implemented");
+        std::vector<std::string> avatars;
+        avatars.reserve(avatarDtos.size());
+
+        for (const auto& dto : avatarDtos)
+            avatars.push_back(dto.getValues()[_mapper->get(JsonKey::Avatar)].toString().toStdString());
+
+        return avatars;
     }
 
     QVector<AvatarDto> CharacterAdapter::toAvatarDtos(std::vector<std::string> avatars)
     {
         throw std::runtime_error("Not implemented");
+    }
+
+    std::string CharacterAdapter::toMiniAvatar(const QVector<AvatarDto>& avatarDtos)
+    {
+        auto it = std::find_if(avatarDtos.begin(),
+                               avatarDtos.end(),
+                               [this](const auto& dto)
+        {
+            return dto.getValues().contains(_mapper->get(JsonKey::IsMiniAvatar))
+                    && dto.getValues()[_mapper->get(JsonKey::IsMiniAvatar)].toBool();
+        });
+
+        if (it != avatarDtos.end())
+            return it->getValues()[_mapper->get(JsonKey::Avatar)].toString().toStdString();
+
+        return {};
     }
 
     Core::GroupInfo CharacterAdapter::toGroup(GroupDto groupDto)

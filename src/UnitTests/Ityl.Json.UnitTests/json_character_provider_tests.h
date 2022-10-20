@@ -36,7 +36,7 @@ namespace Ityl::Json
 //      void LoadCharacter_ShouldHaveRelationships() const;
       void LoadCharacter_ShouldHaveEthnies() const;
       void LoadCharacter_ShouldHaveGroups() const;
-//      void LoadCharacter_ShouldHaveAvatars() const;
+      void LoadCharacter_ShouldHaveAvatars() const;
 
     private:
         static const std::string firstName;

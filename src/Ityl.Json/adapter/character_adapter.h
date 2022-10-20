@@ -26,6 +26,8 @@ namespace Ityl::Json
         std::vector<std::string> toAvatars(const QVector<AvatarDto>& avatarDtos);
         QVector<AvatarDto> toAvatarDtos(std::vector<std::string> avatars);
 
+        std::string toMiniAvatar(const QVector<AvatarDto>& avatarDtos);
+
         // Group
         Core::GroupInfo toGroup(GroupDto groupDto);
         GroupDto toGroupDto(const Core::GroupInfo& group);

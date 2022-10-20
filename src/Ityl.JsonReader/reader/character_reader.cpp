@@ -166,7 +166,6 @@ namespace Ityl::Reader
             QJsonObject object = value.toObject();
             if (object.contains("isMiniAvatar") && object["isMiniAvatar"].toBool())
                 character.setMiniAvatar(object["avatar"].toString());
-
             avatars.push_back(object["avatar"].toString());
         }
 
