@@ -1,6 +1,7 @@
 #include "json_character_provider_tests.h"
 
 #include <sstream>
+#include <unordered_map>
 #include <QtTest/QTest>
 
 namespace Ityl::Json
@@ -11,10 +12,9 @@ namespace Ityl::Json
     void JsonCharacterProviderTests::init()
     {
         std::stringstream fullpath;
-        auto mapper = std::make_shared<Json::JsonModelMapper>();
         fullpath << QCoreApplication::applicationDirPath().toStdString() << "/" << "testFiles";
-        Ityl::Json::JsonItemProvider<Ityl::Json::CharacterDto> provider(fullpath.str(), mapper);
-        Ityl::Json::CharacterAdapter adapter(mapper);
+        Ityl::Json::JsonItemProvider<Ityl::Json::CharacterDto> provider(fullpath.str());
+        Ityl::Json::CharacterAdapter adapter;
         _characterProvider = std::make_unique<Ityl::Json::JsonCharacterProvider>(std::move(provider), std::move(adapter));
     }
 
@@ -135,10 +135,39 @@ namespace Ityl::Json
         }
     }
 
-//    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveSkills() const
-//    {
+    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveSkills() const
+    {
+        std::unordered_map<std::string, std::vector<Core::Skill>> expectedSkills;
+        expectedSkills.emplace("category1", std::vector<Core::Skill> { Core::Skill("skillName1") });
+        expectedSkills.emplace("category2", std::vector<Core::Skill> { Core::Skill("skillName2", std::vector<std::string> { "specialty" }) });
 
-//    }
+        auto character = _characterProvider->loadCharacter(firstName, lastName);
+
+        const auto& skills = character.getSkills();
+        QCOMPARE(skills.size(), expectedSkills.size());
+
+        QCOMPARE(CompareSkill(skills.at("category1")[0], expectedSkills.at("category1")[0]), true);
+        QCOMPARE(CompareSkill(skills.at("category2")[0], expectedSkills.at("category2")[0]), true);
+    }
+
+    bool JsonCharacterProviderTests::CompareSkill(const Core::Skill& actualSkill, const Core::Skill& expectedSkill) const
+    {
+        if (actualSkill.getType() != expectedSkill.getType())
+            return false;
+        if (actualSkill.getSpecialties().size() != expectedSkill.getSpecialties().size())
+            return false;
+
+        for (auto i = 0; i < actualSkill.getSpecialties().size(); ++i)
+        {
+            auto actualSpecialty = actualSkill.getSpecialties()[i];
+            auto expectedSpecialty = expectedSkill.getSpecialties()[i];
+
+            if (actualSpecialty != expectedSpecialty)
+                return false;
+        }
+
+        return true;
+    }
 
 //    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveRelationships() const
 //    {

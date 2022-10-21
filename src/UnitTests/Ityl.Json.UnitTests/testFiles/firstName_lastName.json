@@ -21,8 +21,8 @@
       { "role": "role2" }
     ],
     "skills": [
-      { "category": "category1", "name": "skillName" },
-      { "category": "category2", "name": "skillName", "specialties": [ { "specialty": "specialty" } ] }
+      { "category": "category1", "name": "skillName1" },
+      { "category": "category2", "name": "skillName2", "specialties": [ { "specialty": "specialty" } ] }
     ],
     "relationships": [
       { "link": "parent", "firstName": "", "lastName": "" },

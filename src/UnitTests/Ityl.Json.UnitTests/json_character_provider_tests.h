@@ -32,16 +32,18 @@ namespace Ityl::Json
       void LoadCharacter_ShouldHaveStatus() const;
       void LoadCharacter_ShouldHaveDescription() const;
       void LoadCharacter_ShouldHaveRoles() const;
-//      void LoadCharacter_ShouldHaveSkills() const;
+      void LoadCharacter_ShouldHaveSkills() const;
 //      void LoadCharacter_ShouldHaveRelationships() const;
       void LoadCharacter_ShouldHaveEthnies() const;
       void LoadCharacter_ShouldHaveGroups() const;
       void LoadCharacter_ShouldHaveAvatars() const;
 
     private:
-        static const std::string firstName;
-        static const std::string lastName;
+      static const std::string firstName;
+      static const std::string lastName;
 
-        std::unique_ptr<Ityl::Json::JsonCharacterProvider> _characterProvider;
+      std::unique_ptr<Ityl::Json::JsonCharacterProvider> _characterProvider;
+
+      bool CompareSkill(const Core::Skill& actualSkill, const Core::Skill& expectedSkill) const;
     };
 }

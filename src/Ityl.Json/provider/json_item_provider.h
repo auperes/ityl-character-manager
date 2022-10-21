@@ -7,8 +7,6 @@
 #include <QJsonDocument>
 #include <QJsonObject>
 
-#include "../model/json_model_mapper.h"
-
 namespace Ityl::Json
 {
     class JsonUtils
@@ -23,22 +21,20 @@ namespace Ityl::Json
     class JsonItemProvider
     {
     public:
-        JsonItemProvider(const std::string& folderPath, std::shared_ptr<JsonModelMapper> mapper);
+        JsonItemProvider(const std::string& folderPath);
 
         TItemDto readItem(const std::string& filename);
 
     private:
         std::string _folderPath;
-        std::shared_ptr<JsonModelMapper> _mapper;
 
         QJsonObject readJsonFile(const QString& filepath);
     };
 
 ///////////////////////////
     template<typename TItemDto>
-    JsonItemProvider<TItemDto>::JsonItemProvider(const std::string& folderPath, std::shared_ptr<JsonModelMapper> mapper)
+    JsonItemProvider<TItemDto>::JsonItemProvider(const std::string& folderPath)
         : _folderPath(folderPath)
-        , _mapper(mapper)
     {
     }
 
@@ -49,7 +45,7 @@ namespace Ityl::Json
         std::stringstream fullpath;
         fullpath << _folderPath << JsonUtils::SEPARATOR << filename;
         auto jsonObject = readJsonFile(QString::fromStdString(fullpath.str()));
-        itemDto.read(*_mapper, jsonObject);
+        itemDto.read(jsonObject);
         return itemDto;
     }
 

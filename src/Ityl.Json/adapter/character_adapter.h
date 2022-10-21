@@ -5,21 +5,18 @@
 #include <model/character.h>
 
 #include "../model/character_dto.h"
-#include "../model/json_model_mapper.h"
 
 namespace Ityl::Json
 {
     class CharacterAdapter
     {
     public:
-        CharacterAdapter(std::shared_ptr<JsonModelMapper> mapper);
+        CharacterAdapter();
 
         Core::Character toCharacter(const CharacterDto& characterDto);
         CharacterDto toCharacterDto(const Core::Character& character);
 
     private:
-        std::shared_ptr<JsonModelMapper> _mapper;
-
         // Avatar
         std::string toAvatar(const AvatarDto& avatarDto);
         AvatarDto toAvatarDto(const std::string& avatar);
@@ -56,8 +53,8 @@ namespace Ityl::Json
         QVector<QString> toRoleDtos(const std::vector<std::string>& roles);
 
         // Skill
-        std::vector<Core::Skill> toSkill(SkillDto skillDto);
-        SkillDto toSkillDto(const std::vector<Core::Skill>& skill);
+        Core::Skill toSkill(SkillDto skillDto);
+        SkillDto toSkillDto(const Core::Skill& skill);
         std::unordered_map<std::string, std::vector<Core::Skill>> toSkills(const QVector<SkillDto>& skillDtos);
         QVector<SkillDto> toSkillDtos(const std::unordered_map<std::string, std::vector<Core::Skill>>& skills);
 

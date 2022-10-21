@@ -2,49 +2,41 @@
 
 namespace Ityl::Json
 {
-    JsonModelMapper::JsonModelMapper()
-    {
-        _keys.emplace(JsonKey::FirstName, "firstName");
-        _keys.emplace(JsonKey::LastName, "lastName");
-        _keys.emplace(JsonKey::BirthName, "birthName");
-        _keys.emplace(JsonKey::NickName, "nickName");
-        _keys.emplace(JsonKey::Title, "title");
-        _keys.emplace(JsonKey::Quote, "quote");
-        _keys.emplace(JsonKey::BirthPlace, "birthPlace");
-        _keys.emplace(JsonKey::LivelyPlace, "livelyPlace");
-        _keys.emplace(JsonKey::BirthNation, "birthNation");
-        _keys.emplace(JsonKey::CurrentNation, "currentNation");
-        _keys.emplace(JsonKey::BirthDate, "birthDate");
-        _keys.emplace(JsonKey::DeathDate, "deathDate");
-        _keys.emplace(JsonKey::Status, "status");
-        _keys.emplace(JsonKey::Description, "description");
-        _keys.emplace(JsonKey::Group, "group");
-        _keys.emplace(JsonKey::Type, "type");
-        _keys.emplace(JsonKey::Subgroup, "subgroup");
-        _keys.emplace(JsonKey::Role, "role");
-        _keys.emplace(JsonKey::IsOld, "old");
-        _keys.emplace(JsonKey::Ethnie, "ethnie");
-        _keys.emplace(JsonKey::Organization, "organization");
-        _keys.emplace(JsonKey::Family, "family");
-        _keys.emplace(JsonKey::Guild, "guild");
-        _keys.emplace(JsonKey::Alive, "alive");
-        _keys.emplace(JsonKey::Dead, "dead");
-        _keys.emplace(JsonKey::Missing, "missing");
-        _keys.emplace(JsonKey::Sealed, "sealed");
-        _keys.emplace(JsonKey::Character, "character");
-        _keys.emplace(JsonKey::Values, "values");
-        _keys.emplace(JsonKey::Roles, "roles");
-        _keys.emplace(JsonKey::Skills, "skills");
-        _keys.emplace(JsonKey::Relationships, "relationships");
-        _keys.emplace(JsonKey::Ethnies, "ethnies");
-        _keys.emplace(JsonKey::Groups, "groups");
-        _keys.emplace(JsonKey::Avatars, "avatars");
-        _keys.emplace(JsonKey::Avatar, "avatar");
-        _keys.emplace(JsonKey::IsMiniAvatar, "isMiniAvatar");
-    }
-
-    QString JsonModelMapper::get(JsonKey key) const
-    {
-        return _keys[key];
-    }
+        const QString JsonKey::FirstName = "firstName";
+        const QString JsonKey::LastName = "lastName";
+        const QString JsonKey::BirthName = "birthName";
+        const QString JsonKey::NickName = "nickName";
+        const QString JsonKey::Title = "title";
+        const QString JsonKey::Quote = "quote";
+        const QString JsonKey::BirthPlace = "birthPlace";
+        const QString JsonKey::LivelyPlace = "livelyPlace";
+        const QString JsonKey::BirthNation = "birthNation";
+        const QString JsonKey::CurrentNation = "currentNation";
+        const QString JsonKey::BirthDate = "birthDate";
+        const QString JsonKey::DeathDate = "deathDate";
+        const QString JsonKey::Status = "status";
+        const QString JsonKey::Description = "description";
+        const QString JsonKey::Group = "group";
+        const QString JsonKey::Type = "type";
+        const QString JsonKey::Subgroup = "subgroup";
+        const QString JsonKey::Role = "role";
+        const QString JsonKey::IsOld = "old";
+        const QString JsonKey::Ethnie = "ethnie";
+        const QString JsonKey::Organization = "organization";
+        const QString JsonKey::Family = "family";
+        const QString JsonKey::Guild = "guild";
+        const QString JsonKey::Alive = "alive";
+        const QString JsonKey::Dead = "dead";
+        const QString JsonKey::Missing = "missing";
+        const QString JsonKey::Sealed = "sealed";
+        const QString JsonKey::Character = "character";
+        const QString JsonKey::Values = "values";
+        const QString JsonKey::Roles = "roles";
+        const QString JsonKey::Skills = "skills";
+        const QString JsonKey::Relationships = "relationships";
+        const QString JsonKey::Ethnies = "ethnies";
+        const QString JsonKey::Groups = "groups";
+        const QString JsonKey::Avatars = "avatars";
+        const QString JsonKey::Avatar = "avatar";
+        const QString JsonKey::IsMiniAvatar = "isMiniAvatar";
 }

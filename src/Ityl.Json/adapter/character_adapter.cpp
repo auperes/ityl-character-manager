@@ -4,10 +4,11 @@
 #include <string>
 #include <QString>
 
+#include "../model/json_model_mapper.h"
+
 namespace Ityl::Json
 {
-    CharacterAdapter::CharacterAdapter(std::shared_ptr<JsonModelMapper> mapper)
-        : _mapper(mapper)
+    CharacterAdapter::CharacterAdapter()
     {
     }
 
@@ -15,20 +16,20 @@ namespace Ityl::Json
     {
         Core::Character character;
         character
-                .setFirstName(characterDto.getValues().value(_mapper->get(JsonKey::FirstName)).toStdString())
-                .setLastName(characterDto.getValues().value(_mapper->get(JsonKey::LastName)).toStdString())
-                .setBirthName(characterDto.getValues().value(_mapper->get(JsonKey::BirthName)).toStdString())
-                .setNickName(characterDto.getValues().value(_mapper->get(JsonKey::NickName)).toStdString())
-                .setTitle(characterDto.getValues().value(_mapper->get(JsonKey::Title)).toStdString())
-                .setQuote(characterDto.getValues().value(_mapper->get(JsonKey::Quote)).toStdString())
-                .setBirthPlace(characterDto.getValues().value(_mapper->get(JsonKey::BirthPlace)).toStdString())
-                .setLivelyPlace(characterDto.getValues().value(_mapper->get(JsonKey::LivelyPlace)).toStdString())
-                .setBirthNation(characterDto.getValues().value(_mapper->get(JsonKey::BirthNation)).toStdString())
-                .setCurrentNation(characterDto.getValues().value(_mapper->get(JsonKey::CurrentNation)).toStdString())
-                .setStatus(toStatus(characterDto.getValues().value(_mapper->get(JsonKey::Status))))
-                .setDescription(characterDto.getValues().value(_mapper->get(JsonKey::Description)).toStdString())
+                .setFirstName(characterDto.getValues().value(JsonKey::FirstName).toStdString())
+                .setLastName(characterDto.getValues().value(JsonKey::LastName).toStdString())
+                .setBirthName(characterDto.getValues().value(JsonKey::BirthName).toStdString())
+                .setNickName(characterDto.getValues().value(JsonKey::NickName).toStdString())
+                .setTitle(characterDto.getValues().value(JsonKey::Title).toStdString())
+                .setQuote(characterDto.getValues().value(JsonKey::Quote).toStdString())
+                .setBirthPlace(characterDto.getValues().value(JsonKey::BirthPlace).toStdString())
+                .setLivelyPlace(characterDto.getValues().value(JsonKey::LivelyPlace).toStdString())
+                .setBirthNation(characterDto.getValues().value(JsonKey::BirthNation).toStdString())
+                .setCurrentNation(characterDto.getValues().value(JsonKey::CurrentNation).toStdString())
+                .setStatus(toStatus(characterDto.getValues().value(JsonKey::Status)))
+                .setDescription(characterDto.getValues().value(JsonKey::Description).toStdString())
                 .setRoles(toRoles(characterDto.getRoles()))
-//                .setSkills(toSkills(characterDto.getSkills()))
+                .setSkills(toSkills(characterDto.getSkills()))
 //                .setRelationships(toRelationships(characterDto.getRelationships()))
                 .setEthnies(toEthnies(characterDto.getEthnies()))
                 .setGroups(toGroups(characterDto.getGroups()))
@@ -59,7 +60,7 @@ namespace Ityl::Json
         avatars.reserve(avatarDtos.size());
 
         for (const auto& dto : avatarDtos)
-            avatars.push_back(dto.getValues()[_mapper->get(JsonKey::Avatar)].toString().toStdString());
+            avatars.push_back(dto.getValues()[JsonKey::Avatar].toString().toStdString());
 
         return avatars;
     }
@@ -75,12 +76,12 @@ namespace Ityl::Json
                                avatarDtos.end(),
                                [this](const auto& dto)
         {
-            return dto.getValues().contains(_mapper->get(JsonKey::IsMiniAvatar))
-                    && dto.getValues()[_mapper->get(JsonKey::IsMiniAvatar)].toBool();
+            return dto.getValues().contains(JsonKey::IsMiniAvatar)
+                    && dto.getValues()[JsonKey::IsMiniAvatar].toBool();
         });
 
         if (it != avatarDtos.end())
-            return it->getValues()[_mapper->get(JsonKey::Avatar)].toString().toStdString();
+            return it->getValues()[JsonKey::Avatar].toString().toStdString();
 
         return {};
     }
@@ -89,16 +90,16 @@ namespace Ityl::Json
     {
         Core::GroupInfo groupInfo;
         const auto& values = groupDto.getValues();
-        if (values.contains(_mapper->get(JsonKey::Group)))
-            groupInfo.setName(values[_mapper->get(JsonKey::Group)].toString().toStdString());
-        if (values.contains(_mapper->get(JsonKey::Type)))
-            groupInfo.setType(toGroupType(values[_mapper->get(JsonKey::Type)].toString()));
-        if (values.contains(_mapper->get(JsonKey::Subgroup)))
-            groupInfo.setSubgroupName(values[_mapper->get(JsonKey::Subgroup)].toString().toStdString());
-        if (values.contains(_mapper->get(JsonKey::Role)))
-            groupInfo.setRole(values[_mapper->get(JsonKey::Role)].toString().toStdString());
-        if (values.contains(_mapper->get(JsonKey::IsOld)))
-            groupInfo.setIsOld(QVariant(values[_mapper->get(JsonKey::IsOld)]).toBool());
+        if (values.contains(JsonKey::Group))
+            groupInfo.setName(values[JsonKey::Group].toString().toStdString());
+        if (values.contains(JsonKey::Type))
+            groupInfo.setType(toGroupType(values[JsonKey::Type].toString()));
+        if (values.contains(JsonKey::Subgroup))
+            groupInfo.setSubgroupName(values[JsonKey::Subgroup].toString().toStdString());
+        if (values.contains(JsonKey::Role))
+            groupInfo.setRole(values[JsonKey::Role].toString().toStdString());
+        if (values.contains(JsonKey::IsOld))
+            groupInfo.setIsOld(QVariant(values[JsonKey::IsOld]).toBool());
 
         return groupInfo;
     }
@@ -126,15 +127,15 @@ namespace Ityl::Json
 
     Core::GroupType CharacterAdapter::toGroupType(const QString& typeDto)
     {
-        if (typeDto == _mapper->get(JsonKey::Ethnie))
+        if (typeDto == JsonKey::Ethnie)
             return Core::GroupType::Ethnie;
-        if (typeDto == _mapper->get(JsonKey::Family))
+        if (typeDto == JsonKey::Family)
             return Core::GroupType::Family;
-        if (typeDto == _mapper->get(JsonKey::Organization))
+        if (typeDto == JsonKey::Organization)
             return Core::GroupType::Organization;
-        if (typeDto == _mapper->get(JsonKey::Guild))
+        if (typeDto == JsonKey::Guild)
             return Core::GroupType::Guild;
-        if (typeDto == _mapper->get(JsonKey::Group))
+        if (typeDto == JsonKey::Group)
             return Core::GroupType::Group;
 
         throw std::runtime_error("Unsupported GroupType " + typeDto.toStdString());
@@ -209,19 +210,44 @@ namespace Ityl::Json
         throw std::runtime_error("Not implemented");
     }
 
-    std::vector<Core::Skill> CharacterAdapter::toSkill(SkillDto skillDto)
+    Core::Skill CharacterAdapter::toSkill(SkillDto skillDto)
     {
-        throw std::runtime_error("Not implemented");
+        Core::Skill skill;
+        skill.setType(skillDto.getName().toStdString());
+
+
+        std::vector<std::string> specialties;
+        specialties.reserve(skillDto.getSpecialities().size());
+
+        for (const auto& specialty : skillDto.getSpecialities())
+            specialties.push_back(specialty.toStdString());
+
+        skill.setSpecialties(specialties);
+
+        return skill;
     }
 
-    SkillDto CharacterAdapter::toSkillDto(const std::vector<Core::Skill>& skill)
+    SkillDto CharacterAdapter::toSkillDto(const Core::Skill& skill)
     {
         throw std::runtime_error("Not implemented");
     }
 
     std::unordered_map<std::string, std::vector<Core::Skill> > CharacterAdapter::toSkills(const QVector<SkillDto>& skillDtos)
     {
-        throw std::runtime_error("Not implemented");
+        std::unordered_map<std::string, std::vector<Core::Skill> > skills;
+
+        for (const auto& skillDto : skillDtos)
+        {
+            auto skill = toSkill(skillDto);
+            auto category = skillDto.getCategory().toStdString();
+
+            if (auto it = skills.find(category); it != skills.end())
+                it->second.push_back(skill);
+            else
+                skills[category] = std::vector<Core::Skill>{ skill };
+        }
+
+        return skills;
     }
 
     QVector<SkillDto> CharacterAdapter::toSkillDtos(const std::unordered_map<std::string, std::vector<Core::Skill> >& skills)
@@ -231,16 +257,16 @@ namespace Ityl::Json
 
     Core::Status CharacterAdapter::toStatus(QString statusDto)
     {
-        if (statusDto == _mapper->get(JsonKey::Alive))
+        if (statusDto == JsonKey::Alive)
             return Core::Status::Alive;
-        if (statusDto == _mapper->get(JsonKey::Dead))
+        if (statusDto == JsonKey::Dead)
             return Core::Status::Dead;
-        if (statusDto == _mapper->get(JsonKey::Missing))
+        if (statusDto == JsonKey::Missing)
             return Core::Status::Missing;
-        if (statusDto == _mapper->get(JsonKey::Sealed))
+        if (statusDto == JsonKey::Sealed)
             return Core::Status::Sealed;
 
-        std::string errorMessage("Cannot convert status. Unknown value: " + _mapper->get(JsonKey::Status).toStdString());
+        std::string errorMessage("Cannot convert status. Unknown value: " + JsonKey::Status.toStdString());
         std::cout << errorMessage << std::endl;
         throw std::logic_error(errorMessage.c_str());
     }

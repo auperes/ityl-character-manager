@@ -35,7 +35,7 @@ namespace Ityl::Json
         void setGroups(const QVector<GroupDto>& newGroups);
         void setAvatars(const QVector<AvatarDto>& newAvatars);
 
-        void read(const JsonModelMapper& mapper, const QJsonObject& json);
+        void read(const QJsonObject& json);
         void write(QJsonObject& json);
 
     private:
@@ -48,10 +48,10 @@ namespace Ityl::Json
         QVector<AvatarDto> _avatars;
 
         void readValues(const QJsonArray& json);
-        void readRoles(const JsonModelMapper& mapper, const QJsonArray& json);
+        void readRoles(const QJsonArray& json);
         void readSkills(const QJsonArray& json);
         void readRelationships(const QJsonArray& json);
-        void readEthnies(const JsonModelMapper& mapper, const QJsonArray& json);
+        void readEthnies(const QJsonArray& json);
         void readGroups(const QJsonArray& json);
         void readAvatars(const QJsonArray& json);
     };

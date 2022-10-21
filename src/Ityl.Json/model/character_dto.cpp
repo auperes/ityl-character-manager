@@ -37,16 +37,16 @@ namespace Ityl::Json
         _avatars = newAvatars;
     }
 
-    void CharacterDto::read(const JsonModelMapper& mapper, const QJsonObject& json)
+    void CharacterDto::read(const QJsonObject& json)
     {
-        QJsonObject characterObject = json.value(mapper.get(JsonKey::Character)).toObject();
-        readValues(characterObject[mapper.get(JsonKey::Values)].toArray());
-        readRoles(mapper, characterObject[mapper.get(JsonKey::Roles)].toArray());
-        readSkills(characterObject[mapper.get(JsonKey::Skills)].toArray());
-        readRelationships(characterObject[mapper.get(JsonKey::Relationships)].toArray());
-        readEthnies(mapper, characterObject[mapper.get(JsonKey::Ethnies)].toArray());
-        readGroups(characterObject[mapper.get(JsonKey::Groups)].toArray());
-        readAvatars(characterObject[mapper.get(JsonKey::Avatars)].toArray());
+        QJsonObject characterObject = json.value(JsonKey::Character).toObject();
+        readValues(characterObject[JsonKey::Values].toArray());
+        readRoles(characterObject[JsonKey::Roles].toArray());
+        readSkills(characterObject[JsonKey::Skills].toArray());
+        readRelationships(characterObject[JsonKey::Relationships].toArray());
+        readEthnies(characterObject[JsonKey::Ethnies].toArray());
+        readGroups(characterObject[JsonKey::Groups].toArray());
+        readAvatars(characterObject[JsonKey::Avatars].toArray());
     }
 
     void CharacterDto::readValues(const QJsonArray& jsonValues)
@@ -58,13 +58,13 @@ namespace Ityl::Json
         }
     }
 
-    void CharacterDto::readRoles(const JsonModelMapper& mapper, const QJsonArray& jsonRoles)
+    void CharacterDto::readRoles(const QJsonArray& jsonRoles)
     {
         _roles.reserve(jsonRoles.size());
         for (auto value : jsonRoles)
         {
             QJsonObject object = value.toObject();
-            _roles.push_back(object[mapper.get(JsonKey::Role)].toString());
+            _roles.push_back(object[JsonKey::Role].toString());
         }
     }
 
@@ -90,13 +90,13 @@ namespace Ityl::Json
         }
     }
 
-    void CharacterDto::readEthnies(const JsonModelMapper& mapper, const QJsonArray& jsonEthnies)
+    void CharacterDto::readEthnies(const QJsonArray& jsonEthnies)
     {
         _ethnies.reserve(jsonEthnies.size());
         for (auto value : jsonEthnies)
         {
             QJsonObject object = value.toObject();
-            _ethnies.push_back(object[mapper.get(JsonKey::Ethnie)].toString());
+            _ethnies.push_back(object[JsonKey::Ethnie].toString());
         }
     }
 
