@@ -266,4 +266,3 @@ namespace Ityl::Json
 }
 
 QTEST_MAIN(Ityl::Json::JsonCharacterProviderTests)
-#include "json_character_provider_tests.moc"
