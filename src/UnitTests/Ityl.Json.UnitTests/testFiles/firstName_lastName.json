@@ -1,0 +1,45 @@
+{
+  "character": {
+    "values": [
+      { "firstName": "firstName" },
+      { "lastName": "lastName" },
+      { "birthName": "birthName" },
+      { "nickName": "nickName" },
+      { "title": "title" },
+      { "quote": "quote" },
+      { "birthPlace": "birthPlace" },
+      { "livelyPlace": "livelyPlace" },
+      { "birthNation": "birthNation" },
+      { "currentNation": "currentNation" },
+      { "birthDate": "birthDate" },
+      { "deathDate": "deathDate" },
+      { "status": "alive" },
+      { "description": "description" }
+    ],
+    "roles": [
+      { "role": "role1" },
+      { "role": "role2" }
+    ],
+    "skills": [
+      { "category": "category1", "name": "skillName1" },
+      { "category": "category2", "name": "skillName2", "specialties": [ { "specialty": "specialty" } ] }
+    ],
+    "relationships": [
+      { "link": "parent", "firstName": "a", "lastName": "b" },
+      { "link": "parent", "firstName": "c", "lastName": "d" },
+      { "link": "cousin", "firstName": "e", "lastName": "f", "old": true }
+    ],
+    "ethnies": [
+      { "ethnie": "ethnie1" },
+      { "ethnie": "ethnie2" }
+    ],
+    "groups": [
+      { "group": "group1", "type": "organization", "role": "role1" },
+      { "group": "group2", "type": "group", "subgroup": "subgroup", "role": "role2", "old": true }
+    ],
+    "avatars": [
+      { "avatar": "avatar.png" },
+      { "avatar": "miniAvatar.png", "isMiniAvatar": true }
+    ]
+  }
+}
