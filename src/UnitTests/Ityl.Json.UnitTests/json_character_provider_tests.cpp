@@ -169,10 +169,29 @@ namespace Ityl::Json
         return true;
     }
 
-//    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveRelationships() const
-//    {
+    void JsonCharacterProviderTests::LoadCharacter_ShouldHaveRelationships() const
+    {
+        auto character = _characterProvider->loadCharacter(firstName, lastName);
 
-//    }
+        const auto& relationships = character.getRelationships();
+
+        QCOMPARE(relationships.size(), 2);
+        const auto& parents = relationships.at(Core::Relationship::Parent);
+        QCOMPARE(parents.size(), 2);
+        auto [firstName1, lastName1] = parents[0];
+        QCOMPARE(firstName1, "a");
+        QCOMPARE(lastName1, "b");
+
+        auto [firstName2, lastName2] = parents[1];
+        QCOMPARE(firstName2, "c");
+        QCOMPARE(lastName2, "d");
+
+        const auto& cousins = relationships.at(Core::Cousin);
+        QCOMPARE(cousins.size(), 1);
+        auto [firstName3, lastName3] = cousins[0];
+        QCOMPARE(firstName3, "e");
+        QCOMPARE(lastName3, "f");
+    }
 
     void JsonCharacterProviderTests::LoadCharacter_ShouldHaveEthnies() const
     {

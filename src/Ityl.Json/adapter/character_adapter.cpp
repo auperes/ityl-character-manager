@@ -30,7 +30,7 @@ namespace Ityl::Json
                 .setDescription(characterDto.getValues().value(JsonKey::Description).toStdString())
                 .setRoles(toRoles(characterDto.getRoles()))
                 .setSkills(toSkills(characterDto.getSkills()))
-//                .setRelationships(toRelationships(characterDto.getRelationships()))
+                .setRelationships(toRelationships(characterDto.getRelationships()))
                 .setEthnies(toEthnies(characterDto.getEthnies()))
                 .setGroups(toGroups(characterDto.getGroups()))
                 .setMiniAvatar(toMiniAvatar(characterDto.getAvatars()))
@@ -176,10 +176,82 @@ namespace Ityl::Json
 
     std::unordered_map<Core::Relationship, std::vector<std::pair<std::string, std::string> > > CharacterAdapter::toRelationships(const QVector<RelationshipDto>& relationshipDtos)
     {
-        throw std::runtime_error("Not implemented");
+        std::unordered_map<Core::Relationship, std::vector<std::pair<std::string, std::string> > > relationships;
+
+        for (const auto& relationshipDto : relationshipDtos)
+        {
+            auto type = toRelationship(relationshipDto.getType());
+            auto firstName = relationshipDto.getFirstName().toStdString();
+            auto lastName = relationshipDto.getLastName().toStdString();
+
+            auto it = relationships.find(type);
+            if (it == relationships.end())
+                relationships[type] = std::vector<std::pair<std::string, std::string>>{ std::make_pair(firstName, lastName) };
+            else
+                relationships[type].push_back(std::make_pair(firstName, lastName));
+        }
+
+        return relationships;
     }
 
     QVector<RelationshipDto> CharacterAdapter::toRelationshipDtos(const std::unordered_map<Core::Relationship, std::vector<std::pair<std::string, std::string> > >& relationships)
+    {
+        throw std::runtime_error("Not implemented");
+    }
+
+    Core::Relationship CharacterAdapter::toRelationship(QString relationship)
+    {
+        if (relationship == "uncleAunt")
+            return Core::Relationship::UncleAunt;
+        if (relationship == "wife")
+            return Core::Relationship::Wife;
+        if (relationship == "child")
+            return Core::Relationship::Child;
+        if (relationship == "cousin")
+            return Core::Relationship::Cousin;
+        if (relationship == "parent")
+            return Core::Relationship::Parent;
+        if (relationship == "nephew")
+            return Core::Relationship::Nephew;
+        if (relationship == "husband")
+            return Core::Relationship::Husband;
+        if (relationship == "sibling")
+            return Core::Relationship::Sibling;
+        if (relationship == "grandChild")
+            return Core::Relationship::GrandChild;
+        if (relationship == "grandParent")
+            return Core::Relationship::GrandParent;
+        if (relationship == "halfSibling")
+            return Core::Relationship::HalfSibling;
+        if (relationship == "guardian")
+            return Core::Relationship::Guardian;
+        if (relationship == "partner")
+            return Core::Relationship::Partner;
+        if (relationship == "twin")
+            return Core::Relationship::Twin;
+        if (relationship == "protege")
+            return Core::Relationship::Protege;
+        if (relationship == "betrothed")
+            return Core::Relationship::Betrothed;
+        if (relationship == "master")
+            return Core::Relationship::Master;
+        if (relationship == "adoptiveSibling")
+            return Core::Relationship::AdoptiveSibling;
+        if (relationship == "disciple")
+            return Core::Relationship::Disciple;
+        if (relationship == "rightHand")
+            return Core::Relationship::RightHand;
+        if (relationship == "rightHandOf")
+            return Core::Relationship::RightHandOf;
+        if (relationship == "rival")
+            return Core::Relationship::Rival;
+
+        std::string errorMessage("Cannot convert relationship name. Unknown value: " + relationship.toStdString());
+        std::cout << errorMessage << std::endl;
+        throw std::logic_error(errorMessage.c_str());
+    }
+
+    QString CharacterAdapter::toRelationshipDto(const Core::Relationship& relationship)
     {
         throw std::runtime_error("Not implemented");
     }

@@ -25,26 +25,9 @@
       { "category": "category2", "name": "skillName2", "specialties": [ { "specialty": "specialty" } ] }
     ],
     "relationships": [
-      { "link": "parent", "firstName": "", "lastName": "" },
-      { "link": "parent", "firstName": "", "lastName": "" },
-      { "link": "grandParent", "firstName": "", "lastName": "" },
-      { "link": "grandParent", "firstName": "", "lastName": "" },
-      { "link": "twin", "firstName": "", "lastName": "" },
-      { "link": "sibling", "firstName": "", "lastName": "" },
-      { "link": "husband", "firstName": "", "lastName": "" },
-      { "link": "wife", "firstName": "", "lastName": "" },
-      { "link": "partner", "firstName": "", "lastName": "" },
-      { "link": "child", "firstName": "", "lastName": "" },
-      { "link": "uncleAunt", "firstName": "", "lastName": "" },
-      { "link": "uncleAunt", "firstName": "", "lastName": "" },
-      { "link": "nephew", "firstName": "", "lastName": "" },
-      { "link": "cousin", "firstName": "", "lastName": "" },
-      { "link": "grandChild", "firstName": "", "lastName": "" },
-      { "link": "guardian", "firstName": "", "lastName": "" },
-      { "link": "protege", "firstName": "", "lastName": "" },
-      { "link": "disciple", "firstName": "", "lastName": "" },
-      { "link": "rightHand", "firstName": "", "lastName": "" },
-      { "link": "rival", "firstName": "", "lastName": "", "old": true }
+      { "link": "parent", "firstName": "a", "lastName": "b" },
+      { "link": "parent", "firstName": "c", "lastName": "d" },
+      { "link": "cousin", "firstName": "e", "lastName": "f", "old": true }
     ],
     "ethnies": [
       { "ethnie": "ethnie1" },

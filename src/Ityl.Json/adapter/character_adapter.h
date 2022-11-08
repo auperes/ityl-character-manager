@@ -41,8 +41,8 @@ namespace Ityl::Json
         QVector<QString> toEthnieDtos(const std::vector<Core::GroupInfo>& ethnies);
 
         // Relationship
-    //    Core::GroupInfo toRelationship(GroupDto groupDto);
-    //    GroupDto toRelationshipDto(const Core::GroupInfo& group);
+        Core::Relationship toRelationship(QString relationship);
+        QString toRelationshipDto(const Core::Relationship& relationship);
         std::unordered_map<Core::Relationship, std::vector<std::pair<std::string, std::string>>> toRelationships(const QVector<RelationshipDto>& relationshipDtos);
         QVector<RelationshipDto> toRelationshipDtos(const std::unordered_map<Core::Relationship, std::vector<std::pair<std::string, std::string>>>& relationships);
 
