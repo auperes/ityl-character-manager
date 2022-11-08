@@ -11,6 +11,8 @@ project(Ityl.Character.Manager
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED true)
 
+set(CMAKE_CXX_FLAGS " ${CMAKE_CXX_FLAGS} --coverage")
+
 #set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
 #set(CMAKE_AUTORCC ON)
